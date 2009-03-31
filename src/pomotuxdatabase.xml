@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE database SYSTEM "litesql.dtd"> 
+<database name="PomotuxDatabase" namespace="pomotuxdatabase">
+	
+	<!-- maps Activity object into database -->
+	<object name="Activity">
+		<field name="mDescription" type="string"></field>
+		<field name="mInsertionDate" type="date"></field>
+		<field name="mDeadLine" type="date"></field>
+		<field name="mNumPomodoro" type="integer" default="0"></field>
+		<field name="mIsFinished" type="boolean" default="true"></field>
+	</object>
+
+	<!-- maps AIS object into database -->
+	<object name="ActivityInventorySheet"></object>
+	
+	<!-- maps TDTS object into database -->
+	<object name="TodoTodaySheet">
+		<field name="mActivityOrder" type="integer"></field>
+	</object>
+	
+	<!-- creates a many-to-one relationship between Activity and AIS -->
+	<relation name="InsertActivity">
+		<relate object="Activity" limit="many"></relate>
+		<relate object="ActivityInventorySheet" limit="one"></relate>
+	</relation>
+	
+</database>
