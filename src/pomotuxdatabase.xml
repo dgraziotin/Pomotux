@@ -25,7 +25,7 @@
 		<relate object="ActivityInventorySheet" limit="one"></relate>
 	</relation>
 
-	<!-- creates a many-to-one relationship between Activity and AIS -->
+	<!-- creates a many-to-one relationship between Activity and TDTS -->
 	<relation name="PickUpActivity">
 		<relate object="Activity" limit="many"></relate>
 		<relate object="TodoTodaySheet" limit="one"></relate>
