@@ -3,11 +3,7 @@
 #include "litesql.hpp"
 #include "pomotuxdatabase.hpp"
 #include <time.h>
-/*// provide implementation for Person::sayHello
-void example::Person::sayHello() {
-    std::cout << "Hi! My name is " << name 
-        << " and I am " << age << " years old." << std::endl;
-}*/
+
 
 // no name collisions expected
 using namespace litesql;
@@ -25,29 +21,46 @@ int main(int argc, char **argv) {
         // start transaction
         db.begin();
 	
+	/* creation of one Activity Inventory Sheet */
 	ActivityInventorySheet ais(db);     
+	/* make it persistent */
 	ais.update();
+	
+	/* same for one Todo Today Sheet*/
+	TodoTodaySheet tdts(db);     
+	tdts.update();
 
+	/* creation of an activity */
 	Activity at(db);        
 	at.mDescription = "A dummy Activity";
 	time_t seconds;
  	 seconds = time (NULL);
-	at.mInsertionDate = (int) seconds;
-	at.mDeadLine = 6;
+	at.mInsertionDate = (int) seconds;	// dates must be stored in UNIX datetime format (seconds passed from 1-1-1970)
+	at.mDeadLine = 6;			// therefore, this is allowed but not valid
 	at.mIsFinished = true;
 	at.mNumPomodoro = 15;
-	at.update();	
+	at.update();				// make this activity persistent
 
+	/* another activity */
 	Activity at2(db);        
 	at2.mDescription = "A second dummy Activity tomorrow";
-	at2.mInsertionDate = (int) seconds + (24 * 60 * 60);
+	at2.mInsertionDate = (int) seconds + (24 * 60 * 60);	// just to play, this is inserted tomorrow
 	at2.mDeadLine = 6;
 	at2.mIsFinished = false;
 	at2.mNumPomodoro = 1;
 	at2.update();
-
+	
+	/* 
+	at the moment, the method is used statically, because we don't 
+	know if it's legal to create an instance of a relation defined in the db
+	See E/R diagram for a better view
+	 */
+	/* activity linked in AIS */
 	InsertActivity::link(db,at,ais);
 	InsertActivity::link(db,at2,ais);
+	
+	/* one activity linked in TDTS */
+	PickUpActivity::link(db,at,tdts);
 	// commit transaction
         db.commit();
         // clean up 
