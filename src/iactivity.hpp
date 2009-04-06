@@ -13,6 +13,12 @@ class IActivity : public Activity
 {
 	public:
 	IActivity(const litesql::Database& db);
+	
+  /** Copy constructor.
+	* 
+	* @param from The value to copy to this object.
+	*/
+
 	IActivity(const litesql::Database& db,string description,int insertionDate,int deadlineDate);
 	void set_mDescription (string description);
 	void set_mInsertionDate (int date);
