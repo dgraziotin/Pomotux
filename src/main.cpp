@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
 		else
 		{
 				db.commit();
-				cout<<"see you!!";
+				cout<<"see you!!"<<endl;
 				return 0;
 		
 		}
