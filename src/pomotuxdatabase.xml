@@ -8,7 +8,7 @@
 		<field name="mInsertionDate" type="date"></field>
 		<field name="mDeadLine" type="date"></field>
 		<field name="mNumPomodoro" type="integer" default="0"></field>
-		<field name="mIsFinished" type="boolean" default="true"></field>
+		<field name="mIsFinished" type="boolean" default="false"></field>
 	</object>
 
 	<!-- maps AIS object into database -->

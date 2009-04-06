@@ -13,14 +13,15 @@ class IActivity : public Activity
 {
 	public:
 	IActivity(const litesql::Database& db);
+	IActivity(const litesql::Database& db,string description,int insertionDate,int deadlineDate);
 	void set_mDescription (string description);
 	void set_mInsertionDate (int date);
 	void set_mDeadline (int date);
 	void set_mNumPomodoro (int numPomodoro);
 	void set_mIsFinished (bool isFinished);
 	string get_mDescription();
-	int get_mInsertionDate();
-	int get_mDeadline();
+	litesql::Field<litesql::Date> get_mInsertionDate();
+	litesql::Field<litesql::Date> get_mDeadline();
 	int get_mNumPomodoro();
 	bool get_mIsFinished();
 	~IActivity();

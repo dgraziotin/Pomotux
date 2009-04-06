@@ -4,6 +4,8 @@
 #include "pomotuxdatabase.hpp"
 #include <time.h>
 #include "iactivity.hpp"
+#include "iactivityinventorysheet.hpp"
+#include "itodotodaysheet.hpp"
 
 
 // no name collisions expected
@@ -23,12 +25,12 @@ int main(int argc, char **argv) {
         db.begin();
 	
 	/* creation of one Activity Inventory Sheet */
-	ActivityInventorySheet ais(db);     
+	IActivityInventorySheet ais(db);     
 	/* make it persistent */
 	ais.update();
 	
 	/* same for one Todo Today Sheet*/
-	TodoTodaySheet tdts(db);     
+	ITodoTodaySheet tdts(db);     
 	tdts.update();
 
 	/* creation of an activity */
@@ -36,21 +38,15 @@ int main(int argc, char **argv) {
 	at.set_mDescription("A dummy Activity");
 	time_t seconds;
  	 seconds = time (NULL);
-	at.mInsertionDate = (int) seconds;	// dates must be stored in UNIX datetime format (seconds passed from 1-1-1970)
-	at.mDeadLine = 6;			// therefore, this is allowed but not valid
-	at.mIsFinished = true;
-	at.mNumPomodoro = 15;
+	at.set_mInsertionDate((int) seconds);	// dates must be stored in UNIX datetime format (seconds passed from 1-1-1970)
+	at.set_mDeadline(6);			// therefore, this is allowed but not valid
+	at.set_mIsFinished(true);
+	at.set_mNumPomodoro(15);
 	at.update();				// make this activity persistent
 
-	/* another activity */
-	Activity at2(db);        
-	at2.mDescription = "A second dummy Activity tomorrow";
-	at2.mInsertionDate = (int) seconds + (24 * 60 * 60);	// just to play, this is inserted tomorrow
-	at2.mDeadLine = 6;
-	at2.mIsFinished = false;
-	at2.mNumPomodoro = 1;
+	/* a third debug activity */
+	IActivity at2(db,"third activity",(int)seconds,(int) seconds + (24 * 60 * 60));
 	at2.update();
-	
 	/* 
 	at the moment, the method is used statically, because we don't 
 	know if it's legal to create an instance of a relation defined in the db
