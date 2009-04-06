@@ -5,13 +5,14 @@
 using namespace litesql;
 using namespace pomotuxdatabase;
 
-IActivity::IActivity(const litesql::Database& db) : Activity()
+IActivity::IActivity(const litesql::Database& db) : Activity(db)
 {
 	
 }
 
 void IActivity::set_mDescription (string description)
 {
+	mDescription = description;
 }
 
 void IActivity::set_mInsertionDate (int date)

@@ -3,6 +3,7 @@
 #include "litesql.hpp"
 #include "pomotuxdatabase.hpp"
 #include <time.h>
+#include "iactivity.hpp"
 
 
 // no name collisions expected
@@ -31,8 +32,8 @@ int main(int argc, char **argv) {
 	tdts.update();
 
 	/* creation of an activity */
-	Activity at(db);        
-	at.mDescription = "A dummy Activity";
+	IActivity at(db);        
+	at.set_mDescription("A dummy Activity");
 	time_t seconds;
  	 seconds = time (NULL);
 	at.mInsertionDate = (int) seconds;	// dates must be stored in UNIX datetime format (seconds passed from 1-1-1970)
