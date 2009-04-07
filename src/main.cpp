@@ -11,6 +11,8 @@
 using namespace litesql;
 using namespace pomotuxdatabase;
 
+
+
 int main(int argc, char **argv) {
     try {
         // using SQLite3 as backend
@@ -35,6 +37,7 @@ int main(int argc, char **argv) {
 		cout << "what do you like to do? " <<endl;
 		cout << "1 - create a Todo Today Sheet" <<endl;
 		cout << "2 - create an Activity" <<endl;
+		cout << "3 - find an activity in the AIS given the ID" <<endl;
 		cout << "* - to exit" <<endl;
 		
 		
@@ -59,6 +62,27 @@ int main(int argc, char **argv) {
 				at.update();
 				/* activity linked in AIS */
 				InsertActivity::link(db,at,ais);
+		}
+		
+		else if (userInput==3)
+		{
+				int ID;
+				cout <<"Isert activity ID:" << endl;
+				cin>> ID;
+				
+				try
+				{
+					vector<Activity> selected = select<Activity>(db,Activity::Id == ID).all(); // I have just one record but it's just a try
+				}catch(NotFound e){
+					cout << "No Activity Found" << endl;
+				}
+
+				//IActivity selected = select<Activity> (db,Activity::id == ID).one();
+				//cout << IActivity.get_mDescription() <<endl; 
+				/*	PersonDatabase db("sqlite3", "database=person.db");
+					vector<Person> = select<Person>(db).all();
+					Person bob = select<Person>(db, Person::Name == "Bob").one();
+				*/
 		}
 				// commit transaction
 		else
