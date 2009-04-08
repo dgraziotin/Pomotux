@@ -3,6 +3,7 @@
 
 using namespace litesql;
 using namespace pomotuxdatabase;
+using namespace std;
 
 void pomotuxdatabase::TodoTodaySheet::PickUpActivity(const litesql::Database& database, Activity& newActivity, ActivityInventorySheet& currentAIS,  TodoTodaySheet& currentTDTS)
 {
@@ -14,7 +15,7 @@ try{
 	
 	}catch(NotFound e){
 		cout << "Fatal. The tables are not consistent." << endl;
-		exit(-1);
+		//exit (-1);
 	}
 	ActivityTDTS::link(database,newActivity,currentTDTS);
 }

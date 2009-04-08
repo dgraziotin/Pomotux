@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
 	/* one activity linked in TDTS */
 	tdts.PickUpActivity(db,at2,ais,tdts);
 	//at2.Delete(db,at2, ais, tdts);
-	
+	at2.Delete(db,at2,ais,tdts);
 	
 	//ActivityTDTS::unlink(db,at2,tdts,NULL);
 	
