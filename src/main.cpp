@@ -16,11 +16,12 @@ using namespace pomotuxdatabase;
 int main(int argc, char **argv) {
     try {
         // using SQLite3 as backend
-         PomotuxDatabase db("sqlite3", "database=pomotux.db");
+        PomotuxDatabase db("sqlite3", "database=pomotux.db");
         // create tables, sequences and indexes
         db.verbose = true;
-	if(db.needsUpgrade())
-		db.upgrade();
+		
+		if(db.needsUpgrade())
+			db.upgrade();
         //db.create();
         // start transaction
         db.begin();
@@ -58,7 +59,7 @@ int main(int argc, char **argv) {
 				cin>> days;
 				time_t seconds;
 				seconds=time(NULL);  // get the current time
-				IActivity at(db,description,(int)seconds,(int) seconds + days*(24 * 60 * 60));
+				IActivity at(db,description,(int)seconds,(((int)seconds)+days*(24 * 60 * 60)));
 				at.update();
 				/* activity linked in AIS */
 				InsertActivity::link(db,at,ais);
@@ -72,21 +73,30 @@ int main(int argc, char **argv) {
 				
 				try
 				{
-					vector<Activity> selected = select<Activity>(db,Activity::Id == ID).all(); // I have just one record but it's just a try
+					Activity result = InsertActivity::get<Activity>(db,Activity::Id == 1, InsertActivity::ActivityInventorySheet == 1).one();
+				//	vector<Activity> selected =select<Activity>(db,Activity::Id == ID).all(); // I have just one record but it's just a try
+				//	for (vector<Activity>::iterator i = selected.begin(); i != selected.end(); i++) cout << toString(*i) << endl;
+					cout << result <<endl;
 				}catch(NotFound e){
 					cout << "No Activity Found" << endl;
+					break;
 				}
-
+				
+				
+				
 				//IActivity selected = select<Activity> (db,Activity::id == ID).one();
 				//cout << IActivity.get_mDescription() <<endl; 
 				/*	PersonDatabase db("sqlite3", "database=person.db");
 					vector<Person> = select<Person>(db).all();
 					Person bob = select<Person>(db, Person::Name == "Bob").one();
+					* 
+					*  for (vector<Person>::iterator i = family.begin(); i != family.end(); i++) cout << toString(*i) << endl;
 				*/
 		}
-				// commit transaction
+				
 		else
-		{
+		{	
+				// commit transaction
 				db.commit();
 				cout<<"see you!!"<<endl;
 				return 0;
