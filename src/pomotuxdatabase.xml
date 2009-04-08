@@ -16,19 +16,20 @@
 	
 	<!-- maps TDTS object into database -->
 	<object name="TodoTodaySheet">
-		<field name="mActivityOrder" type="integer"></field>
 	</object>
 	
 	<!-- creates a many-to-one relationship between Activity and AIS -->
 	<relation name="InsertActivity">
 		<relate object="Activity" limit="many"></relate>
 		<relate object="ActivityInventorySheet" limit="one"></relate>
+		
 	</relation>
 
 	<!-- creates a many-to-one relationship between Activity and AIS -->
 	<relation name="PickUpActivity">
 		<relate object="Activity" limit="many"></relate>
 		<relate object="TodoTodaySheet" limit="one"></relate>
+		<field name="mActivityOrder" type="integer"></field>
 	</relation>
 	
 </database>
