@@ -8,7 +8,7 @@
 		<field name="mInsertionDate" type="date"></field>
 		<field name="mDeadLine" type="date"></field>
 		<field name="mNumPomodoro" type="integer" default="0"></field>
-		<field name="mIsFinished" type="boolean" default="false"></field>
+		<field name="mIsFinished" type="boolean" default="true"></field>
 	</object>
 
 	<!-- maps AIS object into database -->
@@ -25,7 +25,7 @@
 		<relate object="ActivityInventorySheet" limit="one"></relate>
 	</relation>
 
-	<!-- creates a many-to-one relationship between Activity and TDTS -->
+	<!-- creates a many-to-one relationship between Activity and AIS -->
 	<relation name="PickUpActivity">
 		<relate object="Activity" limit="many"></relate>
 		<relate object="TodoTodaySheet" limit="one"></relate>
