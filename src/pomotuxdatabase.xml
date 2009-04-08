@@ -46,7 +46,7 @@
 	<relation name="ActivityTDTS">
 		<relate object="Activity" limit="many"></relate>
 		<relate object="TodoTodaySheet" limit="one"></relate>
-		<field name="mActivityOrder" type="integer"></field>
+		<field name="mActivityOrder" type="integer" default="0"></field>
 	</relation>
 	
 </database>

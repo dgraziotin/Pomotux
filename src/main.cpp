@@ -56,10 +56,15 @@ int main(int argc, char **argv) {
 	 */
 	/* activity linked in AIS */
 	ais.InsertActivity(db,at,ais);
-	//ais.InsertActivity(db,at2,ais);
+	ais.InsertActivity(db,at2,ais);
 	
 	/* one activity linked in TDTS */
 	tdts.PickUpActivity(db,at2,ais,tdts);
+	//at2.Delete(db,at2, ais, tdts);
+	
+	
+	//ActivityTDTS::unlink(db,at2,tdts,NULL);
+	
 	
 	// commit transaction
         db.commit();
