@@ -10,7 +10,7 @@
 		<field name="mNumPomodoro" type="integer" default="0"></field>
 		<field name="mIsFinished" type="boolean" default="true"></field>
 		<method name="Delete" returntype="void">
-			<param name="database" type="litesql::Database&amp;"/>
+			<param name="database" type="const litesql::Database&amp;"/>
 			<param name="delActivity" type="Activity&amp;"/>
 			<param name="currentAIS" type="ActivityInventorySheet&amp;"/>
 			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
@@ -20,7 +20,7 @@
 	<!-- maps AIS object into database -->
 	<object name="ActivityInventorySheet">
 		<method name="InsertActivity" returntype="void">
-			<param name="database" type="litesql::Database&amp;"/>
+			<param name="database" type="const litesql::Database&amp;"/>
 			<param name="newActivity" type="Activity&amp;"/>
 			<param name="currentAIS" type="ActivityInventorySheet&amp;"/>
 		</method>
@@ -29,7 +29,7 @@
 	<!-- maps TDTS object into database -->
 	<object name="TodoTodaySheet">
 		<method name="PickUpActivity" returntype="void">
-			<param name="database" type="litesql::Database&amp;"/>
+			<param name="database" type="const litesql::Database&amp;"/>
 			<param name="newActivity" type="Activity&amp;"/>
 			<param name="currentAIS" type="ActivityInventorySheet&amp;"/>
 			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>

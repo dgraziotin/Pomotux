@@ -8,17 +8,6 @@
 using namespace litesql;
 using namespace pomotuxdatabase;
 
-void pomotuxdatabase::Activity::Delete(litesql::Database& database, Activity& delActivity, ActivityInventorySheet& currentAIS, TodoTodaySheet& currentTDTS){
-		std::cout << "troia.";
-}
-
-void pomotuxdatabase::ActivityInventorySheet::InsertActivity(litesql::Database& database, Activity& delActivity, ActivityInventorySheet& currentAIS){
-		std::cout << "troia.";
-}
-
-void pomotuxdatabase::TodoTodaySheet::PickUpActivity(litesql::Database& database, Activity& delActivity, ActivityInventorySheet& currentAIS, TodoTodaySheet& currentTDTS){
-		std::cout << "troia.";
-}
 int main(int argc, char **argv) {
     try {
         // using SQLite3 as backend
@@ -66,11 +55,11 @@ int main(int argc, char **argv) {
 	See E/R diagram for a better view
 	 */
 	/* activity linked in AIS */
-	ActivityAIS::link(db,at,ais);
-	ActivityAIS::link(db,at2,ais);
+	ais.InsertActivity(db,at,ais);
+	//ais.InsertActivity(db,at2,ais);
 	
 	/* one activity linked in TDTS */
-	ActivityTDTS::link(db,at,tdts);
+	tdts.PickUpActivity(db,at2,ais,tdts);
 	
 	// commit transaction
         db.commit();
