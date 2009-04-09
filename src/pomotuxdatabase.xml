@@ -8,12 +8,18 @@
 		<field name="mInsertionDate" type="date"></field>
 		<field name="mDeadLine" type="date"></field>
 		<field name="mNumPomodoro" type="integer" default="0"></field>
+		<field name="mOrder" type="integer" default="0"></field>
 		<field name="mIsFinished" type="boolean" default="true"></field>
 		<method name="Delete" returntype="void">
 			<param name="database" type="const litesql::Database&amp;"/>
 			<param name="delActivity" type="Activity&amp;"/>
 			<param name="currentAIS" type="ActivityInventorySheet&amp;"/>
 			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
+		</method>
+		<method name="Modify" returntype="void">
+			<param name="currentActivity" type="Activity&amp;"/>
+			<param name="newDeadline" type="int"/>
+			<param name="newDescription" type="std::string"/>
 		</method>
 	</object>
 
@@ -28,10 +34,29 @@
 	
 	<!-- maps TDTS object into database -->
 	<object name="TodoTodaySheet">
-		<method name="PickUpActivity" returntype="void">
+		<method name="ScheduleActivity" returntype="void">
 			<param name="database" type="const litesql::Database&amp;"/>
 			<param name="newActivity" type="Activity&amp;"/>
 			<param name="currentAIS" type="ActivityInventorySheet&amp;"/>
+			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
+		</method>
+		<method name="FinishActivity" returntype="void">
+			<param name="database" type="const litesql::Database&amp;"/>
+			<param name="currentActivity" type="Activity&amp;"/>
+			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
+		</method>
+		<method name="Push" returntype="void">
+			<param name="database" type="const litesql::Database&amp;"/>
+			<param name="currentActivity" type="Activity&amp;"/>
+			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
+			<param name="direction" type="int"/>
+		</method>
+		<method name="GetMaxmActivityOrder" returntype="int">
+			<param name="database" type="const litesql::Database&amp;"/>
+			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
+		</method>
+		<method name="MakeConsistent" returntype="void">
+			<param name="database" type="const litesql::Database&amp;"/>
 			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
 		</method>
 	</object>
@@ -46,7 +71,6 @@
 	<relation name="ActivityTDTS">
 		<relate object="Activity" limit="many"></relate>
 		<relate object="TodoTodaySheet" limit="one"></relate>
-		<field name="mActivityOrder" type="integer" default="0"></field>
 	</relation>
 	
 </database>
