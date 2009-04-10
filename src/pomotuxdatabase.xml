@@ -3,74 +3,74 @@
 <database name="PomotuxDatabase" namespace="pomotuxdatabase">
 	
 	<!-- maps Activity object into database -->
-	<object name="Activity">
-		<field name="mDescription" type="string"></field>
-		<field name="mInsertionDate" type="date"></field>
-		<field name="mDeadLine" type="date"></field>
-		<field name="mNumPomodoro" type="integer" default="0"></field>
-		<field name="mOrder" type="integer" default="0"></field>
-		<field name="mIsFinished" type="boolean" default="true"></field>
-		<method name="Delete" returntype="void">
-			<param name="database" type="const litesql::Database&amp;"/>
-			<param name="delActivity" type="Activity&amp;"/>
-			<param name="currentAIS" type="ActivityInventorySheet&amp;"/>
-			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
-		</method>
-		<method name="Modify" returntype="void">
-			<param name="currentActivity" type="Activity&amp;"/>
-			<param name="newDeadline" type="int"/>
-			<param name="newDescription" type="std::string"/>
-		</method>
-	</object>
+    <object name="Activity">
+        <field name="mDescription" type="string"></field>
+        <field name="mInsertionDate" type="date"></field>
+        <field name="mDeadline" type="date"></field>
+        <field name="mNumPomodoro" type="integer" default="0"></field>
+        <field name="mOrder" type="integer" default="0"></field>
+        <field name="mIsFinished" type="boolean" default="true"></field>
+        <method name="Delete" returntype="void">
+            <param name="rDatabase" type="const litesql::Database&amp;"/>
+            <param name="rCurrentActivity" type="Activity&amp;"/>
+            <param name="rAIS" type="ActivityInventorySheet&amp;"/>
+            <param name="rTTS" type="TodoTodaySheet&amp;"/>
+        </method>
+        <method name="Modify" returntype="void">
+            <param name="rCurrentActivity" type="Activity&amp;"/>
+            <param name="newDeadline" type="int"/>
+            <param name="newDescription" type="std::string"/>
+        </method>
+    </object>
 
 	<!-- maps AIS object into database -->
-	<object name="ActivityInventorySheet">
-		<method name="InsertActivity" returntype="void">
-			<param name="database" type="const litesql::Database&amp;"/>
-			<param name="newActivity" type="Activity&amp;"/>
-			<param name="currentAIS" type="ActivityInventorySheet&amp;"/>
-		</method>
-	</object>
+    <object name="ActivityInventorySheet">
+        <method name="InsertActivity" returntype="void">
+            <param name="rDatabase" type="const litesql::Database&amp;"/>
+            <param name="rNewActivity" type="Activity&amp;"/>
+            <param name="rAIS" type="ActivityInventorySheet&amp;"/>
+        </method>
+    </object>
 	
-	<!-- maps TDTS object into database -->
-	<object name="TodoTodaySheet">
-		<method name="ScheduleActivity" returntype="void">
-			<param name="database" type="const litesql::Database&amp;"/>
-			<param name="newActivity" type="Activity&amp;"/>
-			<param name="currentAIS" type="ActivityInventorySheet&amp;"/>
-			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
-		</method>
-		<method name="FinishActivity" returntype="void">
-			<param name="database" type="const litesql::Database&amp;"/>
-			<param name="currentActivity" type="Activity&amp;"/>
-			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
-		</method>
-		<method name="Push" returntype="void">
-			<param name="database" type="const litesql::Database&amp;"/>
-			<param name="currentActivity" type="Activity&amp;"/>
-			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
-			<param name="direction" type="int"/>
-		</method>
-		<method name="GetMaxmActivityOrder" returntype="int">
-			<param name="database" type="const litesql::Database&amp;"/>
-			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
-		</method>
-		<method name="MakeConsistent" returntype="void">
-			<param name="database" type="const litesql::Database&amp;"/>
-			<param name="currentTDTS" type="TodoTodaySheet&amp;"/>
-		</method>
-	</object>
+	<!-- maps TTS object into database -->
+    <object name="TodoTodaySheet">
+        <method name="ScheduleActivity" returntype="void">
+            <param name="rDatabase" type="const litesql::Database&amp;"/>
+            <param name="rNewActivity" type="Activity&amp;"/>
+            <param name="rAIS" type="ActivityInventorySheet&amp;"/>
+            <param name="rTTS" type="TodoTodaySheet&amp;"/>
+        </method>
+        <method name="FinishActivity" returntype="void">
+            <param name="rDatabase" type="const litesql::Database&amp;"/>
+            <param name="rCurrentActivity" type="Activity&amp;"/>
+            <param name="rTTS" type="TodoTodaySheet&amp;"/>
+        </method>
+        <method name="MoveActivity" returntype="void">
+            <param name="rDatabase" type="const litesql::Database&amp;"/>
+            <param name="rCurrentActivity" type="Activity&amp;"/>
+            <param name="rCurrentTDS" type="TodoTodaySheet&amp;"/>
+            <param name="direction" type="const int"/>
+        </method>
+        <method name="GetMaxmActivityOrder" returntype="int">
+            <param name="rDatabase" type="const litesql::Database&amp;"/>
+            <param name="rTTS" type="TodoTodaySheet&amp;"/>
+        </method>
+        <method name="MakeConsistent" returntype="void">
+            <param name="rDatabase" type="const litesql::Database&amp;"/>
+            <param name="rTTS" type="TodoTodaySheet&amp;"/>
+        </method>
+    </object>
 	
 	<!-- creates a many-to-one relationship between Activity and AIS -->
-	<relation name="ActivityAIS">
-		<relate object="Activity" limit="many"></relate>
-		<relate object="ActivityInventorySheet" limit="one"></relate>
-	</relation>
+    <relation name="ActivityInAIS">
+        <relate object="Activity" limit="many"></relate>
+        <relate object="ActivityInventorySheet" limit="one"></relate>
+    </relation>
 
-	<!-- creates a many-to-one relationship between Activity and TDTS -->
-	<relation name="ActivityTDTS">
-		<relate object="Activity" limit="many"></relate>
-		<relate object="TodoTodaySheet" limit="one"></relate>
-	</relation>
+	<!-- creates a many-to-one relationship between Activity and TTS -->
+    <relation name="ActivityInTTS">
+        <relate object="Activity" limit="many"></relate>
+        <relate object="TodoTodaySheet" limit="one"></relate>
+    </relation>
 	
 </database>

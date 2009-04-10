@@ -4,7 +4,7 @@
 using namespace litesql;
 using namespace pomotuxdatabase;
 
-void pomotuxdatabase::ActivityInventorySheet::InsertActivity(const litesql::Database& database, Activity& newActivity, ActivityInventorySheet& currentAIS)
+void pomotuxdatabase::ActivityInventorySheet::InsertActivity(const litesql::Database& rDatabase, Activity& rNewActivity, ActivityInventorySheet& rAIS)
 {
-	ActivityAIS::link(database,newActivity,currentAIS);
+    ActivityInAIS::link(rDatabase,rNewActivity,rAIS);
 }

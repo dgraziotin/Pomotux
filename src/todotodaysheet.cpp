@@ -5,70 +5,71 @@ using namespace litesql;
 using namespace pomotuxdatabase;
 using namespace std;
 
-void pomotuxdatabase::TodoTodaySheet::ScheduleActivity(const litesql::Database& database, Activity& newActivity, ActivityInventorySheet& currentAIS,  TodoTodaySheet& currentTDTS)
+void pomotuxdatabase::TodoTodaySheet::ScheduleActivity(const litesql::Database& rDatabase, Activity& rNewActivity, ActivityInventorySheet& rAIS,  TodoTodaySheet& rTTS)
 {
-	currentTDTS.MakeConsistent(database,currentTDTS);
-try{
-	Activity searchActivity = ActivityAIS::get<Activity>(database, 
-                                         Activity::Id == newActivity.id,
-                                         ActivityAIS::ActivityInventorySheet==currentAIS.id).one();
+    rTTS.MakeConsistent(rDatabase,rTTS);
+    try {
+        Activity searchActivity = ActivityInAIS::get<Activity>(rDatabase,
+                                  Activity::Id == rNewActivity.id,
+                                  ActivityInAIS::ActivityInventorySheet==rAIS.id).one();
 
-	
-	}catch(NotFound e){
-		cout << "Fatal. The tables are not consistent." << endl;
-		//exit (-1);
-	}
-	newActivity.mOrder = GetMaxmActivityOrder(database, currentTDTS) + 1;
-	newActivity.update();
-	ActivityTDTS::link(database,newActivity,currentTDTS);
+
+    } catch (NotFound e) {
+        cout << "Fatal. The tables are not consistent." << endl;
+        //exit (-1);
+    }
+    rNewActivity.mOrder = GetMaxmActivityOrder(rDatabase, rTTS) + 1;
+    rNewActivity.update();
+    ActivityInTTS::link(rDatabase,rNewActivity,rTTS);
 }
 
-void pomotuxdatabase::TodoTodaySheet::FinishActivity(const litesql::Database& database, Activity& currentActivity,TodoTodaySheet& currentTDTS)
+void pomotuxdatabase::TodoTodaySheet::FinishActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS)
 {
-	currentActivity.mIsFinished = true;
-	currentActivity.update();
-	ActivityTDTS::unlink(database, currentActivity, currentTDTS);
-	currentTDTS.MakeConsistent(database,currentTDTS);
+    rCurrentActivity.mIsFinished = true;
+    rCurrentActivity.update();
+    ActivityInTTS::unlink(rDatabase, rCurrentActivity, rTTS);
+    rTTS.MakeConsistent(rDatabase,rTTS);
 }
 
-void pomotuxdatabase::TodoTodaySheet::Push(const litesql::Database& database, Activity& currentActivity,TodoTodaySheet& currentTDTS, int direction)
+void pomotuxdatabase::TodoTodaySheet::MoveActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS, int direction)
 {
-	currentTDTS.MakeConsistent(database,currentTDTS);
-	try{
-		Activity targetActivity = ActivityTDTS::get<Activity>(database, 
-                                         Activity::MOrder == currentActivity.mOrder + direction,
-                                         ActivityTDTS::TodoTodaySheet==currentTDTS.id).one();
-		targetActivity.mOrder = currentActivity.mOrder;
-		currentActivity.mOrder = currentActivity.mOrder + direction;
-	
-		targetActivity.update();
-		currentActivity.update();
-	}catch(NotFound e){
-		cout << "Fatal: you are either trying to push up the first Activity or to push down the last Activity!" << endl;
-		return;
-	}
+    rTTS.MakeConsistent(rDatabase,rTTS);
+    try {
+        Activity targetActivity = ActivityInTTS::get<Activity>(rDatabase,
+                                  Activity::MOrder == rCurrentActivity.mOrder + direction,
+                                  ActivityInTTS::TodoTodaySheet==rTTS.id).one();
+        targetActivity.mOrder = rCurrentActivity.mOrder;
+        rCurrentActivity.mOrder = rCurrentActivity.mOrder + direction;
+
+        targetActivity.update();
+        rCurrentActivity.update();
+    } catch (NotFound e) {
+        cout << "Fatal: you are either trying to push up the first Activity or to push down the last Activity!" << endl;
+        return;
+    }
 }
 
-void pomotuxdatabase::TodoTodaySheet::MakeConsistent(const litesql::Database& database, TodoTodaySheet& currentTDTS)
+void pomotuxdatabase::TodoTodaySheet::MakeConsistent(const litesql::Database& rDatabase, TodoTodaySheet& rTTS)
 {
-	vector<Activity> currentTDTSActivities = ActivityTDTS::get<Activity>(database,Expr(), 
-                                         ActivityTDTS::TodoTodaySheet==currentTDTS.id).orderBy(Activity::MOrder).all();
-	int order = 0;
-	for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++){
-		(*i).mOrder = order++; 
-		(*i).update();
-	}
+    vector<Activity> currentTDTSActivities = ActivityInTTS::get<Activity>(rDatabase,Expr(),
+            ActivityInTTS::TodoTodaySheet==rTTS.id).orderBy(Activity::MOrder).all();
+    int order = 0;
+    for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++) {
+        (*i).mOrder = order++;
+        (*i).update();
+    }
 }
-int pomotuxdatabase::TodoTodaySheet::GetMaxmActivityOrder(const litesql::Database& database, TodoTodaySheet& currentTDTS)
+
+int pomotuxdatabase::TodoTodaySheet::GetMaxmActivityOrder(const litesql::Database& rDatabase, TodoTodaySheet& rTTS)
 {
-	
-	vector<Activity> currentTDTSActivities = ActivityTDTS::get<Activity>(database,Expr(), 
-                                         ActivityTDTS::TodoTodaySheet==currentTDTS.id).all();
-	int maxOrder = -1;			 
-	for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++){
-		if ((*i).mOrder > maxOrder)
-			maxOrder = (*i).mOrder;
-	}
-	
-	return maxOrder;
+
+    vector<Activity> currentTDTSActivities = ActivityInTTS::get<Activity>(rDatabase,Expr(),
+            ActivityInTTS::TodoTodaySheet==rTTS.id).all();
+    int maxOrder = -1;
+    for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++) {
+        if ((*i).mOrder > maxOrder)
+            maxOrder = (*i).mOrder;
+    }
+
+    return maxOrder;
 }
