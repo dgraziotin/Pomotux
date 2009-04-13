@@ -26,38 +26,43 @@ int main(int argc, char **argv)
         ActivityInventorySheet ais(db);
         /* make it persistent */
         ais.update();
-        /* same for one Todo Today Sheet*/
+	/* menu */
         TodoTodaySheet tts(db);
         tts.update();
-	/* menu */
+	
 	int controller = 1;
 	while (controller == 1) {
 	cout << "\n";
-	cout << "MAIN MENU" << endl;
-	cout << "1 - Create an activity" << endl;
-	cout << "2 - Modify an activity" << endl;
-	cout << "3 - Delete an activyty" << endl;
-	cout << "4 - Schedule an activity in the todo today sheet" << endl;
-	cout << "5 - Increase or decrease the priority of an activity in the todo today sheet" << endl;
-	cout << "6 - Finish an activity" << endl;
-	cout << "7 - Postpone Activity" << endl;
-	cout << "8 - Close Pomotux" << endl;
+	cout << "********************************************************************************" << endl;
+	cout << "*                                 MAIN MENU                                    *" << endl;
+	cout << "********************************************************************************" << endl;
+	cout << "* 1 - Create an activity                                                       *" << endl;
+	cout << "* 2 - Modify an activity                                                       *" << endl;
+	cout << "* 3 - Delete an activity                                                       *" << endl;
+	cout << "* 4 - Create a Todo Today Sheet                                                *" << endl;
+	cout << "* 5 - Schedule an activity in the todo today sheet                             *" << endl;
+	cout << "* 6 - Increase or decrease the priority of an activity in the todo today sheet *" << endl;
+	cout << "* 7 - Finish an activity                                                       *" << endl;
+	cout << "* 8 - Postpone Activity                                                        *" << endl;
+	cout << "* 9 - Close Pomotux                                                            *" << endl;
+	cout << "********************************************************************************" << endl;
 	cout << "\n";
 	cout << "Choose an option: ";
 	cin >> controller;
 	cout << "\n";
 	if (controller == 1) {
-		//creation of an activity
+		cout << "CREATE AN ACTIVITY" << endl;
+		cout << "\n";
         	Activity at(db);
 		string description;
-		cout << "Insert a description" << endl;
+		cout << "Insert a description: ";
 		cin >> description;
         	at.mDescription = description;
         	time_t seconds;
         	seconds = time (NULL);
         	at.mInsertionDate = (int) seconds;	// dates must be stored in UNIX datetime format (seconds passed from 1-1-1970)
 		int days;
-		cout << "Insert the number of days until the deadlines" << endl;
+		cout << "Insert the number of days until the deadlines: ";
 		cin >> days;
         	at.mDeadline = (int) seconds + days*(86400);
         	at.mIsFinished = false;
@@ -65,60 +70,84 @@ int main(int argc, char **argv)
         	at.mOrder = 0;
         	at.update();				// make this activity persistent
         	ais.InsertActivity(db,at,ais);		// insert the activity automatically in the AIS
+		cout << endl << "A new activity is successfully created." << endl;
 		controller = 1;
 	} else if (controller == 2) {
 		int id;
-		cout << "Select the ID of the activities you want to modify" << endl;
+		cout << "MODIFY AN ACTIVITY" << endl;
+		cout << "\n";
+		cout << "Select the ID of the activities you want to modify: ";
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		string newDescription;
 		int newDeadline;
-		cout << "Insert a new description (empty for no changes)" << endl;
+		cout << "Insert a new description (empty for no changes): ";
 		cin >> newDescription;
-		cout << "Insert a new deadline (0 for no changes)" << endl;
+		cout << "Insert a new deadline (0 for no changes): ";
 		cin >> newDeadline;	
 		at.Modify(db, at, newDeadline, newDescription);
+		cout << endl << "The activity is successfully modified." << endl;
  		controller = 1;
 	} else if (controller == 3) {
 		int id;
-		cout << "Select the ID of the activities you want to delete" << endl;
+		cout << "DELETE AN ACTIVITY" << endl;
+		cout << "\n";
+		cout << "Select the ID of the activities you want to delete: ";
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		at.Delete(db, at, ais, tts);
+		cout << endl << "The activity is successfully deleted." << endl;
 		controller = 1;
 	} else if (controller == 4) {
+		/*cout << "CREATE A TODO TODAY SHEET" << endl;
+		cout << "\n";
+        	TodoTodaySheet tts(db);
+        	tts.update();*/
+		controller = 1;			
+	} else if (controller == 5) {
 		int id;
-		cout << "Select the ID of the activities you want to schedule" << endl;
+		cout << "SCHEDULE AN ACTIVITY IN A TODO TODAY SHEET" << endl;
+		cout << "\n";
+		cout << "Select the ID of the activities you want to schedule: ";
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		tts.ScheduleActivity(db, at, ais, tts);
+		cout << endl << "The activity is successfully scheduled." << endl;
 		controller = 1;
-	} else if (controller == 5) {
+	} else if (controller == 6) {
 		int id, direction;
-		cout << "Select the ID of the activities you want to prioritize" << endl;
+		cout << "INCREASE OR DECREASE THE PRIORITY OF AN ACTIVITY" << endl;
+		cout << "\n";
+		cout << "Select the ID of the activities you want to prioritize: ";
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
-		cout << "-1 - If you want to increase the priority" << endl;
-		cout << "1 - If you want to decrease the priority" << endl;
+		cout << "**********************************************" << endl;
+		cout << "* -1 - If you want to increase the priority  *" << endl;
+		cout << "*  1 - If you want to decrease the priority  *" << endl;
+		cout << "**********************************************" << endl;
+		cout << "\n";
 		cout << "Choose an option: ";
 		cin >> direction;
 		tts.MoveActivity(db, at, tts, direction);
 		controller = 1; 	
-	} else if (controller == 6) {
+	} else if (controller == 7) {
 		int id;
-		cout << "Select the ID of the activities you want to schedule" << endl;
+		cout << "FINISH AN ACTIVITY" << endl;
+		cout << "Select the ID of the activities you want to schedule: ";
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		tts.FinishActivity(db, at, tts);
+		cout << endl << "The activity is successfully finished." << endl;
 		controller = 1;
-	} else if (controller == 7) {
+	} else if (controller == 8) {
 		int id;
-		cout << "Select the ID of the activities you want to post-pone" << endl;
+		cout << "Select the ID of the activities you want to post-pone: ";
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		tts.PostponeActivity(db, at, tts);
+		cout << endl << "The activity is successfully postponed." << endl;
 		controller = 1;
-	} else if (controller < 1 || controller > 8) {
+	} else if (controller < 1 || controller > 9) {
 		cout << "Your input is not correct. Try again" << endl;
 		controller = 1;
 	} else {
@@ -127,6 +156,7 @@ int main(int argc, char **argv)
 	}
         // commit transaction
         db.commit();
+	cout << "See you the next time!";
         // clean up
         //db.drop();
     } catch (Except e) {
