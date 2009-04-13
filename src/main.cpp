@@ -22,78 +22,99 @@ int main(int argc, char **argv)
         //db.create();
         // start transaction
         db.begin();
-
         /* creation of one Activity Inventory Sheet */
         ActivityInventorySheet ais(db);
         /* make it persistent */
         ais.update();
-
         /* same for one Todo Today Sheet*/
         TodoTodaySheet tts(db);
         tts.update();
-
-        /* creation of an activity */
-        Activity at(db);
-        at.mDescription = "A dummy Activity";
-        time_t seconds;
-        seconds = time (NULL);
-        at.mInsertionDate = (int) seconds;	// dates must be stored in UNIX datetime format (seconds passed from 1-1-1970)
-        at.mDeadline = 6;			// therefore, this is allowed but not valid
-        at.mIsFinished = false;
-        at.mNumPomodoro = 15;
-        at.mOrder = 2;
-        at.update();				// make this activity persistent
-
-        /* another activity */
-        Activity at2(db);
-        at2.mDescription = "A second dummy Activity tomorrow";
-        at2.mInsertionDate = (int) seconds + (24 * 60 * 60);	// just to play, this is inserted tomorrow
-        at2.mDeadline = 6;
-        at2.mIsFinished = false;
-        at2.mNumPomodoro = 1;
-        at2.mOrder = 3;
-        at2.update();
-
-        Activity at3(db);
-        at3.mDescription = "A third dummy Activity tomorrow";
-        at3.mInsertionDate = (int) seconds + 2 * (24 * 60 * 60);	// just to play, this is inserted tomorrow
-        at3.mDeadline = 123123;
-        at3.mIsFinished = false;
-        at3.mNumPomodoro = 9;
-        at3.mOrder = 1;
-        at3.update();
-
-        Activity at4(db);
-        at4.mDescription = "A fourth dummy Activity tomorrow";
-        at4.mInsertionDate = (int) seconds + 2 * (24 * 60 * 60);	// just to play, this is inserted tomorrow
-        at4.mDeadline = 123123;
-        at4.mIsFinished = false;
-        at4.mNumPomodoro = 9;
-        at4.mOrder = 4;
-        at4.update();
-
-
-        /* activity linked in AIS */
-        ais.InsertActivity(db,at,ais);
-        ais.InsertActivity(db,at2,ais);
-        ais.InsertActivity(db,at3,ais);
-        ais.InsertActivity(db,at4,ais);
-
-        /* one activity linked in TDTS */
-        tts.ScheduleActivity(db,at,ais,tts);
-        tts.ScheduleActivity(db,at2,ais,tts);
-        tts.ScheduleActivity(db,at3,ais,tts);
-        tts.ScheduleActivity(db,at4,ais,tts);
-
-
-        tts.MoveActivity(db,at,tts,1);
-
-        at3.Modify(at3, 0, string(""));
-        //at2.Delete(db,at2, ais, tts);
-
-
-
-
+	/* menu */
+	int controller = 1;
+	while (controller == 1) {
+	cout << "\n";
+	cout << "MAIN MENU" << endl;
+	cout << "1 - Create an activity" << endl;
+	cout << "2 - Modify an activity" << endl;
+	cout << "3 - Delete an activyty" << endl;
+	cout << "4 - Schedule an activity in the todo today sheet" << endl;
+	cout << "5 - Increase or decrease the priority of an activity in the todo today sheet" << endl;
+	cout << "6 - Finish an activity" << endl;
+	cout << "7 - Close Pomotux" << endl;
+	cout << "\n";
+	cout << "Choose an option: ";
+	cin >> controller;
+	cout << "\n";
+	if (controller == 1) {
+		//creation of an activity
+        	Activity at(db);
+		string description;
+		cout << "Insert a description" << endl;
+		cin >> description;
+        	at.mDescription = description;
+        	time_t seconds;
+        	seconds = time (NULL);
+        	at.mInsertionDate = (int) seconds;	// dates must be stored in UNIX datetime format (seconds passed from 1-1-1970)
+		int days;
+		cout << "Insert the number of days until the deadlines" << endl;
+		cin >> days;
+        	at.mDeadline = (int) seconds + days*(86400);
+        	at.mIsFinished = false;
+        	at.mNumPomodoro = 0;
+        	at.mOrder = 0;
+        	at.update();				// make this activity persistent
+        	ais.InsertActivity(db,at,ais);		// insert the activity automatically in the AIS
+		controller = 1;
+	} else if (controller == 2) {
+		int id;
+		cout << "Select the ID of the activities you want to modify" << endl;
+		cin >> id;
+		Activity at = select<Activity>(db, Activity::Id == id).one();
+		string newDescription;
+		int newDeadline;
+		cout << "Insert a new description (empty for no changes)" << endl;
+		cin >> newDescription;
+		cout << "Insert a new deadline (0 for no changes)" << endl;
+		cin >> newDeadline;	
+		at.Modify(at, newDeadline, newDescription);
+ 		controller = 1;
+	} else if (controller == 3) {
+		int id;
+		cout << "Select the ID of the activities you want to delete" << endl;
+		cin >> id;
+		Activity at = select<Activity>(db, Activity::Id == id).one();
+		at.Delete(db, at, ais, tts);
+		controller = 1;
+	} else if (controller == 4) {
+		int id;
+		cout << "Select the ID of the activities you want to schedule" << endl;
+		cin >> id;
+		Activity at = select<Activity>(db, Activity::Id == id).one();
+		tts.ScheduleActivity(db, at, ais, tts);
+		controller = 1;
+	} else if (controller == 5) {
+		int id, direction;
+		cout << "Select the ID of the activities you want to schedule" << endl;
+		cin >> id;
+		Activity at = select<Activity>(db, Activity::Id == id).one();
+		cout << "-1 - If you want to increase the priority" << endl;
+		cout << "1 - If you want to decrease the priority" << endl;
+		cout << "Choose an option: ";
+		cin >> direction;
+		tts.MoveActivity(db, at, tts, direction);
+		controller = 1; 	
+	} else if (controller == 6) {
+		int id;
+		cout << "Select the ID of the activities you want to schedule" << endl;
+		cin >> id;
+		Activity at = select<Activity>(db, Activity::Id == id).one();
+		tts.FinishActivity(db, at, tts);
+		controller = 1;
+	} else if (controller < 1 || controller > 7) {
+		cout << "Your input is not correct. Try again" << endl;
+		controller = 1;
+	}
+	}
         // commit transaction
         db.commit();
         // clean up
