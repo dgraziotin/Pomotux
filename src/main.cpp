@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 		cin >> newDescription;
 		cout << "Insert a new deadline (0 for no changes)" << endl;
 		cin >> newDeadline;	
-		at.Modify(at, newDeadline, newDescription);
+		at.Modify(db, at, newDeadline, newDescription);
  		controller = 1;
 	} else if (controller == 3) {
 		int id;
