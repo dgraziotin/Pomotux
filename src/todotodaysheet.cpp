@@ -33,6 +33,13 @@ void pomotuxdatabase::TodoTodaySheet::FinishActivity(const litesql::Database& rD
 	rDatabase.commit();
 }
 
+void pomotuxdatabase::TodoTodaySheet::PostponeActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS)
+{
+    ActivityInTTS::unlink(rDatabase, rCurrentActivity, rTTS);
+    rTTS.MakeConsistent(rDatabase,rTTS);
+	rDatabase.commit();
+}
+
 void pomotuxdatabase::TodoTodaySheet::MoveActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS, int direction)
 {
     rTTS.MakeConsistent(rDatabase,rTTS);

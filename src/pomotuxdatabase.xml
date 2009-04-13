@@ -46,6 +46,11 @@
             <param name="rCurrentActivity" type="Activity&amp;"/>
             <param name="rTTS" type="TodoTodaySheet&amp;"/>
         </method>
+		<method name="PostponeActivity" returntype="void">
+            <param name="rDatabase" type="const litesql::Database&amp;"/>
+            <param name="rCurrentActivity" type="Activity&amp;"/>
+            <param name="rTTS" type="TodoTodaySheet&amp;"/>
+        </method>
         <method name="MoveActivity" returntype="void">
             <param name="rDatabase" type="const litesql::Database&amp;"/>
             <param name="rCurrentActivity" type="Activity&amp;"/>

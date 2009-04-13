@@ -40,7 +40,8 @@ int main(int argc, char **argv)
 	cout << "4 - Schedule an activity in the todo today sheet" << endl;
 	cout << "5 - Increase or decrease the priority of an activity in the todo today sheet" << endl;
 	cout << "6 - Finish an activity" << endl;
-	cout << "7 - Close Pomotux" << endl;
+	cout << "7 - Postpone Activity" << endl;
+	cout << "8 - Close Pomotux" << endl;
 	cout << "\n";
 	cout << "Choose an option: ";
 	cin >> controller;
@@ -94,7 +95,7 @@ int main(int argc, char **argv)
 		controller = 1;
 	} else if (controller == 5) {
 		int id, direction;
-		cout << "Select the ID of the activities you want to schedule" << endl;
+		cout << "Select the ID of the activities you want to prioritize" << endl;
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		cout << "-1 - If you want to increase the priority" << endl;
@@ -110,9 +111,18 @@ int main(int argc, char **argv)
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		tts.FinishActivity(db, at, tts);
 		controller = 1;
-	} else if (controller < 1 || controller > 7) {
+	} else if (controller == 7) {
+		int id;
+		cout << "Select the ID of the activities you want to post-pone" << endl;
+		cin >> id;
+		Activity at = select<Activity>(db, Activity::Id == id).one();
+		tts.PostponeActivity(db, at, tts);
+		controller = 1;
+	} else if (controller < 1 || controller > 8) {
 		cout << "Your input is not correct. Try again" << endl;
 		controller = 1;
+	} else {
+		controller = 0;
 	}
 	}
         // commit transaction
