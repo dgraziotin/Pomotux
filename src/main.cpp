@@ -24,12 +24,18 @@ int main(int argc, char **argv)
         db.begin();
         /* creation of one Activity Inventory Sheet */
         ActivityInventorySheet ais(db);
-        /* make it persistent */
-        ais.update();
-	/* menu */
         TodoTodaySheet tts(db);
-        tts.update();
-	
+	/* menu */
+	char control;
+	cout << "\nThis is the first time you run this program? (y/n)" << endl;
+	cin >> control;
+	if (control == 'y' || control == 'Y') {
+		ais.update();
+		tts.update();
+	} else {
+		ais = select<ActivityInventorySheet>(db, ActivityInventorySheet::Id == 1).one();
+		tts = select<TodoTodaySheet>(db, TodoTodaySheet::Id == 1).one();
+	}	
 	int controller = 1;
 	while (controller == 1) {
 	cout << "\n";
@@ -39,24 +45,26 @@ int main(int argc, char **argv)
 	cout << "* 1 - Create an activity                                                       *" << endl;
 	cout << "* 2 - Modify an activity                                                       *" << endl;
 	cout << "* 3 - Delete an activity                                                       *" << endl;
-	cout << "* 4 - Create a Todo Today Sheet                                                *" << endl;
-	cout << "* 5 - Schedule an activity in the todo today sheet                             *" << endl;
-	cout << "* 6 - Increase or decrease the priority of an activity in the todo today sheet *" << endl;
-	cout << "* 7 - Finish an activity                                                       *" << endl;
-	cout << "* 8 - Postpone Activity                                                        *" << endl;
+	cout << "* 4 - Schedule an activity in the todo today sheet                             *" << endl;
+	cout << "* 5 - Increase or decrease the priority of an activity in the todo today sheet *" << endl;
+	cout << "* 6 - Finish an activity                                                       *" << endl;
+	cout << "* 7 - Postpone Activity                                                        *" << endl;
+	cout << "* 8 - Print Menu                                                               *" << endl;
 	cout << "* 9 - Close Pomotux                                                            *" << endl;
 	cout << "********************************************************************************" << endl;
 	cout << "\n";
 	cout << "Choose an option: ";
 	cin >> controller;
-	cout << "\n";
+	cout << "\n";	
 	if (controller == 1) {
 		cout << "CREATE AN ACTIVITY" << endl;
 		cout << "\n";
         	Activity at(db);
 		string description;
 		cout << "Insert a description: ";
-		cin >> description;
+		cin.clear();
+		cin.ignore(1, '\n');
+		getline(cin, description, '\n');
         	at.mDescription = description;
         	time_t seconds;
         	seconds = time (NULL);
@@ -78,11 +86,13 @@ int main(int argc, char **argv)
 		cout << "\n";
 		cout << "Select the ID of the activities you want to modify: ";
 		cin >> id;
+		cin.clear();
+		cin.ignore(1, '\n');
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		string newDescription;
 		int newDeadline;
-		cout << "Insert a new description (empty for no changes): ";
-		cin >> newDescription;
+		cout << "\nInsert a new description (empty for no changes): ";
+		getline(cin, newDescription, '\n');
 		cout << "Insert a new deadline (0 for no changes): ";
 		cin >> newDeadline;	
 		at.Modify(db, at, newDeadline, newDescription);
@@ -97,14 +107,8 @@ int main(int argc, char **argv)
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		at.Delete(db, at, ais, tts);
 		cout << endl << "The activity is successfully deleted." << endl;
-		controller = 1;
+		controller = 1;		
 	} else if (controller == 4) {
-		/*cout << "CREATE A TODO TODAY SHEET" << endl;
-		cout << "\n";
-        	TodoTodaySheet tts(db);
-        	tts.update();*/
-		controller = 1;			
-	} else if (controller == 5) {
 		int id;
 		cout << "SCHEDULE AN ACTIVITY IN A TODO TODAY SHEET" << endl;
 		cout << "\n";
@@ -114,13 +118,15 @@ int main(int argc, char **argv)
 		tts.ScheduleActivity(db, at, ais, tts);
 		cout << endl << "The activity is successfully scheduled." << endl;
 		controller = 1;
-	} else if (controller == 6) {
+	} else if (controller == 5) {
 		int id, direction;
 		cout << "INCREASE OR DECREASE THE PRIORITY OF AN ACTIVITY" << endl;
 		cout << "\n";
 		cout << "Select the ID of the activities you want to prioritize: ";
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
+		cout << "**********************************************" << endl;
+		cout << "                PRIORITY MENU                *" << endl;
 		cout << "**********************************************" << endl;
 		cout << "* -1 - If you want to increase the priority  *" << endl;
 		cout << "*  1 - If you want to decrease the priority  *" << endl;
@@ -130,7 +136,7 @@ int main(int argc, char **argv)
 		cin >> direction;
 		tts.MoveActivity(db, at, tts, direction);
 		controller = 1; 	
-	} else if (controller == 7) {
+	} else if (controller == 6) {
 		int id;
 		cout << "FINISH AN ACTIVITY" << endl;
 		cout << "Select the ID of the activities you want to schedule: ";
@@ -139,13 +145,40 @@ int main(int argc, char **argv)
 		tts.FinishActivity(db, at, tts);
 		cout << endl << "The activity is successfully finished." << endl;
 		controller = 1;
-	} else if (controller == 8) {
+	} else if (controller == 7) {
 		int id;
 		cout << "Select the ID of the activities you want to post-pone: ";
 		cin >> id;
 		Activity at = select<Activity>(db, Activity::Id == id).one();
 		tts.PostponeActivity(db, at, tts);
 		cout << endl << "The activity is successfully postponed." << endl;
+		controller = 1;
+	} else if (controller == 8) {
+		int selection;
+		cout << "*************************" << endl;
+		cout << "*      PRINT MENU       *" << endl;
+		cout << "*************************" << endl;
+		cout << "* 1 - Print the AIS     *" << endl;
+		cout << "* 2 - Print the TTS	*" << endl;
+		cout << "*************************" << endl;
+		cout << "\n";
+		cout << "Choose an option: ";
+		cin >> selection;
+		if (selection == 1) {
+			vector<Activity> currentAISActivities = ActivityInAIS::get<Activity>(db,Expr(),
+            			ActivityInAIS::ActivityInventorySheet==1).orderBy(Activity::Id).all();
+			cout << "\nAIS" << endl;
+			cout << "ID  | DESCRIPTION" << endl;
+			for (vector<Activity>::iterator i = currentAISActivities.begin(); i != currentAISActivities.end(); i++) 
+				cout << (*i).id << "   | " << (*i).mDescription << "\n";
+		} else {
+			vector<Activity> currentTTSActivities = ActivityInTTS::get<Activity>(db,Expr(),
+            			ActivityInTTS::TodoTodaySheet==1).orderBy(Activity::Id).all();
+			cout << "\nTTS" << endl;
+			cout << "ID  | DESCRIPTION" << endl;
+			for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) 
+				cout << (*i).id << " | " << (*i).mDescription << "\n";
+		}
 		controller = 1;
 	} else if (controller < 1 || controller > 9) {
 		cout << "Your input is not correct. Try again" << endl;
@@ -156,7 +189,7 @@ int main(int argc, char **argv)
 	}
         // commit transaction
         db.commit();
-	cout << "See you the next time!";
+	cout << "See you the next time!" << endl;
         // clean up
         //db.drop();
     } catch (Except e) {
@@ -165,4 +198,5 @@ int main(int argc, char **argv)
     }
     return 0;
 }
+
 
