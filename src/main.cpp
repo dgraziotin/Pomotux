@@ -173,11 +173,11 @@ int main(int argc, char **argv)
 				cout << (*i).id << "   | " << (*i).mDescription << "\n";
 		} else {
 			vector<Activity> currentTTSActivities = ActivityInTTS::get<Activity>(db,Expr(),
-            			ActivityInTTS::TodoTodaySheet==1).orderBy(Activity::Id).all();
+            			ActivityInTTS::TodoTodaySheet==1).orderBy(Activity::MOrder).all();
 			cout << "\nTTS" << endl;
-			cout << "ID  | DESCRIPTION" << endl;
+			cout << "ID  | DESCRIPTION | order" << endl;
 			for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) 
-				cout << (*i).id << " | " << (*i).mDescription << "\n";
+				cout << (*i).id << " | " << (*i).mDescription << " | " << (*i).mOrder << "\n";
 		}
 		controller = 1;
 	} else if (controller < 1 || controller > 9) {

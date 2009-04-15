@@ -15,6 +15,7 @@ void pomotuxdatabase::Activity::Delete(const litesql::Database& rDatabase,  Acti
 
     ActivityInTTS::del(rDatabase,ActivityInTTS::Activity == delActivity.id);
     delActivity.del();
+	rTTS.MakeConsistent(rDatabase, rTTS);
 	rDatabase.commit();
 }
 
