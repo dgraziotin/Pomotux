@@ -35,9 +35,11 @@ void pomotuxdatabase::TodoTodaySheet::FinishActivity(const litesql::Database& rD
 
 void pomotuxdatabase::TodoTodaySheet::PostponeActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS)
 {
+    rCurrentActivity.mOrder = 0;
+    rCurrentActivity.update();
     ActivityInTTS::unlink(rDatabase, rCurrentActivity, rTTS);
     rTTS.MakeConsistent(rDatabase,rTTS);
-	rDatabase.commit();
+    rDatabase.commit();
 }
 
 void pomotuxdatabase::TodoTodaySheet::MoveActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS, int direction)
@@ -66,7 +68,7 @@ void pomotuxdatabase::TodoTodaySheet::MakeConsistent(const litesql::Database& rD
 {
     vector<Activity> currentTDTSActivities = ActivityInTTS::get<Activity>(rDatabase,Expr(),
             ActivityInTTS::TodoTodaySheet==rTTS.id).orderBy(Activity::MOrder).all();
-    int order = 0;
+    int order = 1;
     for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++) {
         (*i).mOrder = order++;
         (*i).update();
@@ -79,7 +81,7 @@ int pomotuxdatabase::TodoTodaySheet::GetMaxmActivityOrder(const litesql::Databas
 
     vector<Activity> currentTDTSActivities = ActivityInTTS::get<Activity>(rDatabase,Expr(),
             ActivityInTTS::TodoTodaySheet==rTTS.id).all();
-    int maxOrder = -1;
+    int maxOrder = 0;
     for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++) {
         if ((*i).mOrder > maxOrder)
             maxOrder = (*i).mOrder;
