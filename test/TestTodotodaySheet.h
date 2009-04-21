@@ -20,7 +20,7 @@ public:
 
     void setUp() {
         try {
-            db = new PomotuxDatabase("sqlite3", "database=pomotuxTEST.db");
+            db = new PomotuxDatabase("sqlite3", "database=testpomotux.db");
             db->verbose = false;
             db->create();
             db->begin();
