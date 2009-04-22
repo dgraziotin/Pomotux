@@ -6,8 +6,9 @@ using namespace litesql;
 using namespace pomotuxdatabase;
 using namespace std;
 
-InsertActivity::InsertActivity(QWidget *parent, const litesql::Database& db): QDialog(parent)
+InsertActivity::InsertActivity(QWidget *parent, PomotuxDatabase& database): QDialog(parent)
 {
+    db = &database;
     titleLabel = new QLabel(tr("InsertActivity"));
     titleLabel->setObjectName(QString::fromUtf8("titleLabel"));
     QFont font;
@@ -48,7 +49,7 @@ InsertActivity::InsertActivity(QWidget *parent, const litesql::Database& db): QD
     /*Set the signals*/
 
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
-    connect(submitButton, SIGNAL(clicked()), this, SLOT(insertNewActivity(litesql::Database&)));
+    connect(submitButton, SIGNAL(clicked()), this, SLOT(insertNewActivity()));
 
     /*Set the layout*/
 
@@ -71,17 +72,17 @@ InsertActivity::InsertActivity(QWidget *parent, const litesql::Database& db): QD
     setLayout(mainLayout);
 }
 
-void InsertActivity::insertNewActivity(litesql::Database& db)
+void InsertActivity::insertNewActivity()
 {
    QString text = lineEdit->text();
    string a = text.toStdString();
-   updateDatabase(db, a);
+   updateDatabase(a);
 }
 
-void InsertActivity::updateDatabase(litesql::Database& db, string a)
+void InsertActivity::updateDatabase(string a)
 {  
-   Activity at(db);
+   Activity at(*(db));
    at.mDescription = a;
    at.update();	
-   db.commit();	
+   db->commit();	
 }

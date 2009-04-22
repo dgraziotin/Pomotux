@@ -30,13 +30,14 @@ class InsertActivity : public QDialog
 {
 Q_OBJECT // macro used when signals and slots appears 
 public:
-    InsertActivity(QWidget *parent, const litesql::Database& db);
-    void updateDatabase(litesql::Database& db, string a);
+    InsertActivity(QWidget *parent, PomotuxDatabase& database);
+    void updateDatabase(string a);
 
 public slots:
-    void insertNewActivity(litesql::Database& db);
+    void insertNewActivity();
 
-private:
+public:
+    PomotuxDatabase *db;
     QVBoxLayout *titleLayout;
     QLabel *titleLabel;
     QHBoxLayout *descriptionLayout;
