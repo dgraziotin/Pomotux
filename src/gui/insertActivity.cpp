@@ -48,7 +48,7 @@ InsertActivity::InsertActivity(QWidget *parent, const litesql::Database& db): QD
     /*Set the signals*/
 
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
-    connect(submitButton, SIGNAL(clicked()), this, SLOT(insertNewActivity(db)));
+    connect(submitButton, SIGNAL(clicked()), this, SLOT(insertNewActivity(litesql::Database&)));
 
     /*Set the layout*/
 
@@ -71,16 +71,15 @@ InsertActivity::InsertActivity(QWidget *parent, const litesql::Database& db): QD
     setLayout(mainLayout);
 }
 
-void InsertActivity::insertNewActivity(const litesql::Database& db)
+void InsertActivity::insertNewActivity(litesql::Database& db)
 {
    QString text = lineEdit->text();
    string a = text.toStdString();
-   emit updateDatabase(db, a);
+   updateDatabase(db, a);
 }
 
-void InsertActivity::updateDatabase(const litesql::Database& db, string a)
+void InsertActivity::updateDatabase(litesql::Database& db, string a)
 {  
-   cout << "prova";
    Activity at(db);
    at.mDescription = a;
    at.update();	
