@@ -17,17 +17,24 @@
 #include <QDialog>
 #include <iostream>
 #include <stdlib.h>
+#include "litesql.hpp"
+#include "../pomotuxdatabase.hpp"
 
 QT_BEGIN_NAMESPACE
+
+using namespace litesql;
+using namespace pomotuxdatabase;
+using namespace std;
 
 class InsertActivity : public QDialog
 {
 Q_OBJECT // macro used when signals and slots appears 
 public:
-    InsertActivity(QWidget *parent = 0);
+    InsertActivity(QWidget *parent, const litesql::Database& db);
+    void updateDatabase(const litesql::Database& db, string a);
 
 private slots:
-    void insertNewActivity();
+    void insertNewActivity(const litesql::Database& db);
 
 private:
     QVBoxLayout *titleLayout;

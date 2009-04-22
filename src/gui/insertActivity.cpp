@@ -2,7 +2,11 @@
 #include "insertActivity.hpp"
 #include <string>
 
-InsertActivity::InsertActivity(QWidget *parent): QDialog(parent)
+using namespace litesql;
+using namespace pomotuxdatabase;
+using namespace std;
+
+InsertActivity::InsertActivity(QWidget *parent, const litesql::Database& db): QDialog(parent)
 {
     titleLabel = new QLabel(tr("InsertActivity"));
     titleLabel->setObjectName(QString::fromUtf8("titleLabel"));
@@ -44,7 +48,7 @@ InsertActivity::InsertActivity(QWidget *parent): QDialog(parent)
     /*Set the signals*/
 
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
-    connect(submitButton, SIGNAL(clicked()), this, SLOT(insertNewActivity()));
+    connect(submitButton, SIGNAL(clicked()), this, SLOT(insertNewActivity(db)));
 
     /*Set the layout*/
 
@@ -67,8 +71,17 @@ InsertActivity::InsertActivity(QWidget *parent): QDialog(parent)
     setLayout(mainLayout);
 }
 
-void InsertActivity::insertNewActivity()
+void InsertActivity::insertNewActivity(const litesql::Database& db)
 {
+   QString text = lineEdit->text();
+   string a = text.toStdString();
+   updateDatabase(db, a);
+   emit;
+}
 
-}	
-
+void InsertActivity::updateDatabase(const litesql::Database& db, string a)
+{
+   Activity at(db);
+   at.mDescription = a;
+   at.update();		
+}
