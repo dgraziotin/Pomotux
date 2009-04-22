@@ -75,13 +75,14 @@ void InsertActivity::insertNewActivity(const litesql::Database& db)
 {
    QString text = lineEdit->text();
    string a = text.toStdString();
-   updateDatabase(db, a);
-   emit;
+   emit updateDatabase(db, a);
 }
 
 void InsertActivity::updateDatabase(const litesql::Database& db, string a)
-{
+{  
+   cout << "prova";
    Activity at(db);
    at.mDescription = a;
-   at.update();		
+   at.update();	
+   db.commit();	
 }
