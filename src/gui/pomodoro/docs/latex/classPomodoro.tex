@@ -1,0 +1,99 @@
+\hypertarget{classPomodoro}{
+\section{Pomodoro Class Reference}
+\label{classPomodoro}\index{Pomodoro@{Pomodoro}}
+}
+{\tt \#include $<$pomodoro.hpp$>$}
+
+\subsection*{Signals}
+\begin{CompactItemize}
+\item 
+void \hyperlink{classPomodoro_2e69760ea2e9aeb36093a7e2d64006ce}{PomodoroFinished} ()
+\item 
+void \hyperlink{classPomodoro_410db1b2329fac39b9788cdd5e5ea9b9}{PomodoroBroken} ()
+\end{CompactItemize}
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+\hyperlink{classPomodoro_44fec950d9e8157f76fcae92004b084b}{Pomodoro} (QWidget $\ast$parent=0, int minutes=25, int seconds=0)
+\item 
+void \hyperlink{classPomodoro_2af13c5c3a49855021455665d70e2e1c}{Start} ()
+\item 
+void \hyperlink{classPomodoro_8188b8c06ba7aef8d8bf808d82944b9d}{Stop} ()
+\item 
+bool \hyperlink{classPomodoro_61bb61d03bbdf837caf8174220405b7b}{IsRunning} ()
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+A class for \hyperlink{classPomodoro}{Pomodoro} objects. Contains all the operations regarding a \hyperlink{classPomodoro}{Pomodoro}, as well as its graphical representation (a QLCDNumber). It is studied for re-use, as it is completely isolated from the rest of the project. It emits signals either when the pomodoro is finished or broken.
+
+An example on how to use it: include $<$QApplication$>$ include \char`\"{}pomodoro.hpp\char`\"{}
+
+int main(int argc, char $\ast$argv\mbox{[}\mbox{]}) \{ QApplication app(argc, argv); \hyperlink{classPomodoro}{Pomodoro} p(0,25,0); // a pomodoro in an indipendent window, with length of 25 minutes p.show(); // show the pomodoro p.Start(); // start the pomodoro return app.exec(); \} 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classPomodoro_44fec950d9e8157f76fcae92004b084b}{
+\index{Pomodoro@{Pomodoro}!Pomodoro@{Pomodoro}}
+\index{Pomodoro@{Pomodoro}!Pomodoro@{Pomodoro}}
+\subsubsection[{Pomodoro}]{\setlength{\rightskip}{0pt plus 5cm}Pomodoro::Pomodoro (QWidget $\ast$ {\em parent} = {\tt 0}, \/  int {\em minutes} = {\tt 25}, \/  int {\em seconds} = {\tt 0})}}
+\label{classPomodoro_44fec950d9e8157f76fcae92004b084b}
+
+
+Constructor of a \hyperlink{classPomodoro}{Pomodoro}. Sets the attributes and calls ShowTimer() automatically. \begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em parent}]a pointer to the parent widget (0 if we want a new window) \item[{\em minutes}]an integer for the length of \hyperlink{classPomodoro}{Pomodoro} (default 25) \item[{\em seconds}]an integer for the length of \hyperlink{classPomodoro}{Pomodoro} (default 0) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[See also:]ShowTimer() \end{Desc}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classPomodoro_61bb61d03bbdf837caf8174220405b7b}{
+\index{Pomodoro@{Pomodoro}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!Pomodoro@{Pomodoro}}
+\subsubsection[{IsRunning}]{\setlength{\rightskip}{0pt plus 5cm}bool Pomodoro::IsRunning ()}}
+\label{classPomodoro_61bb61d03bbdf837caf8174220405b7b}
+
+
+Getter for mIsRunning variable \begin{Desc}
+\item[Returns:]mIsRunning \end{Desc}
+\hypertarget{classPomodoro_410db1b2329fac39b9788cdd5e5ea9b9}{
+\index{Pomodoro@{Pomodoro}!PomodoroBroken@{PomodoroBroken}}
+\index{PomodoroBroken@{PomodoroBroken}!Pomodoro@{Pomodoro}}
+\subsubsection[{PomodoroBroken}]{\setlength{\rightskip}{0pt plus 5cm}void Pomodoro::PomodoroBroken ()\hspace{0.3cm}{\tt  \mbox{[}signal\mbox{]}}}}
+\label{classPomodoro_410db1b2329fac39b9788cdd5e5ea9b9}
+
+
+Signal launched when the \hyperlink{classPomodoro}{Pomodoro} is broken \hypertarget{classPomodoro_2e69760ea2e9aeb36093a7e2d64006ce}{
+\index{Pomodoro@{Pomodoro}!PomodoroFinished@{PomodoroFinished}}
+\index{PomodoroFinished@{PomodoroFinished}!Pomodoro@{Pomodoro}}
+\subsubsection[{PomodoroFinished}]{\setlength{\rightskip}{0pt plus 5cm}void Pomodoro::PomodoroFinished ()\hspace{0.3cm}{\tt  \mbox{[}signal\mbox{]}}}}
+\label{classPomodoro_2e69760ea2e9aeb36093a7e2d64006ce}
+
+
+Signal launched when the \hyperlink{classPomodoro}{Pomodoro} finishes normally \hypertarget{classPomodoro_2af13c5c3a49855021455665d70e2e1c}{
+\index{Pomodoro@{Pomodoro}!Start@{Start}}
+\index{Start@{Start}!Pomodoro@{Pomodoro}}
+\subsubsection[{Start}]{\setlength{\rightskip}{0pt plus 5cm}void Pomodoro::Start ()}}
+\label{classPomodoro_2af13c5c3a49855021455665d70e2e1c}
+
+
+Starts a \hyperlink{classPomodoro}{Pomodoro}. Sets the signal handler, starts the internal timer, sets mIsRunning to true. It calls Run() as last thing. \begin{Desc}
+\item[See also:]Run() 
+
+\hyperlink{classPomodoro_410db1b2329fac39b9788cdd5e5ea9b9}{PomodoroBroken()} \end{Desc}
+\hypertarget{classPomodoro_8188b8c06ba7aef8d8bf808d82944b9d}{
+\index{Pomodoro@{Pomodoro}!Stop@{Stop}}
+\index{Stop@{Stop}!Pomodoro@{Pomodoro}}
+\subsubsection[{Stop}]{\setlength{\rightskip}{0pt plus 5cm}void Pomodoro::Stop ()}}
+\label{classPomodoro_8188b8c06ba7aef8d8bf808d82944b9d}
+
+
+Stops a \hyperlink{classPomodoro}{Pomodoro}. If it detects that the pomodoro was broken, it launches a \hyperlink{classPomodoro_410db1b2329fac39b9788cdd5e5ea9b9}{PomodoroBroken()} signal. It stops the internal timer, and sets mIsRunning to false. 
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+Projects/Pomotux/src/gui/qtimer/pomodoro.hpp\item 
+Projects/Pomotux/src/gui/qtimer/moc\_\-pomodoro.cpp\item 
+Projects/Pomotux/src/gui/qtimer/pomodoro.cpp\end{CompactItemize}
