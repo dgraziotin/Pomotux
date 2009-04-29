@@ -4,8 +4,8 @@
 #include <time.h>
 
 InsertNewActivity::InsertNewActivity(QWidget *parent, PomotuxDatabase& database) :
-    QDialog(parent),
-    m_ui(new Ui::InsertNewActivity)
+        QDialog(parent),
+        m_ui(new Ui::InsertNewActivity)
 {
     db = &database;
     m_ui->setupUi(this);
@@ -30,18 +30,18 @@ void InsertNewActivity::changeEvent(QEvent *e)
 
 void InsertNewActivity::on_buttonBox_accepted()
 {
-   text = this->m_ui->iaDescriptionLineEdit->text();
-   dayToDeadline = this->m_ui->iaDeadlineSpinBox->value();
-   string a = text.toStdString();
-   Activity at(*(db));
-   at.mDescription = a;
-   time_t deadline = time(NULL);
-   int deadlineInt = (int) deadline + dayToDeadline*(86400);
-   at.mDeadline = deadlineInt;
-   at.update();
-   db->commit();
-   controller = 1;
-   this->close();
+    text = this->m_ui->iaDescriptionLineEdit->text();
+    dayToDeadline = this->m_ui->iaDeadlineSpinBox->value();
+    string a = text.toStdString();
+    Activity at(*(db));
+    at.mDescription = a;
+    time_t deadline = time(NULL);
+    int deadlineInt = (int) deadline + dayToDeadline*(86400);
+    at.mDeadline = deadlineInt;
+    at.update();
+    db->commit();
+    controller = 1;
+    this->close();
 }
 
 void InsertNewActivity::on_buttonBox_rejected()

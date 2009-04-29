@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    try{
+    try {
         PomotuxDatabase *db;
         db = new PomotuxDatabase("sqlite3", "database=pomotux.db");
         db->verbose = false;
@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
         MainWindow *w = new MainWindow(0,*(db));
         w->show();
         return a.exec();
-   } catch (Except e) {
-      //  cerr << e << endl;
+    } catch (Except e) {
+        //  cerr << e << endl;
         return -1;
     }
 }

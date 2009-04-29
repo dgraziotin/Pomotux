@@ -10,7 +10,7 @@ using namespace pomotuxdatabase;
 using namespace std;
 
 namespace Ui {
-    class ModifyAnActivity;
+class ModifyAnActivity;
 }
 
 class ModifyAnActivity : public QDialog {

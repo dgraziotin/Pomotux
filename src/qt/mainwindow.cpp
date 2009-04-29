@@ -2,13 +2,13 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent,PomotuxDatabase& database) :
-    QMainWindow(parent),
-    m_ui(new Ui::MainWindow)
+        QMainWindow(parent),
+        m_ui(new Ui::MainWindow)
 {
-   this->db= &database;
+    this->db= &database;
     m_ui->setupUi(this);
-   wTTS = new TodoTodaySheetGui(this,*(db));
-   wAIS = new GuiActivityInventorySheet(this,*(db));
+    wTTS = new TodoTodaySheetGui(0,*(db));
+    wAIS = new GuiActivityInventorySheet(0,*(db));
 }
 
 MainWindow::~MainWindow()

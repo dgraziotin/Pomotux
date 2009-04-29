@@ -4,7 +4,7 @@
 #include <time.h>
 
 GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDatabase& database)
-    : QMainWindow(parent), ui(new Ui::GuiActivityInventorySheet)
+        : QMainWindow(parent), ui(new Ui::GuiActivityInventorySheet)
 {
     db = &database;
     ui->setupUi(this);
@@ -108,7 +108,7 @@ void GuiActivityInventorySheet::on_deleteActivityButton_clicked()
 
 void GuiActivityInventorySheet::on_ais_itemClicked(QTableWidgetItem* item)
 {
-        row = (int) item->row();
+    row = (int) item->row();
 }
 
 void GuiActivityInventorySheet::on_modifyActivityButton_clicked()

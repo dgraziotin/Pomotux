@@ -11,7 +11,7 @@ using namespace litesql;
 using namespace pomotuxdatabase;
 using namespace std;
 namespace Ui {
-    class MainWindow;
+class MainWindow;
 }
 
 class MainWindow : public QMainWindow {

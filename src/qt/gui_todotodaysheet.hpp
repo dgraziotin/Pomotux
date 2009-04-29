@@ -10,13 +10,11 @@ using namespace litesql;
 using namespace pomotuxdatabase;
 using namespace std;
 
-namespace Ui
-{
-    class TodoTodaySheetGuiClass;
+namespace Ui {
+class TodoTodaySheetGuiClass;
 }
 
-class TodoTodaySheetGui : public QMainWindow
-{
+class TodoTodaySheetGui : public QMainWindow {
     Q_OBJECT
 
 public:

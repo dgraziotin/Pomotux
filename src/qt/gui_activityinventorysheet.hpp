@@ -14,13 +14,11 @@ using namespace litesql;
 using namespace pomotuxdatabase;
 using namespace std;
 
-namespace Ui
-{
-    class GuiActivityInventorySheet;
+namespace Ui {
+class GuiActivityInventorySheet;
 }
 
-class GuiActivityInventorySheet : public QMainWindow
-{
+class GuiActivityInventorySheet : public QMainWindow {
     Q_OBJECT
 
 public:
