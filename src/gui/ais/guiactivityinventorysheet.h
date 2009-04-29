@@ -7,7 +7,7 @@
 #include "insertnewactivity.h"
 #include "modifyanactivity.h"
 #include "litesql.hpp"
-#include "../sep/src/pomotuxdatabase.hpp"
+#include "../src/pomotuxdatabase.hpp"
 #include <time.h>
 
 using namespace litesql;

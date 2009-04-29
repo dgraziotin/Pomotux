@@ -5,6 +5,7 @@
 Pomodoro::Pomodoro(QWidget *parent, int minutes, int seconds)
         : QLCDNumber(parent)
 {
+
     setSegmentStyle(Filled);
     mpTime = new QTime(0,minutes,seconds,0);
     mpTimer = new QTimer(this);
@@ -21,6 +22,7 @@ bool Pomodoro::IsRunning()
 
 void Pomodoro::Start()
 {
+
     connect(mpTimer, SIGNAL(timeout()), this, SLOT(Run()));
     mpTimer->start(1000);
     mIsRunning = true;
@@ -52,4 +54,9 @@ void Pomodoro::ShowTimer()
     if ((mpTime->second() % 2) != 0)
         text[2] = ' ';
     display(text);
+}
+
+Pomodoro::~Pomodoro()
+{
+    this->destroy(1,1);
 }

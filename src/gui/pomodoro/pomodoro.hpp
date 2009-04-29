@@ -36,7 +36,7 @@ public:
        * @param seconds an integer for the length of Pomodoro (default 0)
        * @see ShowTimer()
        */
-    Pomodoro(QWidget *parent = 0,int minutes=25,int seconds=0);
+    Pomodoro(QWidget *parent,int minutes,int seconds);
     /**
        * Starts a Pomodoro. Sets the signal handler, starts the internal timer, sets mIsRunning to true.
        * It calls Run() as last thing.
@@ -54,6 +54,8 @@ public:
        * @return mIsRunning
        */
     bool IsRunning();
+
+    ~Pomodoro();
 private:
     /**
        * Boolean to represent the status of the Pomodoro (true = running)
@@ -67,6 +69,8 @@ private:
        * Internal time object, to hold the minutes and the seconds of a Pomodoro
        */
     QTime* mpTime;
+
+
 private slots:
     /**
        * Sets and shows the timer (LCD)
