@@ -1,5 +1,5 @@
 #include "gui_todotodaysheet.hpp"
-#include "ui_todotodaysheetgui.h"
+#include "ui_gui_todotodaysheet.h"
 #include <cstring>
 #include <QMessageBox>
 
@@ -61,29 +61,33 @@ void TodoTodaySheetGui::refreshTable()
 
 void TodoTodaySheetGui::on_startActivityButton_clicked()
 {
-    //  try
-    // {
- //    QList<QTableWidgetItem *> items = this->ui->tableWidget->selectedItems();
- //    QList<QTableWidgetItem *>::iterator k = items.begin();
- //    QTableWidgetItem * head = (*k);
- //    int id=head->text().toInt(0,10);
+    pomo->show();
+    pomo->Start();
+    /*
+    try
+    {
+    QList<QTableWidgetItem *> items = this->ui->tableWidget->selectedItems();
+     QList<QTableWidgetItem *>::iterator k = items.begin();
+     QTableWidgetItem * head = (*k);
+     int id=head->text().toInt(0,10);
 
- //        Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,
-  //                              ActivityInTTS::TodoTodaySheet==1).one();
-  //       if (this->current == NULL || this->current->id != current.id)
-      //   {
-          //   this->current= new Activity(*(db));
-          //   this->current->id = current.id;
-          //   pomo->~Pomodoro();
-          //   pomo = new Pomodoro(0,25,00);
-      //   }
-         //pomo->show();
-         //pomo->Start();
+         Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,
+                                ActivityInTTS::TodoTodaySheet==1).one();
+        if (this->current == NULL || this->current->id != current.id)
+         {
+             this->current= new Activity(*(db));
+              this->current->id = current.id;
+              pomo->~Pomodoro();
+             pomo = new Pomodoro(0,25,00);
+       }
+        pomo->show();
+         pomo->Start();
 
-   //    QMessageBox msgBox;
-    //    msgBox.setText("ERROR");
-    //    msgBox.exec();
-    // }
+       QMessageBox msgBox;
+        msgBox.setText("ERROR");
+        msgBox.exec();
+     }
+     */
 }
 
 

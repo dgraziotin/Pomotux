@@ -21,11 +21,11 @@ HEADERS += gui_activityinventorysheet.hpp \
     pomodoro.hpp \
     gui_todotodaysheet.hpp \
 	../pomotuxdatabase.hpp
-FORMS += activityinventorysheet.ui \
+FORMS += gui_activityinventorysheet.ui \
     insertnewactivity.ui \
     mainwindow.ui \
     modifyactivity.ui \
-    todotodaysheet.ui
+    gui_todotodaysheet.ui
 OTHER_FILES += Pomotux.pro.user \
     pomodoro.pro \
     Pomotux.pro.user

@@ -1,5 +1,5 @@
 #include "gui_activityinventorysheet.hpp"
-#include "ui_guiactivityinventorysheet.h"
+#include "ui_gui_activityinventorysheet.h"
 #include <string>
 #include <time.h>
 
