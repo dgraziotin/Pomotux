@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'todotodaysheetgui.ui'
 **
-** Created: Wed Apr 29 03:29:19 2009
+** Created: Wed Apr 29 09:56:22 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -40,7 +40,6 @@ public:
     QPushButton *stopActivity;
     QPushButton *postponeActivityButton;
     QPushButton *finishActivityButton;
-    QLabel *label_2;
 
     void setupUi(QMainWindow *TodoTodaySheetGuiClass)
     {
@@ -106,14 +105,6 @@ public:
 
         verticalLayout_2->addWidget(finishActivityButton);
 
-        label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(50, 20, 491, 31));
-        QFont font;
-        font.setFamily(QString::fromUtf8("Monospace"));
-        font.setPointSize(18);
-        label_2->setFont(font);
-        label_2->setAlignment(Qt::AlignCenter);
         TodoTodaySheetGuiClass->setCentralWidget(centralWidget);
 
         retranslateUi(TodoTodaySheetGuiClass);
@@ -136,7 +127,6 @@ public:
         stopActivity->setText(QApplication::translate("TodoTodaySheetGuiClass", "stop", 0, QApplication::UnicodeUTF8));
         postponeActivityButton->setText(QApplication::translate("TodoTodaySheetGuiClass", "postpone", 0, QApplication::UnicodeUTF8));
         finishActivityButton->setText(QApplication::translate("TodoTodaySheetGuiClass", "finish", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("TodoTodaySheetGuiClass", "Todo Today Sheet", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(TodoTodaySheetGuiClass);
     } // retranslateUi
 

@@ -37,6 +37,7 @@ public:
        * @see ShowTimer()
        */
     Pomodoro(QWidget *parent,int minutes,int seconds);
+
     /**
        * Starts a Pomodoro. Sets the signal handler, starts the internal timer, sets mIsRunning to true.
        * It calls Run() as last thing.
@@ -44,11 +45,13 @@ public:
        * @see PomodoroBroken()
        */
     void Start();
+
     /**
       * Stops a Pomodoro. If it detects that the pomodoro was broken, it launches a PomodoroBroken() signal.
       * It stops the internal timer, and sets mIsRunning to false.
       */
     void Stop();
+
     /**
        * Getter for mIsRunning variable
        * @return mIsRunning
@@ -61,10 +64,12 @@ private:
        * Boolean to represent the status of the Pomodoro (true = running)
        */
     bool mIsRunning;
+
     /**
        * Internal timer that launches a signal every 1 second.
        */
     QTimer* mpTimer;
+
     /**
        * Internal time object, to hold the minutes and the seconds of a Pomodoro
        */
@@ -76,6 +81,7 @@ private slots:
        * Sets and shows the timer (LCD)
        */
     void ShowTimer();
+
     /**
        * Decrements the seconds and calls ShowTimer().
        * Detects if the Pomodoro finishes and emits a PomodoroFinished() signal, then calls Stop()
@@ -83,11 +89,13 @@ private slots:
        * @see Stop()
        */
     void Run();
+
 signals:
     /**
       * Signal launched when the Pomodoro finishes normally
       */
     void PomodoroFinished();
+
     /**
       * Signal launched when the Pomodoro is broken
       */

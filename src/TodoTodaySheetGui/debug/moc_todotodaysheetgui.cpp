@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'todotodaysheetgui.h'
 **
-** Created: Wed Apr 29 02:46:10 2009
+** Created: Wed Apr 29 09:56:37 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_TodoTodaySheetGui[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   12, // methods
+       4,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,8 +32,7 @@ static const uint qt_meta_data_TodoTodaySheetGui[] = {
       19,   18,   18,   18, 0x08,
       45,   18,   18,   18, 0x08,
       81,   18,   18,   18, 0x08,
-     101,   18,   18,   18, 0x08,
-     134,   18,   18,   18, 0x08,
+     114,   18,   18,   18, 0x08,
 
        0        // eod
 };
@@ -41,7 +40,6 @@ static const uint qt_meta_data_TodoTodaySheetGui[] = {
 static const char qt_meta_stringdata_TodoTodaySheetGui[] = {
     "TodoTodaySheetGui\0\0on_stopActivity_clicked()\0"
     "on_postponeActivityButton_clicked()\0"
-    "incrementPomodoro()\0"
     "on_startActivityButton_clicked()\0"
     "on_finishActivityButton_clicked()\0"
 };
@@ -73,12 +71,11 @@ int TodoTodaySheetGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: on_stopActivity_clicked(); break;
         case 1: on_postponeActivityButton_clicked(); break;
-        case 2: incrementPomodoro(); break;
-        case 3: on_startActivityButton_clicked(); break;
-        case 4: on_finishActivityButton_clicked(); break;
+        case 2: on_startActivityButton_clicked(); break;
+        case 3: on_finishActivityButton_clicked(); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 4;
     }
     return _id;
 }

@@ -3,6 +3,7 @@
 #include <cstring>
  #include <QMessageBox>
 
+
 using namespace litesql;
 using namespace pomotuxdatabase;
 using namespace std;
@@ -13,8 +14,6 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
     : QMainWindow(parent), ui(new Ui::TodoTodaySheetGuiClass)
 {
     db = &database;
-    db->begin();
-
     pomo = new Pomodoro(0,25,00);
  //   connect(*(pomo),SIGNAL(PomodoroFinished()),this,SLOT(incrementPomodoro()));
 
@@ -62,32 +61,31 @@ void TodoTodaySheetGui::refreshTable()
 
 void TodoTodaySheetGui::on_startActivityButton_clicked()
 {
-     QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
-     QList<QTableWidgetItem *>::iterator k = items.begin();
-     QTableWidgetItem * head = (*k);
-     int id=head->text().toInt(0,10);
-     try
-     {
-         Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,
-                                ActivityInTTS::TodoTodaySheet==1).one();
-         if (this->current == NULL || this->current->id != current.id){
-         this->current= new Activity(*(db));
-         this->current->id = current.id;
-         pomo->~Pomodoro();
-         pomo = new Pomodoro(0,25,00);
-     }
-         pomo->show();
-         pomo->Start();
+    //  try
+    // {
+ //    QList<QTableWidgetItem *> items = this->ui->tableWidget->selectedItems();
+ //    QList<QTableWidgetItem *>::iterator k = items.begin();
+ //    QTableWidgetItem * head = (*k);
+ //    int id=head->text().toInt(0,10);
 
-     }catch(NotFound e){
-     }
+ //        Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,
+  //                              ActivityInTTS::TodoTodaySheet==1).one();
+  //       if (this->current == NULL || this->current->id != current.id)
+      //   {
+          //   this->current= new Activity(*(db));
+          //   this->current->id = current.id;
+          //   pomo->~Pomodoro();
+          //   pomo = new Pomodoro(0,25,00);
+      //   }
+         //pomo->show();
+         //pomo->Start();
+
+   //    QMessageBox msgBox;
+    //    msgBox.setText("ERROR");
+    //    msgBox.exec();
+    // }
 }
 
-void TodoTodaySheetGui::incrementPomodoro()
-{
-    this->current->mNumPomodoro= (this->current->mNumPomodoro)+1;
-    this->current->update();
-}
 
 void TodoTodaySheetGui::on_postponeActivityButton_clicked()
 {

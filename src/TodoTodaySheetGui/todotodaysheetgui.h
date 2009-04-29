@@ -2,7 +2,6 @@
 #define TODOTODAYSHEETGUI_H
 
 #include <QtGui/QMainWindow>
-#include <QModelIndex>
 #include <litesql.hpp>
 #include "../pomotuxdatabase.hpp"
 #include "../gui/pomodoro/pomodoro.hpp"
@@ -37,7 +36,6 @@ private:
 private slots:
     void on_stopActivity_clicked();
     void on_postponeActivityButton_clicked();
-    void incrementPomodoro();
     void on_startActivityButton_clicked();
     void on_finishActivityButton_clicked();
 };
