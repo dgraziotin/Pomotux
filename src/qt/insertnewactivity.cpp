@@ -32,14 +32,6 @@ void InsertNewActivity::on_buttonBox_accepted()
 {
     text = this->m_ui->iaDescriptionLineEdit->text();
     dayToDeadline = this->m_ui->iaDeadlineSpinBox->value();
-    string a = text.toStdString();
-    Activity at(*(db));
-    at.mDescription = a;
-    time_t deadline = time(NULL);
-    int deadlineInt = (int) deadline + dayToDeadline*(86400);
-    at.mDeadline = deadlineInt;
-    at.update();
-    db->commit();
     controller = 1;
     this->close();
 }

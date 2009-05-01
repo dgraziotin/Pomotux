@@ -25,7 +25,6 @@ public:
     GuiActivityInventorySheet(QWidget *parent, PomotuxDatabase& database);
     ~GuiActivityInventorySheet();
     QString *description;
-    float row;
     float *value;
     float mainController;
     time_t now;
@@ -34,9 +33,14 @@ public:
 private:
     Ui::GuiActivityInventorySheet *ui;
     PomotuxDatabase *db;
-    double count;
+    ActivityInventorySheet *rAis;
+    TodoTodaySheet *rTts;
+    float row;
+    void cleaner();
+    void refreshTable();
 
 private slots:
+    void on_insertInTTSButton_clicked();
     void on_modifyActivityButton_clicked();
     void on_ais_itemClicked(QTableWidgetItem* item);
     void on_deleteActivityButton_clicked();

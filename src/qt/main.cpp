@@ -18,8 +18,6 @@ int main(int argc, char *argv[])
             db->upgrade();
         db->begin();
         QApplication a(argc, argv);
-        //GuiActivityInventorySheet *w = new GuiActivityInventorySheet(0,*(db));
-        //TodoTodaySheetGui *w= new TodoTodaySheetGui(0,*(db));
         MainWindow *w = new MainWindow(0,*(db));
         w->show();
         return a.exec();

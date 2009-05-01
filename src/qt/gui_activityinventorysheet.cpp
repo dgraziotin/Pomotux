@@ -2,14 +2,24 @@
 #include "ui_gui_activityinventorysheet.h"
 #include <string>
 #include <time.h>
+#include <QMessageBox>
 
 GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDatabase& database)
         : QMainWindow(parent), ui(new Ui::GuiActivityInventorySheet)
 {
     db = &database;
-    ui->setupUi(this);
     now = time(NULL);
-    count = 0;
+    ui->setupUi(this);
+
+    try {
+        rAis = new ActivityInventorySheet(select<ActivityInventorySheet>(*(db), ActivityInventorySheet::Id == 1).one());
+    }
+    catch (NotFound e) {
+        rAis = new ActivityInventorySheet(*(db));
+        rAis->update();
+    }
+    
+    refreshTable();
 }
 
 GuiActivityInventorySheet::~GuiActivityInventorySheet()
@@ -19,79 +29,32 @@ GuiActivityInventorySheet::~GuiActivityInventorySheet()
 
 void GuiActivityInventorySheet::on_newActivityButton_clicked()
 {
+    try {
     /*Calling the window for creating a new Activity*/
     InsertNewActivity *dialog = new InsertNewActivity(0, *(db));
     dialog->show();
     dialog->exec();
-
     mainController = dialog->controller;
-    if (mainController > 0) {
-        count++;
-        int idNumber = (int) count;
-        int riga = (int) count - 1;
-        /*casting for the description*/
-        description = &dialog->text;
-        QByteArray ba = description->toLatin1();
-        const char *text = ba.data();
+    /*casting for the description*/
+    description = &dialog->text;
+    string sDescription = description->toStdString();
 
-        /*for the dates*/
-        char today[80];
-        struct tm *ts;
-        ts = localtime(&now);
-        strftime(today, 80, "%a %Y-%m-%d", ts);
+    value = &dialog->dayToDeadline;
+    time_t deadlineInt = now + *(value)*(86400);
 
-        value = &dialog->dayToDeadline;
-        time_t deadlineInt = now + *(value)*(86400);
-        char deadline[80];
-        struct tm *ts2;
-        ts2 = localtime(&deadlineInt);
-        strftime(deadline, 80, "%a %Y-%m-%d", ts2);
-
-        /*casting for the id*/
-        stringstream sstr;
-        sstr << idNumber;
-        string str1 = sstr.str();
-        const char *id = str1.c_str();
-
-        /*casting for numPomodoro and priority*/
-        stringstream sstr1;
-        sstr1 << 0;
-        string str2 = sstr1.str();
-        const char *defaultValues = str2.c_str();
-
-        if (this->ui->ais->rowCount() < count)
-            this->ui->ais->setRowCount(count);
-
-        /*creating the new row*/
-        QTableWidgetItem *__rowItem = new QTableWidgetItem();
-        this->ui->ais->setVerticalHeaderItem(riga, __rowItem);
-        QTableWidgetItem *__tableItem2 = new QTableWidgetItem();
-        this->ui->ais->setItem(riga, 0, __tableItem2);
-        QTableWidgetItem *__tableItem3 = new QTableWidgetItem();
-        this->ui->ais->setItem(riga, 1, __tableItem3);
-        QTableWidgetItem *__tableItem4 = new QTableWidgetItem();
-        this->ui->ais->setItem(riga, 2, __tableItem4);
-        QTableWidgetItem *__tableItem5 = new QTableWidgetItem();
-        this->ui->ais->setItem(riga, 3, __tableItem5);
-        QTableWidgetItem *__tableItem6 = new QTableWidgetItem();
-        this->ui->ais->setItem(riga, 4, __tableItem6);
-        QTableWidgetItem *__tableItem7 = new QTableWidgetItem();
-        this->ui->ais->setItem(riga, 5, __tableItem7);
-        QTableWidgetItem *__tableItem8 = new QTableWidgetItem();
-        this->ui->ais->setItem(riga, 6, __tableItem8);
-
-        /*Insert the correct values in the fields*/
-        this->ui->ais->verticalHeaderItem(riga)->setText(QApplication::translate("GuiActivityInventorySheet", "-->", 0, QApplication::UnicodeUTF8));
-        this->ui->ais->item(riga, 0)->setText(QApplication::translate("GuiActivityInventorySheet", id, 0, QApplication::UnicodeUTF8));
-        this->ui->ais->item(riga, 1)->setText(QApplication::translate("GuiActivityInventorySheet", text , 0, QApplication::UnicodeUTF8));
-        this->ui->ais->item(riga, 2)->setText(QApplication::translate("GuiActivityInventorySheet", today , 0, QApplication::UnicodeUTF8));
-        this->ui->ais->item(riga, 3)->setText(QApplication::translate("GuiActivityInventorySheet", deadline , 0, QApplication::UnicodeUTF8));
-        this->ui->ais->item(riga, 4)->setText(QApplication::translate("GuiActivityInventorySheet", defaultValues , 0, QApplication::UnicodeUTF8));
-        this->ui->ais->item(riga, 5)->setText(QApplication::translate("GuiActivityInventorySheet", defaultValues , 0, QApplication::UnicodeUTF8));
-        this->ui->ais->item(riga, 6)->setText(QApplication::translate("GuiActivityInventorySheet", "False" , 0, QApplication::UnicodeUTF8));
-
-        Q_UNUSED(this);
+    Activity at(*(db));
+    at.mDescription = sDescription;
+    at.mInsertionDate = (int) now;
+    at.mDeadline = (int)deadlineInt;
+    at.update();
+    ActivityInventorySheet &cAis = *(rAis);
+    cAis.InsertActivity(*(db),at,cAis);
+    db->commit();
+        }catch (Except e) {
+        cerr << e << endl;
     }
+
+    refreshTable();
 }
 
 void GuiActivityInventorySheet::on_deleteActivityButton_clicked()
@@ -100,15 +63,22 @@ void GuiActivityInventorySheet::on_deleteActivityButton_clicked()
     bool ok;
     int id = idString.toInt(&ok, 16);
     Activity at = select<Activity>(*(db), Activity::Id == id).one();
-    at.del();
-    this->ui->ais->removeRow(row);
-    count --;
+    try {
+    rTts = new TodoTodaySheet(select<TodoTodaySheet>(*(db), TodoTodaySheet::Id == 1).one());
+    } catch (NotFound e) {
+        rTts = new TodoTodaySheet(*(db));
+        rTts->update();
+    }
+    ActivityInventorySheet &cAis = *(rAis);
+    TodoTodaySheet &cTts = *(rTts);
+    at.Delete(*(db), at, cAis, cTts);
+    refreshTable();
 }
 
 
 void GuiActivityInventorySheet::on_ais_itemClicked(QTableWidgetItem* item)
 {
-    row = (int) item->row();
+    row = item->row();
 }
 
 void GuiActivityInventorySheet::on_modifyActivityButton_clicked()
@@ -116,29 +86,70 @@ void GuiActivityInventorySheet::on_modifyActivityButton_clicked()
     ModifyAnActivity *dialog = new ModifyAnActivity(0, *(db));
     dialog->show();
     dialog->exec();
-
     description = &dialog->text;
-    QByteArray ba = description->toLatin1();
-    const char *text = ba.data();
-
     value = &dialog->dayToDeadline;
-
-    /*
-    time_t deadlineInt = now + *(value)*(86400);
-    char deadline[80];
-    struct tm *ts2;
-    ts2 = localtime(&deadlineInt);
-    strftime(deadline, 80, "%a %Y-%m-%d", ts2);*/
-
     QString idString = this->ui->ais->item(row, 0)->text();
     bool ok;
     int id = idString.toInt(&ok, 16);
-
     Activity at = select<Activity>(*(db), Activity::Id == id).one();
-
     string newDescription = description->toStdString();
     at.Modify(*(db), at, *(value), newDescription);
-
-    this->ui->ais->item(row, 1)->setText(QApplication::translate("GuiActivityInventorySheet", text , 0, QApplication::UnicodeUTF8));
-
+    refreshTable();
 }
+void GuiActivityInventorySheet::on_insertInTTSButton_clicked()
+{
+    QString idString = this->ui->ais->item(row, 0)->text();
+    bool ok;
+    int id = idString.toInt(&ok, 16);
+    Activity at = select<Activity>(*(db), Activity::Id == id).one();
+    try {
+        rTts = new TodoTodaySheet(select<TodoTodaySheet>(*(db), TodoTodaySheet::Id == 1).one());
+    } catch (NotFound e) {
+        rTts = new TodoTodaySheet(*(db));
+        rTts->update();
+    }
+    ActivityInventorySheet &cAis = *(rAis);
+    TodoTodaySheet &cTts = *(rTts);
+    cTts.ScheduleActivity(*(db), at, cAis, cTts);
+    db->commit();
+}
+void  GuiActivityInventorySheet::cleaner()
+{
+    for (int i=0 ; i < this->ui->ais->rowCount(); i++)
+        for (int j=0 ; j<6; j++)
+            (*(ui->ais->item(i,j))).~QTableWidgetItem();
+     this->ui->ais->setRowCount(0);
+}
+
+void GuiActivityInventorySheet::refreshTable()
+{
+    cleaner();
+
+    vector<Activity> currentAISActivities = ActivityInAIS::get<Activity>(*(db),Expr(),
+            ActivityInAIS::ActivityInventorySheet==rAis->id).all();
+
+    for (vector<Activity>::iterator i = currentAISActivities.begin(); i != currentAISActivities.end(); i++) {
+        int tablePosition= ui->ais->rowCount();
+        this->ui->ais->insertRow(tablePosition);
+        QTableWidgetItem *currentActivity=new QTableWidgetItem[7];
+        currentActivity[0].setText(QString((toString((*i).id)).c_str()));
+        currentActivity[1].setText(QString((toString((*i).mDescription)).c_str()));
+        currentActivity[2].setText(QString((toString((*i).mInsertionDate)).c_str()));
+        currentActivity[3].setText(QString((toString((*i).mDeadline)).c_str()));
+        currentActivity[4].setText(QString((toString((*i).mOrder)).c_str()));
+        currentActivity[5].setText(QString((toString((*i).mNumPomodoro)).c_str()));
+        currentActivity[6].setText(QString((toString((*i).mIsFinished)).c_str()));
+
+        currentActivity[0].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+        currentActivity[2].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+        currentActivity[3].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+        currentActivity[4].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+        currentActivity[5].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+        currentActivity[6].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+        for (int k=0; k<6; k++)
+        ui->ais->setItem(tablePosition,k,&currentActivity[k]);
+    }
+}
+
+
