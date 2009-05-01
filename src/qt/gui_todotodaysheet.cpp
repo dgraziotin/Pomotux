@@ -14,9 +14,9 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         : QMainWindow(parent), ui(new Ui::TodoTodaySheetGuiClass)
 {
     db = &database;
-    pomo = new Pomodoro(0,25,00);
-//   connect(*(pomo),SIGNAL(PomodoroFinished()),this,SLOT(incrementPomodoro()));
-
+    pomo = new Pomodoro(0,0,4);
+    connect(pomo, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
+    connect(pomo, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
     ui->setupUi(this);
     refreshTable();
 }
@@ -89,6 +89,17 @@ void TodoTodaySheetGui::on_startActivityButton_clicked()
      */
 }
 
+void TodoTodaySheetGui::PomodoroFinished(){
+     QMessageBox msgBox;
+        msgBox.setText("Pomodoro Finished");
+        msgBox.exec();
+}
+
+void TodoTodaySheetGui::PomodoroBroken(){
+     QMessageBox msgBox;
+        msgBox.setText("Pomodoro Broken");
+        msgBox.exec();
+}
 
 void TodoTodaySheetGui::on_postponeActivityButton_clicked()
 {

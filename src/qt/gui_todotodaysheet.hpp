@@ -36,6 +36,8 @@ private slots:
     void on_postponeActivityButton_clicked();
     void on_startActivityButton_clicked();
     void on_finishActivityButton_clicked();
+    void PomodoroFinished();
+    void PomodoroBroken();
 };
 
 #endif // TODOTODAYSHEETGUI_H
