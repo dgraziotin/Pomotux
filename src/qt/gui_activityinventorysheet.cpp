@@ -60,7 +60,7 @@ void GuiActivityInventorySheet::on_newActivityButton_clicked()
 void GuiActivityInventorySheet::on_deleteActivityButton_clicked()
 {
     QString idString = this->ui->ais->item(row, 0)->text();
-    bool ok;
+
     int id = idString.toInt();
     try {
     Activity at = select<Activity>(*(db), Activity::Id == id).one();
@@ -153,4 +153,9 @@ void GuiActivityInventorySheet::refreshTable()
     }
 }
 
+
+void GuiActivityInventorySheet::showEvent( QShowEvent * event)
+{
+    refreshTable();
+}
 

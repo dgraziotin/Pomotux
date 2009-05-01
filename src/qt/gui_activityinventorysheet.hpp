@@ -28,7 +28,7 @@ public:
     float *value;
     float mainController;
     time_t now;
-
+    void showEvent( QShowEvent * event);
 
 private:
     Ui::GuiActivityInventorySheet *ui;

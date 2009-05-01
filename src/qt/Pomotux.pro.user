@@ -65,7 +65,7 @@
     <value type="QString" >LANG=en_US.UTF-8</value>
     <value type="QString" >LANGUAGE=</value>
     <value type="QString" >LOGNAME=ghost</value>
-    <value type="QString" >OLDPWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src</value>
+    <value type="QString" >OLDPWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk</value>
     <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-ghost</value>
     <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games</value>
     <value type="QString" >PWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src/qt</value>
@@ -117,7 +117,7 @@
     <value type="QString" >LANG=en_US.UTF-8</value>
     <value type="QString" >LANGUAGE=</value>
     <value type="QString" >LOGNAME=ghost</value>
-    <value type="QString" >OLDPWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src</value>
+    <value type="QString" >OLDPWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk</value>
     <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-ghost</value>
     <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games</value>
     <value type="QString" >PWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src/qt</value>
