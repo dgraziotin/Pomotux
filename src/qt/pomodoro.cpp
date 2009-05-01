@@ -31,9 +31,9 @@ void Pomodoro::Start()
 
 void Pomodoro::Stop()
 {
-    if (mpTime->second() > 0 && mpTime->minute()!=0)
-        emit PomodoroBroken();
     mpTimer->stop();
+    if (!(mpTime->minute() == 0 && mpTime->second() == 0))
+        emit PomodoroBroken();
     mIsRunning = false;
 }
 
