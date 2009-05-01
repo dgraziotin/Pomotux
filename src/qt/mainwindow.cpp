@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent,PomotuxDatabase& database) :
 {
     this->db= &database;
     m_ui->setupUi(this);
-    wTTS = new TodoTodaySheetGui(0,*(db));
-    wAIS = new GuiActivityInventorySheet(0,*(db));
+    //wTTS = new TodoTodaySheetGui(this,*(db));
+    wAIS = new GuiActivityInventorySheet(this,*(db));
 }
 
 MainWindow::~MainWindow()
@@ -30,6 +30,7 @@ void MainWindow::changeEvent(QEvent *e)
 
 void MainWindow::on_TTSButton_clicked()
 {
+    wTTS = new TodoTodaySheetGui(this,*(db));
     wTTS->show();
 }
 

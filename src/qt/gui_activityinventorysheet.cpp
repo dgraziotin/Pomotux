@@ -61,18 +61,19 @@ void GuiActivityInventorySheet::on_deleteActivityButton_clicked()
 {
     QString idString = this->ui->ais->item(row, 0)->text();
     bool ok;
-    int id = idString.toInt(&ok, 16);
-    Activity at = select<Activity>(*(db), Activity::Id == id).one();
+    int id = idString.toInt();
     try {
+    Activity at = select<Activity>(*(db), Activity::Id == id).one();
+
     rTts = new TodoTodaySheet(select<TodoTodaySheet>(*(db), TodoTodaySheet::Id == 1).one());
-    } catch (NotFound e) {
-        rTts = new TodoTodaySheet(*(db));
-        rTts->update();
-    }
     ActivityInventorySheet &cAis = *(rAis);
     TodoTodaySheet &cTts = *(rTts);
     at.Delete(*(db), at, cAis, cTts);
     refreshTable();
+    } catch (NotFound e) {
+        rTts = new TodoTodaySheet(*(db));
+        rTts->update();
+    }
 }
 
 
@@ -116,7 +117,7 @@ void GuiActivityInventorySheet::on_insertInTTSButton_clicked()
 void  GuiActivityInventorySheet::cleaner()
 {
     for (int i=0 ; i < this->ui->ais->rowCount(); i++)
-        for (int j=0 ; j<6; j++)
+        for (int j=0 ; j<7; j++)
             (*(ui->ais->item(i,j))).~QTableWidgetItem();
      this->ui->ais->setRowCount(0);
 }
@@ -138,7 +139,7 @@ void GuiActivityInventorySheet::refreshTable()
         currentActivity[3].setText(QString((toString((*i).mDeadline)).c_str()));
         currentActivity[4].setText(QString((toString((*i).mOrder)).c_str()));
         currentActivity[5].setText(QString((toString((*i).mNumPomodoro)).c_str()));
-        currentActivity[6].setText(QString((toString((*i).mIsFinished)).c_str()));
+        currentActivity[6].setText(((*i).mIsFinished)?"finished":"not finished");
 
         currentActivity[0].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
         currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
@@ -147,7 +148,7 @@ void GuiActivityInventorySheet::refreshTable()
         currentActivity[4].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
         currentActivity[5].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
         currentActivity[6].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-        for (int k=0; k<6; k++)
+        for (int k=0; k<7; k++)
         ui->ais->setItem(tablePosition,k,&currentActivity[k]);
     }
 }

@@ -2,7 +2,8 @@
 #include "ui_gui_todotodaysheet.h"
 #include <cstring>
 #include <QMessageBox>
-
+#define mins 0
+#define secs 10
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -14,11 +15,10 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         : QMainWindow(parent), ui(new Ui::TodoTodaySheetGuiClass)
 {
     db = &database;
-    pomo = new Pomodoro(0,0,4);
-    connect(pomo, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
-    connect(pomo, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
+    db->begin();
+
     ui->setupUi(this);
-    refreshTable();
+
 }
 
 TodoTodaySheetGui::~TodoTodaySheetGui()
@@ -60,42 +60,57 @@ void TodoTodaySheetGui::refreshTable()
 
 void TodoTodaySheetGui::on_startActivityButton_clicked()
 {
-    pomo->show();
-    pomo->Start();
-    /*
-    try
+
+     try{
+           int id=this->ui->tableWidget->item(0,0)->text().toInt();
+           if (id==0) throw "There Are No Activities to be Initialized";
+           pomo = new Pomodoro(0,mins,secs);
+           Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,ActivityInTTS::TodoTodaySheet==1).one();
+           if(!pomo->IsRunning())
+           {
+               connect(pomo, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
+               connect(pomo, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
+               this->current = new Activity(current);
+               pomo->show();
+               pomo->Start();
+           }else
+           {
+               pomo->show();
+               QMessageBox msgBox;
+               msgBox.setText("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
+               msgBox.exec();
+           }
+        }catch(Except e){
+          QMessageBox msgBox;
+           msgBox.setText("ERROR :");
+           msgBox.exec();
+         }
+}
+
+void TodoTodaySheetGui::PomodoroFinished()
+{
+    try{
+    this->current->mNumPomodoro= (this->current->mNumPomodoro +1);
+    this->current->update();
+    pomo->hide();
+
+     QMessageBox msgBox;
+        msgBox.setText("Pomodoro Finished : Now You Should Make A Short Break");
+        msgBox.exec();
+    }catch (Except e)
     {
-    QList<QTableWidgetItem *> items = this->ui->tableWidget->selectedItems();
-     QList<QTableWidgetItem *>::iterator k = items.begin();
-     QTableWidgetItem * head = (*k);
-     int id=head->text().toInt(0,10);
-
-         Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,
-                                ActivityInTTS::TodoTodaySheet==1).one();
-        if (this->current == NULL || this->current->id != current.id)
-         {
-             this->current= new Activity(*(db));
-              this->current->id = current.id;
-              pomo->~Pomodoro();
-             pomo = new Pomodoro(0,25,00);
-       }
-        pomo->show();
-         pomo->Start();
-
-       QMessageBox msgBox;
+        QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
-     }
-     */
+    }
 }
 
-void TodoTodaySheetGui::PomodoroFinished(){
-     QMessageBox msgBox;
-        msgBox.setText("Pomodoro Finished");
-        msgBox.exec();
-}
-
-void TodoTodaySheetGui::PomodoroBroken(){
+void TodoTodaySheetGui::PomodoroBroken()
+{
+    pomo->~QWidget();
+    pomo = new Pomodoro (0,mins,secs);
+    connect(pomo, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
+    connect(pomo, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
      QMessageBox msgBox;
         msgBox.setText("Pomodoro Broken");
         msgBox.exec();
@@ -110,7 +125,7 @@ void TodoTodaySheetGui::on_postponeActivityButton_clicked()
             QTableWidgetItem * activitiesToBePostponed = (*k);
             Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==activitiesToBePostponed->text().toInt(),
                                ActivityInTTS::TodoTodaySheet==1).one();
-            currentTts.PostponeActivity(*(db),current,currentTts);
+            if(this->current!=NULL||this->current->id!=current.id)currentTts.PostponeActivity(*(db),current,currentTts);
         }
         refreshTable();
     } catch (NotFound e) {
@@ -129,6 +144,7 @@ void TodoTodaySheetGui::on_finishActivityButton_clicked()
     try {
         Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,
                            ActivityInTTS::TodoTodaySheet==1).one();
+
         TodoTodaySheet currentTts = select<TodoTodaySheet>(*(db), TodoTodaySheet::Id == 1).one();
         currentTts.FinishActivity(*(db),current,currentTts);
         refreshTable();
@@ -145,4 +161,9 @@ void TodoTodaySheetGui::on_stopActivity_clicked()
         pomo->show();
         pomo->Stop();
     }
+}
+
+void TodoTodaySheetGui::showEvent( QShowEvent * event)
+{
+   refreshTable();
 }
