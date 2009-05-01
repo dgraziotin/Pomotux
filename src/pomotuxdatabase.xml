@@ -9,7 +9,7 @@
         <field name="mDeadline" type="date"></field>
         <field name="mNumPomodoro" type="integer" default="0"></field>
         <field name="mOrder" type="integer" default="0"></field>
-        <field name="mIsFinished" type="boolean" default="true"></field>
+        <field name="mIsFinished" type="boolean" default="false"></field>
         <method name="Delete" returntype="void">
             <param name="rDatabase" type="const litesql::Database&amp;"/>
             <param name="rCurrentActivity" type="Activity&amp;"/>
@@ -57,7 +57,7 @@
             <param name="rCurrentTDS" type="TodoTodaySheet&amp;"/>
             <param name="direction" type="const int"/>
         </method>
-        <method name="GetMaxmActivityOrder" returntype="int">
+        <method name="GetMaxActivityOrder" returntype="int">
             <param name="rDatabase" type="const litesql::Database&amp;"/>
             <param name="rTTS" type="TodoTodaySheet&amp;"/>
         </method>

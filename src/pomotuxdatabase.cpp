@@ -117,7 +117,7 @@ void Activity::defaults() {
     mDeadline = 0;
     mNumPomodoro = 0;
     mOrder = 0;
-    mIsFinished = true;
+    mIsFinished = false;
 }
 Activity::Activity(const litesql::Database& db)
      : litesql::Persistent(db), id(Id), type(Type), mDescription(MDescription), mInsertionDate(MInsertionDate), mDeadline(MDeadline), mNumPomodoro(MNumPomodoro), mOrder(MOrder), mIsFinished(MIsFinished) {

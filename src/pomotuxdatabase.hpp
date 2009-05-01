@@ -158,7 +158,7 @@ public:
     virtual void FinishActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rTTS);
     virtual void PostponeActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rTTS);
     virtual void MoveActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rCurrentTDS, const int direction);
-    virtual int GetMaxmActivityOrder(const litesql::Database& rDatabase, TodoTodaySheet& rTTS);
+    virtual int GetMaxActivityOrder(const litesql::Database& rDatabase, TodoTodaySheet& rTTS);
     virtual void MakeConsistent(const litesql::Database& rDatabase, TodoTodaySheet& rTTS);
 protected:
     std::string insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs);

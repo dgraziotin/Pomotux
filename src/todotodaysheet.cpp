@@ -18,7 +18,7 @@ void pomotuxdatabase::TodoTodaySheet::ScheduleActivity(const litesql::Database& 
         cout << "Fatal. The tables are not consistent." << endl;
         //exit (-1);
     }
-    rNewActivity.mOrder = GetMaxmActivityOrder(rDatabase, rTTS) + 1;
+    rNewActivity.mOrder = GetMaxActivityOrder(rDatabase, rTTS) + 1;
     rNewActivity.update();
     ActivityInTTS::link(rDatabase,rNewActivity,rTTS);
 	rDatabase.commit();
@@ -76,7 +76,7 @@ void pomotuxdatabase::TodoTodaySheet::MakeConsistent(const litesql::Database& rD
 	rDatabase.commit();
 }
 
-int pomotuxdatabase::TodoTodaySheet::GetMaxmActivityOrder(const litesql::Database& rDatabase, TodoTodaySheet& rTTS)
+int pomotuxdatabase::TodoTodaySheet::GetMaxActivityOrder(const litesql::Database& rDatabase, TodoTodaySheet& rTTS)
 {
 
     vector<Activity> currentTDTSActivities = ActivityInTTS::get<Activity>(rDatabase,Expr(),
