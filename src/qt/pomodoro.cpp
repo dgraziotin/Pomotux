@@ -55,3 +55,11 @@ void Pomodoro::ShowTimer()
         text[2] = ' ';
     display(text);
 }
+
+Pomodoro::~Pomodoro(){
+    delete this->mpTime;
+    delete this->mpTimer;
+    mpTime = NULL;
+    mpTimer = NULL;
+    delete this;
+}

@@ -1,5 +1,6 @@
 /*
-    see hpp file for change needed to attribute and method names
+    see hpp file for change needed to attribute and method names.
+    Watch the Coding Standards everywhere also here!
 */
 
 #include "gui_activityinventorysheet.hpp"
@@ -16,6 +17,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     ui->setupUi(this);
 
     try {
+        /* MEMORY LEAK: rAis is not destroyed anywhere */
         rAis = new ActivityInventorySheet(select<ActivityInventorySheet>(*(db), ActivityInventorySheet::Id == 1).one());
     } catch (NotFound e) {
         rAis = new ActivityInventorySheet(*(db));
@@ -67,7 +69,7 @@ void GuiActivityInventorySheet::on_deleteActivityButton_clicked()
     int id = idString.toInt();
     try {
         Activity at = select<Activity>(*(db), Activity::Id == id).one();
-
+        /* MEMORY LEAK: rTts is not destroyed anywhere */
         rTts = new TodoTodaySheet(select<TodoTodaySheet>(*(db), TodoTodaySheet::Id == 1).one());
         ActivityInventorySheet &cAis = *(rAis);
         TodoTodaySheet &cTts = *(rTts);

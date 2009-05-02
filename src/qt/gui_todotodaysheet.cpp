@@ -1,6 +1,7 @@
 /*
- * see hpp files for changes to method name and methods needed!
- */
+    see hpp file for change needed to attribute and method names.
+    Watch the Coding Standards everywhere also here!
+*/
 
 #include "gui_todotodaysheet.hpp"
 #include "ui_gui_todotodaysheet.h"
@@ -69,6 +70,7 @@ void TodoTodaySheetGui::on_startActivityButton_clicked()
         int id=this->ui->tableWidget->item(0,0)->text().toInt();
         if (id==0) throw "There Are No Activities to be Initialized";
         pomo = new Pomodoro(0,mins,secs);
+        /* MEMORY LEAK: current is not destroyed anywhere, watch the fucking CS, it is not clear it's a pointer */
         Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,ActivityInTTS::TodoTodaySheet==1).one();
         if (!pomo->IsRunning()) {
             connect(pomo, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
@@ -94,6 +96,7 @@ void TodoTodaySheetGui::PomodoroFinished()
     try {
         this->current->mNumPomodoro= (this->current->mNumPomodoro +1);
         this->current->update();
+        /* MEMORY LEAK: pomo is not destroyed anywhere */
         pomo->hide();
 
         QMessageBox msgBox;
