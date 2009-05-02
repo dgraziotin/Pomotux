@@ -23,6 +23,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
         rAis->update();
     }
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    emit DatabaseUpdated();
 }
 
 GuiActivityInventorySheet::~GuiActivityInventorySheet()

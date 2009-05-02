@@ -30,6 +30,7 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         mpTts->update();
     }
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    emit DatabaseUpdated();
 }
 
 void  TodoTodaySheetGui::Cleaner()
@@ -125,7 +126,7 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
         for (QList<QTableWidgetItem *>::iterator k = items.begin(); k<items.end(); k++)
         {
             QTableWidgetItem * activitiesToBePostponed = (*k);
-            Activity current = ActivityInTTS::get<Activity>(*(mpDatabase),Activity::Id==activitiesToBePostponed->text().toInt(),ActivityInTTS::TodoTodaySheet==1).one();
+            Activity current = ActivityInTTS::get<Activity>(*(mpDatabase),Activity::Id==activitiesToBePostponed->text().toInt(),ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
             if (this->mpCurrentActivity==NULL||this->mpCurrentActivity->id!=current.id)mpTts->PostponeActivity(*(mpDatabase),current,*(mpTts));
         }
         emit DatabaseUpdated();
