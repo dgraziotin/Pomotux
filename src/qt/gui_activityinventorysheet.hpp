@@ -30,7 +30,7 @@ public:
     float *value;   // TODO: should be mpValue, make private
     float mainController;   // TODO: mMainController, make private
     time_t now; // TODO: Coding Standards, make private
-    void showEvent( QShowEvent * event);   // TODO: CS
+
 
 private:
     Ui::GuiActivityInventorySheet *ui;  // CS

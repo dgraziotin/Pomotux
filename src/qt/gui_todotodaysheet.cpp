@@ -99,7 +99,6 @@ void TodoTodaySheetGui::PomodoroFinished()
         QMessageBox msgBox;
         msgBox.setText("Pomodoro Finished : Now You Should Make A Short Break");
         msgBox.exec();
-         emit DatabaseUpdated();
     } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");
@@ -109,7 +108,7 @@ void TodoTodaySheetGui::PomodoroFinished()
 
 void TodoTodaySheetGui::PomodoroBroken()
 {
-    mpPomodoro->~QWidget();
+    mpPomodoro->~Pomodoro();
     mpPomodoro = new Pomodoro (0,mins,secs);
     connect(mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
     connect(mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
@@ -172,11 +171,6 @@ void TodoTodaySheetGui::on_StopActivityButton_clicked()
         mpPomodoro->show();
         mpPomodoro->Stop();
     }
-}
-
-void TodoTodaySheetGui::showEvent( QShowEvent * event)
-{
-    RefreshTable();
 }
 
 TodoTodaySheetGui::~TodoTodaySheetGui()

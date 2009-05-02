@@ -25,7 +25,6 @@ class TodoTodaySheetGui : public QMainWindow {
 public:
     TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database);
     ~TodoTodaySheetGui();
-    void showEvent( QShowEvent * event=0);
 
 private:
     PomotuxDatabase *mpDatabase;

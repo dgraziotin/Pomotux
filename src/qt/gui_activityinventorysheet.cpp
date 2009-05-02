@@ -156,9 +156,3 @@ void GuiActivityInventorySheet::RefreshTable()
     }
 }
 
-
-void GuiActivityInventorySheet::showEvent( QShowEvent * event)
-{
-    RefreshTable();
-}
-
