@@ -11,9 +11,11 @@ MainWindow::MainWindow(QWidget *parent,PomotuxDatabase& database) :
 {
     this->db= &database;
     m_ui->setupUi(this);
-    //wTTS = new TodoTodaySheetGui(this,*(db));
+    wTTS = new TodoTodaySheetGui(this,*(db));
     /* MEMORY LEAK: wAIS is not destroyed anywhere */
     wAIS = new GuiActivityInventorySheet(this,*(db));
+    connect(wTTS,SIGNAL(DatabaseUpdated()),wAIS,SLOT(RefreshTable()));
+    connect(wAIS,SIGNAL(DatabaseUpdated()),wTTS,SLOT(RefreshTable()));
 }
 
 MainWindow::~MainWindow()
@@ -35,8 +37,6 @@ void MainWindow::changeEvent(QEvent *e)
 
 void MainWindow::on_TTSButton_clicked()
 {
-    /* MEMORY LEAK: wTTS is not destroyed anywhere */
-    wTTS = new TodoTodaySheetGui(this,*(db));
     wTTS->show();
 }
 

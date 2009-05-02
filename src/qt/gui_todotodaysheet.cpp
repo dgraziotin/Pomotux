@@ -95,10 +95,11 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->mpCurrentActivity->mNumPomodoro= (this->mpCurrentActivity->mNumPomodoro +1);
         this->mpCurrentActivity->update();
         mpPomodoro->hide();
-
+       emit DatabaseUpdated();
         QMessageBox msgBox;
         msgBox.setText("Pomodoro Finished : Now You Should Make A Short Break");
         msgBox.exec();
+         emit DatabaseUpdated();
     } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");

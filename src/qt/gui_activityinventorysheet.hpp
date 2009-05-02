@@ -24,7 +24,7 @@ class GuiActivityInventorySheet : public QMainWindow {
     Q_OBJECT
 
 public:
-    GuiActivityInventorySheet(QWidget *parent, PomotuxDatabase& database);
+    GuiActivityInventorySheet(QWidget *parent,PomotuxDatabase& database);
     ~GuiActivityInventorySheet();
     QString *description;
     float *value;   // TODO: should be mpValue, make private
@@ -38,8 +38,8 @@ private:
     ActivityInventorySheet *rAis;
     TodoTodaySheet *rTts;   // CS: TodoTodaySheet* mpTTS;
     float row;  // CS
-    void cleaner(); // CS
-    void refreshTable();    // CS
+    void Cleaner(); // CS
+       // CS
 
 private slots:
     void on_insertInTTSButton_clicked();    // CS: should be on_InsertInTTSButton_clicked(), if possible, so for the next
@@ -47,7 +47,7 @@ private slots:
     void on_ais_itemClicked(QTableWidgetItem* item);
     void on_deleteActivityButton_clicked();
     void on_newActivityButton_clicked();
-
+    void RefreshTable();
 signals:
     /**
       * Signal launched when the database is updated

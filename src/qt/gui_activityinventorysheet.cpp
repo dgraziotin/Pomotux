@@ -15,7 +15,6 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     db = &database;
     now = time(NULL);
     ui->setupUi(this);
-
     try {
         /* MEMORY LEAK: rAis is not destroyed anywhere */
         rAis = new ActivityInventorySheet(select<ActivityInventorySheet>(*(db), ActivityInventorySheet::Id == 1).one());
@@ -23,8 +22,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
         rAis = new ActivityInventorySheet(*(db));
         rAis->update();
     }
-
-    refreshTable();
+    connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
 }
 
 GuiActivityInventorySheet::~GuiActivityInventorySheet()
@@ -58,8 +56,7 @@ void GuiActivityInventorySheet::on_newActivityButton_clicked()
     } catch (Except e) {
         cerr << e << endl;
     }
-
-    refreshTable();
+    emit DatabaseUpdated();
 }
 
 void GuiActivityInventorySheet::on_deleteActivityButton_clicked()
@@ -74,7 +71,6 @@ void GuiActivityInventorySheet::on_deleteActivityButton_clicked()
         ActivityInventorySheet &cAis = *(rAis);
         TodoTodaySheet &cTts = *(rTts);
         at.Delete(*(db), at, cAis, cTts);
-        refreshTable();
         emit DatabaseUpdated();
     } catch (NotFound e) {
         rTts = new TodoTodaySheet(*(db));
@@ -101,7 +97,6 @@ void GuiActivityInventorySheet::on_modifyActivityButton_clicked()
     Activity at = select<Activity>(*(db), Activity::Id == id).one();
     string newDescription = description->toStdString();
     at.Modify(*(db), at, *(value), newDescription);
-    refreshTable();
     emit DatabaseUpdated();
 }
 void GuiActivityInventorySheet::on_insertInTTSButton_clicked()
@@ -122,7 +117,7 @@ void GuiActivityInventorySheet::on_insertInTTSButton_clicked()
     db->commit();
     emit DatabaseUpdated();
 }
-void  GuiActivityInventorySheet::cleaner()
+void  GuiActivityInventorySheet::Cleaner()
 {
     for (int i=0 ; i < this->ui->ais->rowCount(); i++)
         for (int j=0 ; j<7; j++)
@@ -130,9 +125,9 @@ void  GuiActivityInventorySheet::cleaner()
     this->ui->ais->setRowCount(0);
 }
 
-void GuiActivityInventorySheet::refreshTable()
+void GuiActivityInventorySheet::RefreshTable()
 {
-    cleaner();
+    Cleaner();
 
     vector<Activity> currentAISActivities = ActivityInAIS::get<Activity>(*(db),Expr(),
                                             ActivityInAIS::ActivityInventorySheet==rAis->id).all();
@@ -164,6 +159,6 @@ void GuiActivityInventorySheet::refreshTable()
 
 void GuiActivityInventorySheet::showEvent( QShowEvent * event)
 {
-    refreshTable();
+    RefreshTable();
 }
 
