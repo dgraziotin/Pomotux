@@ -62,6 +62,7 @@ void TodoTodaySheetGui::RefreshTable()
         for (int k=0; k<3; k++)
             ui->tableWidget->setItem(tablePosition,k,&currentActivity[k]);
     }
+    this->ui->MoveMagnitudeBox->setMaximum(ActivityInTTS::get<Activity>(*(this->mpDatabase),Expr()).count());
 }
 
 
@@ -185,3 +186,35 @@ TodoTodaySheetGui::~TodoTodaySheetGui()
     delete ui;
 }
 
+void TodoTodaySheetGui::ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
+{
+    try{
+        for (int i=magnitude;i>0;i--)
+        this->mpTts->MoveActivity(*(this->mpDatabase),activityToMove,*(this->mpTts),direction);
+        emit DatabaseUpdated();
+    }catch (NotFound e){
+        emit DatabaseUpdated();
+    }
+}
+
+void TodoTodaySheetGui::on_MoveActivityButton_clicked()
+{
+    try{
+        QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
+        if(items.empty())throw PomotuxException("There Are No Activities");
+        QList<QTableWidgetItem *>::iterator k = items.begin();
+        QTableWidgetItem * head = (*k);
+        int id=head->text().toInt(0,10);
+        Activity current = ActivityInTTS::get<Activity>(*(mpDatabase),Activity::Id==id,ActivityInTTS::TodoTodaySheet==mpTts->id).one();
+        if(this->mpPomodoro->IsRunning()&&this->mpCurrentActivity->id==current.id)throw PomotuxException("Could not change priority of the current Activity");
+        this->ChangeActivityPriority(ui->MoveMagnitudeBox->value(),(ui->MoveDirectionBox->currentText()=="upward")?-1:1,current);
+    }catch (Except e){
+        QMessageBox msgBox;
+        msgBox.setText("SQL Error");
+        msgBox.exec();
+    }catch (PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        msgBox.exec();
+    }
+}

@@ -33,9 +33,10 @@ private:
     TodoTodaySheet *mpTts;
     Ui::TodoTodaySheetGuiClass *ui;
     void Cleaner();
-
+    void ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove);
 
 private slots:
+    void on_MoveActivityButton_clicked();
     void on_StopActivityButton_clicked();
     void on_PostponeActivityButton_clicked();
     void on_StartActivityButton_clicked();

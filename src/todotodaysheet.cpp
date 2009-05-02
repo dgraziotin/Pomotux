@@ -46,7 +46,6 @@ void pomotuxdatabase::TodoTodaySheet::PostponeActivity(const litesql::Database& 
 void pomotuxdatabase::TodoTodaySheet::MoveActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS, int direction)
 {
     rTTS.MakeConsistent(rDatabase,rTTS);
-    try {
         Activity targetActivity = ActivityInTTS::get<Activity>(rDatabase,
                                   Activity::MOrder == rCurrentActivity.mOrder + direction,
                                   ActivityInTTS::TodoTodaySheet==rTTS.id).one();
@@ -59,10 +58,6 @@ void pomotuxdatabase::TodoTodaySheet::MoveActivity(const litesql::Database& rDat
         targetActivity.update();
         rCurrentActivity.update();
 		rDatabase.commit();
-    } catch (NotFound e) {
-        cout << "Fatal: you are either trying to push up the first Activity or to push down the last Activity!" << endl;
-        return;
-    }
 }
 
 void pomotuxdatabase::TodoTodaySheet::MakeConsistent(const litesql::Database& rDatabase, TodoTodaySheet& rTTS)
