@@ -19,6 +19,7 @@ void pomotuxdatabase::TodoTodaySheet::ScheduleActivity(const litesql::Database& 
         //exit (-1);
     }
     rNewActivity.mOrder = GetMaxActivityOrder(rDatabase, rTTS) + 1;
+    rNewActivity.mIsFinished = false;
     rNewActivity.update();
     ActivityInTTS::link(rDatabase,rNewActivity,rTTS);
 	rDatabase.commit();
