@@ -39,9 +39,11 @@ void Pomodoro::Stop()
 
 void Pomodoro::Reset()
 {
-    mIsRunning = false;
     mpTimer->stop();
+    mIsRunning = false;
     mpTime->setHMS(0,this->mMinutes,this->mSeconds,0);
+   // ShowTimer();
+
 }
 
 
@@ -49,7 +51,7 @@ void Pomodoro::Run()
 {
     if (mpTime->minute() == 0 && mpTime->second() == 0) {
         emit PomodoroFinished();
-        Stop();
+        Reset();
     } else {
         *mpTime = mpTime->addSecs(-1);
     }

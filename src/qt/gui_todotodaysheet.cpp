@@ -21,7 +21,7 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
 {
     mpDatabase = &database;
     mpDatabase->begin();
-
+    this->mpCurrentActivity = new Activity(*(this->mpDatabase));
     ui->setupUi(this);
     try {
         mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
@@ -30,6 +30,9 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         mpTts->update();
     }
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    mpPomodoro = new Pomodoro(0,mins,secs);
+    connect(mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
+    connect(mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
     emit DatabaseUpdated();
 }
 
@@ -69,11 +72,10 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
     try {
         if (this->ui->tableWidget->rowCount()==0) throw PomotuxException("There Are No Activities to be Initialized");
         int id=this->ui->tableWidget->item(0,0)->text().toInt();
-        mpPomodoro = new Pomodoro(0,mins,secs);
+
         Activity current = ActivityInTTS::get<Activity>(*(mpDatabase),Activity::Id==id,ActivityInTTS::TodoTodaySheet==mpTts->id).one();
         if (!mpPomodoro->IsRunning()) {
-            connect(mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
-            connect(mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
+
             this->mpCurrentActivity = new Activity(current);
             mpPomodoro->show();
             mpPomodoro->Start();
@@ -95,7 +97,9 @@ void TodoTodaySheetGui::PomodoroFinished()
     try {
         this->mpCurrentActivity->mNumPomodoro= (this->mpCurrentActivity->mNumPomodoro +1);
         this->mpCurrentActivity->update();
-        mpPomodoro->hide();
+        this->mpPomodoro->hide();
+
+
        emit DatabaseUpdated();
         QMessageBox msgBox;
         msgBox.setText("Pomodoro Finished : Now You Should Make A Short Break");
@@ -109,10 +113,9 @@ void TodoTodaySheetGui::PomodoroFinished()
 
 void TodoTodaySheetGui::PomodoroBroken()
 {
-    mpPomodoro->~Pomodoro();
-    mpPomodoro = new Pomodoro (0,mins,secs);
-    connect(mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
-    connect(mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
+
+    this->mpPomodoro->hide();
+    this->mpPomodoro->Reset();
     QMessageBox msgBox;
     msgBox.setText("Pomodoro Broken");
     msgBox.exec();
@@ -127,7 +130,7 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
         {
             QTableWidgetItem * activitiesToBePostponed = (*k);
             Activity current = ActivityInTTS::get<Activity>(*(mpDatabase),Activity::Id==activitiesToBePostponed->text().toInt(),ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
-            if (this->mpCurrentActivity==NULL||this->mpCurrentActivity->id!=current.id)mpTts->PostponeActivity(*(mpDatabase),current,*(mpTts));
+            if (this->mpCurrentActivity->id!=current.id)mpTts->PostponeActivity(*(mpDatabase),current,*(mpTts));
         }
         emit DatabaseUpdated();
     } catch (NotFound e) {

@@ -55,9 +55,9 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>390</x>
       <y>70</y>
-      <width>151</width>
+      <width>181</width>
       <height>351</height>
      </rect>
     </property>
@@ -68,9 +68,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
-       <width>131</width>
-       <height>301</height>
+       <y>20</y>
+       <width>164</width>
+       <height>321</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -89,6 +89,49 @@
        </widget>
       </item>
       <item>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>Change Activity Priority :</string>
+        </property>
+        <widget class="QWidget" name="gridLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>141</width>
+           <height>141</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QSpinBox" name="MoveMagnitudeBox"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QComboBox" name="MoveDirectionBox">
+            <item>
+             <property name="text">
+              <string>upward</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>downward</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="MoveActivityButton">
+            <property name="text">
+             <string>move</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="PostponeActivityButton">
         <property name="text">
          <string>postpone</string>
@@ -104,6 +147,28 @@
       </item>
      </layout>
     </widget>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>10</y>
+      <width>501</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>DejaVu Sans Mono</family>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Todo Today Sheet</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
   </widget>
  </widget>
