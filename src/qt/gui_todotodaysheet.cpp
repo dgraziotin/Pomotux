@@ -127,7 +127,7 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
         {
             QTableWidgetItem * activitiesToBePostponed = (*k);
             Activity current = ActivityInTTS::get<Activity>(*(mpDatabase),Activity::Id==activitiesToBePostponed->text().toInt(),ActivityInTTS::TodoTodaySheet==1).one();
-            if (this->mpCurrentActivity!=NULL||this->mpCurrentActivity->id!=current.id)mpTts->PostponeActivity(*(mpDatabase),current,*(mpTts));
+            if (this->mpCurrentActivity==NULL||this->mpCurrentActivity->id!=current.id)mpTts->PostponeActivity(*(mpDatabase),current,*(mpTts));
         }
         emit DatabaseUpdated();
     } catch (NotFound e) {
@@ -152,6 +152,7 @@ void TodoTodaySheetGui::on_FinishActivityButton_clicked()
         QTableWidgetItem * head = (*k);
         int id=head->text().toInt(0,10);
         Activity current = ActivityInTTS::get<Activity>(*(mpDatabase),Activity::Id==id,ActivityInTTS::TodoTodaySheet==mpTts->id).one();
+        if (!(this->mpCurrentActivity==NULL||this->mpCurrentActivity->id!=current.id)&&this->mpPomodoro->IsRunning())throw PomotuxException("current activity could be marked as finished only once current pomodoro is over");
         mpTts->FinishActivity(*(mpDatabase),current,*(mpTts));
         emit DatabaseUpdated();
     } catch (NotFound e) {

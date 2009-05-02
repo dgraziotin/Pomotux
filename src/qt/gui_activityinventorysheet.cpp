@@ -145,12 +145,12 @@ void GuiActivityInventorySheet::RefreshTable()
         currentActivity[6].setText(((*i).mIsFinished)?"finished":"not finished");
 
         currentActivity[0].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-        currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-        currentActivity[2].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-        currentActivity[3].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-        currentActivity[4].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-        currentActivity[5].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-        currentActivity[6].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+        currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        currentActivity[2].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        currentActivity[3].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        currentActivity[4].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        currentActivity[5].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+        currentActivity[6].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
         for (int k=0; k<7; k++)
             ui->ais->setItem(tablePosition,k,&currentActivity[k]);
     }

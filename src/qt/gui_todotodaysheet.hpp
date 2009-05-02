@@ -33,7 +33,6 @@ private:
     Activity *mpCurrentActivity;
     TodoTodaySheet *mpTts;
     Ui::TodoTodaySheetGuiClass *ui;
-
     void Cleaner();
 
 
