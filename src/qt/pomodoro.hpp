@@ -76,6 +76,7 @@ private:
     /**
        * Integer to store the seconds of length of a Pomodoro
        */
+
     int mSeconds;
     /**
        * Boolean to represent the status of the Pomodoro (true = running)

@@ -8,7 +8,6 @@ Pomodoro::Pomodoro(QWidget *parent, int minutes, int seconds)
     this->mMinutes = minutes;
     this->mSeconds = seconds;
     setSegmentStyle(Filled);
-    connect(mpTimer, SIGNAL(timeout()), this, SLOT(Run()));
     mpTime = new QTime(0,minutes,seconds,0);
     mpTimer = new QTimer(this);
     mIsRunning = false;
@@ -24,6 +23,7 @@ bool Pomodoro::IsRunning()
 
 void Pomodoro::Start()
 {
+    connect(mpTimer, SIGNAL(timeout()), this, SLOT(Run()));
     mpTimer->start(1000);
     mIsRunning = true;
     Run();
