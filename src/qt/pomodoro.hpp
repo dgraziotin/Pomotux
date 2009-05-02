@@ -53,6 +53,12 @@ public:
     void Stop();
 
     /**
+      * Resets the Pomodoro.
+      * This method is just for having a single Pomodoro object during the execution of the program.
+      */
+    void Reset();
+
+    /**
        * Getter for mIsRunning variable
        * @return mIsRunning
        */
@@ -63,6 +69,14 @@ public:
        */
     ~Pomodoro();
 private:
+    /**
+       * Integer to store the minutes of length of a Pomodoro
+       */
+    int mMinutes;
+    /**
+       * Integer to store the seconds of length of a Pomodoro
+       */
+    int mSeconds;
     /**
        * Boolean to represent the status of the Pomodoro (true = running)
        */

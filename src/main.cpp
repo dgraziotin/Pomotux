@@ -177,7 +177,7 @@ int main(int argc, char **argv)
 			cout << "\nTTS" << endl;
 			cout << "ID  | DESCRIPTION | order | deadline" << endl;
 			for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) 
-				cout << (*i).id << " | " << (*i).mDescription << " | " << (*i).mOrder << (*i).mDeadline << "\n";
+				cout << (*i).id << " | " << (*i).mDescription << " | " << (*i).mOrder << (*i).mDeadline.asString("%d.%m.%y") << "\n";
 		}
 		controller = 1;
 	} else if (controller < 1 || controller > 9) {
