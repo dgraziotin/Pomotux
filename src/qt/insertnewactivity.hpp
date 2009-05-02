@@ -1,3 +1,7 @@
+/*
+ * TODO: Doxygen comments!
+ */
+
 #ifndef INSERTNEWACTIVITY_H
 #define INSERTNEWACTIVITY_H
 
@@ -19,20 +23,20 @@ class InsertNewActivity : public QDialog {
 public:
     explicit InsertNewActivity(QWidget *parent, PomotuxDatabase& database);
     virtual ~InsertNewActivity();
-    QString text;
-    float dayToDeadline;
-    float controller;
-    PomotuxDatabase *db;
+    QString text;           // put it prive; Coding Standards, should be mText but you should use a better name,like mDescription
+    float dayToDeadline;    // put it private, CS
+    float controller;   // put it private, CS
+    PomotuxDatabase *db;    // put it private; CS: PomotuxDatabase* mpDatabase
 
 protected:
     virtual void changeEvent(QEvent *e);
 
 private:
-    Ui::InsertNewActivity *m_ui;
+    Ui::InsertNewActivity *m_ui;    // what does this mean? Choose a better name and respect CS
 
 private slots:
-    void on_buttonBox_rejected();
-    void on_buttonBox_accepted();
+    void on_buttonBox_rejected();   // if possible, on_ButtonBox_rejected()
+    void on_buttonBox_accepted();   // etc.
 };
 
 #endif // INSERTNEWACTIVITY_H

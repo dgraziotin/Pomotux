@@ -1,3 +1,6 @@
+/*
+ * TODO: read hpp file and change methods and attributes names!
+ */
 #include "modifyactivity.hpp"
 #include "ui_modifyanactivity.h"
 

@@ -1,3 +1,6 @@
+/*
+ * TODO: Doxygen comments!
+ */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -22,13 +25,13 @@ public:
     virtual ~MainWindow();
 
 protected:
-    virtual void changeEvent(QEvent *e);
+    virtual void changeEvent(QEvent *e);    // Coding Standards: ChangeEvent()
 
 private:
-    PomotuxDatabase *db;
-    GuiActivityInventorySheet *wAIS;
-    TodoTodaySheetGui *wTTS;
-    Ui::MainWindow *m_ui;
+    PomotuxDatabase *db;                // CS..
+    GuiActivityInventorySheet *wAIS;    // CS: GuiActivityInventorySheet* mpAIS (what does w stand for?)
+    TodoTodaySheetGui *wTTS;            // CS
+    Ui::MainWindow *m_ui;               // CS and choose a better name
 
 private slots:
     void on_AISButton_clicked();

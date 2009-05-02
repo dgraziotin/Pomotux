@@ -1,3 +1,6 @@
+/*
+ * TODO: read hpp file and change methods and attributes names!
+ */
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 

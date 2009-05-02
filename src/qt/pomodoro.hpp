@@ -58,7 +58,6 @@ public:
        */
     bool IsRunning();
 
-    ~Pomodoro();
 private:
     /**
        * Boolean to represent the status of the Pomodoro (true = running)

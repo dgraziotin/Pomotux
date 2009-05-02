@@ -55,8 +55,3 @@ void Pomodoro::ShowTimer()
         text[2] = ' ';
     display(text);
 }
-
-Pomodoro::~Pomodoro()
-{
-    this->destroy(1,1);
-}

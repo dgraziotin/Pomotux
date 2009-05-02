@@ -1,9 +1,11 @@
+/*
+ * TODO: Doxygen comments!
+ */
 #ifndef GUIACTIVITYINVENTORYSHEET_H
 #define GUIACTIVITYINVENTORYSHEET_H
 
 #include <QtGui/QMainWindow>
 #include <QTableWidget>
-//#include "../sep/src/gui/insertActivity.hpp"
 #include "insertnewactivity.hpp"
 #include "modifyactivity.hpp"
 #include "litesql.hpp"
@@ -25,26 +27,32 @@ public:
     GuiActivityInventorySheet(QWidget *parent, PomotuxDatabase& database);
     ~GuiActivityInventorySheet();
     QString *description;
-    float *value;
-    float mainController;
-    time_t now;
-    void showEvent( QShowEvent * event);
+    float *value;   // TODO: should be mpValue, make private
+    float mainController;   // TODO: mMainController, make private
+    time_t now; // TODO: Coding Standards, make private
+    void showEvent( QShowEvent * event);   // TODO: CS
 
 private:
-    Ui::GuiActivityInventorySheet *ui;
-    PomotuxDatabase *db;
+    Ui::GuiActivityInventorySheet *ui;  // CS
+    PomotuxDatabase *db;    // CS
     ActivityInventorySheet *rAis;
-    TodoTodaySheet *rTts;
-    float row;
-    void cleaner();
-    void refreshTable();
+    TodoTodaySheet *rTts;   // CS: TodoTodaySheet* mpTTS;
+    float row;  // CS
+    void cleaner(); // CS
+    void refreshTable();    // CS
 
 private slots:
-    void on_insertInTTSButton_clicked();
+    void on_insertInTTSButton_clicked();    // CS: should be on_InsertInTTSButton_clicked(), if possible, so for the next
     void on_modifyActivityButton_clicked();
     void on_ais_itemClicked(QTableWidgetItem* item);
     void on_deleteActivityButton_clicked();
     void on_newActivityButton_clicked();
+
+signals:
+    /**
+      * Signal launched when the database is updated
+      */
+    void DatabaseUpdated();
 };
 
 #endif // GUIACTIVITYINVENTORYSHEET_H

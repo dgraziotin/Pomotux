@@ -1,3 +1,7 @@
+/*
+ * TODO: Doxygen comments!
+ */
+
 #ifndef TODOTODAYSHEETGUI_H
 #define TODOTODAYSHEETGUI_H
 
@@ -20,19 +24,19 @@ class TodoTodaySheetGui : public QMainWindow {
 public:
     TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database);
     ~TodoTodaySheetGui();
-    void showEvent( QShowEvent * event);
+    void showEvent( QShowEvent * event);    // Coding Standards
 
 private:
-    PomotuxDatabase *db;
-    Pomodoro *pomo;
-    Activity *current;
-    Ui::TodoTodaySheetGuiClass *ui;
+    PomotuxDatabase *db;    // Coding Standards: PomotuxDatabase* mpDatabase
+    Pomodoro *pomo;         // CS: Pomodoro* mpPomodoro
+    Activity *current;      // CS
+    Ui::TodoTodaySheetGuiClass *ui; // CS
 
-    void cleaner();
-    void refreshTable();
+    void cleaner();     // CS
+    void refreshTable();    // CS
 
 private slots:
-    void on_stopActivity_clicked();
+    void on_stopActivity_clicked();     // If possible, should be on_StopActivity_clicked(), so for the next methods
     void on_postponeActivityButton_clicked();
     void on_startActivityButton_clicked();
     void on_finishActivityButton_clicked();

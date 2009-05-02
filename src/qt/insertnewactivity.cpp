@@ -1,3 +1,6 @@
+/*
+ * TODO: read hpp file and change methods and attributes names!
+ */
 #include "insertnewactivity.hpp"
 #include "ui_insertnewactivity.h"
 #include <string>
