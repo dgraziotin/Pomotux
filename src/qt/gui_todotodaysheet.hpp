@@ -137,7 +137,7 @@ private slots:
     void PomodoroFinished();
 
         /**
-       * Handles the signal of PomodoroBroken() received from mpPomodoro prompting the user with an alert message
+       * Handles the signal of PomodoroBroken() received from mpPomodoro prompting the user an alert message
        * @see pomodoro.hpp
        */
     void PomodoroBroken();
