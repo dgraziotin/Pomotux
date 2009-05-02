@@ -11,16 +11,18 @@ SOURCES += gui_activityinventorysheet.cpp \
     pomodoro.cpp \
     gui_todotodaysheet.cpp \
     ../activity.cpp \
-	../activityinventorysheet.cpp \
-	../pomotuxdatabase.cpp \
-	../todotodaysheet.cpp 
+    ../activityinventorysheet.cpp \
+    ../pomotuxdatabase.cpp \
+    ../todotodaysheet.cpp \
+    pomotuxexception.cpp
 HEADERS += gui_activityinventorysheet.hpp \
     insertnewactivity.hpp \
     mainwindow.hpp \
     modifyactivity.hpp \
     pomodoro.hpp \
     gui_todotodaysheet.hpp \
-	../pomotuxdatabase.hpp
+    ../pomotuxdatabase.hpp \
+    pomotuxexception.hpp
 FORMS += gui_activityinventorysheet.ui \
     insertnewactivity.ui \
     mainwindow.ui \

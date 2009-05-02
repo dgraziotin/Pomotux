@@ -9,6 +9,7 @@
 #include <litesql.hpp>
 #include "../pomotuxdatabase.hpp"
 #include "pomodoro.hpp"
+#include "pomotuxexception.hpp"
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -24,24 +25,32 @@ class TodoTodaySheetGui : public QMainWindow {
 public:
     TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database);
     ~TodoTodaySheetGui();
-    void showEvent( QShowEvent * event);    // Coding Standards
+    void showEvent( QShowEvent * event=0);    // Coding Standards
 
 private:
     PomotuxDatabase *db;    // Coding Standards: PomotuxDatabase* mpDatabase
     Pomodoro *pomo;         // CS: Pomodoro* mpPomodoro
     Activity *current;      // CS
+    TodoTodaySheet *rTts;
     Ui::TodoTodaySheetGuiClass *ui; // CS
 
-    void cleaner();     // CS
-    void refreshTable();    // CS
+    void Cleaner();     // CS
+
 
 private slots:
-    void on_stopActivity_clicked();     // If possible, should be on_StopActivity_clicked(), so for the next methods
-    void on_postponeActivityButton_clicked();
-    void on_startActivityButton_clicked();
-    void on_finishActivityButton_clicked();
+    void on_StopActivityButton_clicked();     // If possible, should be on_StopActivity_clicked(), so for the next methods
+    void on_PostponeActivityButton_clicked();
+    void on_StartActivityButton_clicked();
+    void on_FinishActivityButton_clicked();
     void PomodoroFinished();
     void PomodoroBroken();
+    void RefreshTable();
+
+signals:
+    /**
+      * Signal launched when the database is updated
+      */
+    void DatabaseUpdated();
 };
 
 #endif // TODOTODAYSHEETGUI_H

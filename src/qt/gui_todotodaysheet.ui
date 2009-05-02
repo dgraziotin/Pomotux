@@ -75,28 +75,28 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QPushButton" name="startActivityButton">
+       <widget class="QPushButton" name="StartActivityButton">
         <property name="text">
          <string>start</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="stopActivity">
+       <widget class="QPushButton" name="StopActivityButton">
         <property name="text">
          <string>stop</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="postponeActivityButton">
+       <widget class="QPushButton" name="PostponeActivityButton">
         <property name="text">
          <string>postpone</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="finishActivityButton">
+       <widget class="QPushButton" name="FinishActivityButton">
         <property name="text">
          <string>finish</string>
         </property>

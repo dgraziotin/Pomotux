@@ -23,17 +23,26 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
     db->begin();
 
     ui->setupUi(this);
-
+    try {
+        rTts = new TodoTodaySheet(select<TodoTodaySheet>(*(db), TodoTodaySheet::Id == 1).one());
+    } catch (NotFound e) {
+        rTts = new TodoTodaySheet(*(db));
+        rTts->update();
+    }
+    connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
 }
 
 TodoTodaySheetGui::~TodoTodaySheetGui()
 {
+    this->rTts->~Persistent();
+    this->current->~Persistent();
+    this->pomo->~Pomodoro();
     delete ui;
 }
 
 
 
-void  TodoTodaySheetGui::cleaner()
+void  TodoTodaySheetGui::Cleaner()
 {
     for (int i=0 ; i<ui->tableWidget->rowCount(); i++)
         for (int j=0 ; j<3; j++)
@@ -41,11 +50,11 @@ void  TodoTodaySheetGui::cleaner()
     ui->tableWidget->setRowCount(0);
 }
 
-void TodoTodaySheetGui::refreshTable()
+void TodoTodaySheetGui::RefreshTable()
 {
     vector<Activity> currentTTSActivities = ActivityInTTS::get<Activity>(*(db),Expr(),
                                             ActivityInTTS::TodoTodaySheet==1).orderBy(Activity::MOrder).all();
-    cleaner();
+    Cleaner();
     for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) {
         int tablePosition= ui->tableWidget->rowCount();
         ui->tableWidget->insertRow(tablePosition);
@@ -63,15 +72,14 @@ void TodoTodaySheetGui::refreshTable()
 
 
 
-void TodoTodaySheetGui::on_startActivityButton_clicked()
+void TodoTodaySheetGui::on_StartActivityButton_clicked()
 {
 
     try {
+        if (this->ui->tableWidget->rowCount()==0) throw PomotuxException("There Are No Activities to be Initialized");
         int id=this->ui->tableWidget->item(0,0)->text().toInt();
-        if (id==0) throw "There Are No Activities to be Initialized";
         pomo = new Pomodoro(0,mins,secs);
-        /* MEMORY LEAK: current is not destroyed anywhere, watch the fucking CS, it is not clear it's a pointer */
-        Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,ActivityInTTS::TodoTodaySheet==1).one();
+        Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,ActivityInTTS::TodoTodaySheet==rTts->id).one();
         if (!pomo->IsRunning()) {
             connect(pomo, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
             connect(pomo, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
@@ -84,9 +92,9 @@ void TodoTodaySheetGui::on_startActivityButton_clicked()
             msgBox.setText("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
             msgBox.exec();
         }
-    } catch (Except e) {
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
-        msgBox.setText("ERROR :");
+        msgBox.setText(e.getMessage());
         msgBox.exec();
     }
 }
@@ -96,7 +104,6 @@ void TodoTodaySheetGui::PomodoroFinished()
     try {
         this->current->mNumPomodoro= (this->current->mNumPomodoro +1);
         this->current->update();
-        /* MEMORY LEAK: pomo is not destroyed anywhere */
         pomo->hide();
 
         QMessageBox msgBox;
@@ -120,46 +127,54 @@ void TodoTodaySheetGui::PomodoroBroken()
     msgBox.exec();
 }
 
-void TodoTodaySheetGui::on_postponeActivityButton_clicked()
+void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
 {
     QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
     try {
-        TodoTodaySheet currentTts = select<TodoTodaySheet>(*(db), TodoTodaySheet::Id == 1).one();
+        if(items.empty())throw PomotuxException("There Are No Activities Selected");
         for (QList<QTableWidgetItem *>::iterator k = items.begin(); k<items.end(); k++) {
             QTableWidgetItem * activitiesToBePostponed = (*k);
             Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==activitiesToBePostponed->text().toInt(),
                                ActivityInTTS::TodoTodaySheet==1).one();
-            if (this->current!=NULL||this->current->id!=current.id)currentTts.PostponeActivity(*(db),current,currentTts);
+            if (this->current!=NULL||this->current->id!=current.id)rTts->PostponeActivity(*(db),current,*(rTts));
         }
-        refreshTable();
+        emit DatabaseUpdated();
     } catch (NotFound e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
+    }catch (PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        msgBox.exec();
     }
 }
 
-void TodoTodaySheetGui::on_finishActivityButton_clicked()
+void TodoTodaySheetGui::on_FinishActivityButton_clicked()
 {
+
+      try {
     QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
+    if(items.empty())throw PomotuxException("There Are No Activities");
     QList<QTableWidgetItem *>::iterator k = items.begin();
     QTableWidgetItem * head = (*k);
     int id=head->text().toInt(0,10);
-    try {
         Activity current = ActivityInTTS::get<Activity>(*(db),Activity::Id==id,
-                           ActivityInTTS::TodoTodaySheet==1).one();
-
-        TodoTodaySheet currentTts = select<TodoTodaySheet>(*(db), TodoTodaySheet::Id == 1).one();
-        currentTts.FinishActivity(*(db),current,currentTts);
-        refreshTable();
+                           ActivityInTTS::TodoTodaySheet==rTts->id).one();
+        rTts->FinishActivity(*(db),current,*(rTts));
+        emit DatabaseUpdated();
     } catch (NotFound e) {
         QMessageBox msgBox;
-        msgBox.setText("ERROR");
+        msgBox.setText("ERROR ");
+        msgBox.exec();
+    }catch (PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
         msgBox.exec();
     }
 }
 
-void TodoTodaySheetGui::on_stopActivity_clicked()
+void TodoTodaySheetGui::on_StopActivityButton_clicked()
 {
     if (pomo->IsRunning()) {
         pomo->show();
@@ -169,5 +184,5 @@ void TodoTodaySheetGui::on_stopActivity_clicked()
 
 void TodoTodaySheetGui::showEvent( QShowEvent * event)
 {
-    refreshTable();
+    RefreshTable();
 }
