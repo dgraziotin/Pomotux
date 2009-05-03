@@ -1,7 +1,4 @@
-/*
-    see hpp file for change needed to attribute and method names.
-    Watch the Coding Standards everywhere also here!
-*/
+
 #include "insertnewactivity.hpp"
 #include "ui_insertnewactivity.h"
 #include <string>
@@ -11,13 +8,28 @@ InsertNewActivity::InsertNewActivity(QWidget *parent, PomotuxDatabase& database)
         QDialog(parent),
         m_ui(new Ui::InsertNewActivity)
 {
-    db = &database;
+    mpDatabase = &database;
     m_ui->setupUi(this);
 }
 
 InsertNewActivity::~InsertNewActivity()
 {
     delete m_ui;
+}
+
+float InsertNewActivity::getDayToDeadline()
+{
+    return mDayToDeadline;
+}
+
+float InsertNewActivity::getController()
+{
+    return mController;
+}
+
+QString InsertNewActivity::getDescription()
+{
+    return mDescription;
 }
 
 void InsertNewActivity::changeEvent(QEvent *e)
@@ -32,16 +44,16 @@ void InsertNewActivity::changeEvent(QEvent *e)
     }
 }
 
-void InsertNewActivity::on_buttonBox_accepted()
+void InsertNewActivity::on_ButtonBox_accepted()
 {
-    text = this->m_ui->iaDescriptionLineEdit->text();
-    dayToDeadline = this->m_ui->iaDeadlineSpinBox->value();
-    controller = 1;
+    mDescription = this->m_ui->iaDescriptionLineEdit->text();
+    mDayToDeadline = this->m_ui->iaDeadlineSpinBox->value();
+    mController = 1;
     this->close();
 }
 
-void InsertNewActivity::on_buttonBox_rejected()
+void InsertNewActivity::on_ButtonBox_rejected()
 {
-    controller = 0;
+    mController = 0;
     this->close();
 }

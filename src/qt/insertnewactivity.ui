@@ -93,7 +93,7 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="ButtonBox">
    <property name="geometry">
     <rect>
      <x>120</x>

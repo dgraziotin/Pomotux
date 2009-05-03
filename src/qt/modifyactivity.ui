@@ -93,24 +93,18 @@ p, li { white-space: pre-wrap; }
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget_4">
+  <widget class="QDialogButtonBox" name="ButtonBox">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>220</y>
-     <width>182</width>
-     <height>80</height>
+     <x>100</x>
+     <y>240</y>
+     <width>180</width>
+     <height>34</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QDialogButtonBox" name="buttonBox">
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
   </widget>
  </widget>
  <resources/>
