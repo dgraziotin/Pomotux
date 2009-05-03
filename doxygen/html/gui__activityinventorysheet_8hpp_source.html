@@ -9,6 +9,7 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -44,7 +45,7 @@
 <a name="l00024"></a>00024     Q_OBJECT
 <a name="l00025"></a>00025 
 <a name="l00026"></a>00026 <span class="keyword">public</span>:
-<a name="l00027"></a>00027     GuiActivityInventorySheet(QWidget *parent,PomotuxDatabase&amp; database);
+<a name="l00027"></a>00027     GuiActivityInventorySheet(QWidget *parent,<a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a>&amp; database);
 <a name="l00028"></a>00028     ~GuiActivityInventorySheet();
 <a name="l00029"></a>00029     QString *description;
 <a name="l00030"></a>00030     <span class="keywordtype">float</span> *value;   <span class="comment">// TODO: should be mpValue, make private</span>
@@ -54,9 +55,9 @@
 <a name="l00034"></a>00034 
 <a name="l00035"></a>00035 <span class="keyword">private</span>:
 <a name="l00036"></a>00036     Ui::GuiActivityInventorySheet *ui;  <span class="comment">// CS</span>
-<a name="l00037"></a>00037     PomotuxDatabase *db;    <span class="comment">// CS</span>
-<a name="l00038"></a>00038     ActivityInventorySheet *rAis;
-<a name="l00039"></a>00039     TodoTodaySheet *rTts;   <span class="comment">// CS: TodoTodaySheet* mpTTS;</span>
+<a name="l00037"></a>00037     <a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a> *db;    <span class="comment">// CS</span>
+<a name="l00038"></a>00038     <a class="code" href="classpomotuxdatabase_1_1_activity_inventory_sheet.html">ActivityInventorySheet</a> *rAis;
+<a name="l00039"></a>00039     <a class="code" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> *rTts;   <span class="comment">// CS: TodoTodaySheet* mpTTS;</span>
 <a name="l00040"></a>00040     <span class="keywordtype">float</span> row;  <span class="comment">// CS</span>
 <a name="l00041"></a>00041     <span class="keywordtype">void</span> Cleaner(); <span class="comment">// CS</span>
 <a name="l00042"></a>00042        <span class="comment">// CS</span>
@@ -74,7 +75,7 @@
 <a name="l00057"></a>00057 
 <a name="l00058"></a>00058 <span class="preprocessor">#endif // GUIACTIVITYINVENTORYSHEET_H</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sun May 3 14:36:40 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Sun May 3 16:31:31 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>

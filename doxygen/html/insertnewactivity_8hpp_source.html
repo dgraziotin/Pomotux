@@ -9,6 +9,7 @@
   <div class="tabs">
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -41,12 +42,12 @@
 <a name="l00021"></a>00021     Q_OBJECT
 <a name="l00022"></a>00022     Q_DISABLE_COPY(InsertNewActivity)
 <a name="l00023"></a>00023 public:
-<a name="l00024"></a>00024     explicit InsertNewActivity(QWidget *parent, PomotuxDatabase&amp; database);
+<a name="l00024"></a>00024     explicit InsertNewActivity(QWidget *parent, <a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a>&amp; database);
 <a name="l00025"></a>00025     virtual ~InsertNewActivity();
 <a name="l00026"></a>00026     QString text;           <span class="comment">// put it prive; Coding Standards, should be mText but you should use a better name,like mDescription</span>
 <a name="l00027"></a>00027     <span class="keywordtype">float</span> dayToDeadline;    <span class="comment">// put it private, CS</span>
 <a name="l00028"></a>00028     <span class="keywordtype">float</span> controller;   <span class="comment">// put it private, CS</span>
-<a name="l00029"></a>00029     PomotuxDatabase *db;    <span class="comment">// put it private; CS: PomotuxDatabase* mpDatabase</span>
+<a name="l00029"></a>00029     <a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a> *db;    <span class="comment">// put it private; CS: PomotuxDatabase* mpDatabase</span>
 <a name="l00030"></a>00030 
 <a name="l00031"></a>00031 protected:
 <a name="l00032"></a>00032     virtual <span class="keywordtype">void</span> changeEvent(QEvent *e);
@@ -61,7 +62,7 @@
 <a name="l00041"></a>00041 
 <a name="l00042"></a>00042 <span class="preprocessor">#endif // INSERTNEWACTIVITY_H</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sun May 3 14:36:40 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Sun May 3 16:31:31 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>
