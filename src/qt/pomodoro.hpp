@@ -1,10 +1,14 @@
 /**
- *  A class for Pomodoro objects. Contains all the operations regarding a Pomodoro,
+ *  A class for Pomodoro objects.
+ *   Contains all the operations regarding a Pomodoro,
  *  as well as its graphical representation (a QLCDNumber).
  *  It is studied for re-use, as it is completely isolated from the rest of the project.
  *  It emits signals either when the pomodoro is finished or broken.
  *
+ *  @see http://doc.trolltech.com/4.5/qtimer.html
+ *
  *  An example on how to use it:
+ * <pre>
  *   #include <QApplication>
  *   #include "pomodoro.hpp"
  *
@@ -16,6 +20,7 @@
  *      p.Start();          // start the pomodoro
  *      return app.exec();
  *   }
+ * </pre>
  *
  */
 

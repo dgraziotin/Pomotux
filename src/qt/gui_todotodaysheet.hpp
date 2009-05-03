@@ -1,22 +1,3 @@
-/**
- *  A class for Todo Today Sheet graphical user interface object. Contains all the operations regarding the interaction
- *  among the final user and Todo Today Sheet object in the database.
- *  It is been implemented on the purpose but it grants a lot of elasticity for re-use thanks to QT libraries contribution.
- *  It exchange signals within itself in order to maintain an high average of consistency with the database; internal signals
- *  can also be intercepted from the outside the class in case become necessary a synchronization(i.e. multiple windows inquiring the database)
- *  This class depends on several libraries and external files such as the QtGui/QMainWindow  and litesql libraries(i.e. the framework
- *  libraries used to access the sqlite database)
- *
- *  @include <QtGui/QMainWindow>
- *  @include <litesql.hpp>
- *  @include "../pomotuxdatabase.hpp"
- *  @include "pomodoro.hpp"
- *  @include "pomotuxexception.hpp"
- *
- *  @see http://apps.sourceforge.net/trac/litesql/
- *  @see http://doc.trolltech.com/4.5/index.html
- */
-
 #ifndef TODOTODAYSHEETGUI_H
 #define TODOTODAYSHEETGUI_H
 
@@ -35,17 +16,16 @@ class TodoTodaySheetGuiClass;
 }
 
 /**
- *  A class for Todo Today Sheet graphical user interface object. Contains all the operations regarding the interaction
+ *  A class for Todo Today Sheet graphical user interface object.
+ *  Contains all the operations regarding the interaction
  *  among the final user and Todo Today Sheet object in the database.
- *  It has been implemented on the purpose but it grants a lot of elasticity for re-use thanks to QT libraries contribution.
+ *  It is been implemented on the purpose but it grants a lot of elasticity for re-use thanks to QT libraries contribution.
  *  It exchange signals within itself in order to maintain an high average of consistency with the database; internal signals
- *  can also be intercepted from the outside the class in case it becomes necessary synchronization(i.e. multiple windows inquiring the database)
+ *  can also be intercepted from the outside the class in case become necessary a synchronization(i.e. multiple windows inquiring the database)
  *  This class depends on several libraries and external files such as the QtGui/QMainWindow  and litesql libraries(i.e. the framework
  *  libraries used to access the sqlite database)
  *
  *
- *  @see <a href="http://apps.sourceforge.net/trac/litesql/">litesql</a>
- *  @see <a href="http://doc.trolltech.com/4.5/index.html">trolltech documentation qt 4.5</a
  */
 class TodoTodaySheetGui : public QMainWindow {
     Q_OBJECT
@@ -107,6 +87,7 @@ private slots:
        *
        * @see ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
        */
+    void on_tableWidget_activated(QModelIndex index);
     void on_MoveActivityButton_clicked();
 
     /**
@@ -142,7 +123,7 @@ private slots:
        */
     void PomodoroBroken();
 
-        /**
+       /**
        * Handles the signal of DatabaseUpdated() received whenever the database is modified and refreshes the window
        * @see DatabaseUpdated()
        */
