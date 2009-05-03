@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2009-05-03T18:19:11" xmlns:UML="http://schema.omg.org/spec/UML/1.3" >
+<XMI verified="false" xmi.version="1.2" timestamp="2009-05-03T18:44:28" xmlns:UML="http://schema.omg.org/spec/UML/1.3" >
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://uml.sf.net</XMI.exporter>
@@ -115,7 +115,7 @@
        </UML:Association.connection>
       </UML:Association>
       <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="z7sVvjHk5Psg" name="User" />
-      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="kda5Lp4ThZOO" name="GuiActivityInventorySheet" />
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="kda5Lp4ThZOO" name="GuiTodoTodaySheet" />
       <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="pYRmrTUS1Zoq" name="Pomodoro" />
       <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="vV8fLJVwzfKd" name="ActivityInAIS" />
       <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="ocwdfrVZ9xz3" name="ActivityInAIS" >
@@ -149,16 +149,16 @@
            <startpoint startx="177" starty="294" />
            <endpoint endx="177" endy="361" />
           </linepath>
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="177" showstereotype="1" y="327" text="Has" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="703" width="33" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="ccl9xIOVLvga" height="20" />
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="177" showstereotype="1" y="327" text="Has" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="703" width="33" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="EtL2rRwncu0E" height="20" />
          </assocwidget>
          <assocwidget indexa="1" indexb="1" widgetaid="vc10uT6dB4Kx" linecolor="none" totalcounta="3" xmi.id="ocwdfrVZ9xz3" widgetbid="k25U0O8y5H7e" totalcountb="2" type="503" linewidth="none" >
           <linepath>
            <startpoint startx="378" starty="220" />
            <endpoint endx="669" endy="220" />
           </linepath>
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="523" showstereotype="1" y="220" text="ActivityInAIS" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="703" width="91" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="u60473ChvaHJ" height="20" />
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="389" showstereotype="1" y="196" text="0..*" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="701" width="31" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="lud8AhfmIPvF" height="20" />
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="651" showstereotype="1" y="198" text="1" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="702" width="16" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="hHi0BMY5SZ8X" height="20" />
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="523" showstereotype="1" y="220" text="ActivityInAIS" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="703" width="91" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="toQJMXH7Fjac" height="20" />
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="389" showstereotype="1" y="196" text="0..*" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="701" width="31" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="DPSDAK1OENO3" height="20" />
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="651" showstereotype="1" y="198" text="1" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="702" width="16" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="oLpODpa7dyQx" height="20" />
          </assocwidget>
          <assocwidget indexa="2" indexb="1" widgetaid="vc10uT6dB4Kx" linecolor="none" totalcounta="3" xmi.id="nzFne0uxR6Fk" widgetbid="1zdGBGtCoDU1" totalcountb="2" type="503" linewidth="none" >
           <linepath>
@@ -166,16 +166,16 @@
            <endpoint endx="676" endy="378" />
            <point x="676" y="289" />
           </linepath>
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="518" showstereotype="1" y="293" text="ActivityInTTS" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="703" width="94" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="cICXsSobKRjU" height="20" />
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="380" showstereotype="1" y="267" text="0..*" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="701" width="31" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="7NGPm9cTPIRa" height="20" />
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="655" showstereotype="1" y="356" text="1" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="702" width="16" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="fzd5Ylb83ldt" height="20" />
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="518" showstereotype="1" y="293" text="ActivityInTTS" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="703" width="94" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="Wf4lOeMb2opA" height="20" />
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="380" showstereotype="1" y="267" text="0..*" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="701" width="31" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="8oWK9vOvEDKR" height="20" />
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" usesdiagramusefillcolor="1" x="655" showstereotype="1" y="356" text="1" font="Sans Serif,10,-1,5,50,0,0,0,0,0" pretext="" role="702" width="16" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="2sYdrwYNbd6x" height="20" />
          </assocwidget>
         </associations>
        </diagram>
        <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" showpubliconly="1" showpackage="1" showstereotype="1" name="Activity Facing" font="Sans Serif,10,-1,5,50,0,0,0,0,0" canvasheight="1025" canvaswidth="1057" localid="OHidGc4rkHIz" snapcsgrid="0" showgrid="0" showops="1" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="vxq8fV7xDLmt" documentation="" showscope="1" snapgrid="0" showatts="1" type="3" >
         <widgets>
          <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" usesdiagramusefillcolor="1" instancename="" x="82" decon="0" showstereotype="1" y="48" font="Sans Serif,10,-1,5,50,0,1,0,0,0" localid="lqgx74zwhaxL" width="52" isinstance="0" multipleinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="z7sVvjHk5Psg" height="26" drawasactor="0" />
-         <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" usesdiagramusefillcolor="1" instancename="" x="191" decon="0" showstereotype="1" y="48" font="Sans Serif,10,-1,5,50,0,1,0,0,0" localid="q7TDz7ynmttq" width="193" isinstance="0" multipleinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="kda5Lp4ThZOO" height="26" drawasactor="0" />
+         <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" usesdiagramusefillcolor="1" instancename="" x="191" decon="0" showstereotype="1" y="48" font="Sans Serif,10,-1,5,50,0,1,0,0,0" localid="q7TDz7ynmttq" width="149" isinstance="0" multipleinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="kda5Lp4ThZOO" height="26" drawasactor="0" />
          <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" usesdiagramusefillcolor="1" instancename="" x="830" decon="0" showstereotype="1" y="48" font="Sans Serif,10,-1,5,50,0,1,0,0,0" localid="dFYAduykOBiT" width="88" isinstance="0" multipleinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="pYRmrTUS1Zoq" height="26" drawasactor="0" />
          <combinedFragmentwidget width="369" showstereotype="1" x="684" y="302" usesdiagramusefillcolor="1" usesdiagramfillcolor="1" isinstance="0" fillcolor="none" height="453" CombinedFragmenttype="3" linecolor="#00ff00" xmi.id="TWa89KFzTxhZ" combinedFragmentname="-mpTimer cycles" usefillcolor="1" documentation="" linewidth="none" font="Sans Serif,10,-1,5,50,0,0,0,0,0" />
          <notewidget width="314" showstereotype="1" x="714" noteType="0" y="389" usesdiagramusefillcolor="1" usesdiagramfillcolor="0" isinstance="0" fillcolor="#fffdfd" height="130" linecolor="#000000" xmi.id="9xPdxDdrU0rQ" usefillcolor="1" linewidth="none" font="Sans Serif,10,-1,5,50,0,0,0,0,0" text="function Run():&#xa;   if (minutes = 0 and seconds = 0)&#xa;        launch signal PomodoroFinished&#xa;        stop timerGui&#xa;   else&#xa;        decrement a second from timerGui&#xa;   refresh timerGui" />
@@ -263,7 +263,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello" >
-  <docsettings viewid="vxq8fV7xDLmt" uniqueid="OCNwhyC4IwZf" documentation="" />
+  <docsettings viewid="vxq8fV7xDLmt" uniqueid="FxSaZ3gWI73Y" documentation="" />
   <listview>
    <listitem open="1" type="800" label="Views" >
     <listitem open="1" type="801" id="Logical View" >
