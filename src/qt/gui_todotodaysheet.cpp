@@ -1,7 +1,3 @@
-/*
-    see hpp file for change needed to attribute and method names.
-    Watch the Coding Standards everywhere also here!
-*/
 
 #include "gui_todotodaysheet.hpp"
 #include "ui_gui_todotodaysheet.h"
@@ -117,8 +113,6 @@ void TodoTodaySheetGui::PomodoroFinished()
         msgBox.setText(e.getMessage());
         msgBox.exec();
     }
-
-
 }
 
 void TodoTodaySheetGui::PomodoroBroken()
