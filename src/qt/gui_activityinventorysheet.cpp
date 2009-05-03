@@ -1,8 +1,3 @@
-/*
-    see hpp file for change needed to attribute and method names.
-    Watch the Coding Standards everywhere also here!
-*/
-
 #include "gui_activityinventorysheet.hpp"
 #include "ui_gui_activityinventorysheet.h"
 #include <string>
@@ -15,19 +10,22 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     mpDatabase = &database;
     mNow = time(NULL);
     ui->setupUi(this);
+
     try {
-        /* MEMORY LEAK: rAis is not destroyed anywhere */
         mpAis = new ActivityInventorySheet(select<ActivityInventorySheet>(*(mpDatabase), ActivityInventorySheet::Id == 1).one());
     } catch (NotFound e) {
         mpAis = new ActivityInventorySheet(*(mpDatabase));
         mpAis->update();
     }
+
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     emit DatabaseUpdated();
 }
 
 GuiActivityInventorySheet::~GuiActivityInventorySheet()
 {
+    this->mpTts->~Persistent();
+    this->mpAis->~Persistent();
     delete ui;
 }
 
@@ -38,11 +36,13 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
         InsertNewActivity *dialog = new InsertNewActivity(0, *(mpDatabase));
         dialog->show();
         dialog->exec();
+
+        /*Control if the user pressed ok or cancel*/
         float mainController = dialog->getController();
-        if (mainController > 0) {
-            /*casting for the description*/
-            QString *description = &dialog->getDescription();
-            string sDescription = description->toStdString();
+        if (mainController > 0)
+        {
+            QString description = dialog->getDescription();
+            string sDescription = description.toStdString();
 
             float value = dialog->getDayToDeadline();
             time_t deadlineInt = mNow + value*(86400);
@@ -52,6 +52,7 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
             at.mInsertionDate = (int) mNow;
             at.mDeadline = (int)deadlineInt;
             at.update();
+
             ActivityInventorySheet &cAis = *(mpAis);
             cAis.InsertActivity(*(mpDatabase),at,cAis);
             mpDatabase->commit();
@@ -59,17 +60,17 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
     } catch (Except e) {
         cerr << e << endl;
     }
+
     emit DatabaseUpdated();
 }
 
 void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
 {
     QString idString = this->ui->ais->item(mRow, 0)->text();
-
     int id = idString.toInt();
+
     try {
         Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
-        /* MEMORY LEAK: rTts is not destroyed anywhere */
         mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
         ActivityInventorySheet &cAis = *(mpAis);
         TodoTodaySheet &cTts = *(mpTts);
@@ -85,6 +86,9 @@ void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
 void GuiActivityInventorySheet::on_ais_itemClicked(QTableWidgetItem* item)
 {
     mRow = item->row();
+    ui->DeleteActivityButton->setEnabled(true);
+    ui->ModifyActivityButton->setEnabled(true);
+    ui->InsertInTTSButton->setEnabled(true);
 }
 
 void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
@@ -92,15 +96,17 @@ void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
     ModifyAnActivity *dialog = new ModifyAnActivity(0, *(mpDatabase));
     dialog->show();
     dialog->exec();
+
     float mainController = dialog->getController();
-    if (mainController > 0){
-        QString *description = &dialog->getDescription();
+    if (mainController > 0)
+    {
+        QString description = dialog->getDescription();
         float value = dialog->getDayToDeadline();
         QString idString = this->ui->ais->item(mRow, 0)->text();
         bool ok;
         int id = idString.toInt(&ok, 16);
         Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
-        string newDescription = description->toStdString();
+        string newDescription = description.toStdString();
         at.Modify(*(mpDatabase), at, value, newDescription);
         emit DatabaseUpdated();
     }
@@ -112,17 +118,34 @@ void GuiActivityInventorySheet::on_InsertInTTSButton_clicked()
     bool ok;
     int id = idString.toInt(&ok, 16);
     Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
+
     try {
         mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
     } catch (NotFound e) {
         mpTts = new TodoTodaySheet(*(mpDatabase));
         mpTts->update();
     }
-    ActivityInventorySheet &cAis = *(mpAis);
-    TodoTodaySheet &cTts = *(mpTts);
-    cTts.ScheduleActivity(*(mpDatabase), at, cAis, cTts);
-    mpDatabase->commit();
-    emit DatabaseUpdated();
+
+    vector<Activity> currentTDTSActivities = ActivityInTTS::get<Activity>(*(mpDatabase),Expr(),
+            ActivityInTTS::TodoTodaySheet==mpTts->id).all();
+    int check = 0;
+    for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++)
+    {
+        if ((*i).id == id) check = 1;
+    }
+    if (check == 0 )
+    {
+        ActivityInventorySheet &cAis = *(mpAis);
+        TodoTodaySheet &cTts = *(mpTts);
+        cTts.ScheduleActivity(*(mpDatabase), at, cAis, cTts);
+        mpDatabase->commit();
+        emit DatabaseUpdated();
+    } else {
+        QMessageBox msgBox;
+        msgBox.setText("Activity already present in the TTS");
+        msgBox.exec();
+    }
+
 }
 
 void  GuiActivityInventorySheet::Cleaner()
