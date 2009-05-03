@@ -45,7 +45,7 @@
        </column>
        <column>
         <property name="text">
-         <string>position</string>
+         <string>nr.pomodoro</string>
         </property>
        </column>
       </widget>

@@ -22,6 +22,7 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
     this->mpDatabase = &database;
     this->mpDatabase->begin();
     this->mpCurrentActivity = new Activity(*(this->mpDatabase));
+    this->mConsecutivePomodoro=0;
     ui->setupUi(this);
     try {
         this->mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(this->mpDatabase), TodoTodaySheet::Id == 1).one());
@@ -55,7 +56,7 @@ void TodoTodaySheetGui::RefreshTable()
         QTableWidgetItem *currentActivity=new QTableWidgetItem[3];
         currentActivity[0].setText(QString((toString((*i).id)).c_str()));
         currentActivity[1].setText(QString((toString((*i).mDescription)).c_str()));
-        currentActivity[2].setText(QString((toString((*i).mOrder)).c_str()));
+        currentActivity[2].setText(QString((toString((*i).mNumPomodoro)).c_str()));
         currentActivity[0].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
         currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
         currentActivity[2].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
@@ -99,17 +100,25 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->mpCurrentActivity->mNumPomodoro= (this->mpCurrentActivity->mNumPomodoro +1);
         this->mpCurrentActivity->update();
         this->mpPomodoro->hide();
-
-
-       emit DatabaseUpdated();
-        QMessageBox msgBox;
-        msgBox.setText("Pomodoro Finished : Now You Should Make A Short Break");
-        msgBox.exec();
+        this->mConsecutivePomodoro=(this->mConsecutivePomodoro+1);
+        emit DatabaseUpdated();
+        if(this->mConsecutivePomodoro>=4)
+            {
+                this->mConsecutivePomodoro=0;
+                throw PomotuxException("You Should now take a break longer than usual");
+            }
+        throw PomotuxException("Now you Should take a short break");
     } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
+    }catch (PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        msgBox.exec();
     }
+
+
 }
 
 void TodoTodaySheetGui::PomodoroBroken()

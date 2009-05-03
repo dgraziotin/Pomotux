@@ -64,6 +64,12 @@ private:
        */
     TodoTodaySheet *mpTts;
 
+    /**
+       * An integer to store the number of consecutive pomodoro taken by the user in order to inform him when to take a longer break
+       */
+    int mConsecutivePomodoro;
+
+
     Ui::TodoTodaySheetGuiClass *ui;
         /**
        * Cleans the ui::tableWidget whenever the database is updated
