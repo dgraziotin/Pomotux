@@ -87,7 +87,6 @@ private slots:
        *
        * @see ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
        */
-    void on_tableWidget_activated(QModelIndex index);
     void on_MoveActivityButton_clicked();
 
     /**
