@@ -53,35 +53,38 @@
 <a name="l00061"></a>00061 
 <a name="l00065"></a>00065     <a class="code" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> *mpTts;
 <a name="l00066"></a>00066 
-<a name="l00067"></a>00067     Ui::TodoTodaySheetGuiClass *ui;
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> Cleaner();
+<a name="l00070"></a>00070     <span class="keywordtype">int</span> mConsecutivePomodoro;
+<a name="l00071"></a>00071 
 <a name="l00072"></a>00072 
-<a name="l00081"></a>00081     <span class="keywordtype">void</span> ChangeActivityPriority(<span class="keywordtype">int</span> magnitude,<span class="keywordtype">int</span> direction,<a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a>&amp; activityToMove);
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083 <span class="keyword">private</span> slots:
-<a name="l00090"></a>00090     <span class="keywordtype">void</span> on_MoveActivityButton_clicked();
-<a name="l00091"></a>00091 
-<a name="l00095"></a>00095     <span class="keywordtype">void</span> on_StopActivityButton_clicked();
-<a name="l00096"></a>00096 
-<a name="l00100"></a>00100     <span class="keywordtype">void</span> on_PostponeActivityButton_clicked();
-<a name="l00101"></a>00101 
-<a name="l00105"></a>00105     <span class="keywordtype">void</span> on_StartActivityButton_clicked();
-<a name="l00106"></a>00106 
-<a name="l00110"></a>00110     <span class="keywordtype">void</span> on_FinishActivityButton_clicked();
-<a name="l00111"></a>00111 
-<a name="l00117"></a>00117     <span class="keywordtype">void</span> PomodoroFinished();
-<a name="l00118"></a>00118 
-<a name="l00123"></a>00123     <span class="keywordtype">void</span> PomodoroBroken();
+<a name="l00073"></a>00073     Ui::TodoTodaySheetGuiClass *ui;
+<a name="l00077"></a>00077     <span class="keywordtype">void</span> Cleaner();
+<a name="l00078"></a>00078 
+<a name="l00087"></a>00087     <span class="keywordtype">void</span> ChangeActivityPriority(<span class="keywordtype">int</span> magnitude,<span class="keywordtype">int</span> direction,<a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a>&amp; activityToMove);
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089 <span class="keyword">private</span> slots:
+<a name="l00096"></a>00096     <span class="keywordtype">void</span> on_MoveActivityButton_clicked();
+<a name="l00097"></a>00097 
+<a name="l00101"></a>00101     <span class="keywordtype">void</span> on_StopActivityButton_clicked();
+<a name="l00102"></a>00102 
+<a name="l00106"></a>00106     <span class="keywordtype">void</span> on_PostponeActivityButton_clicked();
+<a name="l00107"></a>00107 
+<a name="l00111"></a>00111     <span class="keywordtype">void</span> on_StartActivityButton_clicked();
+<a name="l00112"></a>00112 
+<a name="l00116"></a>00116     <span class="keywordtype">void</span> on_FinishActivityButton_clicked();
+<a name="l00117"></a>00117 
+<a name="l00123"></a>00123     <span class="keywordtype">void</span> PomodoroFinished();
 <a name="l00124"></a>00124 
-<a name="l00129"></a>00129     <span class="keywordtype">void</span> RefreshTable();
+<a name="l00129"></a>00129     <span class="keywordtype">void</span> PomodoroBroken();
 <a name="l00130"></a>00130 
-<a name="l00131"></a>00131 signals:
-<a name="l00135"></a>00135     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#20051a83651c164dea4d9bc0d0ab21c5">DatabaseUpdated</a>();
-<a name="l00136"></a>00136 };
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138 <span class="preprocessor">#endif // TODOTODAYSHEETGUI_H</span>
+<a name="l00135"></a>00135     <span class="keywordtype">void</span> RefreshTable();
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137 signals:
+<a name="l00141"></a>00141     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#20051a83651c164dea4d9bc0d0ab21c5">DatabaseUpdated</a>();
+<a name="l00142"></a>00142 };
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144 <span class="preprocessor">#endif // TODOTODAYSHEETGUI_H</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sun May 3 16:31:31 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Sun May 3 18:22:06 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>

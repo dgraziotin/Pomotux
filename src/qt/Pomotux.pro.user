@@ -13,6 +13,14 @@
   <value type="QString" >Pomotux</value>
  </data>
  <data>
+  <variable>RunConfiguration0-UseDyldImageSuffix</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseTerminal</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
   <variable>RunConfiguration0-UserSetName</variable>
   <value type="bool" >false</value>
  </data>
@@ -50,114 +58,17 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Zgpvtm3PqZ,guid=cfc71884e83f970ebfb8b47149fd5ecf</value>
-    <value type="QString" >DESKTOP_SESSION=gnome</value>
-    <value type="QString" >DESKTOP_STARTUP_ID=</value>
-    <value type="QString" >DISPLAY=:0.0</value>
-    <value type="QString" >GDMSESSION=gnome</value>
-    <value type="QString" >GDM_LANG=en_US.UTF-8</value>
-    <value type="QString" >GDM_XSERVER_LOCATION=local</value>
-    <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString" >GNOME_KEYRING_PID=4071</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-T0LuJM/socket</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/ghost/.gtkrc-1.2-gnome2</value>
-    <value type="QString" >HOME=/home/ghost</value>
-    <value type="QString" >LANG=en_US.UTF-8</value>
-    <value type="QString" >LOGNAME=ghost</value>
-    <value type="QString" >OLDPWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src</value>
-    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-ghost</value>
-    <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games</value>
-    <value type="QString" >PWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src/qt</value>
-    <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/ghost-laptop:/tmp/.ICE-unix/4086</value>
-    <value type="QString" >SHELL=/bin/bash</value>
-    <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=4221</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-T0LuJM/socket.ssh</value>
-    <value type="QString" >TERM=xterm</value>
-    <value type="QString" >USER=ghost</value>
-    <value type="QString" >USERNAME=ghost</value>
-    <value type="QString" >WINDOWPATH=7</value>
-    <value type="QString" >XAUTHORITY=/home/ghost/.Xauthority</value>
-    <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=26488061d7a163866298020046345cbd-1241341644.783759-246042204</value>
-    <value type="QString" >_=/usr/bin/qtcreator</value>
-   </valuelist>
-   <valuelist key="abstractProcess.arguments" type="QVariantList" >
-    <value type="QString" >/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src/qt/Pomotux.pro</value>
-    <value type="QString" >-spec</value>
-    <value type="QString" >/usr/share/qt4/mkspecs/linux-g++</value>
-    <value type="QString" >-r</value>
-    <value type="QString" >CONFIG+=debug</value>
-   </valuelist>
-   <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
-   <value key="abstractProcess.enabled" type="bool" >false</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src/qt</value>
-   <value key="buildConfiguration" type="int" >2</value>
-  </valuemap>
- </data>
- <data>
-  <variable>buildconfiguration-Debug-buildstep1</variable>
-  <valuemap type="QVariantMap" >
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
-   <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Zgpvtm3PqZ,guid=cfc71884e83f970ebfb8b47149fd5ecf</value>
-    <value type="QString" >DESKTOP_SESSION=gnome</value>
-    <value type="QString" >DESKTOP_STARTUP_ID=</value>
-    <value type="QString" >DISPLAY=:0.0</value>
-    <value type="QString" >GDMSESSION=gnome</value>
-    <value type="QString" >GDM_LANG=en_US.UTF-8</value>
-    <value type="QString" >GDM_XSERVER_LOCATION=local</value>
-    <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString" >GNOME_KEYRING_PID=4071</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-T0LuJM/socket</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/ghost/.gtkrc-1.2-gnome2</value>
-    <value type="QString" >HOME=/home/ghost</value>
-    <value type="QString" >LANG=en_US.UTF-8</value>
-    <value type="QString" >LOGNAME=ghost</value>
-    <value type="QString" >OLDPWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src</value>
-    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-ghost</value>
-    <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games</value>
-    <value type="QString" >PWD=/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src/qt</value>
-    <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/ghost-laptop:/tmp/.ICE-unix/4086</value>
-    <value type="QString" >SHELL=/bin/bash</value>
-    <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=4221</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-T0LuJM/socket.ssh</value>
-    <value type="QString" >TERM=xterm</value>
-    <value type="QString" >USER=ghost</value>
-    <value type="QString" >USERNAME=ghost</value>
-    <value type="QString" >WINDOWPATH=7</value>
-    <value type="QString" >XAUTHORITY=/home/ghost/.Xauthority</value>
-    <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=26488061d7a163866298020046345cbd-1241341644.783759-246042204</value>
-    <value type="QString" >_=/usr/bin/qtcreator</value>
-   </valuelist>
-   <valuelist key="abstractProcess.arguments" type="QVariantList" >
-    <value type="QString" >-w</value>
-   </valuelist>
-   <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
-   <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src/qt</value>
-  </valuemap>
- </data>
- <data>
-  <variable>buildconfiguration-Debug-cleanstep0</variable>
-  <valuemap type="QVariantMap" >
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
-   <valuelist key="abstractProcess.Environment" type="QVariantList" >
     <value type="QString" >ALSA_PLUGINS_DIR=/usr/lib/alsa-lib</value>
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-k65NaEVbEy,guid=547d8e8179bf9d69944f834749fd807c</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-MCHrDy6TIT,guid=48f6d8e2abf7c62cbec450a349fdad23</value>
     <value type="QString" >DESKTOP_SESSION=kde</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
     <value type="QString" >GDMSESSION=kde</value>
     <value type="QString" >GDM_LANG=it_IT.utf8</value>
     <value type="QString" >GDM_XSERVER_LOCATION=local</value>
-    <value type="QString" >GNOME_KEYRING_PID=6749</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-rGmWki/socket</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-3op1pQ/S.gpg-agent:6843:1</value>
+    <value type="QString" >GNOME_KEYRING_PID=13995</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-yDd23d/socket</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-U3VB19/S.gpg-agent:14089:1</value>
     <value type="QString" >GS_LIB=/home/bodom_lx/.fonts</value>
     <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bodom_lx/.gtkrc-2.0:/home/bodom_lx/.gtkrc-2.0-kde4:/home/bodom_lx/.kde4/share/config/gtkrc-2.0</value>
     <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/bodom_lx/.gtkrc::/home/bodom_lx/.kde4/share/config/gtkrc</value>
@@ -175,7 +86,6 @@
     <value type="QString" >KDE_SESSION_UID=1000</value>
     <value type="QString" >KDE_SESSION_VERSION=4</value>
     <value type="QString" >LANG=it_IT.utf8</value>
-    <value type="QString" >LANGUAGE=</value>
     <value type="QString" >LC_COLLATE=C</value>
     <value type="QString" >LESS=-R</value>
     <value type="QString" >LOGNAME=bodom_lx</value>
@@ -192,14 +102,14 @@
     <value type="QString" >QT_PLUGIN_PATH=/home/bodom_lx/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
     <value type="QString" >QT_XFT=true</value>
     <value type="QString" >SAL_GTK_USE_PIXMAPPAINT=1</value>
-    <value type="QString" >SESSION_MANAGER=local/namaah:@/tmp/.ICE-unix/6898,unix/namaah:/tmp/.ICE-unix/6898</value>
+    <value type="QString" >SESSION_MANAGER=local/namaah:@/tmp/.ICE-unix/14144,unix/namaah:/tmp/.ICE-unix/14144</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=6846</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-zeMdwh6845/agent.6845</value>
+    <value type="QString" >SSH_AGENT_PID=14092</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-gFfNc14091/agent.14091</value>
     <value type="QString" >USER=bodom_lx</value>
     <value type="QString" >USERNAME=bodom_lx</value>
-    <value type="QString" >WINDOWPATH=7</value>
+    <value type="QString" >WINDOWPATH=7:7</value>
     <value type="QString" >XAUTHORITY=/home/bodom_lx/.Xauthority</value>
     <value type="QString" >XCURSOR_THEME=Oxygen_Black</value>
     <value type="QString" >XDG_CACHE_HOME=/home/bodom_lx/.cache</value>
@@ -207,7 +117,162 @@
     <value type="QString" >XDG_CONFIG_HOME=/home/bodom_lx/.config</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share:/usr/local/share:/opt/kde/share:/usr/share/gdm/:/opt/kde/share</value>
     <value type="QString" >XDG_DATA_HOME=/home/bodom_lx/.local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=1a50cb8a8b34cd2cdf1a7ff149e31a9b-1241350267.214583-1650340663</value>
+    <value type="QString" >XDG_SESSION_COOKIE=1a50cb8a8b34cd2cdf1a7ff149e31a9b-1241361698.147123-1468588245</value>
+    <value type="QString" >_=/usr/bin/kdeinit4</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >/home/bodom_lx/Projects/Pomotux/src/qt/Pomotux.pro</value>
+    <value type="QString" >-spec</value>
+    <value type="QString" >/usr/share/qt/mkspecs/linux-g++</value>
+    <value type="QString" >-r</value>
+    <value type="QString" >CONFIG+=debug</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
+   <value key="abstractProcess.enabled" type="bool" >false</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/bodom_lx/Projects/Pomotux/src/qt</value>
+   <value key="buildConfiguration" type="int" >2</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-buildstep1</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >ALSA_PLUGINS_DIR=/usr/lib/alsa-lib</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-MCHrDy6TIT,guid=48f6d8e2abf7c62cbec450a349fdad23</value>
+    <value type="QString" >DESKTOP_SESSION=kde</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=:0.0</value>
+    <value type="QString" >GDMSESSION=kde</value>
+    <value type="QString" >GDM_LANG=it_IT.utf8</value>
+    <value type="QString" >GDM_XSERVER_LOCATION=local</value>
+    <value type="QString" >GNOME_KEYRING_PID=13995</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-yDd23d/socket</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-U3VB19/S.gpg-agent:14089:1</value>
+    <value type="QString" >GS_LIB=/home/bodom_lx/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bodom_lx/.gtkrc-2.0:/home/bodom_lx/.gtkrc-2.0-kde4:/home/bodom_lx/.kde4/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/bodom_lx/.gtkrc::/home/bodom_lx/.kde4/share/config/gtkrc</value>
+    <value type="QString" >G_BROKEN_FILENAMES=1</value>
+    <value type="QString" >HISTCONTROL=erasedups</value>
+    <value type="QString" >HISTSIZE=1000</value>
+    <value type="QString" >HOME=/home/bodom_lx</value>
+    <value type="QString" >INPUTRC=/etc/inputrc</value>
+    <value type="QString" >INTEL_BATCH=1</value>
+    <value type="QString" >J2SDKDIR=/opt/java</value>
+    <value type="QString" >JAVA_HOME=/opt/java</value>
+    <value type="QString" >KDEDIRS=/usr:/opt/kde</value>
+    <value type="QString" >KDE_FULL_SESSION=true</value>
+    <value type="QString" >KDE_MULTIHEAD=false</value>
+    <value type="QString" >KDE_SESSION_UID=1000</value>
+    <value type="QString" >KDE_SESSION_VERSION=4</value>
+    <value type="QString" >LANG=it_IT.utf8</value>
+    <value type="QString" >LC_COLLATE=C</value>
+    <value type="QString" >LESS=-R</value>
+    <value type="QString" >LOGNAME=bodom_lx</value>
+    <value type="QString" >MALLOC_CHECK_=2</value>
+    <value type="QString" >MOZ_DISABLE_PANGO=1</value>
+    <value type="QString" >MOZ_PLUGIN_PATH=/usr/lib/mozilla/plugins:/opt/mozilla/lib/plugins</value>
+    <value type="QString" >OOO_FORCE_DESKTOP=gnome</value>
+    <value type="QString" >PATH=/usr/bin:/bin:/usr/bin:/sbin:/usr/sbin:/opt/java/bin:/opt/java/jre/bin:/opt/kde/bin:/usr/bin/perlbin/site:/usr/bin/perlbin/vendor:/usr/bin/perlbin/core:/opt/qt/bin</value>
+    <value type="QString" >PKG_CONFIG_PATH=/usr/lib/pkgconfig:/opt/kde/lib/pkgconfig:/opt/qt/lib/pkgconfig</value>
+    <value type="QString" >PS3=> </value>
+    <value type="QString" >PS4=+ </value>
+    <value type="QString" >PWD=/home/bodom_lx</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >QT_PLUGIN_PATH=/home/bodom_lx/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString" >QT_XFT=true</value>
+    <value type="QString" >SAL_GTK_USE_PIXMAPPAINT=1</value>
+    <value type="QString" >SESSION_MANAGER=local/namaah:@/tmp/.ICE-unix/14144,unix/namaah:/tmp/.ICE-unix/14144</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SHLVL=1</value>
+    <value type="QString" >SSH_AGENT_PID=14092</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-gFfNc14091/agent.14091</value>
+    <value type="QString" >USER=bodom_lx</value>
+    <value type="QString" >USERNAME=bodom_lx</value>
+    <value type="QString" >WINDOWPATH=7:7</value>
+    <value type="QString" >XAUTHORITY=/home/bodom_lx/.Xauthority</value>
+    <value type="QString" >XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString" >XDG_CACHE_HOME=/home/bodom_lx/.cache</value>
+    <value type="QString" >XDG_CONFIG_DIRS=/etc/xdg:/opt/kde/etc/xdg</value>
+    <value type="QString" >XDG_CONFIG_HOME=/home/bodom_lx/.config</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share:/usr/local/share:/opt/kde/share:/usr/share/gdm/:/opt/kde/share</value>
+    <value type="QString" >XDG_DATA_HOME=/home/bodom_lx/.local/share</value>
+    <value type="QString" >XDG_SESSION_COOKIE=1a50cb8a8b34cd2cdf1a7ff149e31a9b-1241361698.147123-1468588245</value>
+    <value type="QString" >_=/usr/bin/kdeinit4</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool" >true</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/bodom_lx/Projects/Pomotux/src/qt</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-cleanstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >ALSA_PLUGINS_DIR=/usr/lib/alsa-lib</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-MCHrDy6TIT,guid=48f6d8e2abf7c62cbec450a349fdad23</value>
+    <value type="QString" >DESKTOP_SESSION=kde</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=:0.0</value>
+    <value type="QString" >GDMSESSION=kde</value>
+    <value type="QString" >GDM_LANG=it_IT.utf8</value>
+    <value type="QString" >GDM_XSERVER_LOCATION=local</value>
+    <value type="QString" >GNOME_KEYRING_PID=13995</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-yDd23d/socket</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-U3VB19/S.gpg-agent:14089:1</value>
+    <value type="QString" >GS_LIB=/home/bodom_lx/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/bodom_lx/.gtkrc-2.0:/home/bodom_lx/.gtkrc-2.0-kde4:/home/bodom_lx/.kde4/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/bodom_lx/.gtkrc::/home/bodom_lx/.kde4/share/config/gtkrc</value>
+    <value type="QString" >G_BROKEN_FILENAMES=1</value>
+    <value type="QString" >HISTCONTROL=erasedups</value>
+    <value type="QString" >HISTSIZE=1000</value>
+    <value type="QString" >HOME=/home/bodom_lx</value>
+    <value type="QString" >INPUTRC=/etc/inputrc</value>
+    <value type="QString" >INTEL_BATCH=1</value>
+    <value type="QString" >J2SDKDIR=/opt/java</value>
+    <value type="QString" >JAVA_HOME=/opt/java</value>
+    <value type="QString" >KDEDIRS=/usr:/opt/kde</value>
+    <value type="QString" >KDE_FULL_SESSION=true</value>
+    <value type="QString" >KDE_MULTIHEAD=false</value>
+    <value type="QString" >KDE_SESSION_UID=1000</value>
+    <value type="QString" >KDE_SESSION_VERSION=4</value>
+    <value type="QString" >LANG=it_IT.utf8</value>
+    <value type="QString" >LC_COLLATE=C</value>
+    <value type="QString" >LESS=-R</value>
+    <value type="QString" >LOGNAME=bodom_lx</value>
+    <value type="QString" >MALLOC_CHECK_=2</value>
+    <value type="QString" >MOZ_DISABLE_PANGO=1</value>
+    <value type="QString" >MOZ_PLUGIN_PATH=/usr/lib/mozilla/plugins:/opt/mozilla/lib/plugins</value>
+    <value type="QString" >OOO_FORCE_DESKTOP=gnome</value>
+    <value type="QString" >PATH=/usr/bin:/bin:/usr/bin:/sbin:/usr/sbin:/opt/java/bin:/opt/java/jre/bin:/opt/kde/bin:/usr/bin/perlbin/site:/usr/bin/perlbin/vendor:/usr/bin/perlbin/core:/opt/qt/bin</value>
+    <value type="QString" >PKG_CONFIG_PATH=/usr/lib/pkgconfig:/opt/kde/lib/pkgconfig:/opt/qt/lib/pkgconfig</value>
+    <value type="QString" >PS3=> </value>
+    <value type="QString" >PS4=+ </value>
+    <value type="QString" >PWD=/home/bodom_lx</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >QT_PLUGIN_PATH=/home/bodom_lx/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString" >QT_XFT=true</value>
+    <value type="QString" >SAL_GTK_USE_PIXMAPPAINT=1</value>
+    <value type="QString" >SESSION_MANAGER=local/namaah:@/tmp/.ICE-unix/14144,unix/namaah:/tmp/.ICE-unix/14144</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SHLVL=1</value>
+    <value type="QString" >SSH_AGENT_PID=14092</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-gFfNc14091/agent.14091</value>
+    <value type="QString" >USER=bodom_lx</value>
+    <value type="QString" >USERNAME=bodom_lx</value>
+    <value type="QString" >WINDOWPATH=7:7</value>
+    <value type="QString" >XAUTHORITY=/home/bodom_lx/.Xauthority</value>
+    <value type="QString" >XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString" >XDG_CACHE_HOME=/home/bodom_lx/.cache</value>
+    <value type="QString" >XDG_CONFIG_DIRS=/etc/xdg:/opt/kde/etc/xdg</value>
+    <value type="QString" >XDG_CONFIG_HOME=/home/bodom_lx/.config</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share:/usr/local/share:/opt/kde/share:/usr/share/gdm/:/opt/kde/share</value>
+    <value type="QString" >XDG_DATA_HOME=/home/bodom_lx/.local/share</value>
+    <value type="QString" >XDG_SESSION_COOKIE=1a50cb8a8b34cd2cdf1a7ff149e31a9b-1241361698.147123-1468588245</value>
     <value type="QString" >_=/usr/bin/kdeinit4</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
