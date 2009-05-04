@@ -36,55 +36,55 @@
 <a name="l00015"></a>00015 <span class="keyword">class </span>TodoTodaySheetGuiClass;
 <a name="l00016"></a>00016 }
 <a name="l00017"></a>00017 
-<a name="l00030"></a><a class="code" href="class_todo_today_sheet_gui.html">00030</a> <span class="keyword">class </span><a class="code" href="class_todo_today_sheet_gui.html">TodoTodaySheetGui</a> : <span class="keyword">public</span> QMainWindow {
-<a name="l00031"></a>00031     Q_OBJECT
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="keyword">public</span>:
-<a name="l00039"></a>00039     <a class="code" href="class_todo_today_sheet_gui.html#43698efeb9838f63e7ee71a9c780270a">TodoTodaySheetGui</a>(QWidget *parent,<a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a>&amp; database);
-<a name="l00040"></a>00040 
-<a name="l00044"></a>00044     <a class="code" href="class_todo_today_sheet_gui.html#b1cc722873b146a4cc7d542b5e23181c">~TodoTodaySheetGui</a>();
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 <span class="keyword">private</span>:
-<a name="l00050"></a>00050     <a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a> *mpDatabase;
-<a name="l00051"></a>00051 
-<a name="l00055"></a>00055     <a class="code" href="class_pomodoro.html">Pomodoro</a> *mpPomodoro;
-<a name="l00056"></a>00056 
-<a name="l00060"></a>00060     <a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a> *mpCurrentActivity;
-<a name="l00061"></a>00061 
-<a name="l00065"></a>00065     <a class="code" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> *mpTts;
-<a name="l00066"></a>00066 
-<a name="l00070"></a>00070     <span class="keywordtype">int</span> mConsecutivePomodoro;
-<a name="l00071"></a>00071 
+<a name="l00031"></a><a class="code" href="class_todo_today_sheet_gui.html">00031</a> <span class="keyword">class </span><a class="code" href="class_todo_today_sheet_gui.html">TodoTodaySheetGui</a> : <span class="keyword">public</span> QMainWindow {
+<a name="l00032"></a>00032     Q_OBJECT
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034 <span class="keyword">public</span>:
+<a name="l00040"></a>00040     <a class="code" href="class_todo_today_sheet_gui.html#43698efeb9838f63e7ee71a9c780270a">TodoTodaySheetGui</a>(QWidget *parent,<a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a>&amp; database);
+<a name="l00041"></a>00041 
+<a name="l00045"></a>00045     <a class="code" href="class_todo_today_sheet_gui.html#b1cc722873b146a4cc7d542b5e23181c">~TodoTodaySheetGui</a>();
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 <span class="keyword">private</span>:
+<a name="l00051"></a><a class="code" href="class_todo_today_sheet_gui.html#6003946ee3ca0a35fc1d0906f912971a">00051</a>     <a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a> *<a class="code" href="class_todo_today_sheet_gui.html#6003946ee3ca0a35fc1d0906f912971a">mpDatabase</a>;
+<a name="l00052"></a>00052 
+<a name="l00056"></a><a class="code" href="class_todo_today_sheet_gui.html#f8aeccd2ea1719c2f9ff26e0a743597c">00056</a>     <a class="code" href="class_pomodoro.html">Pomodoro</a> *<a class="code" href="class_todo_today_sheet_gui.html#f8aeccd2ea1719c2f9ff26e0a743597c">mpPomodoro</a>;
+<a name="l00057"></a>00057 
+<a name="l00061"></a><a class="code" href="class_todo_today_sheet_gui.html#afd0e1a84defd6c5f4c0b0ac839aeba3">00061</a>     <a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a> *<a class="code" href="class_todo_today_sheet_gui.html#afd0e1a84defd6c5f4c0b0ac839aeba3">mpCurrentActivity</a>;
+<a name="l00062"></a>00062 
+<a name="l00066"></a><a class="code" href="class_todo_today_sheet_gui.html#822a32a8e113008f880a380e42be3d02">00066</a>     <a class="code" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> *<a class="code" href="class_todo_today_sheet_gui.html#822a32a8e113008f880a380e42be3d02">mpTts</a>;
+<a name="l00067"></a>00067 
+<a name="l00071"></a><a class="code" href="class_todo_today_sheet_gui.html#1a534196496e2ae35168acd7fd670917">00071</a>     <span class="keywordtype">int</span> <a class="code" href="class_todo_today_sheet_gui.html#1a534196496e2ae35168acd7fd670917">mConsecutivePomodoro</a>;
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073     Ui::TodoTodaySheetGuiClass *ui;
-<a name="l00077"></a>00077     <span class="keywordtype">void</span> Cleaner();
-<a name="l00078"></a>00078 
-<a name="l00087"></a>00087     <span class="keywordtype">void</span> ChangeActivityPriority(<span class="keywordtype">int</span> magnitude,<span class="keywordtype">int</span> direction,<a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a>&amp; activityToMove);
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089 <span class="keyword">private</span> slots:
-<a name="l00096"></a>00096     <span class="keywordtype">void</span> on_MoveActivityButton_clicked();
-<a name="l00097"></a>00097 
-<a name="l00101"></a>00101     <span class="keywordtype">void</span> on_StopActivityButton_clicked();
-<a name="l00102"></a>00102 
-<a name="l00106"></a>00106     <span class="keywordtype">void</span> on_PostponeActivityButton_clicked();
-<a name="l00107"></a>00107 
-<a name="l00111"></a>00111     <span class="keywordtype">void</span> on_StartActivityButton_clicked();
-<a name="l00112"></a>00112 
-<a name="l00116"></a>00116     <span class="keywordtype">void</span> on_FinishActivityButton_clicked();
-<a name="l00117"></a>00117 
-<a name="l00123"></a>00123     <span class="keywordtype">void</span> PomodoroFinished();
-<a name="l00124"></a>00124 
-<a name="l00129"></a>00129     <span class="keywordtype">void</span> PomodoroBroken();
-<a name="l00130"></a>00130 
-<a name="l00135"></a>00135     <span class="keywordtype">void</span> RefreshTable();
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137 signals:
-<a name="l00141"></a>00141     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#20051a83651c164dea4d9bc0d0ab21c5">DatabaseUpdated</a>();
-<a name="l00142"></a>00142 };
-<a name="l00143"></a>00143 
-<a name="l00144"></a>00144 <span class="preprocessor">#endif // TODOTODAYSHEETGUI_H</span>
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074     Ui::TodoTodaySheetGuiClass *ui;
+<a name="l00078"></a>00078     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#c053d5e45aafe1578021318e54a51db4">Cleaner</a>();
+<a name="l00079"></a>00079 
+<a name="l00088"></a>00088     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#bf65bbe690962bca32a968563e59009d">ChangeActivityPriority</a>(<span class="keywordtype">int</span> magnitude,<span class="keywordtype">int</span> direction,<a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a>&amp; activityToMove);
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090 <span class="keyword">private</span> slots:
+<a name="l00097"></a>00097     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#5f38aaa1595755f1708539539573962a">on_MoveActivityButton_clicked</a>();
+<a name="l00098"></a>00098 
+<a name="l00102"></a>00102     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#40ec5f0141fdc739e98dae75d984526c">on_StopActivityButton_clicked</a>();
+<a name="l00103"></a>00103 
+<a name="l00107"></a>00107     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#dcda2cf60c2fa926d1106c6df5f71a82">on_PostponeActivityButton_clicked</a>();
+<a name="l00108"></a>00108 
+<a name="l00112"></a>00112     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#90f6f71402d17ac790c96e9281596c5f">on_StartActivityButton_clicked</a>();
+<a name="l00113"></a>00113 
+<a name="l00117"></a>00117     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#a7c495a5b8c1507324dd7aeceff708a7">on_FinishActivityButton_clicked</a>();
+<a name="l00118"></a>00118 
+<a name="l00124"></a>00124     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#05b30f013cf9df10810623c8e9fc9cf4">PomodoroFinished</a>();
+<a name="l00125"></a>00125 
+<a name="l00130"></a>00130     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#1ab912b070d312cf6bfa95b1de8560e3">PomodoroBroken</a>();
+<a name="l00131"></a>00131 
+<a name="l00136"></a>00136     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#07f1731ddca5ff28e4fece0fa7103dc1">RefreshTable</a>();
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138 signals:
+<a name="l00142"></a>00142     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#20051a83651c164dea4d9bc0d0ab21c5">DatabaseUpdated</a>();
+<a name="l00143"></a>00143 };
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145 <span class="preprocessor">#endif // TODOTODAYSHEETGUI_H</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sun May 3 18:22:06 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 4 12:44:27 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>

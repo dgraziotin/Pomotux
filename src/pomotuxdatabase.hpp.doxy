@@ -17,11 +17,11 @@ class TodoTodaySheet;
  */
 class ActivityInAIS {
 public:
-	/**
-	 * Represents a Row in the database. <br>
-	 * One column is an Activity, 
-	 * while the second column is an ais (many to one relationship)
-	 */
+    /**
+     * Represents a Row in the database. <br>
+     * One column is an Activity,
+     * while the second column is an ais (many to one relationship)
+     */
     class Row {
     public:
         litesql::Field<int> activityInventorySheet;
@@ -47,11 +47,11 @@ public:
  */
 class ActivityInTTS {
 public:
-	/**
-	 * Represents a Row in the database. <br>
-	 * One column is an Activity, 
-	 * while the second column is a tts (many to one relationship)
-	 */
+    /**
+     * Represents a Row in the database. <br>
+     * One column is an Activity,
+     * while the second column is a tts (many to one relationship)
+     */
     class Row {
     public:
         litesql::Field<int> todoTodaySheet;
@@ -83,42 +83,42 @@ public:
     static const std::string table__;
     static const std::string sequence__;
     static const litesql::FieldType Id;
-	/**
-	 * An automatically created attribute to store the id of an Activity
-	 * in the database
-	 */
+    /**
+     * An automatically created attribute to store the id of an Activity
+     * in the database
+     */
     litesql::Field<int> id;
     static const litesql::FieldType Type;
     litesql::Field<std::string> type;
     static const litesql::FieldType MDescription;
-	/**
-	 * A string that holds the description of an activity
-	 */
+    /**
+     * A string that holds the description of an activity
+     */
     litesql::Field<std::string> mDescription;
     static const litesql::FieldType MInsertionDate;
-	/**
-	 * The date of the creation of the activity
-	 */
+    /**
+     * The date of the creation of the activity
+     */
     litesql::Field<litesql::Date> mInsertionDate;
     static const litesql::FieldType MDeadline;
-	/**
-	 * The deadline of the activity.
-	 */
+    /**
+     * The deadline of the activity.
+     */
     litesql::Field<litesql::Date> mDeadline;
     static const litesql::FieldType MNumPomodoro;
-	/**
-	 * The number of Pomodoro dedicated to the activity
-	 */
+    /**
+     * The number of Pomodoro dedicated to the activity
+     */
     litesql::Field<int> mNumPomodoro;
     static const litesql::FieldType MOrder;
-	/**
-	 * The order of the activity when scheduled in TTS
-	 */
+    /**
+     * The order of the activity when scheduled in TTS
+     */
     litesql::Field<int> mOrder;
     static const litesql::FieldType MIsFinished;
-	/**
-	 * A boolean representing the status of an Activity
-	 */
+    /**
+     * A boolean representing the status of an Activity
+     */
     litesql::Field<bool> mIsFinished;
 protected:
     void defaults();
@@ -127,31 +127,31 @@ public:
     Activity(const litesql::Database& db, const litesql::Record& rec);
     Activity(const Activity& obj);
     const Activity& operator=(const Activity& obj);
-	/**
-	 * This method deletes an activity in a clever way. <br/>
-	 * It searches for the activity in the Activity table, as well as in the corresponding relations
-	 * ActivityInAIS and ActivityInTTS, deleting it.
-	 * @param rDatabase a reference to the current database used
-	 * @param rCurrentActivity a reference to the activity whe want to delete
-	 * @param rAIS a reference to the current Activity Inventory Sheet
-	 * @param rTTS a reference to the current Todo Today Sheet
-	 * @see Activity
-	 * @see ActivityInventorySheet
-	 * @see ActivityInAIS
-	 * @see TodoTodaySheet
-	 * @see ActivityInTTS
-	 */
+    /**
+     * This method deletes an activity in a clever way. <br/>
+     * It searches for the activity in the Activity table, as well as in the corresponding relations
+     * ActivityInAIS and ActivityInTTS, deleting it.
+     * @param rDatabase a reference to the current database used
+     * @param rCurrentActivity a reference to the activity whe want to delete
+     * @param rAIS a reference to the current Activity Inventory Sheet
+     * @param rTTS a reference to the current Todo Today Sheet
+     * @see Activity
+     * @see ActivityInventorySheet
+     * @see ActivityInAIS
+     * @see TodoTodaySheet
+     * @see ActivityInTTS
+     */
     virtual void Delete(const litesql::Database& rDatabase, Activity& rCurrentActivity, ActivityInventorySheet& rAIS, TodoTodaySheet& rTTS);
     /**
-	 * This method modifies an existing activity. <br/>
-	 * We just let the user to modify its description and the deadline.
-	 * @param rDatabase a reference to the current database used
-	 * @param rCurrentActivity a reference to the activity whe want to delete
-	 * @param newDeadline the new deadline
-	 * @param newDescription the new description
-	 * @see Activity
-	 */
-	virtual void Modify(const litesql::Database& rDatabase, Activity& rCurrentActivity, int newDeadline, std::string newDescription);
+     * This method modifies an existing activity. <br/>
+     * We just let the user to modify its description and the deadline.
+     * @param rDatabase a reference to the current database used
+     * @param rCurrentActivity a reference to the activity whe want to delete
+     * @param newDeadline the new deadline
+     * @param newDescription the new description
+     * @see Activity
+     */
+    virtual void Modify(const litesql::Database& rDatabase, Activity& rCurrentActivity, int newDeadline, std::string newDescription);
 protected:
     std::string insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs);
     void create();
@@ -185,9 +185,9 @@ public:
     static const std::string table__;
     static const std::string sequence__;
     static const litesql::FieldType Id;
-	/**
-	 * An automatically created attribute to store the id of an AIS stored in the database
-	 */
+    /**
+     * An automatically created attribute to store the id of an AIS stored in the database
+     */
     litesql::Field<int> id;
     static const litesql::FieldType Type;
     litesql::Field<std::string> type;
@@ -198,15 +198,15 @@ public:
     ActivityInventorySheet(const litesql::Database& db, const litesql::Record& rec);
     ActivityInventorySheet(const ActivityInventorySheet& obj);
     const ActivityInventorySheet& operator=(const ActivityInventorySheet& obj);
-	/**
-	 * Method that inserts an Activity in the Activity Inventory Sheet, using ActivityInAIS relation.
-	 * 
-	 * @param rDatabase a reference to the current database used
-	 * @param rNewActivity a reference to the activity whe have just created
-	 * @param rAIS a reference to the current Activity Inventory Sheet
-	 * @see Activity
-	 * @see ActivityInAIS
-	 */
+    /**
+     * Method that inserts an Activity in the Activity Inventory Sheet, using ActivityInAIS relation.
+     *
+     * @param rDatabase a reference to the current database used
+     * @param rNewActivity a reference to the activity whe have just created
+     * @param rAIS a reference to the current Activity Inventory Sheet
+     * @see Activity
+     * @see ActivityInAIS
+     */
     virtual void InsertActivity(const litesql::Database& rDatabase, Activity& rNewActivity, ActivityInventorySheet& rAIS);
 protected:
     std::string insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs);
@@ -241,9 +241,9 @@ public:
     static const std::string table__;
     static const std::string sequence__;
     static const litesql::FieldType Id;
-	/**
-	 * An automatically generated attribute that stores the id of the object when made persistend
-	 */
+    /**
+     * An automatically generated attribute that stores the id of the object when made persistend
+     */
     litesql::Field<int> id;
     static const litesql::FieldType Type;
     litesql::Field<std::string> type;
@@ -254,82 +254,82 @@ public:
     TodoTodaySheet(const litesql::Database& db, const litesql::Record& rec);
     TodoTodaySheet(const TodoTodaySheet& obj);
     const TodoTodaySheet& operator=(const TodoTodaySheet& obj);
-	/**
-	 * This method schedules an Activity in the TodoTodaySheet. <br/>
-	 * It uses the ActivityInTTS relation. <br/>
-	 * It needs a reference to the actual Activity Inventory Sheet because this method does also a 
-	 * consistency check: the activity MUST be in AIS before going in TTS. It uses ActivityInAIS to 
-	 * perform this operation
-	 * @param rDatabase a reference to the current database used
-	 * @param rCurrentActivity a reference to the activity whe want to schedule
-	 * @param rAIS a reference to the current Activity Inventory Sheet
-	 * @param rTTS a reference to the current Todo Today Sheet
-	 * @see Activity
-	 * @see ActivityInventorySheet
-	 * @see ActivityInAIS
-	 * @see TodoTodaySheet
-	 * @see ActivityInTTS
-	 */
+    /**
+     * This method schedules an Activity in the TodoTodaySheet. <br/>
+     * It uses the ActivityInTTS relation. <br/>
+     * It needs a reference to the actual Activity Inventory Sheet because this method does also a
+     * consistency check: the activity MUST be in AIS before going in TTS. It uses ActivityInAIS to
+     * perform this operation
+     * @param rDatabase a reference to the current database used
+     * @param rCurrentActivity a reference to the activity whe want to schedule
+     * @param rAIS a reference to the current Activity Inventory Sheet
+     * @param rTTS a reference to the current Todo Today Sheet
+     * @see Activity
+     * @see ActivityInventorySheet
+     * @see ActivityInAIS
+     * @see TodoTodaySheet
+     * @see ActivityInTTS
+     */
     virtual void ScheduleActivity(const litesql::Database& rDatabase, Activity& rNewActivity, ActivityInventorySheet& rAIS, TodoTodaySheet& rTTS);
     /**
-	 * Marks an Activity to be finished. <br/>
-	 * It unlinks the Activity from a TodoTodaySheet.<br/>
-	 * Sets its status as "finished"
-	 * @param rDatabase a reference to the current database used
-	 * @param rCurrentActivity a reference to the activity whe want to schedule
-	 * @param rTTS a reference to the current Todo Today Sheet
-	 * @see Activity
-	 * @see TodoTodaySheet
-	 * @see ActivityInTTS
-	 */
-	virtual void FinishActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rTTS);
+     * Marks an Activity to be finished. <br/>
+     * It unlinks the Activity from a TodoTodaySheet.<br/>
+     * Sets its status as "finished"
+     * @param rDatabase a reference to the current database used
+     * @param rCurrentActivity a reference to the activity whe want to schedule
+     * @param rTTS a reference to the current Todo Today Sheet
+     * @see Activity
+     * @see TodoTodaySheet
+     * @see ActivityInTTS
+     */
+    virtual void FinishActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rTTS);
     /**
-	 * Unlinks an Activity from a TodoTodaySheet <br/>
-	 * It unlinks the Activity from the ActivityInTTS relation.<br/>
-	 * Does not change its status.
-	 * @param rDatabase a reference to the current database used
-	 * @param rCurrentActivity a reference to the activity whe want to schedule
-	 * @param rTTS a reference to the current Todo Today Sheet
-	 * @see Activity
-	 * @see TodoTodaySheet
-	 * @see ActivityInTTS
-	 */
-	virtual void PostponeActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rTTS);
+     * Unlinks an Activity from a TodoTodaySheet <br/>
+     * It unlinks the Activity from the ActivityInTTS relation.<br/>
+     * Does not change its status.
+     * @param rDatabase a reference to the current database used
+     * @param rCurrentActivity a reference to the activity whe want to schedule
+     * @param rTTS a reference to the current Todo Today Sheet
+     * @see Activity
+     * @see TodoTodaySheet
+     * @see ActivityInTTS
+     */
+    virtual void PostponeActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rTTS);
     /**
-	 * Changes the priority of an Activity.
-	 * 
-	 * @param rDatabase a reference to the current database used
-	 * @param rCurrentActivity a reference to the activity whe want to schedule
-	 * @param rCurrentTTS a reference to the current Todo Today Sheet
-	 * @param direction the direction of moving (negative for "up", positive for "down")
-	 * @see Activity
-	 * @see TodoTodaySheet
-	 * @see ActivityInTTS
-	 */
-	virtual void MoveActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rCurrentTDS, const int direction);
+     * Changes the priority of an Activity.
+     *
+     * @param rDatabase a reference to the current database used
+     * @param rCurrentActivity a reference to the activity whe want to schedule
+     * @param rCurrentTTS a reference to the current Todo Today Sheet
+     * @param direction the direction of moving (negative for "up", positive for "down")
+     * @see Activity
+     * @see TodoTodaySheet
+     * @see ActivityInTTS
+     */
+    virtual void MoveActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity, TodoTodaySheet& rCurrentTDS, const int direction);
     /**
-	 * Returns the max value of order of the activities scheduled in TTS.
-	 * 
-	 * @param rDatabase a reference to the current database used
-	 * @param rCurrentTTS a reference to the current Todo Today Sheet
-	 * @return the max value of order
-	 * @see Activity
-	 * @see TodoTodaySheet
-	 * @see ActivityInTTS
-	 */
-	virtual int GetMaxActivityOrder(const litesql::Database& rDatabase, TodoTodaySheet& rTTS);
-	/**
-	 * Tries to make consistent the values of orders of the activities scheduled in the TTS.<br/>
-	 * It fetches the activities scheduled in the TTS, ordered by "mOrder". <br/>
-	 * The sequence could be fragmented, ie. 1-2-4-7-8-9-15-17. <br/>
-	 * The method updates the orders to be sequential, ie. 1-2-3-4-5-6-7-8. <br/>
-	 * 
-	 * @param rDatabase a reference to the current database used
-	 * @param rCurrentTTS a reference to the current Todo Today Sheet
-	 * @see Activity
-	 * @see TodoTodaySheet
-	 * @see ActivityInTTS
-	 */
+     * Returns the max value of order of the activities scheduled in TTS.
+     *
+     * @param rDatabase a reference to the current database used
+     * @param rCurrentTTS a reference to the current Todo Today Sheet
+     * @return the max value of order
+     * @see Activity
+     * @see TodoTodaySheet
+     * @see ActivityInTTS
+     */
+    virtual int GetMaxActivityOrder(const litesql::Database& rDatabase, TodoTodaySheet& rTTS);
+    /**
+     * Tries to make consistent the values of orders of the activities scheduled in the TTS.<br/>
+     * It fetches the activities scheduled in the TTS, ordered by "mOrder". <br/>
+     * The sequence could be fragmented, ie. 1-2-4-7-8-9-15-17. <br/>
+     * The method updates the orders to be sequential, ie. 1-2-3-4-5-6-7-8. <br/>
+     *
+     * @param rDatabase a reference to the current database used
+     * @param rCurrentTTS a reference to the current Todo Today Sheet
+     * @see Activity
+     * @see TodoTodaySheet
+     * @see ActivityInTTS
+     */
     virtual void MakeConsistent(const litesql::Database& rDatabase, TodoTodaySheet& rTTS);
 protected:
     std::string insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs);

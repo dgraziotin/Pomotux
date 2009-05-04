@@ -13,6 +13,14 @@
   <value type="QString" >Pomotux</value>
  </data>
  <data>
+  <variable>RunConfiguration0-UseDyldImageSuffix</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseTerminal</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
   <variable>RunConfiguration0-UserSetName</variable>
   <value type="bool" >false</value>
  </data>
@@ -87,7 +95,7 @@
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
     <value type="QString" >/home/ghost/Documents/uni/SEP/project/Pomotux/team8/trunk/src/qt/Pomotux.pro</value>
     <value type="QString" >-spec</value>
-    <value type="QString" >/usr/share/qt4/mkspecs/linux-g++</value>
+    <value type="QString" >/usr/share/qt/mkspecs/linux-g++</value>
     <value type="QString" >-r</value>
     <value type="QString" >CONFIG+=debug</value>
    </valuelist>

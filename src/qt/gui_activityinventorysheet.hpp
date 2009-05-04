@@ -1,23 +1,3 @@
-/**
- *  A class for Activity Inventory Sheet graphical user interface object. Contains all the operations regarding the interaction
- *  among the final user and Activity Inventory Sheet object in the database.
- *  It exchange signals within itself in order to maintain an high average of consistency with the database; internal signals
- *  can also be intercepted from the outside the class in case become necessary a synchronization(i.e. multiple windows inquiring the database)
- *  This class depends on several libraries and external files such as the QtGui/QMainWindow  and litesql libraries(i.e. the framework
- *  libraries used to access the sqlite database)
- *
- *  @include <QtGui/QMainWindow>
- *  @include <litesql.hpp>
- *  @include <time.h>
- *  @include <QTableWidget>
- *  @include "insertnewactivity.hpp"
- *  @include "modifyactivity.hpp"
- *  @include "../pomotuxdatabase.hpp"
- *
- *  @see http://apps.sourceforge.net/trac/litesql/
- *  @see http://doc.trolltech.com/4.5/index.html
- */
-
 #ifndef GUIACTIVITYINVENTORYSHEET_H
 #define GUIACTIVITYINVENTORYSHEET_H
 
@@ -129,10 +109,10 @@ private slots:
      */
     void on_NewActivityButton_clicked();
 
-     /**
-      * Handles the signal of DatabaseUpdated() received whenever the database is modified and refreshes the window
-      * @see DatabaseUpdated()
-      */
+    /**
+     * Handles the signal of DatabaseUpdated() received whenever the database is modified and refreshes the window
+     * @see DatabaseUpdated()
+     */
     void RefreshTable();
 
 signals:

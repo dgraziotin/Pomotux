@@ -22,7 +22,7 @@ void pomotuxdatabase::TodoTodaySheet::ScheduleActivity(const litesql::Database& 
     rNewActivity.mIsFinished = false;
     rNewActivity.update();
     ActivityInTTS::link(rDatabase,rNewActivity,rTTS);
-	rDatabase.commit();
+    rDatabase.commit();
 }
 
 void pomotuxdatabase::TodoTodaySheet::FinishActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS)
@@ -31,7 +31,7 @@ void pomotuxdatabase::TodoTodaySheet::FinishActivity(const litesql::Database& rD
     rCurrentActivity.update();
     ActivityInTTS::unlink(rDatabase, rCurrentActivity, rTTS);
     rTTS.MakeConsistent(rDatabase,rTTS);
-	rDatabase.commit();
+    rDatabase.commit();
 }
 
 void pomotuxdatabase::TodoTodaySheet::PostponeActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS)
@@ -46,18 +46,18 @@ void pomotuxdatabase::TodoTodaySheet::PostponeActivity(const litesql::Database& 
 void pomotuxdatabase::TodoTodaySheet::MoveActivity(const litesql::Database& rDatabase, Activity& rCurrentActivity,TodoTodaySheet& rTTS, int direction)
 {
     rTTS.MakeConsistent(rDatabase,rTTS);
-        Activity targetActivity = ActivityInTTS::get<Activity>(rDatabase,
-                                  Activity::MOrder == rCurrentActivity.mOrder + direction,
-                                  ActivityInTTS::TodoTodaySheet==rTTS.id).one();
-       
-	    int currentActivityOrder = rCurrentActivity.mOrder;
-		
-		targetActivity.mOrder = currentActivityOrder;
-        rCurrentActivity.mOrder = (currentActivityOrder + direction);
-		
-        targetActivity.update();
-        rCurrentActivity.update();
-		rDatabase.commit();
+    Activity targetActivity = ActivityInTTS::get<Activity>(rDatabase,
+                              Activity::MOrder == rCurrentActivity.mOrder + direction,
+                              ActivityInTTS::TodoTodaySheet==rTTS.id).one();
+
+    int currentActivityOrder = rCurrentActivity.mOrder;
+
+    targetActivity.mOrder = currentActivityOrder;
+    rCurrentActivity.mOrder = (currentActivityOrder + direction);
+
+    targetActivity.update();
+    rCurrentActivity.update();
+    rDatabase.commit();
 }
 
 void pomotuxdatabase::TodoTodaySheet::MakeConsistent(const litesql::Database& rDatabase, TodoTodaySheet& rTTS)
@@ -69,7 +69,7 @@ void pomotuxdatabase::TodoTodaySheet::MakeConsistent(const litesql::Database& rD
         (*i).mOrder = order++;
         (*i).update();
     }
-	rDatabase.commit();
+    rDatabase.commit();
 }
 
 int pomotuxdatabase::TodoTodaySheet::GetMaxActivityOrder(const litesql::Database& rDatabase, TodoTodaySheet& rTTS)

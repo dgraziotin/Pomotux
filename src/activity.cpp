@@ -15,8 +15,8 @@ void pomotuxdatabase::Activity::Delete(const litesql::Database& rDatabase,  Acti
 
     ActivityInTTS::del(rDatabase,ActivityInTTS::Activity == delActivity.id);
     delActivity.del();
-	rTTS.MakeConsistent(rDatabase, rTTS);
-	rDatabase.commit();
+    rTTS.MakeConsistent(rDatabase, rTTS);
+    rDatabase.commit();
 }
 
 void pomotuxdatabase::Activity::Modify(const litesql::Database& rDatabase, Activity& rCurrentActivity,  int newDeadline, string newDescription)
@@ -27,5 +27,5 @@ void pomotuxdatabase::Activity::Modify(const litesql::Database& rDatabase, Activ
         rCurrentActivity.mDescription = newDescription;
 
     rCurrentActivity.update();
-	rDatabase.commit();
+    rDatabase.commit();
 }

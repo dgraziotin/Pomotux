@@ -33,8 +33,7 @@ using namespace std;
  *  }
  * </pre>
  */
-class PomotuxException
-{
+class PomotuxException {
     /**
       * QString representing the message of the Exception
       */

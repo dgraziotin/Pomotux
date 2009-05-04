@@ -94,17 +94,16 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->mpPomodoro->hide();
         this->mConsecutivePomodoro=(this->mConsecutivePomodoro+1);
         emit DatabaseUpdated();
-        if(this->mConsecutivePomodoro>=4)
-            {
-                this->mConsecutivePomodoro=0;
-                throw PomotuxException("You Should now take a break longer than usual");
-            }
+        if (this->mConsecutivePomodoro>=4) {
+            this->mConsecutivePomodoro=0;
+            throw PomotuxException("You Should now take a break longer than usual");
+        }
         throw PomotuxException("Now you Should take a short break");
     } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
-    }catch (PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();
@@ -124,9 +123,8 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
 {
     QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
     try {
-        if(items.empty())throw PomotuxException("There Are No Activities Selected");
-        for (QList<QTableWidgetItem *>::iterator k = items.begin(); k<items.end(); k++)
-        {
+        if (items.empty())throw PomotuxException("There Are No Activities Selected");
+        for (QList<QTableWidgetItem *>::iterator k = items.begin(); k<items.end(); k++) {
             QTableWidgetItem * activitiesToBePostponed = (*k);
             Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==activitiesToBePostponed->text().toInt(),ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
             if (this->mpCurrentActivity->id!=current.id)this->mpTts->PostponeActivity(*(this->mpDatabase),current,*(this->mpTts));
@@ -136,7 +134,7 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
-    }catch (PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();
@@ -146,10 +144,9 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
 void TodoTodaySheetGui::on_FinishActivityButton_clicked()
 {
 
-    try
-     {
+    try {
         QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
-        if(items.empty())throw PomotuxException("There Are No Activities");
+        if (items.empty())throw PomotuxException("There Are No Activities");
         QList<QTableWidgetItem *>::iterator k = items.begin();
         QTableWidgetItem * head = (*k);
         int id=head->text().toInt(0,10);
@@ -161,7 +158,7 @@ void TodoTodaySheetGui::on_FinishActivityButton_clicked()
         QMessageBox msgBox;
         msgBox.setText("ERROR ");
         msgBox.exec();
-    } catch (PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();
@@ -186,31 +183,31 @@ TodoTodaySheetGui::~TodoTodaySheetGui()
 
 void TodoTodaySheetGui::ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
 {
-    try{
-        for (int i=magnitude;i>0;i--)
-        this->mpTts->MoveActivity(*(this->mpDatabase),activityToMove,*(this->mpTts),direction);
+    try {
+        for (int i=magnitude; i>0; i--)
+            this->mpTts->MoveActivity(*(this->mpDatabase),activityToMove,*(this->mpTts),direction);
         emit DatabaseUpdated();
-    }catch (NotFound e){
+    } catch (NotFound e) {
         emit DatabaseUpdated();
     }
 }
 
 void TodoTodaySheetGui::on_MoveActivityButton_clicked()
 {
-    try{
+    try {
         QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
-        if(items.empty())throw PomotuxException("There Are No Activities");
+        if (items.empty())throw PomotuxException("There Are No Activities");
         QList<QTableWidgetItem *>::iterator k = items.begin();
         QTableWidgetItem * head = (*k);
         int id=head->text().toInt(0,10);
         Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==id,ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
-        if(this->mpPomodoro->IsRunning()&&this->mpCurrentActivity->id==current.id)throw PomotuxException("Could not change priority of the current Activity");
+        if (this->mpPomodoro->IsRunning()&&this->mpCurrentActivity->id==current.id)throw PomotuxException("Could not change priority of the current Activity");
         this->ChangeActivityPriority(ui->MoveMagnitudeBox->value(),(ui->MoveDirectionBox->currentText()=="upward")?-1:1,current);
-    }catch (Except e){
+    } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("SQL Error");
         msgBox.exec();
-    }catch (PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();

@@ -39,8 +39,7 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
 
         /*Control if the user pressed ok or cancel*/
         float mainController = dialog->getController();
-        if (mainController > 0)
-        {
+        if (mainController > 0) {
             QString description = dialog->getDescription();
             string sDescription = description.toStdString();
 
@@ -98,8 +97,7 @@ void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
     dialog->exec();
 
     float mainController = dialog->getController();
-    if (mainController > 0)
-    {
+    if (mainController > 0) {
         QString description = dialog->getDescription();
         float value = dialog->getDayToDeadline();
         QString idString = this->ui->ais->item(mRow, 0)->text();
@@ -129,12 +127,10 @@ void GuiActivityInventorySheet::on_InsertInTTSButton_clicked()
     vector<Activity> currentTDTSActivities = ActivityInTTS::get<Activity>(*(mpDatabase),Expr(),
             ActivityInTTS::TodoTodaySheet==mpTts->id).all();
     int check = 0;
-    for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++)
-    {
+    for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++) {
         if ((*i).id == id) check = 1;
     }
-    if (check == 0 )
-    {
+    if (check == 0 ) {
         ActivityInventorySheet &cAis = *(mpAis);
         TodoTodaySheet &cTts = *(mpTts);
         cTts.ScheduleActivity(*(mpDatabase), at, cAis, cTts);

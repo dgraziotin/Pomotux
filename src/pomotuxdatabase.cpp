@@ -2,8 +2,9 @@
 namespace pomotuxdatabase {
 using namespace litesql;
 ActivityInAIS::Row::Row(const litesql::Database& db, const litesql::Record& rec)
-         : activityInventorySheet(ActivityInAIS::ActivityInventorySheet), activity(ActivityInAIS::Activity) {
-    switch(rec.size()) {
+        : activityInventorySheet(ActivityInAIS::ActivityInventorySheet), activity(ActivityInAIS::Activity)
+{
+    switch (rec.size()) {
     case 2:
         activityInventorySheet = rec[1];
     case 1:
@@ -13,7 +14,8 @@ ActivityInAIS::Row::Row(const litesql::Database& db, const litesql::Record& rec)
 const std::string ActivityInAIS::table__("_06044cc54d2aba326c362937595d5709");
 const litesql::FieldType ActivityInAIS::Activity("Activity1","INTEGER",table__);
 const litesql::FieldType ActivityInAIS::ActivityInventorySheet("ActivityInventorySheet2","INTEGER",table__);
-void ActivityInAIS::link(const litesql::Database& db, const pomotuxdatabase::Activity& o0, const pomotuxdatabase::ActivityInventorySheet& o1) {
+void ActivityInAIS::link(const litesql::Database& db, const pomotuxdatabase::Activity& o0, const pomotuxdatabase::ActivityInventorySheet& o1)
+{
     Record values;
     Split fields;
     fields.push_back(Activity.name());
@@ -22,13 +24,16 @@ void ActivityInAIS::link(const litesql::Database& db, const pomotuxdatabase::Act
     values.push_back(o1.id);
     db.insert(table__, values, fields);
 }
-void ActivityInAIS::unlink(const litesql::Database& db, const pomotuxdatabase::Activity& o0, const pomotuxdatabase::ActivityInventorySheet& o1) {
+void ActivityInAIS::unlink(const litesql::Database& db, const pomotuxdatabase::Activity& o0, const pomotuxdatabase::ActivityInventorySheet& o1)
+{
     db.delete_(table__, (Activity == o0.id && ActivityInventorySheet == o1.id));
 }
-void ActivityInAIS::del(const litesql::Database& db, const litesql::Expr& expr) {
+void ActivityInAIS::del(const litesql::Database& db, const litesql::Expr& expr)
+{
     db.delete_(table__, expr);
 }
-litesql::DataSource<ActivityInAIS::Row> ActivityInAIS::getRows(const litesql::Database& db, const litesql::Expr& expr) {
+litesql::DataSource<ActivityInAIS::Row> ActivityInAIS::getRows(const litesql::Database& db, const litesql::Expr& expr)
+{
     SelectQuery sel;
     sel.result(Activity.fullName());
     sel.result(ActivityInventorySheet.fullName());
@@ -36,14 +41,16 @@ litesql::DataSource<ActivityInAIS::Row> ActivityInAIS::getRows(const litesql::Da
     sel.where(expr);
     return DataSource<ActivityInAIS::Row>(db, sel);
 }
-template <> litesql::DataSource<pomotuxdatabase::Activity> ActivityInAIS::get(const litesql::Database& db, const litesql::Expr& expr, const litesql::Expr& srcExpr) {
+template <> litesql::DataSource<pomotuxdatabase::Activity> ActivityInAIS::get(const litesql::Database& db, const litesql::Expr& expr, const litesql::Expr& srcExpr)
+{
     SelectQuery sel;
     sel.source(table__);
     sel.result(Activity.fullName());
     sel.where(srcExpr);
     return DataSource<pomotuxdatabase::Activity>(db, pomotuxdatabase::Activity::Id.in(sel) && expr);
 }
-template <> litesql::DataSource<pomotuxdatabase::ActivityInventorySheet> ActivityInAIS::get(const litesql::Database& db, const litesql::Expr& expr, const litesql::Expr& srcExpr) {
+template <> litesql::DataSource<pomotuxdatabase::ActivityInventorySheet> ActivityInAIS::get(const litesql::Database& db, const litesql::Expr& expr, const litesql::Expr& srcExpr)
+{
     SelectQuery sel;
     sel.source(table__);
     sel.result(ActivityInventorySheet.fullName());
@@ -51,8 +58,9 @@ template <> litesql::DataSource<pomotuxdatabase::ActivityInventorySheet> Activit
     return DataSource<pomotuxdatabase::ActivityInventorySheet>(db, pomotuxdatabase::ActivityInventorySheet::Id.in(sel) && expr);
 }
 ActivityInTTS::Row::Row(const litesql::Database& db, const litesql::Record& rec)
-         : todoTodaySheet(ActivityInTTS::TodoTodaySheet), activity(ActivityInTTS::Activity) {
-    switch(rec.size()) {
+        : todoTodaySheet(ActivityInTTS::TodoTodaySheet), activity(ActivityInTTS::Activity)
+{
+    switch (rec.size()) {
     case 2:
         todoTodaySheet = rec[1];
     case 1:
@@ -62,7 +70,8 @@ ActivityInTTS::Row::Row(const litesql::Database& db, const litesql::Record& rec)
 const std::string ActivityInTTS::table__("Activity_TodoTodaySheet_");
 const litesql::FieldType ActivityInTTS::Activity("Activity1","INTEGER",table__);
 const litesql::FieldType ActivityInTTS::TodoTodaySheet("TodoTodaySheet2","INTEGER",table__);
-void ActivityInTTS::link(const litesql::Database& db, const pomotuxdatabase::Activity& o0, const pomotuxdatabase::TodoTodaySheet& o1) {
+void ActivityInTTS::link(const litesql::Database& db, const pomotuxdatabase::Activity& o0, const pomotuxdatabase::TodoTodaySheet& o1)
+{
     Record values;
     Split fields;
     fields.push_back(Activity.name());
@@ -71,13 +80,16 @@ void ActivityInTTS::link(const litesql::Database& db, const pomotuxdatabase::Act
     values.push_back(o1.id);
     db.insert(table__, values, fields);
 }
-void ActivityInTTS::unlink(const litesql::Database& db, const pomotuxdatabase::Activity& o0, const pomotuxdatabase::TodoTodaySheet& o1) {
+void ActivityInTTS::unlink(const litesql::Database& db, const pomotuxdatabase::Activity& o0, const pomotuxdatabase::TodoTodaySheet& o1)
+{
     db.delete_(table__, (Activity == o0.id && TodoTodaySheet == o1.id));
 }
-void ActivityInTTS::del(const litesql::Database& db, const litesql::Expr& expr) {
+void ActivityInTTS::del(const litesql::Database& db, const litesql::Expr& expr)
+{
     db.delete_(table__, expr);
 }
-litesql::DataSource<ActivityInTTS::Row> ActivityInTTS::getRows(const litesql::Database& db, const litesql::Expr& expr) {
+litesql::DataSource<ActivityInTTS::Row> ActivityInTTS::getRows(const litesql::Database& db, const litesql::Expr& expr)
+{
     SelectQuery sel;
     sel.result(Activity.fullName());
     sel.result(TodoTodaySheet.fullName());
@@ -85,14 +97,16 @@ litesql::DataSource<ActivityInTTS::Row> ActivityInTTS::getRows(const litesql::Da
     sel.where(expr);
     return DataSource<ActivityInTTS::Row>(db, sel);
 }
-template <> litesql::DataSource<pomotuxdatabase::Activity> ActivityInTTS::get(const litesql::Database& db, const litesql::Expr& expr, const litesql::Expr& srcExpr) {
+template <> litesql::DataSource<pomotuxdatabase::Activity> ActivityInTTS::get(const litesql::Database& db, const litesql::Expr& expr, const litesql::Expr& srcExpr)
+{
     SelectQuery sel;
     sel.source(table__);
     sel.result(Activity.fullName());
     sel.where(srcExpr);
     return DataSource<pomotuxdatabase::Activity>(db, pomotuxdatabase::Activity::Id.in(sel) && expr);
 }
-template <> litesql::DataSource<pomotuxdatabase::TodoTodaySheet> ActivityInTTS::get(const litesql::Database& db, const litesql::Expr& expr, const litesql::Expr& srcExpr) {
+template <> litesql::DataSource<pomotuxdatabase::TodoTodaySheet> ActivityInTTS::get(const litesql::Database& db, const litesql::Expr& expr, const litesql::Expr& srcExpr)
+{
     SelectQuery sel;
     sel.source(table__);
     sel.result(TodoTodaySheet.fullName());
@@ -111,7 +125,8 @@ const litesql::FieldType Activity::MDeadline("mDeadline_","INTEGER",table__);
 const litesql::FieldType Activity::MNumPomodoro("mNumPomodoro_","INTEGER",table__);
 const litesql::FieldType Activity::MOrder("mOrder_","INTEGER",table__);
 const litesql::FieldType Activity::MIsFinished("mIsFinished_","INTEGER",table__);
-void Activity::defaults() {
+void Activity::defaults()
+{
     id = 0;
     mInsertionDate = 0;
     mDeadline = 0;
@@ -120,36 +135,48 @@ void Activity::defaults() {
     mIsFinished = false;
 }
 Activity::Activity(const litesql::Database& db)
-     : litesql::Persistent(db), id(Id), type(Type), mDescription(MDescription), mInsertionDate(MInsertionDate), mDeadline(MDeadline), mNumPomodoro(MNumPomodoro), mOrder(MOrder), mIsFinished(MIsFinished) {
+        : litesql::Persistent(db), id(Id), type(Type), mDescription(MDescription), mInsertionDate(MInsertionDate), mDeadline(MDeadline), mNumPomodoro(MNumPomodoro), mOrder(MOrder), mIsFinished(MIsFinished)
+{
     defaults();
 }
 Activity::Activity(const litesql::Database& db, const litesql::Record& rec)
-     : litesql::Persistent(db, rec), id(Id), type(Type), mDescription(MDescription), mInsertionDate(MInsertionDate), mDeadline(MDeadline), mNumPomodoro(MNumPomodoro), mOrder(MOrder), mIsFinished(MIsFinished) {
+        : litesql::Persistent(db, rec), id(Id), type(Type), mDescription(MDescription), mInsertionDate(MInsertionDate), mDeadline(MDeadline), mNumPomodoro(MNumPomodoro), mOrder(MOrder), mIsFinished(MIsFinished)
+{
     defaults();
     size_t size = (rec.size() > 8) ? 8 : rec.size();
-    switch(size) {
-    case 8: mIsFinished = convert<const std::string&, bool>(rec[7]);
+    switch (size) {
+    case 8:
+        mIsFinished = convert<const std::string&, bool>(rec[7]);
         mIsFinished.setModified(false);
-    case 7: mOrder = convert<const std::string&, int>(rec[6]);
+    case 7:
+        mOrder = convert<const std::string&, int>(rec[6]);
         mOrder.setModified(false);
-    case 6: mNumPomodoro = convert<const std::string&, int>(rec[5]);
+    case 6:
+        mNumPomodoro = convert<const std::string&, int>(rec[5]);
         mNumPomodoro.setModified(false);
-    case 5: mDeadline = convert<const std::string&, litesql::Date>(rec[4]);
+    case 5:
+        mDeadline = convert<const std::string&, litesql::Date>(rec[4]);
         mDeadline.setModified(false);
-    case 4: mInsertionDate = convert<const std::string&, litesql::Date>(rec[3]);
+    case 4:
+        mInsertionDate = convert<const std::string&, litesql::Date>(rec[3]);
         mInsertionDate.setModified(false);
-    case 3: mDescription = convert<const std::string&, std::string>(rec[2]);
+    case 3:
+        mDescription = convert<const std::string&, std::string>(rec[2]);
         mDescription.setModified(false);
-    case 2: type = convert<const std::string&, std::string>(rec[1]);
+    case 2:
+        type = convert<const std::string&, std::string>(rec[1]);
         type.setModified(false);
-    case 1: id = convert<const std::string&, int>(rec[0]);
+    case 1:
+        id = convert<const std::string&, int>(rec[0]);
         id.setModified(false);
     }
 }
 Activity::Activity(const Activity& obj)
-     : litesql::Persistent(obj), id(obj.id), type(obj.type), mDescription(obj.mDescription), mInsertionDate(obj.mInsertionDate), mDeadline(obj.mDeadline), mNumPomodoro(obj.mNumPomodoro), mOrder(obj.mOrder), mIsFinished(obj.mIsFinished) {
+        : litesql::Persistent(obj), id(obj.id), type(obj.type), mDescription(obj.mDescription), mInsertionDate(obj.mInsertionDate), mDeadline(obj.mDeadline), mNumPomodoro(obj.mNumPomodoro), mOrder(obj.mOrder), mIsFinished(obj.mIsFinished)
+{
 }
-const Activity& Activity::operator=(const Activity& obj) {
+const Activity& Activity::operator=(const Activity& obj)
+{
     if (this != &obj) {
         id = obj.id;
         type = obj.type;
@@ -163,7 +190,8 @@ const Activity& Activity::operator=(const Activity& obj) {
     litesql::Persistent::operator=(obj);
     return *this;
 }
-std::string Activity::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs) {
+std::string Activity::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs)
+{
     tables.push_back(table__);
     litesql::Record fields;
     litesql::Record values;
@@ -195,7 +223,8 @@ std::string Activity::insert(litesql::Record& tables, litesql::Records& fieldRec
     valueRecs.push_back(values);
     return litesql::Persistent::insert(tables, fieldRecs, valueRecs, sequence__);
 }
-void Activity::create() {
+void Activity::create()
+{
     litesql::Record tables;
     litesql::Records fieldRecs;
     litesql::Records valueRecs;
@@ -204,7 +233,8 @@ void Activity::create() {
     if (id == 0)
         id = newID;
 }
-void Activity::addUpdates(Updates& updates) {
+void Activity::addUpdates(Updates& updates)
+{
     prepareUpdate(updates, table__);
     updateField(updates, table__, id);
     updateField(updates, table__, type);
@@ -215,9 +245,11 @@ void Activity::addUpdates(Updates& updates) {
     updateField(updates, table__, mOrder);
     updateField(updates, table__, mIsFinished);
 }
-void Activity::addIDUpdates(Updates& updates) {
+void Activity::addIDUpdates(Updates& updates)
+{
 }
-void Activity::getFieldTypes(std::vector<litesql::FieldType>& ftypes) {
+void Activity::getFieldTypes(std::vector<litesql::FieldType>& ftypes)
+{
     ftypes.push_back(Id);
     ftypes.push_back(Type);
     ftypes.push_back(MDescription);
@@ -227,14 +259,17 @@ void Activity::getFieldTypes(std::vector<litesql::FieldType>& ftypes) {
     ftypes.push_back(MOrder);
     ftypes.push_back(MIsFinished);
 }
-void Activity::delRecord() {
+void Activity::delRecord()
+{
     deleteFromTable(table__, id);
 }
-void Activity::delRelations() {
+void Activity::delRelations()
+{
     ActivityInAIS::del(*db, (ActivityInAIS::Activity == id));
     ActivityInTTS::del(*db, (ActivityInTTS::Activity == id));
 }
-void Activity::update() {
+void Activity::update()
+{
     if (!inDatabase) {
         create();
         return;
@@ -242,13 +277,14 @@ void Activity::update() {
     Updates updates;
     addUpdates(updates);
     if (id != oldKey) {
-        if (!typeIsCorrect()) 
+        if (!typeIsCorrect())
             upcastCopy()->addIDUpdates(updates);
     }
     litesql::Persistent::update(updates);
     oldKey = id;
 }
-void Activity::del() {
+void Activity::del()
+{
     if (typeIsCorrect() == false) {
         std::auto_ptr<Activity> p(upcastCopy());
         p->delRelations();
@@ -260,13 +296,16 @@ void Activity::del() {
     }
     inDatabase = false;
 }
-bool Activity::typeIsCorrect() {
+bool Activity::typeIsCorrect()
+{
     return type == type__;
 }
-std::auto_ptr<Activity> Activity::upcast() {
+std::auto_ptr<Activity> Activity::upcast()
+{
     return auto_ptr<Activity>(new Activity(*this));
 }
-std::auto_ptr<Activity> Activity::upcastCopy() {
+std::auto_ptr<Activity> Activity::upcastCopy()
+{
     Activity* np = NULL;
     np->id = id;
     np->type = type;
@@ -281,7 +320,8 @@ std::auto_ptr<Activity> Activity::upcastCopy() {
         np = new Activity(*this);
     return auto_ptr<Activity>(np);
 }
-std::ostream & operator<<(std::ostream& os, Activity o) {
+std::ostream & operator<<(std::ostream& os, Activity o)
+{
     os << "-------------------------------------" << std::endl;
     os << o.id.name() << " = " << o.id << std::endl;
     os << o.type.name() << " = " << o.type << std::endl;
@@ -300,28 +340,35 @@ const std::string ActivityInventorySheet::table__("ActivityInventorySheet_");
 const std::string ActivityInventorySheet::sequence__("ActivityInventorySheet_seq");
 const litesql::FieldType ActivityInventorySheet::Id("id_","INTEGER",table__);
 const litesql::FieldType ActivityInventorySheet::Type("type_","TEXT",table__);
-void ActivityInventorySheet::defaults() {
+void ActivityInventorySheet::defaults()
+{
     id = 0;
 }
 ActivityInventorySheet::ActivityInventorySheet(const litesql::Database& db)
-     : litesql::Persistent(db), id(Id), type(Type) {
+        : litesql::Persistent(db), id(Id), type(Type)
+{
     defaults();
 }
 ActivityInventorySheet::ActivityInventorySheet(const litesql::Database& db, const litesql::Record& rec)
-     : litesql::Persistent(db, rec), id(Id), type(Type) {
+        : litesql::Persistent(db, rec), id(Id), type(Type)
+{
     defaults();
     size_t size = (rec.size() > 2) ? 2 : rec.size();
-    switch(size) {
-    case 2: type = convert<const std::string&, std::string>(rec[1]);
+    switch (size) {
+    case 2:
+        type = convert<const std::string&, std::string>(rec[1]);
         type.setModified(false);
-    case 1: id = convert<const std::string&, int>(rec[0]);
+    case 1:
+        id = convert<const std::string&, int>(rec[0]);
         id.setModified(false);
     }
 }
 ActivityInventorySheet::ActivityInventorySheet(const ActivityInventorySheet& obj)
-     : litesql::Persistent(obj), id(obj.id), type(obj.type) {
+        : litesql::Persistent(obj), id(obj.id), type(obj.type)
+{
 }
-const ActivityInventorySheet& ActivityInventorySheet::operator=(const ActivityInventorySheet& obj) {
+const ActivityInventorySheet& ActivityInventorySheet::operator=(const ActivityInventorySheet& obj)
+{
     if (this != &obj) {
         id = obj.id;
         type = obj.type;
@@ -329,7 +376,8 @@ const ActivityInventorySheet& ActivityInventorySheet::operator=(const ActivityIn
     litesql::Persistent::operator=(obj);
     return *this;
 }
-std::string ActivityInventorySheet::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs) {
+std::string ActivityInventorySheet::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs)
+{
     tables.push_back(table__);
     litesql::Record fields;
     litesql::Record values;
@@ -343,7 +391,8 @@ std::string ActivityInventorySheet::insert(litesql::Record& tables, litesql::Rec
     valueRecs.push_back(values);
     return litesql::Persistent::insert(tables, fieldRecs, valueRecs, sequence__);
 }
-void ActivityInventorySheet::create() {
+void ActivityInventorySheet::create()
+{
     litesql::Record tables;
     litesql::Records fieldRecs;
     litesql::Records valueRecs;
@@ -352,24 +401,30 @@ void ActivityInventorySheet::create() {
     if (id == 0)
         id = newID;
 }
-void ActivityInventorySheet::addUpdates(Updates& updates) {
+void ActivityInventorySheet::addUpdates(Updates& updates)
+{
     prepareUpdate(updates, table__);
     updateField(updates, table__, id);
     updateField(updates, table__, type);
 }
-void ActivityInventorySheet::addIDUpdates(Updates& updates) {
+void ActivityInventorySheet::addIDUpdates(Updates& updates)
+{
 }
-void ActivityInventorySheet::getFieldTypes(std::vector<litesql::FieldType>& ftypes) {
+void ActivityInventorySheet::getFieldTypes(std::vector<litesql::FieldType>& ftypes)
+{
     ftypes.push_back(Id);
     ftypes.push_back(Type);
 }
-void ActivityInventorySheet::delRecord() {
+void ActivityInventorySheet::delRecord()
+{
     deleteFromTable(table__, id);
 }
-void ActivityInventorySheet::delRelations() {
+void ActivityInventorySheet::delRelations()
+{
     ActivityInAIS::del(*db, (ActivityInAIS::ActivityInventorySheet == id));
 }
-void ActivityInventorySheet::update() {
+void ActivityInventorySheet::update()
+{
     if (!inDatabase) {
         create();
         return;
@@ -377,13 +432,14 @@ void ActivityInventorySheet::update() {
     Updates updates;
     addUpdates(updates);
     if (id != oldKey) {
-        if (!typeIsCorrect()) 
+        if (!typeIsCorrect())
             upcastCopy()->addIDUpdates(updates);
     }
     litesql::Persistent::update(updates);
     oldKey = id;
 }
-void ActivityInventorySheet::del() {
+void ActivityInventorySheet::del()
+{
     if (typeIsCorrect() == false) {
         std::auto_ptr<ActivityInventorySheet> p(upcastCopy());
         p->delRelations();
@@ -395,13 +451,16 @@ void ActivityInventorySheet::del() {
     }
     inDatabase = false;
 }
-bool ActivityInventorySheet::typeIsCorrect() {
+bool ActivityInventorySheet::typeIsCorrect()
+{
     return type == type__;
 }
-std::auto_ptr<ActivityInventorySheet> ActivityInventorySheet::upcast() {
+std::auto_ptr<ActivityInventorySheet> ActivityInventorySheet::upcast()
+{
     return auto_ptr<ActivityInventorySheet>(new ActivityInventorySheet(*this));
 }
-std::auto_ptr<ActivityInventorySheet> ActivityInventorySheet::upcastCopy() {
+std::auto_ptr<ActivityInventorySheet> ActivityInventorySheet::upcastCopy()
+{
     ActivityInventorySheet* np = NULL;
     np->id = id;
     np->type = type;
@@ -410,7 +469,8 @@ std::auto_ptr<ActivityInventorySheet> ActivityInventorySheet::upcastCopy() {
         np = new ActivityInventorySheet(*this);
     return auto_ptr<ActivityInventorySheet>(np);
 }
-std::ostream & operator<<(std::ostream& os, ActivityInventorySheet o) {
+std::ostream & operator<<(std::ostream& os, ActivityInventorySheet o)
+{
     os << "-------------------------------------" << std::endl;
     os << o.id.name() << " = " << o.id << std::endl;
     os << o.type.name() << " = " << o.type << std::endl;
@@ -423,28 +483,35 @@ const std::string TodoTodaySheet::table__("TodoTodaySheet_");
 const std::string TodoTodaySheet::sequence__("TodoTodaySheet_seq");
 const litesql::FieldType TodoTodaySheet::Id("id_","INTEGER",table__);
 const litesql::FieldType TodoTodaySheet::Type("type_","TEXT",table__);
-void TodoTodaySheet::defaults() {
+void TodoTodaySheet::defaults()
+{
     id = 0;
 }
 TodoTodaySheet::TodoTodaySheet(const litesql::Database& db)
-     : litesql::Persistent(db), id(Id), type(Type) {
+        : litesql::Persistent(db), id(Id), type(Type)
+{
     defaults();
 }
 TodoTodaySheet::TodoTodaySheet(const litesql::Database& db, const litesql::Record& rec)
-     : litesql::Persistent(db, rec), id(Id), type(Type) {
+        : litesql::Persistent(db, rec), id(Id), type(Type)
+{
     defaults();
     size_t size = (rec.size() > 2) ? 2 : rec.size();
-    switch(size) {
-    case 2: type = convert<const std::string&, std::string>(rec[1]);
+    switch (size) {
+    case 2:
+        type = convert<const std::string&, std::string>(rec[1]);
         type.setModified(false);
-    case 1: id = convert<const std::string&, int>(rec[0]);
+    case 1:
+        id = convert<const std::string&, int>(rec[0]);
         id.setModified(false);
     }
 }
 TodoTodaySheet::TodoTodaySheet(const TodoTodaySheet& obj)
-     : litesql::Persistent(obj), id(obj.id), type(obj.type) {
+        : litesql::Persistent(obj), id(obj.id), type(obj.type)
+{
 }
-const TodoTodaySheet& TodoTodaySheet::operator=(const TodoTodaySheet& obj) {
+const TodoTodaySheet& TodoTodaySheet::operator=(const TodoTodaySheet& obj)
+{
     if (this != &obj) {
         id = obj.id;
         type = obj.type;
@@ -452,7 +519,8 @@ const TodoTodaySheet& TodoTodaySheet::operator=(const TodoTodaySheet& obj) {
     litesql::Persistent::operator=(obj);
     return *this;
 }
-std::string TodoTodaySheet::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs) {
+std::string TodoTodaySheet::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs)
+{
     tables.push_back(table__);
     litesql::Record fields;
     litesql::Record values;
@@ -466,7 +534,8 @@ std::string TodoTodaySheet::insert(litesql::Record& tables, litesql::Records& fi
     valueRecs.push_back(values);
     return litesql::Persistent::insert(tables, fieldRecs, valueRecs, sequence__);
 }
-void TodoTodaySheet::create() {
+void TodoTodaySheet::create()
+{
     litesql::Record tables;
     litesql::Records fieldRecs;
     litesql::Records valueRecs;
@@ -475,24 +544,30 @@ void TodoTodaySheet::create() {
     if (id == 0)
         id = newID;
 }
-void TodoTodaySheet::addUpdates(Updates& updates) {
+void TodoTodaySheet::addUpdates(Updates& updates)
+{
     prepareUpdate(updates, table__);
     updateField(updates, table__, id);
     updateField(updates, table__, type);
 }
-void TodoTodaySheet::addIDUpdates(Updates& updates) {
+void TodoTodaySheet::addIDUpdates(Updates& updates)
+{
 }
-void TodoTodaySheet::getFieldTypes(std::vector<litesql::FieldType>& ftypes) {
+void TodoTodaySheet::getFieldTypes(std::vector<litesql::FieldType>& ftypes)
+{
     ftypes.push_back(Id);
     ftypes.push_back(Type);
 }
-void TodoTodaySheet::delRecord() {
+void TodoTodaySheet::delRecord()
+{
     deleteFromTable(table__, id);
 }
-void TodoTodaySheet::delRelations() {
+void TodoTodaySheet::delRelations()
+{
     ActivityInTTS::del(*db, (ActivityInTTS::TodoTodaySheet == id));
 }
-void TodoTodaySheet::update() {
+void TodoTodaySheet::update()
+{
     if (!inDatabase) {
         create();
         return;
@@ -500,13 +575,14 @@ void TodoTodaySheet::update() {
     Updates updates;
     addUpdates(updates);
     if (id != oldKey) {
-        if (!typeIsCorrect()) 
+        if (!typeIsCorrect())
             upcastCopy()->addIDUpdates(updates);
     }
     litesql::Persistent::update(updates);
     oldKey = id;
 }
-void TodoTodaySheet::del() {
+void TodoTodaySheet::del()
+{
     if (typeIsCorrect() == false) {
         std::auto_ptr<TodoTodaySheet> p(upcastCopy());
         p->delRelations();
@@ -518,13 +594,16 @@ void TodoTodaySheet::del() {
     }
     inDatabase = false;
 }
-bool TodoTodaySheet::typeIsCorrect() {
+bool TodoTodaySheet::typeIsCorrect()
+{
     return type == type__;
 }
-std::auto_ptr<TodoTodaySheet> TodoTodaySheet::upcast() {
+std::auto_ptr<TodoTodaySheet> TodoTodaySheet::upcast()
+{
     return auto_ptr<TodoTodaySheet>(new TodoTodaySheet(*this));
 }
-std::auto_ptr<TodoTodaySheet> TodoTodaySheet::upcastCopy() {
+std::auto_ptr<TodoTodaySheet> TodoTodaySheet::upcastCopy()
+{
     TodoTodaySheet* np = NULL;
     np->id = id;
     np->type = type;
@@ -533,7 +612,8 @@ std::auto_ptr<TodoTodaySheet> TodoTodaySheet::upcastCopy() {
         np = new TodoTodaySheet(*this);
     return auto_ptr<TodoTodaySheet>(np);
 }
-std::ostream & operator<<(std::ostream& os, TodoTodaySheet o) {
+std::ostream & operator<<(std::ostream& os, TodoTodaySheet o)
+{
     os << "-------------------------------------" << std::endl;
     os << o.id.name() << " = " << o.id << std::endl;
     os << o.type.name() << " = " << o.type << std::endl;
@@ -541,10 +621,12 @@ std::ostream & operator<<(std::ostream& os, TodoTodaySheet o) {
     return os;
 }
 PomotuxDatabase::PomotuxDatabase(std::string backendType, std::string connInfo)
-     : litesql::Database(backendType, connInfo) {
+        : litesql::Database(backendType, connInfo)
+{
     initialize();
 }
-std::vector<litesql::Database::SchemaItem> PomotuxDatabase::getSchema() const {
+std::vector<litesql::Database::SchemaItem> PomotuxDatabase::getSchema() const
+{
     vector<Database::SchemaItem> res;
     res.push_back(Database::SchemaItem("schema_","table","CREATE TABLE schema_ (name_ TEXT, type_ TEXT, sql_ TEXT);"));
     if (backend->supportsSequences()) {
@@ -565,7 +647,8 @@ std::vector<litesql::Database::SchemaItem> PomotuxDatabase::getSchema() const {
     res.push_back(Database::SchemaItem("_0cc98704fb046de91749a1aa7c6c4f96","index","CREATE INDEX _0cc98704fb046de91749a1aa7c6c4f96 ON Activity_TodoTodaySheet_ (Activity1,TodoTodaySheet2)"));
     return res;
 }
-void PomotuxDatabase::initialize() {
+void PomotuxDatabase::initialize()
+{
     static bool initialized = false;
     if (initialized)
         return;

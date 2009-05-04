@@ -66,7 +66,8 @@ void Pomodoro::ShowTimer()
     display(text);
 }
 
-Pomodoro::~Pomodoro(){
+Pomodoro::~Pomodoro()
+{
     delete this->mpTime;
     delete this->mpTimer;
     mpTime = NULL;

@@ -46,6 +46,22 @@
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pomodoro.html#d75fcf23785ded5be18767f6b69f2165">~Pomodoro</a> ()</td></tr>
 
+<tr><td colspan="2"><br><h2>Private Slots</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pomodoro.html#d4b4d24c4c4e48ef28d4b693f70f89f1">ShowTimer</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pomodoro.html#990caffb9bf07772f106251f14ce388d">Run</a> ()</td></tr>
+
+<tr><td colspan="2"><br><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pomodoro.html#3ad9e8b966245611888a9102b0ff7c0d">mMinutes</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pomodoro.html#c27b3276b458b082cbc5dca16f085858">mSeconds</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pomodoro.html#9f83ada5fa7a9bd14a5601f209f6ab92">mIsRunning</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QTimer *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pomodoro.html#7ca37b7b2375453aa44ba84f249a21b2">mpTimer</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QTime *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pomodoro.html#a7f2b1be838ef6459060f5b74dc7cfdc">mpTime</a></td></tr>
+
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 A class for <a class="el" href="class_pomodoro.html">Pomodoro</a> objects. Contains all the operations regarding a <a class="el" href="class_pomodoro.html">Pomodoro</a>, as well as its graphical representation (a QLCDNumber). It is studied for re-use, as it is completely isolated from the rest of the project. It emits signals either when the pomodoro is finished or broken.<p>
@@ -94,14 +110,14 @@ An example on how to use it: <pre>
 <div class="memdoc">
 
 <p>
-Constructor of a <a class="el" href="class_pomodoro.html">Pomodoro</a>. Sets the attributes and calls ShowTimer() automatically. <dl compact><dt><b>Parameters:</b></dt><dd>
+Constructor of a <a class="el" href="class_pomodoro.html">Pomodoro</a>. Sets the attributes and calls <a class="el" href="class_pomodoro.html#d4b4d24c4c4e48ef28d4b693f70f89f1">ShowTimer()</a> automatically. <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>parent</em>&nbsp;</td><td>a pointer to the parent widget (0 if we want a new window) </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>minutes</em>&nbsp;</td><td>an integer for the length of <a class="el" href="class_pomodoro.html">Pomodoro</a> (default 25) </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>seconds</em>&nbsp;</td><td>an integer for the length of <a class="el" href="class_pomodoro.html">Pomodoro</a> (default 0) </td></tr>
   </table>
 </dl>
-<dl class="see" compact><dt><b>See also:</b></dt><dd>ShowTimer() </dd></dl>
+<dl class="see" compact><dt><b>See also:</b></dt><dd><a class="el" href="class_pomodoro.html#d4b4d24c4c4e48ef28d4b693f70f89f1">ShowTimer()</a> </dd></dl>
 
 </div>
 </div><p>
@@ -202,6 +218,46 @@ Signal launched when the <a class="el" href="class_pomodoro.html">Pomodoro</a> f
 Resets the <a class="el" href="class_pomodoro.html">Pomodoro</a>. This method is just for having a single <a class="el" href="class_pomodoro.html">Pomodoro</a> object during the execution of the program. 
 </div>
 </div><p>
+<a class="anchor" name="990caffb9bf07772f106251f14ce388d"></a><!-- doxytag: member="Pomodoro::Run" ref="990caffb9bf07772f106251f14ce388d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Pomodoro::Run           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Decrements the seconds and calls <a class="el" href="class_pomodoro.html#d4b4d24c4c4e48ef28d4b693f70f89f1">ShowTimer()</a>. Detects if the <a class="el" href="class_pomodoro.html">Pomodoro</a> finishes and emits a <a class="el" href="class_pomodoro.html#2e69760ea2e9aeb36093a7e2d64006ce">PomodoroFinished()</a> signal, then calls <a class="el" href="class_pomodoro.html#8188b8c06ba7aef8d8bf808d82944b9d">Stop()</a> <dl class="see" compact><dt><b>See also:</b></dt><dd><a class="el" href="class_pomodoro.html#2e69760ea2e9aeb36093a7e2d64006ce">PomodoroFinished()</a> <p>
+<a class="el" href="class_pomodoro.html#8188b8c06ba7aef8d8bf808d82944b9d">Stop()</a> </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="d4b4d24c4c4e48ef28d4b693f70f89f1"></a><!-- doxytag: member="Pomodoro::ShowTimer" ref="d4b4d24c4c4e48ef28d4b693f70f89f1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Pomodoro::ShowTimer           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Sets and shows the timer (LCD) 
+</div>
+</div><p>
 <a class="anchor" name="2af13c5c3a49855021455665d70e2e1c"></a><!-- doxytag: member="Pomodoro::Start" ref="2af13c5c3a49855021455665d70e2e1c" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -218,7 +274,7 @@ Resets the <a class="el" href="class_pomodoro.html">Pomodoro</a>. This method is
 <div class="memdoc">
 
 <p>
-Starts a <a class="el" href="class_pomodoro.html">Pomodoro</a>. Sets the signal handler, starts the internal timer, sets mIsRunning to true. It calls Run() as last thing. <dl class="see" compact><dt><b>See also:</b></dt><dd>Run() <p>
+Starts a <a class="el" href="class_pomodoro.html">Pomodoro</a>. Sets the signal handler, starts the internal timer, sets mIsRunning to true. It calls <a class="el" href="class_pomodoro.html#990caffb9bf07772f106251f14ce388d">Run()</a> as last thing. <dl class="see" compact><dt><b>See also:</b></dt><dd><a class="el" href="class_pomodoro.html#990caffb9bf07772f106251f14ce388d">Run()</a> <p>
 <a class="el" href="class_pomodoro.html#410db1b2329fac39b9788cdd5e5ea9b9">PomodoroBroken()</a> </dd></dl>
 
 </div>
@@ -242,10 +298,86 @@ Starts a <a class="el" href="class_pomodoro.html">Pomodoro</a>. Sets the signal 
 Stops a <a class="el" href="class_pomodoro.html">Pomodoro</a>. If it detects that the pomodoro was broken, it launches a <a class="el" href="class_pomodoro.html#410db1b2329fac39b9788cdd5e5ea9b9">PomodoroBroken()</a> signal. It stops the internal timer, and sets mIsRunning to false. 
 </div>
 </div><p>
-<hr>The documentation for this class was generated from the following files:<ul>
-<li>/home/bodom_lx/Projects/Pomotux/src/qt/<a class="el" href="pomodoro_8hpp_source.html">pomodoro.hpp</a><li>/home/bodom_lx/Projects/Pomotux/src/qt/moc_pomodoro.cpp<li>/home/bodom_lx/Projects/Pomotux/src/qt/pomodoro.cpp</ul>
+<hr><h2>Member Data Documentation</h2>
+<a class="anchor" name="9f83ada5fa7a9bd14a5601f209f6ab92"></a><!-- doxytag: member="Pomodoro::mIsRunning" ref="9f83ada5fa7a9bd14a5601f209f6ab92" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_pomodoro.html#9f83ada5fa7a9bd14a5601f209f6ab92">Pomodoro::mIsRunning</a><code> [private]</code>          </td>
+        </tr>
+      </table>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sun May 3 18:22:06 2009 for Pomotux by&nbsp;
+<div class="memdoc">
+
+<p>
+Boolean to represent the status of the <a class="el" href="class_pomodoro.html">Pomodoro</a> (true = running) 
+</div>
+</div><p>
+<a class="anchor" name="3ad9e8b966245611888a9102b0ff7c0d"></a><!-- doxytag: member="Pomodoro::mMinutes" ref="3ad9e8b966245611888a9102b0ff7c0d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_pomodoro.html#3ad9e8b966245611888a9102b0ff7c0d">Pomodoro::mMinutes</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Integer to store the minutes of length of a <a class="el" href="class_pomodoro.html">Pomodoro</a> 
+</div>
+</div><p>
+<a class="anchor" name="a7f2b1be838ef6459060f5b74dc7cfdc"></a><!-- doxytag: member="Pomodoro::mpTime" ref="a7f2b1be838ef6459060f5b74dc7cfdc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QTime* <a class="el" href="class_pomodoro.html#a7f2b1be838ef6459060f5b74dc7cfdc">Pomodoro::mpTime</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Internal time object, to hold the minutes and the seconds of a <a class="el" href="class_pomodoro.html">Pomodoro</a> 
+</div>
+</div><p>
+<a class="anchor" name="7ca37b7b2375453aa44ba84f249a21b2"></a><!-- doxytag: member="Pomodoro::mpTimer" ref="7ca37b7b2375453aa44ba84f249a21b2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QTimer* <a class="el" href="class_pomodoro.html#7ca37b7b2375453aa44ba84f249a21b2">Pomodoro::mpTimer</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Internal timer that launches a signal every 1 second. 
+</div>
+</div><p>
+<a class="anchor" name="c27b3276b458b082cbc5dca16f085858"></a><!-- doxytag: member="Pomodoro::mSeconds" ref="c27b3276b458b082cbc5dca16f085858" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_pomodoro.html#c27b3276b458b082cbc5dca16f085858">Pomodoro::mSeconds</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Integer to store the seconds of length of a <a class="el" href="class_pomodoro.html">Pomodoro</a> 
+</div>
+</div><p>
+<hr>The documentation for this class was generated from the following files:<ul>
+<li>/home/bodom_lx/Projects/Pomotux/src/qt/<a class="el" href="pomodoro_8hpp_source.html">pomodoro.hpp</a><li>/home/bodom_lx/Projects/Pomotux/src/qt/pomodoro.cpp</ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 4 12:44:27 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>

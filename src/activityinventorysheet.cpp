@@ -6,10 +6,10 @@ using namespace pomotuxdatabase;
 
 void pomotuxdatabase::ActivityInventorySheet::InsertActivity(const litesql::Database& rDatabase, Activity& rNewActivity, ActivityInventorySheet& rAIS)
 {
-    try{
-    ActivityInAIS::link(rDatabase,rNewActivity,rAIS);
+    try {
+        ActivityInAIS::link(rDatabase,rNewActivity,rAIS);
         //rDatabase.commit();
-}catch (Except e) {
+    } catch (Except e) {
         cerr << e << endl;
 
     }

@@ -1,0 +1,9 @@
+INSTALL
+***************
+
+Please verify that your system meets all the dependencies described in
+DEPENDENCIES file.
+First enter the src/ directory and perform a make, to compile the logic
+unit and the old textual Pomotux.
+Then enter the src/qt directory, do a qmake to generate the Makefile.
+Do another make, then run the src/qt/Pomotux binary compiled

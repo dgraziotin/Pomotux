@@ -24,7 +24,6 @@ class TodoTodaySheetGuiClass;
  *  can also be intercepted from the outside the class in case it becomes necessary synchronization(i.e. multiple windows inquiring the database)
  *  This class depends on several libraries and external files such as the QtGui/QMainWindow  and litesql libraries(i.e. the framework
  *  libraries used to access the sqlite database)
- *
  *  @see http://apps.sourceforge.net/trac/litesql/
  *  @see http://doc.trolltech.com/4.5/index.html
  *
@@ -36,7 +35,7 @@ public:
     /**
      * Constructor of a Todo Today Sheet Graphical User Interface window.
      * @param parent a pointer to the parent widget (0 if we want a new window)
-     * @param a reference to a litesql3 database
+     * @param database a reference to a litesql3 database
      */
     TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database);
 
@@ -46,24 +45,24 @@ public:
     ~TodoTodaySheetGui();
 
 private:
-        /**
-       * A pointer to the litesql database in use
-       */
+    /**
+    * A pointer to the litesql database in use
+    */
     PomotuxDatabase *mpDatabase;
 
-        /**
-       * A pointer to a Pomodoro which is Shown and Set either when an Activty is Started/Stopped or when the Pomodoro finishes
-       */
+    /**
+    * A pointer to a Pomodoro which is Shown and Set either when an Activty is Started/Stopped or when the Pomodoro finishes
+    */
     Pomodoro *mpPomodoro;
 
-        /**
-       * A pointer to the Activity that is at the momenent under a Pomodoro
-       */
+    /**
+    * A pointer to the Activity that is at the momenent under a Pomodoro
+    */
     Activity *mpCurrentActivity;
 
-        /**
-       * A pointer to the Todo Today Sheet in use
-       */
+    /**
+    * A pointer to the Todo Today Sheet in use
+    */
     TodoTodaySheet *mpTts;
 
     /**
@@ -73,28 +72,28 @@ private:
 
 
     Ui::TodoTodaySheetGuiClass *ui;
-        /**
-       * Cleans the ui::tableWidget whenever the database is updated
-       */
+    /**
+    * Cleans the ui::tableWidget whenever the database is updated
+    */
     void Cleaner();
 
-        /**
-       * Processes the change of priority once all prelimary controls are made. It is called from the SLOT assigned to the click of MoveActivityButton
-       *
-       * @param magnitude a positive integer representing the number of position of the change
-       * @param direction an integer representing the direction of the change (i.e. -1 upshift +1 downshift)
-       * @param activityToMove a reference to an Activity obj representing the activity to move
-       * @see on_MoveActivityButton_clicked()
-       */
+    /**
+    * Processes the change of priority once all prelimary controls are made. It is called from the SLOT assigned to the click of MoveActivityButton
+    *
+    * @param magnitude a positive integer representing the number of position of the change
+    * @param direction an integer representing the direction of the change (i.e. -1 upshift +1 downshift)
+    * @param activityToMove a reference to an Activity obj representing the activity to move
+    * @see on_MoveActivityButton_clicked()
+    */
     void ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove);
 
 private slots:
-        /**
-       * Reads the input from ui::MoveMagnitudeBox and ui::MoveDirectionBox checks all the preliminary controls and then call the ChangeActivityPriority()
-       * function
-       *
-       * @see ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
-       */
+    /**
+    * Reads the input from ui::MoveMagnitudeBox and ui::MoveDirectionBox checks all the preliminary controls and then call the ChangeActivityPriority()
+    * function
+    *
+    * @see ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
+    */
     void on_MoveActivityButton_clicked();
 
     /**
@@ -102,38 +101,38 @@ private slots:
        */
     void on_StopActivityButton_clicked();
 
-        /**
-       * Throws out all the selected Activities from the Todo Today Sheet
-       */
+    /**
+    * Throws out all the selected Activities from the Todo Today Sheet
+    */
     void on_PostponeActivityButton_clicked();
 
-        /**
-       * Starts the pomodoro of the activity placed in the top of the Todo Today Sheet
-       */
+    /**
+    * Starts the pomodoro of the activity placed in the top of the Todo Today Sheet
+    */
     void on_StartActivityButton_clicked();
 
-        /**
-       * Finishes the selected Activity by throwing it out of the Todo Today Sheet and setting the activity flag mIsFinished to true
-       */
+    /**
+    * Finishes the selected Activity by throwing it out of the Todo Today Sheet and setting the activity flag mIsFinished to true
+    */
     void on_FinishActivityButton_clicked();
 
-        /**
-       * Handles the signal of PomodoroFinished() received from mpPomodoro sending an alert to the user and incrementing the activity
-       * attribute mNumPomodoro by one.
-       * @see pomodoro.hpp
-       */
+    /**
+    * Handles the signal of PomodoroFinished() received from mpPomodoro sending an alert to the user and incrementing the activity
+    * attribute mNumPomodoro by one.
+    * @see pomodoro.hpp
+    */
     void PomodoroFinished();
 
-        /**
-       * Handles the signal of PomodoroBroken() received from mpPomodoro prompting the user an alert message
-       * @see pomodoro.hpp
-       */
+    /**
+    * Handles the signal of PomodoroBroken() received from mpPomodoro prompting the user an alert message
+    * @see pomodoro.hpp
+    */
     void PomodoroBroken();
 
-       /**
-       * Handles the signal of DatabaseUpdated() received whenever the database is modified and refreshes the window
-       * @see DatabaseUpdated()
-       */
+    /**
+    * Handles the signal of DatabaseUpdated() received whenever the database is modified and refreshes the window
+    * @see DatabaseUpdated()
+    */
     void RefreshTable();
 
 signals:
