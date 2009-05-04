@@ -19,12 +19,14 @@ class TodoTodaySheetGuiClass;
  *  A class for Todo Today Sheet graphical user interface object.
  *  Contains all the operations regarding the interaction
  *  among the final user and Todo Today Sheet object in the database.
- *  It is been implemented on the purpose but it grants a lot of elasticity for re-use thanks to QT libraries contribution.
+ *  It has been implemented on the purpose but it grants a lot of elasticity for re-use thanks to QT libraries contribution.
  *  It exchange signals within itself in order to maintain an high average of consistency with the database; internal signals
  *  can also be intercepted from the outside the class in case become necessary a synchronization(i.e. multiple windows inquiring the database)
  *  This class depends on several libraries and external files such as the QtGui/QMainWindow  and litesql libraries(i.e. the framework
  *  libraries used to access the sqlite database)
  *
+ *  @see http://apps.sourceforge.net/trac/litesql/
+ *  @see http://doc.trolltech.com/4.5/index.html
  *
  */
 class TodoTodaySheetGui : public QMainWindow {
