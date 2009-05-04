@@ -70,18 +70,14 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
     try {
         if (this->ui->tableWidget->rowCount()==0) throw PomotuxException("There Are No Activities to be Initialized");
         int id=this->ui->tableWidget->item(0,0)->text().toInt();
-
         Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==id,ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
         if (!this->mpPomodoro->IsRunning()) {
-
             this->mpCurrentActivity = new Activity(current);
             this->mpPomodoro->show();
             this->mpPomodoro->Start();
         } else {
             this->mpPomodoro->show();
-            QMessageBox msgBox;
-            msgBox.setText("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
-            msgBox.exec();
+            throw PomotuxException("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
         }
     } catch (PomotuxException e) {
         QMessageBox msgBox;
@@ -117,7 +113,6 @@ void TodoTodaySheetGui::PomodoroFinished()
 
 void TodoTodaySheetGui::PomodoroBroken()
 {
-
     this->mpPomodoro->hide();
     this->mpPomodoro->Reset();
     QMessageBox msgBox;
