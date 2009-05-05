@@ -113,10 +113,8 @@ void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
 void GuiActivityInventorySheet::on_InsertInTTSButton_clicked()
 {
     QString idString = this->ui->ais->item(mRow, 0)->text();
-    bool ok;
-    int id = idString.toInt(&ok, 16);
+    int id = idString.toInt();
     Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
-
     try {
         mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
     } catch (NotFound e) {
