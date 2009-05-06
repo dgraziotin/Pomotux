@@ -4,7 +4,7 @@
 #include <cstring>
 #include <QMessageBox>
 #define mins 0
-#define secs 10
+#define secs 5
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -68,7 +68,7 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
 {
 
     try {
-        if (this->ui->tableWidget->rowCount()==0) throw PomotuxException("There Are No Activities to be Initialized");
+        if (this->ui->tableWidget->rowCount()==0) throw PomotuxException("There Are No Activities selected");
         int id=this->ui->tableWidget->item(0,0)->text().toInt();
         Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==id,ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
         if (!this->mpPomodoro->IsRunning()) {
@@ -127,7 +127,7 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
         for (QList<QTableWidgetItem *>::iterator k = items.begin(); k<items.end(); k++) {
             QTableWidgetItem * activitiesToBePostponed = (*k);
             Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==activitiesToBePostponed->text().toInt(),ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
-            if (this->mpCurrentActivity->id!=current.id)this->mpTts->PostponeActivity(*(this->mpDatabase),current,*(this->mpTts));
+            if (this->mpCurrentActivity->id!=current.id || !(this->mpPomodoro->IsRunning()))this->mpTts->PostponeActivity(*(this->mpDatabase),current,*(this->mpTts));
         }
         emit DatabaseUpdated();
     } catch (NotFound e) {
