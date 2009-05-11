@@ -1,52 +1,114 @@
-Checking ./activity.cpp...
-1/20 files checked 5% done
-Checking ./activityinventorysheet.cpp...
-2/20 files checked 10% done
-Checking ./main.cpp...
-3/20 files checked 15% done
-Checking ./pomotuxdatabase.cpp...
-4/20 files checked 20% done
-Checking ./qt/gui_activityinventorysheet.cpp...
-5/20 files checked 25% done
-Checking ./qt/gui_todotodaysheet.cpp...
-6/20 files checked 30% done
-Checking ./qt/insertnewactivity.cpp...
-7/20 files checked 35% done
-Checking ./qt/main.cpp...
-8/20 files checked 40% done
-Checking ./qt/mainwindow.cpp...
-9/20 files checked 45% done
-Checking ./qt/moc_gui_activityinventorysheet.cpp...
-Checking ./qt/moc_gui_activityinventorysheet.cpp: !defined(Q_MOC_OUTPUT_REVISION)...
-Checking ./qt/moc_gui_activityinventorysheet.cpp: Q_MOC_OUTPUT_REVISION!=61...
-10/20 files checked 50% done
-Checking ./qt/moc_gui_todotodaysheet.cpp...
-Checking ./qt/moc_gui_todotodaysheet.cpp: !defined(Q_MOC_OUTPUT_REVISION)...
-Checking ./qt/moc_gui_todotodaysheet.cpp: Q_MOC_OUTPUT_REVISION!=61...
-11/20 files checked 55% done
-Checking ./qt/moc_insertnewactivity.cpp...
-Checking ./qt/moc_insertnewactivity.cpp: !defined(Q_MOC_OUTPUT_REVISION)...
-Checking ./qt/moc_insertnewactivity.cpp: Q_MOC_OUTPUT_REVISION!=61...
-12/20 files checked 60% done
-Checking ./qt/moc_modifyactivity.cpp...
-Checking ./qt/moc_modifyactivity.cpp: !defined(Q_MOC_OUTPUT_REVISION)...
-Checking ./qt/moc_modifyactivity.cpp: Q_MOC_OUTPUT_REVISION!=61...
-13/20 files checked 65% done
-Checking ./qt/moc_pomodoro.cpp...
-Checking ./qt/moc_pomodoro.cpp: !defined(Q_MOC_OUTPUT_REVISION)...
-Checking ./qt/moc_pomodoro.cpp: Q_MOC_OUTPUT_REVISION!=61...
-14/20 files checked 70% done
-Checking ./qt/moc_preferencesdialog.cpp...
-Checking ./qt/moc_preferencesdialog.cpp: !defined(Q_MOC_OUTPUT_REVISION)...
-Checking ./qt/moc_preferencesdialog.cpp: Q_MOC_OUTPUT_REVISION!=61...
-15/20 files checked 75% done
-Checking ./qt/modifyactivity.cpp...
-16/20 files checked 80% done
-Checking ./qt/pomodoro.cpp...
-17/20 files checked 85% done
-Checking ./qt/pomotuxexception.cpp...
-18/20 files checked 90% done
-Checking ./qt/preferencesdialog.cpp...
-19/20 files checked 95% done
-Checking ./todotodaysheet.cpp...
-20/20 files checked 100% done
+[./pomotuxdatabase.cpp:282]: (all) Memory leak: np                                                     
+[./pomotuxdatabase.cpp:411]: (all) Memory leak: np                                                     
+[./pomotuxdatabase.cpp:534]: (all) Memory leak: np                                                     
+[./pomotuxdatabase.cpp:676]: (all) Memory leak: np                                                     
+[./qt/gui_activityinventorysheet.cpp:66]: (all) Memory leak: dialog                                    
+[./qt/gui_activityinventorysheet.cpp:128]: (all) Memory leak: dialog                                   
+[./qt/gui_activityinventorysheet.hpp:59]: (all) Memory leak: GuiActivityInventorySheet::wTTS           
+[./qt/gui_activityinventorysheet.hpp:61]: (all) Memory leak: GuiActivityInventorySheet::wPreferences   
+[./qt/gui_activityinventorysheet.hpp:71]: (all) Memory leak: GuiActivityInventorySheet::mpAis          
+[./qt/gui_activityinventorysheet.hpp:76]: (all) Memory leak: GuiActivityInventorySheet::mpTts          
+[./qt/ui_gui_activityinventorysheet.h:33]: (all) Memory leak: Ui_GuiActivityInventorySheet::actionLoad_database                                                                                               
+[./qt/ui_gui_activityinventorysheet.h:34]: (all) Memory leak: Ui_GuiActivityInventorySheet::actionLoad_database_2                                                                                             
+[./qt/ui_gui_activityinventorysheet.h:35]: (all) Memory leak: Ui_GuiActivityInventorySheet::actionExit 
+[./qt/ui_gui_activityinventorysheet.h:36]: (all) Memory leak: Ui_GuiActivityInventorySheet::actionPreferences                                                                                                 
+[./qt/ui_gui_activityinventorysheet.h:37]: (all) Memory leak: Ui_GuiActivityInventorySheet::actionHelp 
+[./qt/ui_gui_activityinventorysheet.h:38]: (all) Memory leak: Ui_GuiActivityInventorySheet::actionAbout
+[./qt/ui_gui_activityinventorysheet.h:39]: (all) Memory leak: Ui_GuiActivityInventorySheet::centralWidget                                                                                                     
+[./qt/ui_gui_activityinventorysheet.h:40]: (all) Memory leak: Ui_GuiActivityInventorySheet::verticalLayoutWidget                                                                                              
+[./qt/ui_gui_activityinventorysheet.h:41]: (all) Memory leak: Ui_GuiActivityInventorySheet::titleLayout
+[./qt/ui_gui_activityinventorysheet.h:42]: (all) Memory leak: Ui_GuiActivityInventorySheet::titleLabel 
+[./qt/ui_gui_activityinventorysheet.h:43]: (all) Memory leak: Ui_GuiActivityInventorySheet::horizontalLayoutWidget                                                                                            
+[./qt/ui_gui_activityinventorysheet.h:44]: (all) Memory leak: Ui_GuiActivityInventorySheet::aisTableLayout                                                                                                    
+[./qt/ui_gui_activityinventorysheet.h:45]: (all) Memory leak: Ui_GuiActivityInventorySheet::ais        
+[./qt/ui_gui_activityinventorysheet.h:46]: (all) Memory leak: Ui_GuiActivityInventorySheet::horizontalLayoutWidget_2                                                                                          
+[./qt/ui_gui_activityinventorysheet.h:47]: (all) Memory leak: Ui_GuiActivityInventorySheet::buttonsLayout                                                                                                     
+[./qt/ui_gui_activityinventorysheet.h:48]: (all) Memory leak: Ui_GuiActivityInventorySheet::NewActivityButton                                                                                                 
+[./qt/ui_gui_activityinventorysheet.h:49]: (all) Memory leak: Ui_GuiActivityInventorySheet::ModifyActivityButton                                                                                              
+[./qt/ui_gui_activityinventorysheet.h:50]: (all) Memory leak: Ui_GuiActivityInventorySheet::DeleteActivityButton                                                                                              
+[./qt/ui_gui_activityinventorysheet.h:51]: (all) Memory leak: Ui_GuiActivityInventorySheet::InsertInTTSButton                                                                                                 
+[./qt/ui_gui_activityinventorysheet.h:52]: (all) Memory leak: Ui_GuiActivityInventorySheet::wTtsButton 
+[./qt/ui_gui_activityinventorysheet.h:53]: (all) Memory leak: Ui_GuiActivityInventorySheet::menuBar    
+[./qt/ui_gui_activityinventorysheet.h:54]: (all) Memory leak: Ui_GuiActivityInventorySheet::menuFile   
+[./qt/ui_gui_activityinventorysheet.h:55]: (all) Memory leak: Ui_GuiActivityInventorySheet::menuOption 
+[./qt/ui_gui_activityinventorysheet.h:56]: (all) Memory leak: Ui_GuiActivityInventorySheet::menuHelp   
+[./qt/ui_gui_activityinventorysheet.h:30]: (style) The class 'Ui_GuiActivityInventorySheet' has no constructor                                                                                                
+[./qt/ui_gui_activityinventorysheet.h:30]: (error) Class Ui_GuiActivityInventorySheet which is inherited by class GuiActivityInventorySheet does not have a virtual destructor                                
+[./qt/gui_todotodaysheet.cpp:252]: (all) Memory leak: dialog                                           
+[./qt/gui_todotodaysheet.hpp:58]: (all) Memory leak: TodoTodaySheetGui::mpPomodoro                     
+[./qt/gui_todotodaysheet.hpp:68]: (all) Memory leak: TodoTodaySheetGui::mpCurrentActivity              
+[./qt/gui_todotodaysheet.hpp:73]: (all) Memory leak: TodoTodaySheetGui::mpTts                          
+[./qt/gui_todotodaysheet.hpp:78]: (all) Memory leak: TodoTodaySheetGui::mpAis                          
+[./qt/ui_gui_todotodaysheet.h:34]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::centralWidget         
+[./qt/ui_gui_todotodaysheet.h:35]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::verticalLayoutWidget  
+[./qt/ui_gui_todotodaysheet.h:36]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::verticalLayout        
+[./qt/ui_gui_todotodaysheet.h:37]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::label                 
+[./qt/ui_gui_todotodaysheet.h:38]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::tableWidget           
+[./qt/ui_gui_todotodaysheet.h:39]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::groupBox              
+[./qt/ui_gui_todotodaysheet.h:40]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::verticalLayoutWidget_2
+[./qt/ui_gui_todotodaysheet.h:41]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::verticalLayout_2      
+[./qt/ui_gui_todotodaysheet.h:42]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::StartActivityButton   
+[./qt/ui_gui_todotodaysheet.h:43]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::StopActivityButton    
+[./qt/ui_gui_todotodaysheet.h:44]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::groupBox_2            
+[./qt/ui_gui_todotodaysheet.h:45]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::gridLayoutWidget      
+[./qt/ui_gui_todotodaysheet.h:46]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::gridLayout            
+[./qt/ui_gui_todotodaysheet.h:47]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::MoveMagnitudeBox      
+[./qt/ui_gui_todotodaysheet.h:48]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::MoveDirectionBox      
+[./qt/ui_gui_todotodaysheet.h:49]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::MoveActivityButton    
+[./qt/ui_gui_todotodaysheet.h:50]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::PostponeActivityButton
+[./qt/ui_gui_todotodaysheet.h:51]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::FinishActivityButton  
+[./qt/ui_gui_todotodaysheet.h:52]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::newActivityButton     
+[./qt/ui_gui_todotodaysheet.h:53]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::label_2               
+[./qt/ui_gui_todotodaysheet.h:54]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::label_3               
+[./qt/ui_gui_todotodaysheet.h:55]: (all) Memory leak: Ui_TodoTodaySheetGuiClass::NumInterruptions      
+[./qt/ui_gui_todotodaysheet.h:31]: (style) The class 'Ui_TodoTodaySheetGuiClass' has no constructor    
+[./qt/ui_insertnewactivity.h:32]: (all) Memory leak: Ui_InsertNewActivity::horizontalLayoutWidget      
+[./qt/ui_insertnewactivity.h:33]: (all) Memory leak: Ui_InsertNewActivity::iaTitleLayout               
+[./qt/ui_insertnewactivity.h:34]: (all) Memory leak: Ui_InsertNewActivity::label                       
+[./qt/ui_insertnewactivity.h:35]: (all) Memory leak: Ui_InsertNewActivity::horizontalLayoutWidget_2    
+[./qt/ui_insertnewactivity.h:36]: (all) Memory leak: Ui_InsertNewActivity::iaDescriptionLayout         
+[./qt/ui_insertnewactivity.h:37]: (all) Memory leak: Ui_InsertNewActivity::iaDescriptionLabel          
+[./qt/ui_insertnewactivity.h:38]: (all) Memory leak: Ui_InsertNewActivity::iaDescriptionLineEdit       
+[./qt/ui_insertnewactivity.h:39]: (all) Memory leak: Ui_InsertNewActivity::horizontalLayoutWidget_3    
+[./qt/ui_insertnewactivity.h:40]: (all) Memory leak: Ui_InsertNewActivity::iaDeadlineLayout            
+[./qt/ui_insertnewactivity.h:41]: (all) Memory leak: Ui_InsertNewActivity::iaDeadlineLabel             
+[./qt/ui_insertnewactivity.h:42]: (all) Memory leak: Ui_InsertNewActivity::iaDeadlineSpinBox           
+[./qt/ui_insertnewactivity.h:43]: (all) Memory leak: Ui_InsertNewActivity::horizontalSpacer            
+[./qt/ui_insertnewactivity.h:44]: (all) Memory leak: Ui_InsertNewActivity::ButtonBox                   
+[./qt/ui_insertnewactivity.h:29]: (style) The class 'Ui_InsertNewActivity' has no constructor          
+[./qt/ui_insertnewactivity.h:29]: (error) Class Ui_InsertNewActivity which is inherited by class InsertNewActivity does not have a virtual destructor                                                         
+[./qt/main.cpp:25]: (all) Memory leak: db                                                              
+[./qt/main.cpp:25]: (all) Memory leak: w                                                               
+[./qt/mainwindow.hpp:32]: (all) Memory leak: MainWindow::wAIS                                          
+[./qt/mainwindow.hpp:33]: (all) Memory leak: MainWindow::wTTS                                          
+[./qt/ui_modifyactivity.h:32]: (all) Memory leak: Ui_ModifyAnActivity::horizontalLayoutWidget          
+[./qt/ui_modifyactivity.h:33]: (all) Memory leak: Ui_ModifyAnActivity::mATitleLayout                   
+[./qt/ui_modifyactivity.h:34]: (all) Memory leak: Ui_ModifyAnActivity::mATitleLabel                    
+[./qt/ui_modifyactivity.h:35]: (all) Memory leak: Ui_ModifyAnActivity::horizontalLayoutWidget_2        
+[./qt/ui_modifyactivity.h:36]: (all) Memory leak: Ui_ModifyAnActivity::mADescriptionLayout             
+[./qt/ui_modifyactivity.h:37]: (all) Memory leak: Ui_ModifyAnActivity::mADescriptionlabel              
+[./qt/ui_modifyactivity.h:38]: (all) Memory leak: Ui_ModifyAnActivity::mADescriptionLineEdit           
+[./qt/ui_modifyactivity.h:39]: (all) Memory leak: Ui_ModifyAnActivity::horizontalLayoutWidget_3        
+[./qt/ui_modifyactivity.h:40]: (all) Memory leak: Ui_ModifyAnActivity::mADeadlineLayout                
+[./qt/ui_modifyactivity.h:41]: (all) Memory leak: Ui_ModifyAnActivity::mADeadlineLabel                 
+[./qt/ui_modifyactivity.h:42]: (all) Memory leak: Ui_ModifyAnActivity::mADeadlineSpinBox               
+[./qt/ui_modifyactivity.h:43]: (all) Memory leak: Ui_ModifyAnActivity::horizontalSpacer                
+[./qt/ui_modifyactivity.h:44]: (all) Memory leak: Ui_ModifyAnActivity::ButtonBox                       
+[./qt/ui_modifyactivity.h:29]: (style) The class 'Ui_ModifyAnActivity' has no constructor              
+[./qt/ui_modifyactivity.h:29]: (error) Class Ui_ModifyAnActivity which is inherited by class ModifyAnActivity does not have a virtual destructor                                                              
+[./qt/ui_preferencesdialog.h:34]: (all) Memory leak: Ui_PreferencesDialog::comboBox                    
+[./qt/ui_preferencesdialog.h:35]: (all) Memory leak: Ui_PreferencesDialog::verticalLayoutWidget        
+[./qt/ui_preferencesdialog.h:36]: (all) Memory leak: Ui_PreferencesDialog::verticalLayout              
+[./qt/ui_preferencesdialog.h:37]: (all) Memory leak: Ui_PreferencesDialog::label                       
+[./qt/ui_preferencesdialog.h:38]: (all) Memory leak: Ui_PreferencesDialog::label_3                     
+[./qt/ui_preferencesdialog.h:39]: (all) Memory leak: Ui_PreferencesDialog::label_2                     
+[./qt/ui_preferencesdialog.h:40]: (all) Memory leak: Ui_PreferencesDialog::horizontalLayoutWidget      
+[./qt/ui_preferencesdialog.h:41]: (all) Memory leak: Ui_PreferencesDialog::horizontalLayout            
+[./qt/ui_preferencesdialog.h:42]: (all) Memory leak: Ui_PreferencesDialog::minutes                     
+[./qt/ui_preferencesdialog.h:43]: (all) Memory leak: Ui_PreferencesDialog::buttonBox                   
+[./qt/ui_preferencesdialog.h:44]: (all) Memory leak: Ui_PreferencesDialog::horizontalLayoutWidget_2    
+[./qt/ui_preferencesdialog.h:45]: (all) Memory leak: Ui_PreferencesDialog::horizontalLayout_2          
+[./qt/ui_preferencesdialog.h:46]: (all) Memory leak: Ui_PreferencesDialog::lineEdit                    
+[./qt/ui_preferencesdialog.h:47]: (all) Memory leak: Ui_PreferencesDialog::toolButton                  
+[./qt/ui_preferencesdialog.h:31]: (style) The class 'Ui_PreferencesDialog' has no constructor          
+[./qt/ui_preferencesdialog.h:31]: (error) Class Ui_PreferencesDialog which is inherited by class PreferencesDialog does not have a virtual destructor 
