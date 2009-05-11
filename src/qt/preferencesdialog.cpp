@@ -31,10 +31,10 @@ void PreferencesDialog::changeEvent(QEvent *e)
 
 void PreferencesDialog::on_buttonBox_accepted()
 {
-
+    emit DatabaseUpdated();
 }
 
 void PreferencesDialog::on_buttonBox_rejected()
 {
-    this->close();
+    this->hide();
 }

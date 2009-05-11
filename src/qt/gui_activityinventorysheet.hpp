@@ -10,6 +10,7 @@
 #include <time.h>
 #include "preferencesdialog.hpp"
 #include "gui_todotodaysheet.hpp"
+
 using namespace litesql;
 using namespace pomotuxdatabase;
 using namespace std;
@@ -56,6 +57,8 @@ private:
      * A pointer to the Todo Today Window
      */
     TodoTodaySheetGui *wTTS;
+
+    PreferencesDialog *wPreferences;
 
     /**
      * A pointer to the litesql database in use
@@ -116,6 +119,9 @@ private slots:
      */
     void on_NewActivityButton_clicked();
 
+    /**
+      * Prompt the Preference Window
+      */
     void Preferences();
 
     /**
