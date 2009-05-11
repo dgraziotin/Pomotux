@@ -89,7 +89,7 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
             this->mpPomodoro->show();
             throw PomotuxException("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
         }
-        this->ui->newActivityButton->setText("Interruption");
+        this->ui->newActivityButton->setText("Handle Interruption");
     } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());

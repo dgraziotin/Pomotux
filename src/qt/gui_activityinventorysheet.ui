@@ -93,7 +93,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>120</x>
       <y>400</y>
-      <width>461</width>
+      <width>479</width>
       <height>80</height>
      </rect>
     </property>
@@ -147,7 +147,7 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <property name="text">
-     <string>Go To Todo Today Sheet -&gt;</string>
+     <string>Todo Today Sheet</string>
     </property>
    </widget>
   </widget>
@@ -157,7 +157,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>744</width>
-     <height>25</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
