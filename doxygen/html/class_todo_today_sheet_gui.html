@@ -37,7 +37,10 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#b1cc722873b146a4cc7d542b5e23181c">~TodoTodaySheetGui</a> ()</td></tr>
 
 <tr><td colspan="2"><br><h2>Private Slots</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#5f38aaa1595755f1708539539573962a">on_MoveActivityButton_clicked</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#af52f99f9b640bd38469265e6c478c17">on_newActivityButton_clicked</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="5f38aaa1595755f1708539539573962a"></a><!-- doxytag: member="TodoTodaySheetGui::on_MoveActivityButton_clicked" ref="5f38aaa1595755f1708539539573962a" args="()" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><b>on_MoveActivityButton_clicked</b> ()</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#40ec5f0141fdc739e98dae75d984526c">on_StopActivityButton_clicked</a> ()</td></tr>
 
@@ -67,7 +70,11 @@
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#822a32a8e113008f880a380e42be3d02">mpTts</a></td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classpomotuxdatabase_1_1_activity_inventory_sheet.html">ActivityInventorySheet</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#286e0646ded8fc47d19d6b9e1a3e8d48">mpAis</a></td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#1a534196496e2ae35168acd7fd670917">mConsecutivePomodoro</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">time_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#7a4686af6f1962c1de68b4191ea8860d">mNow</a></td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="70c5777ca3f71c6c27713452b4b0c057"></a><!-- doxytag: member="TodoTodaySheetGui::ui" ref="70c5777ca3f71c6c27713452b4b0c057" args="" -->
 Ui::TodoTodaySheetGuiClass *&nbsp;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
@@ -172,7 +179,7 @@ Processes the change of priority once all prelimary controls are made. It is cal
     <tr><td valign="top"></td><td valign="top"><em>activityToMove</em>&nbsp;</td><td>a reference to an Activity obj representing the activity to move </td></tr>
   </table>
 </dl>
-<dl class="see" compact><dt><b>See also:</b></dt><dd><a class="el" href="class_todo_today_sheet_gui.html#5f38aaa1595755f1708539539573962a">on_MoveActivityButton_clicked()</a> </dd></dl>
+<dl class="see" compact><dt><b>See also:</b></dt><dd>on_MoveActivityButton_clicked() </dd></dl>
 
 </div>
 </div><p>
@@ -233,12 +240,12 @@ Signal launched when the database is updated
 Finishes the selected Activity by throwing it out of the Todo Today Sheet and setting the activity flag mIsFinished to true 
 </div>
 </div><p>
-<a class="anchor" name="5f38aaa1595755f1708539539573962a"></a><!-- doxytag: member="TodoTodaySheetGui::on_MoveActivityButton_clicked" ref="5f38aaa1595755f1708539539573962a" args="()" -->
+<a class="anchor" name="af52f99f9b640bd38469265e6c478c17"></a><!-- doxytag: member="TodoTodaySheetGui::on_newActivityButton_clicked" ref="af52f99f9b640bd38469265e6c478c17" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void TodoTodaySheetGui::on_MoveActivityButton_clicked           </td>
+          <td class="memname">void TodoTodaySheetGui::on_newActivityButton_clicked           </td>
           <td>(</td>
           <td class="paramname">          </td>
           <td>&nbsp;)&nbsp;</td>
@@ -387,6 +394,36 @@ Handles the signal of <a class="el" href="class_todo_today_sheet_gui.html#20051a
 An integer to store the number of consecutive pomodoro taken by the user in order to inform him when to take a longer break 
 </div>
 </div><p>
+<a class="anchor" name="7a4686af6f1962c1de68b4191ea8860d"></a><!-- doxytag: member="TodoTodaySheetGui::mNow" ref="7a4686af6f1962c1de68b4191ea8860d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">time_t <a class="el" href="class_todo_today_sheet_gui.html#7a4686af6f1962c1de68b4191ea8860d">TodoTodaySheetGui::mNow</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+A variable for saving the current date 
+</div>
+</div><p>
+<a class="anchor" name="286e0646ded8fc47d19d6b9e1a3e8d48"></a><!-- doxytag: member="TodoTodaySheetGui::mpAis" ref="286e0646ded8fc47d19d6b9e1a3e8d48" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classpomotuxdatabase_1_1_activity_inventory_sheet.html">ActivityInventorySheet</a>* <a class="el" href="class_todo_today_sheet_gui.html#286e0646ded8fc47d19d6b9e1a3e8d48">TodoTodaySheetGui::mpAis</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+A pointer to the Activity Inventory Sheet in use 
+</div>
+</div><p>
 <a class="anchor" name="afd0e1a84defd6c5f4c0b0ac839aeba3"></a><!-- doxytag: member="TodoTodaySheetGui::mpCurrentActivity" ref="afd0e1a84defd6c5f4c0b0ac839aeba3" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -450,7 +487,7 @@ A pointer to the Todo Today Sheet in use
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>/home/bodom_lx/Projects/Pomotux/src/qt/<a class="el" href="gui__todotodaysheet_8hpp_source.html">gui_todotodaysheet.hpp</a><li>/home/bodom_lx/Projects/Pomotux/src/qt/gui_todotodaysheet.cpp</ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 4 12:44:27 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 11 11:30:32 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>

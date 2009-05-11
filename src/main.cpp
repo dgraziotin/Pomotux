@@ -175,9 +175,9 @@ int main(int argc, char **argv)
                     vector<Activity> currentTTSActivities = ActivityInTTS::get<Activity>(db,Expr(),
                                                             ActivityInTTS::TodoTodaySheet==1).orderBy(Activity::MOrder).all();
                     cout << "\nTTS" << endl;
-                    cout << "ID  | DESCRIPTION | order | deadline" << endl;
+                    cout << "ID  | DESCRIPTION | order | insertion date |deadline" << endl;
                     for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++)
-                        cout << (*i).id << " | " << (*i).mDescription << " | " << (*i).mOrder << (*i).mDeadline << "\n";
+                        cout << (*i).id << " | " << (*i).mDescription << " | " << (*i).mOrder << " | " << (*i).GetInsertionDate() << " | " << (*i).GetDeadline() << "\n";
                 }
                 controller = 1;
             } else if (controller < 1 || controller > 9) {

@@ -46,6 +46,12 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="647f5b1d2f5990a7b4a102acf2848e34"></a><!-- doxytag: member="pomotuxdatabase::Activity::operator=" ref="647f5b1d2f5990a7b4a102acf2848e34" args="(const Activity &amp;obj)" -->
 const <a class="el" href="classpomotuxdatabase_1_1_activity.html">Activity</a> &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classpomotuxdatabase_1_1_activity.html">Activity</a> &amp;obj)</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpomotuxdatabase_1_1_activity.html#20aef8e4a14e1d9876e4bd39737319a6">HumanizeDate</a> (std::string unixDate)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpomotuxdatabase_1_1_activity.html#b842d72204fa9d5adb4f6e707245808f">GetInsertionDate</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual std::string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpomotuxdatabase_1_1_activity.html#f3a72714df906b9bf3ac7984b4ba64c7">GetDeadline</a> ()</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpomotuxdatabase_1_1_activity.html#3278ba4861da92dc6669e7f2cda5df22">Delete</a> (const litesql::Database &amp;rDatabase, <a class="el" href="classpomotuxdatabase_1_1_activity.html">Activity</a> &amp;rCurrentActivity, <a class="el" href="classpomotuxdatabase_1_1_activity_inventory_sheet.html">ActivityInventorySheet</a> &amp;rAIS, <a class="el" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> &amp;rTTS)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpomotuxdatabase_1_1_activity.html#c86789663dcb7a53f17bed164d6d4d47">Modify</a> (const litesql::Database &amp;rDatabase, <a class="el" href="classpomotuxdatabase_1_1_activity.html">Activity</a> &amp;rCurrentActivity, int newDeadline, std::string newDescription)</td></tr>
@@ -199,6 +205,83 @@ This method deletes an activity in a clever way. <br>
 <a class="el" href="classpomotuxdatabase_1_1_activity_in_a_i_s.html">ActivityInAIS</a> <p>
 <a class="el" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> <p>
 <a class="el" href="classpomotuxdatabase_1_1_activity_in_t_t_s.html">ActivityInTTS</a> </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="f3a72714df906b9bf3ac7984b4ba64c7"></a><!-- doxytag: member="pomotuxdatabase::Activity::GetDeadline" ref="f3a72714df906b9bf3ac7984b4ba64c7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string pomotuxdatabase::Activity::GetDeadline           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Acts as a getter for <a class="el" href="classpomotuxdatabase_1_1_activity.html#069abd160965cd5086ad883a7efba78e">Activity::mDeadline</a>, as LiteSQL-0.3.3 has some bugs when using the public attribute directly. <br>
+ The method is just a wrapper for Activity::HumanizeDate(mDeadline) <dl class="see" compact><dt><b>See also:</b></dt><dd><a class="el" href="classpomotuxdatabase_1_1_activity.html">Activity</a> <p>
+<a class="el" href="classpomotuxdatabase_1_1_activity.html#20aef8e4a14e1d9876e4bd39737319a6">HumanizeDate</a> <p>
+<a href="http://apps.sourceforge.net/trac/litesql">http://apps.sourceforge.net/trac/litesql</a> <p>
+<a href="http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch">http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch</a> <p>
+<a href="http://en.wikipedia.org/wiki/ISO_8601">http://en.wikipedia.org/wiki/ISO_8601</a> </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="b842d72204fa9d5adb4f6e707245808f"></a><!-- doxytag: member="pomotuxdatabase::Activity::GetInsertionDate" ref="b842d72204fa9d5adb4f6e707245808f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string pomotuxdatabase::Activity::GetInsertionDate           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Acts as a getter for <a class="el" href="classpomotuxdatabase_1_1_activity.html#a6a6aa6aab6cdd0d7d35eabe4276723e">Activity::mInsertionDate</a>, as LiteSQL-0.3.3 has some bugs when using the public attribute directly. <br>
+ The method is just a wrapper for Activity::HumanizeDate(mInsertionDate) <dl class="see" compact><dt><b>See also:</b></dt><dd><a class="el" href="classpomotuxdatabase_1_1_activity.html">Activity</a> <p>
+<a class="el" href="classpomotuxdatabase_1_1_activity.html#20aef8e4a14e1d9876e4bd39737319a6">HumanizeDate</a> <p>
+<a href="http://apps.sourceforge.net/trac/litesql">http://apps.sourceforge.net/trac/litesql</a> <p>
+<a href="http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch">http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch</a> <p>
+<a href="http://en.wikipedia.org/wiki/ISO_8601">http://en.wikipedia.org/wiki/ISO_8601</a> </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="20aef8e4a14e1d9876e4bd39737319a6"></a><!-- doxytag: member="pomotuxdatabase::Activity::HumanizeDate" ref="20aef8e4a14e1d9876e4bd39737319a6" args="(std::string unixDate)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string pomotuxdatabase::Activity::HumanizeDate           </td>
+          <td>(</td>
+          <td class="paramtype">std::string&nbsp;</td>
+          <td class="paramname"> <em>unixDate</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Converts a Unix date stored in a string to a human readable date (ISO 8601) again as a string. <br>
+ This method makes sense using litesql-0.3.3 with Scott McFarland patch against LiteSQL datetime.ccp. <br>
+ This method should probably change when litesql-0.3.4 comes out. <dl class="see" compact><dt><b>See also:</b></dt><dd><a class="el" href="classpomotuxdatabase_1_1_activity.html">Activity</a> <p>
+<a href="http://apps.sourceforge.net/trac/litesql">http://apps.sourceforge.net/trac/litesql</a> <p>
+<a href="http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch">http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch</a> <p>
+<a href="http://en.wikipedia.org/wiki/ISO_8601">http://en.wikipedia.org/wiki/ISO_8601</a> </dd></dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>a ISO 8601 string containing the date (example: 2009-05-11) </dd></dl>
 
 </div>
 </div><p>
@@ -362,7 +445,7 @@ The order of the activity when scheduled in TTS
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>/home/bodom_lx/Projects/Pomotux/src/<a class="el" href="pomotuxdatabase_8hpp_source.html">pomotuxdatabase.hpp</a><li>/home/bodom_lx/Projects/Pomotux/src/activity.cpp<li>/home/bodom_lx/Projects/Pomotux/src/pomotuxdatabase.cpp</ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 4 12:44:27 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 11 11:30:32 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>

@@ -1,3 +1,5 @@
+QT (4.5.0) - http://www.qtsoftware.com/downloads
 Sqlite3 (3.6.12)- http://www.sqlite.org
 LiteSQL (0.3.3) - http://apps.sourceforge.net/trac/litesql/
-QT (4.5.0) - http://www.qtsoftware.com/downloads
+				  Please correct litesql-0.3.3 sources with this patch: 
+				  http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
