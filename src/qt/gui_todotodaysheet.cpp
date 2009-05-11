@@ -3,6 +3,7 @@
 #include "ui_gui_todotodaysheet.h"
 #include <cstring>
 #include <QMessageBox>
+#include <QSound>
 #define mins 0
 #define secs 5
 
@@ -93,6 +94,14 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->mpCurrentActivity->update();
         this->mpPomodoro->hide();
         this->mConsecutivePomodoro=(this->mConsecutivePomodoro+1);
+        bool ciao = QSound::isAvailable();
+        if (!ciao) {
+            QMessageBox msgBox;
+            msgBox.setText("ERROR");
+            msgBox.exec();
+        }
+        QSound ring("mysound.wav");
+        ring.play();
         emit DatabaseUpdated();
         if (this->mConsecutivePomodoro>=4) {
             this->mConsecutivePomodoro=0;
