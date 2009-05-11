@@ -167,8 +167,8 @@ void GuiActivityInventorySheet::RefreshTable()
         QTableWidgetItem *currentActivity=new QTableWidgetItem[7];
         currentActivity[0].setText(QString((toString((*i).id)).c_str()));
         currentActivity[1].setText(QString((toString((*i).mDescription)).c_str()));
-        currentActivity[2].setText(QString((toString((*i).mInsertionDate)).c_str()));
-        currentActivity[3].setText(QString((toString((*i).mDeadline)).c_str()));
+        currentActivity[2].setText(QString(((*i).GetInsertionDate()).c_str()));
+        currentActivity[3].setText(QString(((*i).GetDeadline()).c_str()));
         currentActivity[4].setText(QString((toString((*i).mOrder)).c_str()));
         currentActivity[5].setText(QString((toString((*i).mNumPomodoro)).c_str()));
         currentActivity[6].setText(((*i).mIsFinished)?"finished":"not finished");
