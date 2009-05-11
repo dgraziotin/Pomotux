@@ -16,13 +16,14 @@ using namespace std;
 TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         : QMainWindow(parent), ui(new Ui::TodoTodaySheetGuiClass)
 {
-
+    this->mNumInterruption = 0;
     this->mpDatabase = &database;
     this->mpDatabase->begin();
     this->mpCurrentActivity = new Activity(*(this->mpDatabase));
     this->mConsecutivePomodoro=0;
     this->mNow = time(NULL);
     ui->setupUi(this);
+    this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
     try {
         this->mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(this->mpDatabase), TodoTodaySheet::Id == 1).one());
     } catch (NotFound e) {
@@ -256,7 +257,11 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
         msgBox.setText("SQL Error");
         msgBox.exec();
     }
-
+    if (this->mpPomodoro->IsRunning())
+    {
+        this->mNumInterruption = this->mNumInterruption + 1;
+        this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
+    }
     emit DatabaseUpdated();
 }
 

@@ -58,6 +58,11 @@ private:
     Pomodoro *mpPomodoro;
 
     /**
+    * A variable for counting the interruption during the session
+    */
+    int mNumInterruption;
+
+    /**
     * A pointer to the Activity that is at the momenent under a Pomodoro
     */
     Activity *mpCurrentActivity;
