@@ -153,10 +153,9 @@ private slots:
     void RefreshTable();
 
     /**
-    * Handles the signal of DatabaseUpdated() received whever the preferences are changed and starts using the new parameters
-    * @see DatabaseUpdated()
+    *
     */
-    void RefreshPreferences();
+   // void RefreshPreferences();
 
 signals:
     /**
