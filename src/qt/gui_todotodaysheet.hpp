@@ -156,7 +156,7 @@ private slots:
     * Handles the signal of DatabaseUpdated() received whever the preferences are changed and starts using the new parameters
     * @see DatabaseUpdated()
     */
-    RefreshPreferences();
+    void RefreshPreferences();
 
 signals:
     /**
