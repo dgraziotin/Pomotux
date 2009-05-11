@@ -100,14 +100,9 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->mpCurrentActivity->update();
         this->mpPomodoro->hide();
         this->mConsecutivePomodoro=(this->mConsecutivePomodoro+1);
-        bool ciao = QSound::isAvailable();
-        if (!ciao) {
-            QMessageBox msgBox;
-            msgBox.setText("ERROR");
-            msgBox.exec();
-        }
-        QSound ring("mysound.wav");
-        ring.play();
+      //if (!QSound::isAvailable()) throw PomotuxException("Unable to Play the Sound");
+       QSound ring("mysound.wav");
+       ring.play();
         emit DatabaseUpdated();
         if (this->mConsecutivePomodoro>=4) {
             this->mConsecutivePomodoro=0;
@@ -188,13 +183,6 @@ void TodoTodaySheetGui::on_StopActivityButton_clicked()
     }
 }
 
-TodoTodaySheetGui::~TodoTodaySheetGui()
-{
-    this->mpTts->~Persistent();
-    this->mpCurrentActivity->~Persistent();
-    this->mpPomodoro->~Pomodoro();
-    delete ui;
-}
 
 void TodoTodaySheetGui::ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
 {
@@ -265,4 +253,13 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
     }
 
     emit DatabaseUpdated();
+}
+
+
+TodoTodaySheetGui::~TodoTodaySheetGui()
+{
+    this->mpTts->~Persistent();
+    this->mpCurrentActivity->~Persistent();
+    this->mpPomodoro->~Pomodoro();
+    delete ui;
 }
