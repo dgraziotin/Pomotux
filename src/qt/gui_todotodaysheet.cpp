@@ -16,10 +16,12 @@ using namespace std;
 TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         : QMainWindow(parent), ui(new Ui::TodoTodaySheetGuiClass)
 {
+
     this->mpDatabase = &database;
     this->mpDatabase->begin();
     this->mpCurrentActivity = new Activity(*(this->mpDatabase));
     this->mConsecutivePomodoro=0;
+    this->mNow = time(NULL);
     ui->setupUi(this);
     try {
         this->mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(this->mpDatabase), TodoTodaySheet::Id == 1).one());
