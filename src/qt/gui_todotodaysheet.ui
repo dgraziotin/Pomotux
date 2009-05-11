@@ -56,9 +56,9 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>70</y>
+      <y>60</y>
       <width>181</width>
-      <height>351</height>
+      <height>361</height>
      </rect>
     </property>
     <property name="title">
@@ -70,7 +70,7 @@
        <x>10</x>
        <y>20</y>
        <width>164</width>
-       <height>321</height>
+       <height>341</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -142,6 +142,13 @@
        <widget class="QPushButton" name="FinishActivityButton">
         <property name="text">
          <string>finish</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="newActivityButton">
+        <property name="text">
+         <string>new activity</string>
         </property>
        </widget>
       </item>

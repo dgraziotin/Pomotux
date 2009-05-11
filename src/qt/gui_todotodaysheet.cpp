@@ -27,6 +27,12 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         this->mpTts = new TodoTodaySheet(*(this->mpDatabase));
         this->mpTts->update();
     }
+    try {
+        this->mpAis = new ActivityInventorySheet(select<ActivityInventorySheet>(*(mpDatabase), ActivityInventorySheet::Id == 1).one());
+    } catch (NotFound e) {
+        this->mpAis = new ActivityInventorySheet(*(mpDatabase));
+        this->mpAis->update();
+    }
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     this->mpPomodoro = new Pomodoro(0,mins,secs);
     connect(this->mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
@@ -221,4 +227,42 @@ void TodoTodaySheetGui::on_MoveActivityButton_clicked()
         msgBox.setText(e.getMessage());
         msgBox.exec();
     }
+}
+
+void TodoTodaySheetGui::on_newActivityButton_clicked()
+{
+    try {
+        /*Calling the window for creating a new Activity*/
+        InsertNewActivity *dialog = new InsertNewActivity(0, *(mpDatabase));
+        dialog->show();
+        dialog->exec();
+
+        /*Control if the user pressed ok or cancel*/
+        float mainController = dialog->getController();
+        if (mainController > 0) {
+            QString description = dialog->getDescription();
+            string sDescription = description.toStdString();
+
+            float value = dialog->getDayToDeadline();
+            time_t deadlineInt = mNow + value*(86400);
+
+            Activity current(*(mpDatabase));
+            current.mDescription = sDescription;
+            current.mInsertionDate = (int) mNow;
+            current.mDeadline = (int)deadlineInt;
+            current.update();
+            
+
+            mpAis->InsertActivity(*(mpDatabase),current,*(mpAis));
+        }
+    } catch (NotFound e) {
+        mpAis = new ActivityInventorySheet(*(mpDatabase));
+        mpAis->update();
+    }catch (Except e) {
+        QMessageBox msgBox;
+        msgBox.setText("SQL Error");
+        msgBox.exec();
+    }
+
+    emit DatabaseUpdated();
 }

@@ -6,6 +6,8 @@
 #include "../pomotuxdatabase.hpp"
 #include "pomodoro.hpp"
 #include "pomotuxexception.hpp"
+#include "insertnewactivity.hpp"
+#include <time.h>
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -66,10 +68,19 @@ private:
     TodoTodaySheet *mpTts;
 
     /**
+     * A pointer to the Activity Inventory Sheet in use
+     */
+    ActivityInventorySheet* mpAis;
+
+    /**
        * An integer to store the number of consecutive pomodoro taken by the user in order to inform him when to take a longer break
        */
     int mConsecutivePomodoro;
 
+    /**
+     * A variable for saving the current date
+     */
+    time_t mNow;
 
     Ui::TodoTodaySheetGuiClass *ui;
     /**
@@ -94,6 +105,7 @@ private slots:
     *
     * @see ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
     */
+    void on_newActivityButton_clicked();
     void on_MoveActivityButton_clicked();
 
     /**
