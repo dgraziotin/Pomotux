@@ -86,6 +86,7 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
             this->mpPomodoro->show();
             throw PomotuxException("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
         }
+        this->ui->newActivityButton->setText("Interruption");
     } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
@@ -108,6 +109,7 @@ void TodoTodaySheetGui::PomodoroFinished()
             this->mConsecutivePomodoro=0;
             throw PomotuxException("You Should now take a break longer than usual");
         }
+        this->ui->newActivityButton->setText("new activity");
         throw PomotuxException("Now you Should take a short break");
     } catch (Except e) {
         QMessageBox msgBox;
@@ -124,6 +126,7 @@ void TodoTodaySheetGui::PomodoroBroken()
 {
     this->mpPomodoro->hide();
     this->mpPomodoro->Reset();
+    this->ui->newActivityButton->setText("new activity");
     QMessageBox msgBox;
     msgBox.setText("Pomodoro Broken");
     msgBox.exec();
@@ -259,6 +262,7 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
 TodoTodaySheetGui::~TodoTodaySheetGui()
 {
     this->mpTts->~Persistent();
+    this->mpAis->~Persistent();
     this->mpCurrentActivity->~Persistent();
     this->mpPomodoro->~Pomodoro();
     delete ui;

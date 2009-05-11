@@ -14,7 +14,8 @@ SOURCES += gui_activityinventorysheet.cpp \
     ../activityinventorysheet.cpp \
     ../pomotuxdatabase.cpp \
     ../todotodaysheet.cpp \
-    pomotuxexception.cpp
+    pomotuxexception.cpp \
+    preferencesdialog.cpp
 HEADERS += gui_activityinventorysheet.hpp \
     insertnewactivity.hpp \
     mainwindow.hpp \
@@ -22,12 +23,14 @@ HEADERS += gui_activityinventorysheet.hpp \
     pomodoro.hpp \
     gui_todotodaysheet.hpp \
     ../pomotuxdatabase.hpp \
-    pomotuxexception.hpp
+    pomotuxexception.hpp \
+    preferencesdialog.hpp
 FORMS += gui_activityinventorysheet.ui \
     insertnewactivity.ui \
     mainwindow.ui \
     modifyactivity.ui \
-    gui_todotodaysheet.ui
+    gui_todotodaysheet.ui \
+    preferencesdialog.ui
 OTHER_FILES += Pomotux.pro.user \
     pomodoro.pro \
     Pomotux.pro.user

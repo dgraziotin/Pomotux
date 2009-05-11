@@ -8,6 +8,7 @@
 #include <litesql.hpp>
 #include "../pomotuxdatabase.hpp"
 #include <time.h>
+#include "preferencesdialog.hpp"
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -108,6 +109,8 @@ private slots:
      * Creates in the database a new activity. The user can insert a description and a deadline
      */
     void on_NewActivityButton_clicked();
+
+    void Preferences();
 
     /**
      * Handles the signal of DatabaseUpdated() received whenever the database is modified and refreshes the window

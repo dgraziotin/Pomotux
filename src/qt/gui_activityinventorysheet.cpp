@@ -19,6 +19,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     }
 
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    connect(this->ui->actionPreferences,SIGNAL(triggered()),this,SLOT(Preferences()));
     emit DatabaseUpdated();
 }
 
@@ -181,3 +182,10 @@ void GuiActivityInventorySheet::RefreshTable()
     }
 }
 
+void GuiActivityInventorySheet::Preferences()
+{
+    PreferencesDialog edit;
+    edit.show();
+    edit.exec();
+    float mainController = edit.get
+}
