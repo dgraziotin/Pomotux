@@ -37,7 +37,10 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#dd538efb42e83c5c75469dc254c00c40">~GuiActivityInventorySheet</a> ()</td></tr>
 
 <tr><td colspan="2"><br><h2>Private Slots</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#0a592a3659f4ca249a9ba3c6ab852607">on_InsertInTTSButton_clicked</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#32ec7a5208a619ac85ba364ef68e617d">on_wTtsButton_clicked</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="0a592a3659f4ca249a9ba3c6ab852607"></a><!-- doxytag: member="GuiActivityInventorySheet::on_InsertInTTSButton_clicked" ref="0a592a3659f4ca249a9ba3c6ab852607" args="()" -->
+void&nbsp;</td><td class="memItemRight" valign="bottom"><b>on_InsertInTTSButton_clicked</b> ()</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#080b985b475fc1ba529cc595d2e38efd">on_ModifyActivityButton_clicked</a> ()</td></tr>
 
@@ -47,6 +50,8 @@
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#5990395fbfe4cbecff03ff25904fd2cc">on_NewActivityButton_clicked</a> ()</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#2c1931eb7e7f136e2e780c4fab41c7e4">Preferences</a> ()</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#032595da9263c61fa53688d7a37749f9">RefreshTable</a> ()</td></tr>
 
 <tr><td colspan="2"><br><h2>Private Member Functions</h2></td></tr>
@@ -54,6 +59,11 @@
 
 <tr><td colspan="2"><br><h2>Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">Ui::GuiActivityInventorySheet *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#3719b0d89620e705cb3a8934fa64f349">ui</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="class_todo_today_sheet_gui.html">TodoTodaySheetGui</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#9153ff78dcae48a5b45cc040d49568c7">wTTS</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="ded4c95d8e155d28cf0295a44cc476a6"></a><!-- doxytag: member="GuiActivityInventorySheet::wPreferences" ref="ded4c95d8e155d28cf0295a44cc476a6" args="" -->
+PreferencesDialog *&nbsp;</td><td class="memItemRight" valign="bottom"><b>wPreferences</b></td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_gui_activity_inventory_sheet.html#77b84d908e4bcec3c64eaa95a25f5f3f">mpDatabase</a></td></tr>
 
@@ -203,25 +213,6 @@ Set a variable with the row value selected by the user
 Delete from the database an activity selected by the user 
 </div>
 </div><p>
-<a class="anchor" name="0a592a3659f4ca249a9ba3c6ab852607"></a><!-- doxytag: member="GuiActivityInventorySheet::on_InsertInTTSButton_clicked" ref="0a592a3659f4ca249a9ba3c6ab852607" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void GuiActivityInventorySheet::on_InsertInTTSButton_clicked           </td>
-          <td>(</td>
-          <td class="paramname">          </td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [private, slot]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-Insert the selected Activity into the Todo Today Sheet 
-</div>
-</div><p>
 <a class="anchor" name="080b985b475fc1ba529cc595d2e38efd"></a><!-- doxytag: member="GuiActivityInventorySheet::on_ModifyActivityButton_clicked" ref="080b985b475fc1ba529cc595d2e38efd" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -258,6 +249,44 @@ Give the possibility to the user to change the description and the deadline to a
 
 <p>
 Creates in the database a new activity. The user can insert a description and a deadline 
+</div>
+</div><p>
+<a class="anchor" name="32ec7a5208a619ac85ba364ef68e617d"></a><!-- doxytag: member="GuiActivityInventorySheet::on_wTtsButton_clicked" ref="32ec7a5208a619ac85ba364ef68e617d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GuiActivityInventorySheet::on_wTtsButton_clicked           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Insert the selected Activity into the Todo Today Sheet 
+</div>
+</div><p>
+<a class="anchor" name="2c1931eb7e7f136e2e780c4fab41c7e4"></a><!-- doxytag: member="GuiActivityInventorySheet::Preferences" ref="2c1931eb7e7f136e2e780c4fab41c7e4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GuiActivityInventorySheet::Preferences           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Prompt the Preference Window 
 </div>
 </div><p>
 <a class="anchor" name="032595da9263c61fa53688d7a37749f9"></a><!-- doxytag: member="GuiActivityInventorySheet::RefreshTable" ref="032595da9263c61fa53688d7a37749f9" args="()" -->
@@ -371,10 +400,25 @@ A float for memorizing the row selected by the user
 Default pointer created by qtCreator 
 </div>
 </div><p>
+<a class="anchor" name="9153ff78dcae48a5b45cc040d49568c7"></a><!-- doxytag: member="GuiActivityInventorySheet::wTTS" ref="9153ff78dcae48a5b45cc040d49568c7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_todo_today_sheet_gui.html">TodoTodaySheetGui</a>* <a class="el" href="class_gui_activity_inventory_sheet.html#9153ff78dcae48a5b45cc040d49568c7">GuiActivityInventorySheet::wTTS</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+A pointer to the Todo Today Window 
+</div>
+</div><p>
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>/home/bodom_lx/Projects/Pomotux/src/qt/<a class="el" href="gui__activityinventorysheet_8hpp_source.html">gui_activityinventorysheet.hpp</a><li>/home/bodom_lx/Projects/Pomotux/src/qt/gui_activityinventorysheet.cpp</ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 11 11:30:32 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 11 15:12:10 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>

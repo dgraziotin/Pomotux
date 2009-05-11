@@ -56,6 +56,8 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>on_MoveActivityButton
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#07f1731ddca5ff28e4fece0fa7103dc1">RefreshTable</a> ()</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#0337629e5a36817c110a256366889ad0">RefreshPreferences</a> ()</td></tr>
+
 <tr><td colspan="2"><br><h2>Private Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#c053d5e45aafe1578021318e54a51db4">Cleaner</a> ()</td></tr>
 
@@ -65,6 +67,8 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>on_MoveActivityButton
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#6003946ee3ca0a35fc1d0906f912971a">mpDatabase</a></td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="class_pomodoro.html">Pomodoro</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#f8aeccd2ea1719c2f9ff26e0a743597c">mpPomodoro</a></td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#5a7a38d7ad776f0147232e99bfc1ad7c">mNumInterruption</a></td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classpomotuxdatabase_1_1_activity.html">Activity</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_todo_today_sheet_gui.html#afd0e1a84defd6c5f4c0b0ac839aeba3">mpCurrentActivity</a></td></tr>
 
@@ -358,6 +362,26 @@ Handles the signal of <a class="el" href="class_todo_today_sheet_gui.html#05b30f
 
 </div>
 </div><p>
+<a class="anchor" name="0337629e5a36817c110a256366889ad0"></a><!-- doxytag: member="TodoTodaySheetGui::RefreshPreferences" ref="0337629e5a36817c110a256366889ad0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TodoTodaySheetGui::RefreshPreferences           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Handles the signal of <a class="el" href="class_todo_today_sheet_gui.html#20051a83651c164dea4d9bc0d0ab21c5">DatabaseUpdated()</a> received whever the preferences are changed and starts using the new parameters <dl class="see" compact><dt><b>See also:</b></dt><dd><a class="el" href="class_todo_today_sheet_gui.html#20051a83651c164dea4d9bc0d0ab21c5">DatabaseUpdated()</a> </dd></dl>
+
+</div>
+</div><p>
 <a class="anchor" name="07f1731ddca5ff28e4fece0fa7103dc1"></a><!-- doxytag: member="TodoTodaySheetGui::RefreshTable" ref="07f1731ddca5ff28e4fece0fa7103dc1" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -407,6 +431,21 @@ An integer to store the number of consecutive pomodoro taken by the user in orde
 
 <p>
 A variable for saving the current date 
+</div>
+</div><p>
+<a class="anchor" name="5a7a38d7ad776f0147232e99bfc1ad7c"></a><!-- doxytag: member="TodoTodaySheetGui::mNumInterruption" ref="5a7a38d7ad776f0147232e99bfc1ad7c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_todo_today_sheet_gui.html#5a7a38d7ad776f0147232e99bfc1ad7c">TodoTodaySheetGui::mNumInterruption</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+A variable for counting the interruption during the session 
 </div>
 </div><p>
 <a class="anchor" name="286e0646ded8fc47d19d6b9e1a3e8d48"></a><!-- doxytag: member="TodoTodaySheetGui::mpAis" ref="286e0646ded8fc47d19d6b9e1a3e8d48" args="" -->
@@ -487,7 +526,7 @@ A pointer to the Todo Today Sheet in use
 <hr>The documentation for this class was generated from the following files:<ul>
 <li>/home/bodom_lx/Projects/Pomotux/src/qt/<a class="el" href="gui__todotodaysheet_8hpp_source.html">gui_todotodaysheet.hpp</a><li>/home/bodom_lx/Projects/Pomotux/src/qt/gui_todotodaysheet.cpp</ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 11 11:30:32 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 11 15:12:10 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>

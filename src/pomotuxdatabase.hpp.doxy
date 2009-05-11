@@ -10,6 +10,13 @@ class Activity;
 class ActivityInventorySheet;
 class TodoTodaySheet;
 class Settings;
+
+/**
+ * Relationship class between Activities and Activity Inventory Sheet
+ * @see Activity
+ * @see ActivityInventorySheet
+ * @see http://apps.sourceforge.net/trac/litesql/
+ */
 class ActivityInAIS {
 public:
     /**
@@ -377,6 +384,11 @@ public:
     std::auto_ptr<TodoTodaySheet> upcastCopy();
 };
 std::ostream & operator<<(std::ostream& os, TodoTodaySheet o);
+
+/**
+ * Holds settings of a single user
+ * @see http://apps.sourceforge.net/trac/litesql/
+ */
 class Settings : public litesql::Persistent {
 public:
     class Own {
@@ -387,12 +399,21 @@ public:
     static const std::string table__;
     static const std::string sequence__;
     static const litesql::FieldType Id;
+	/**
+     * An automatically generated attribute that stores the id of the option
+     */
     litesql::Field<int> id;
     static const litesql::FieldType Type;
     litesql::Field<std::string> type;
     static const litesql::FieldType MName;
+	/**
+     * Stores the name of the option field we want to memorize
+     */
     litesql::Field<std::string> mName;
     static const litesql::FieldType MValue;
+	/**
+     * Stores the value of the option field
+     */
     litesql::Field<std::string> mValue;
 protected:
     void defaults();
