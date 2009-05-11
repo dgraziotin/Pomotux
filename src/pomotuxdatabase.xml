@@ -72,6 +72,12 @@
         </method>
     </object>
 	
+	<!-- maps AIS object into database -->
+    <object name="Settings">
+        <field name="mName" type="string"></field>
+        <field name="mValue" type="string"></field>
+    </object>
+	
 	<!-- creates a many-to-one relationship between Activity and AIS -->
     <relation name="ActivityInAIS">
         <relate object="Activity" limit="many"></relate>

@@ -540,6 +540,150 @@ std::ostream & operator<<(std::ostream& os, TodoTodaySheet o) {
     os << "-------------------------------------" << std::endl;
     return os;
 }
+const litesql::FieldType Settings::Own::Id("id_","INTEGER","Settings_");
+const std::string Settings::type__("Settings");
+const std::string Settings::table__("Settings_");
+const std::string Settings::sequence__("Settings_seq");
+const litesql::FieldType Settings::Id("id_","INTEGER",table__);
+const litesql::FieldType Settings::Type("type_","TEXT",table__);
+const litesql::FieldType Settings::MName("mName_","TEXT",table__);
+const litesql::FieldType Settings::MValue("mValue_","TEXT",table__);
+void Settings::defaults() {
+    id = 0;
+}
+Settings::Settings(const litesql::Database& db)
+     : litesql::Persistent(db), id(Id), type(Type), mName(MName), mValue(MValue) {
+    defaults();
+}
+Settings::Settings(const litesql::Database& db, const litesql::Record& rec)
+     : litesql::Persistent(db, rec), id(Id), type(Type), mName(MName), mValue(MValue) {
+    defaults();
+    size_t size = (rec.size() > 4) ? 4 : rec.size();
+    switch(size) {
+    case 4: mValue = convert<const std::string&, std::string>(rec[3]);
+        mValue.setModified(false);
+    case 3: mName = convert<const std::string&, std::string>(rec[2]);
+        mName.setModified(false);
+    case 2: type = convert<const std::string&, std::string>(rec[1]);
+        type.setModified(false);
+    case 1: id = convert<const std::string&, int>(rec[0]);
+        id.setModified(false);
+    }
+}
+Settings::Settings(const Settings& obj)
+     : litesql::Persistent(obj), id(obj.id), type(obj.type), mName(obj.mName), mValue(obj.mValue) {
+}
+const Settings& Settings::operator=(const Settings& obj) {
+    if (this != &obj) {
+        id = obj.id;
+        type = obj.type;
+        mName = obj.mName;
+        mValue = obj.mValue;
+    }
+    litesql::Persistent::operator=(obj);
+    return *this;
+}
+std::string Settings::insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs) {
+    tables.push_back(table__);
+    litesql::Record fields;
+    litesql::Record values;
+    fields.push_back(id.name());
+    values.push_back(id);
+    id.setModified(false);
+    fields.push_back(type.name());
+    values.push_back(type);
+    type.setModified(false);
+    fields.push_back(mName.name());
+    values.push_back(mName);
+    mName.setModified(false);
+    fields.push_back(mValue.name());
+    values.push_back(mValue);
+    mValue.setModified(false);
+    fieldRecs.push_back(fields);
+    valueRecs.push_back(values);
+    return litesql::Persistent::insert(tables, fieldRecs, valueRecs, sequence__);
+}
+void Settings::create() {
+    litesql::Record tables;
+    litesql::Records fieldRecs;
+    litesql::Records valueRecs;
+    type = type__;
+    std::string newID = insert(tables, fieldRecs, valueRecs);
+    if (id == 0)
+        id = newID;
+}
+void Settings::addUpdates(Updates& updates) {
+    prepareUpdate(updates, table__);
+    updateField(updates, table__, id);
+    updateField(updates, table__, type);
+    updateField(updates, table__, mName);
+    updateField(updates, table__, mValue);
+}
+void Settings::addIDUpdates(Updates& updates) {
+}
+void Settings::getFieldTypes(std::vector<litesql::FieldType>& ftypes) {
+    ftypes.push_back(Id);
+    ftypes.push_back(Type);
+    ftypes.push_back(MName);
+    ftypes.push_back(MValue);
+}
+void Settings::delRecord() {
+    deleteFromTable(table__, id);
+}
+void Settings::delRelations() {
+}
+void Settings::update() {
+    if (!inDatabase) {
+        create();
+        return;
+    }
+    Updates updates;
+    addUpdates(updates);
+    if (id != oldKey) {
+        if (!typeIsCorrect()) 
+            upcastCopy()->addIDUpdates(updates);
+    }
+    litesql::Persistent::update(updates);
+    oldKey = id;
+}
+void Settings::del() {
+    if (typeIsCorrect() == false) {
+        std::auto_ptr<Settings> p(upcastCopy());
+        p->delRelations();
+        p->onDelete();
+        p->delRecord();
+    } else {
+        onDelete();
+        delRecord();
+    }
+    inDatabase = false;
+}
+bool Settings::typeIsCorrect() {
+    return type == type__;
+}
+std::auto_ptr<Settings> Settings::upcast() {
+    return auto_ptr<Settings>(new Settings(*this));
+}
+std::auto_ptr<Settings> Settings::upcastCopy() {
+    Settings* np = NULL;
+    np->id = id;
+    np->type = type;
+    np->mName = mName;
+    np->mValue = mValue;
+    np->inDatabase = inDatabase;
+    if (!np)
+        np = new Settings(*this);
+    return auto_ptr<Settings>(np);
+}
+std::ostream & operator<<(std::ostream& os, Settings o) {
+    os << "-------------------------------------" << std::endl;
+    os << o.id.name() << " = " << o.id << std::endl;
+    os << o.type.name() << " = " << o.type << std::endl;
+    os << o.mName.name() << " = " << o.mName << std::endl;
+    os << o.mValue.name() << " = " << o.mValue << std::endl;
+    os << "-------------------------------------" << std::endl;
+    return os;
+}
 PomotuxDatabase::PomotuxDatabase(std::string backendType, std::string connInfo)
      : litesql::Database(backendType, connInfo) {
     initialize();
@@ -551,10 +695,12 @@ std::vector<litesql::Database::SchemaItem> PomotuxDatabase::getSchema() const {
         res.push_back(Database::SchemaItem("Activity_seq","sequence","CREATE SEQUENCE Activity_seq START 1 INCREMENT 1"));
         res.push_back(Database::SchemaItem("ActivityInventorySheet_seq","sequence","CREATE SEQUENCE ActivityInventorySheet_seq START 1 INCREMENT 1"));
         res.push_back(Database::SchemaItem("TodoTodaySheet_seq","sequence","CREATE SEQUENCE TodoTodaySheet_seq START 1 INCREMENT 1"));
+        res.push_back(Database::SchemaItem("Settings_seq","sequence","CREATE SEQUENCE Settings_seq START 1 INCREMENT 1"));
     }
     res.push_back(Database::SchemaItem("Activity_","table","CREATE TABLE Activity_ (id_ " + backend->getRowIDType() + ",type_ TEXT,mDescription_ TEXT,mInsertionDate_ INTEGER,mDeadline_ INTEGER,mNumPomodoro_ INTEGER,mOrder_ INTEGER,mIsFinished_ INTEGER)"));
     res.push_back(Database::SchemaItem("ActivityInventorySheet_","table","CREATE TABLE ActivityInventorySheet_ (id_ " + backend->getRowIDType() + ",type_ TEXT)"));
     res.push_back(Database::SchemaItem("TodoTodaySheet_","table","CREATE TABLE TodoTodaySheet_ (id_ " + backend->getRowIDType() + ",type_ TEXT)"));
+    res.push_back(Database::SchemaItem("Settings_","table","CREATE TABLE Settings_ (id_ " + backend->getRowIDType() + ",type_ TEXT,mName_ TEXT,mValue_ TEXT)"));
     res.push_back(Database::SchemaItem("_06044cc54d2aba326c362937595d5709","table","CREATE TABLE _06044cc54d2aba326c362937595d5709 (Activity1 INTEGER UNIQUE,ActivityInventorySheet2 INTEGER)"));
     res.push_back(Database::SchemaItem("Activity_TodoTodaySheet_","table","CREATE TABLE Activity_TodoTodaySheet_ (Activity1 INTEGER UNIQUE,TodoTodaySheet2 INTEGER)"));
     res.push_back(Database::SchemaItem("_cb57b43da17da05f58b6c4cb99b69ab1","index","CREATE INDEX _cb57b43da17da05f58b6c4cb99b69ab1 ON _06044cc54d2aba326c362937595d5709 (Activity1)"));

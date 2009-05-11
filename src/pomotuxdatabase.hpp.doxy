@@ -9,12 +9,7 @@ namespace pomotuxdatabase {
 class Activity;
 class ActivityInventorySheet;
 class TodoTodaySheet;
-/**
- * Relationship class between Activities and Activity Inventory Sheet.
- * @see Activity
- * @see ActivityInventorySheet
- * @see http://apps.sourceforge.net/trac/litesql/
- */
+class Settings;
 class ActivityInAIS {
 public:
     /**
@@ -127,6 +122,39 @@ public:
     Activity(const litesql::Database& db, const litesql::Record& rec);
     Activity(const Activity& obj);
     const Activity& operator=(const Activity& obj);
+	/**
+     * Converts a Unix date stored in a string to a human readable date (ISO 8601) again as a string. <br/>
+	 * This method makes sense using litesql-0.3.3 with Scott McFarland patch against LiteSQL datetime.ccp. <br/>
+	 * This method should probably change when litesql-0.3.4 comes out.
+     * @see Activity
+	 * @see http://apps.sourceforge.net/trac/litesql
+	 * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
+	 * @see http://en.wikipedia.org/wiki/ISO_8601
+	 * @return a ISO 8601 string containing the date (example: 2009-05-11)
+     */
+    virtual std::string HumanizeDate(std::string unixDate);
+	/**
+	 * Acts as a getter for Activity::mInsertionDate, as LiteSQL-0.3.3 has some bugs when using the 
+	 * public attribute directly. <br/>
+	 * The method is just a wrapper for Activity::HumanizeDate(mInsertionDate)
+     * @see Activity
+	 * @see HumanizeDate
+	 * @see http://apps.sourceforge.net/trac/litesql
+	 * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
+	 * @see http://en.wikipedia.org/wiki/ISO_8601
+     */
+    virtual std::string GetInsertionDate();
+	/**
+	 * Acts as a getter for Activity::mDeadline, as LiteSQL-0.3.3 has some bugs when using the 
+	 * public attribute directly. <br/>
+	 * The method is just a wrapper for Activity::HumanizeDate(mDeadline)
+     * @see Activity
+	 * @see HumanizeDate
+	 * @see http://apps.sourceforge.net/trac/litesql
+	 * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
+	 * @see http://en.wikipedia.org/wiki/ISO_8601
+     */
+    virtual std::string GetDeadline();
     /**
      * This method deletes an activity in a clever way. <br/>
      * It searches for the activity in the Activity table, as well as in the corresponding relations
@@ -349,6 +377,48 @@ public:
     std::auto_ptr<TodoTodaySheet> upcastCopy();
 };
 std::ostream & operator<<(std::ostream& os, TodoTodaySheet o);
+class Settings : public litesql::Persistent {
+public:
+    class Own {
+    public:
+        static const litesql::FieldType Id;
+    };
+    static const std::string type__;
+    static const std::string table__;
+    static const std::string sequence__;
+    static const litesql::FieldType Id;
+    litesql::Field<int> id;
+    static const litesql::FieldType Type;
+    litesql::Field<std::string> type;
+    static const litesql::FieldType MName;
+    litesql::Field<std::string> mName;
+    static const litesql::FieldType MValue;
+    litesql::Field<std::string> mValue;
+protected:
+    void defaults();
+public:
+    Settings(const litesql::Database& db);
+    Settings(const litesql::Database& db, const litesql::Record& rec);
+    Settings(const Settings& obj);
+    const Settings& operator=(const Settings& obj);
+protected:
+    std::string insert(litesql::Record& tables, litesql::Records& fieldRecs, litesql::Records& valueRecs);
+    void create();
+    virtual void addUpdates(Updates& updates);
+    virtual void addIDUpdates(Updates& updates);
+public:
+    static void getFieldTypes(std::vector<litesql::FieldType>& ftypes);
+protected:
+    virtual void delRecord();
+    virtual void delRelations();
+public:
+    virtual void update();
+    virtual void del();
+    virtual bool typeIsCorrect();
+    std::auto_ptr<Settings> upcast();
+    std::auto_ptr<Settings> upcastCopy();
+};
+std::ostream & operator<<(std::ostream& os, Settings o);
 /**
  * This class describes a Pomotux Database
  * @see http://apps.sourceforge.net/trac/litesql/
