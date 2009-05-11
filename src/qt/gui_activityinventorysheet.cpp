@@ -18,6 +18,9 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
         mpAis->update();
     }
 
+    wTTS = new TodoTodaySheetGui(this,*(this->mpDatabase));
+    connect(wTTS,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    connect(this,SIGNAL(DatabaseUpdated()),wTTS,SLOT(RefreshTable()));
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this->ui->actionPreferences,SIGNAL(triggered()),this,SLOT(Preferences()));
     emit DatabaseUpdated();
@@ -184,8 +187,12 @@ void GuiActivityInventorySheet::RefreshTable()
 
 void GuiActivityInventorySheet::Preferences()
 {
-    PreferencesDialog edit;
+    PreferencesDialog edit(this,*(this->mpDatabase));
     edit.show();
     edit.exec();
-    float mainController = edit.get
+}
+
+void GuiActivityInventorySheet::on_wTtsButton_clicked()
+{
+    this->wTTS->show();
 }

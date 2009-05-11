@@ -1,8 +1,8 @@
 #include <QtGui/QApplication>
-#include "gui_todotodaysheet.hpp"
+#include "gui_activityinventorysheet.hpp"
 #include <litesql.hpp>
 #include "../pomotuxdatabase.hpp"
-#include "mainwindow.hpp"
+
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -19,8 +19,8 @@ int main(int argc, char *argv[])
             db->upgrade();
         db->begin();
         QApplication a(argc, argv);
-        /* MEMORY LEAK: w is not destroyed anywhere */
-        MainWindow *w = new MainWindow(0,*(db));
+
+        GuiActivityInventorySheet *w = new GuiActivityInventorySheet(0,*(db));
         w->show();
         return a.exec();
     } catch (Except e) {

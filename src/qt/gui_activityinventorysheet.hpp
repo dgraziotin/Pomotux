@@ -9,7 +9,7 @@
 #include "../pomotuxdatabase.hpp"
 #include <time.h>
 #include "preferencesdialog.hpp"
-
+#include "gui_todotodaysheet.hpp"
 using namespace litesql;
 using namespace pomotuxdatabase;
 using namespace std;
@@ -53,6 +53,11 @@ private:
     Ui::GuiActivityInventorySheet* ui;
 
     /**
+     * A pointer to the Todo Today Window
+     */
+    TodoTodaySheetGui *wTTS;
+
+    /**
      * A pointer to the litesql database in use
      */
     PomotuxDatabase* mpDatabase;
@@ -88,6 +93,7 @@ private slots:
     /**
      * Insert the selected Activity into the Todo Today Sheet
      */
+    void on_wTtsButton_clicked();
     void on_InsertInTTSButton_clicked();
 
     /**

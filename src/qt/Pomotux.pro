@@ -6,7 +6,6 @@ TEMPLATE = app
 SOURCES += gui_activityinventorysheet.cpp \
     insertnewactivity.cpp \
     main.cpp \
-    mainwindow.cpp \
     modifyactivity.cpp \
     pomodoro.cpp \
     gui_todotodaysheet.cpp \
@@ -18,7 +17,6 @@ SOURCES += gui_activityinventorysheet.cpp \
     preferencesdialog.cpp
 HEADERS += gui_activityinventorysheet.hpp \
     insertnewactivity.hpp \
-    mainwindow.hpp \
     modifyactivity.hpp \
     pomodoro.hpp \
     gui_todotodaysheet.hpp \
@@ -27,7 +25,6 @@ HEADERS += gui_activityinventorysheet.hpp \
     preferencesdialog.hpp
 FORMS += gui_activityinventorysheet.ui \
     insertnewactivity.ui \
-    mainwindow.ui \
     modifyactivity.ui \
     gui_todotodaysheet.ui \
     preferencesdialog.ui

@@ -1,7 +1,12 @@
 #include "preferencesdialog.hpp"
 #include "ui_preferencesdialog.h"
 
-PreferencesDialog::PreferencesDialog(QWidget *parent) :
+
+using namespace litesql;
+using namespace pomotuxdatabase;
+using namespace std;
+
+PreferencesDialog::PreferencesDialog(QWidget *parent,PomotuxDatabase& database) :
     QDialog(parent),
     m_ui(new Ui::PreferencesDialog)
 {
@@ -22,4 +27,14 @@ void PreferencesDialog::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+void PreferencesDialog::on_buttonBox_accepted()
+{
+
+}
+
+void PreferencesDialog::on_buttonBox_rejected()
+{
+    this->close();
 }
