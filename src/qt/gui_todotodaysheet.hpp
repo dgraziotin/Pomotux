@@ -65,6 +65,11 @@ private:
     int mNumInterruption;
 
     /**
+    * A variable for storing the pomodoro length preference in minutes
+    */
+    int mMinutesPomodoroLength;
+
+    /**
     * A pointer to the Activity that is at the momenent under a Pomodoro
     */
     Activity *mpCurrentActivity;
@@ -159,7 +164,7 @@ private slots:
     /**
     *
     */
-   // void RefreshPreferences();
+    void RefreshPreferences();
 
    /**
     * Tries to play a Bell file called mysound.wav in the src/qt directory.<br/>

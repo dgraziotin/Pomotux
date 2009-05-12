@@ -2,8 +2,11 @@
 #define PREFERENCESDIALOG_HPP
 
 #include <QtGui/QDialog>
+#include <QMessageBox>
+#include <cstring>
 #include <litesql.hpp>
 #include "../pomotuxdatabase.hpp"
+#include "pomotuxexception.hpp"
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -25,6 +28,7 @@ protected:
 
 private:
     Ui::PreferencesDialog *m_ui;
+    PomotuxDatabase *mpDatabase;
 
 private slots:
     void on_buttonBox_rejected();

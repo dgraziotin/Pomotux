@@ -69,6 +69,17 @@ public:
        */
     bool IsRunning();
 
+     /**
+       * Getter for mMinutes variable
+       * @return mMinutes
+       */
+    int GetMinutes();
+
+     /**
+       * Setter for mMinutes variable
+       */
+    void SetMinutes(int);
+
     /**
        * Default destructor
        */

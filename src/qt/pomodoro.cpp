@@ -66,6 +66,16 @@ void Pomodoro::ShowTimer()
     display(text);
 }
 
+int Pomodoro::GetMinutes()
+{
+    return this->mMinutes;
+}
+
+void Pomodoro::SetMinutes(int minutes)
+{
+    this->mMinutes=minutes%60;
+}
+
 Pomodoro::~Pomodoro()
 {
     delete this->mpTime;

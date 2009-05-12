@@ -10,7 +10,18 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,PomotuxDatabase& database) 
     QDialog(parent),
     m_ui(new Ui::PreferencesDialog)
 {
+    this->mpDatabase= &database;
+    this->mpDatabase->begin();
     m_ui->setupUi(this);
+
+    try{
+        Settings length= select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
+        this->m_ui->minutes->setValue(atoi(length.mValue));
+    }catch(Except e){
+        QMessageBox msgBox;
+        msgBox.setText("ERROR");
+        msgBox.exec();
+    }
 }
 
 PreferencesDialog::~PreferencesDialog()
@@ -31,7 +42,24 @@ void PreferencesDialog::changeEvent(QEvent *e)
 
 void PreferencesDialog::on_buttonBox_accepted()
 {
+    //this->m_ui->LibraryPath->text();
+    //this->m_ui->SoundFile->currentText();
+    try{
+        Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
+        if(length.mValue!= this->m_ui->minutes->text().toStdString()) length.mValue=this->m_ui->minutes->text().toStdString();
+        length.update();
+    }catch (Except e){
+        QMessageBox msgBox;
+        msgBox.setText("ERROR");
+        msgBox.exec();
+    }catch (PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        msgBox.exec();
+    }
     emit DatabaseUpdated();
+    this->mpDatabase->commit();
+    this->hide();
 }
 
 void PreferencesDialog::on_buttonBox_rejected()

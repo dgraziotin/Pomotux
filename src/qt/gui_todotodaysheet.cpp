@@ -5,7 +5,6 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QSound>
-#define mins 0
 #define secs 5
 
 using namespace litesql;
@@ -17,6 +16,7 @@ using namespace std;
 TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         : QMainWindow(parent), ui(new Ui::TodoTodaySheetGuiClass)
 {
+
     this->mNumInterruption = 0;
     this->mpDatabase = &database;
     this->mpDatabase->begin();
@@ -25,22 +25,33 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
     this->mNow = time(NULL);
     ui->setupUi(this);
     this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
+
     try {
         this->mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(this->mpDatabase), TodoTodaySheet::Id == 1).one());
     } catch (NotFound e) {
         this->mpTts = new TodoTodaySheet(*(this->mpDatabase));
         this->mpTts->update();
     }
+
     try {
         this->mpAis = new ActivityInventorySheet(select<ActivityInventorySheet>(*(mpDatabase), ActivityInventorySheet::Id == 1).one());
     } catch (NotFound e) {
         this->mpAis = new ActivityInventorySheet(*(mpDatabase));
         this->mpAis->update();
     }
+
+    try{
+        Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
+        this->mMinutesPomodoroLength = atoi(length.mValue);
+    }catch (Except e){
+        this->mMinutesPomodoroLength = 25;
+    }
+
+
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this, SIGNAL(SoundAlert()), this, SLOT(PlaySound()));
 
-    this->mpPomodoro = new Pomodoro(0,mins,secs);
+    this->mpPomodoro = new Pomodoro(0,this->mMinutesPomodoroLength,secs);
     connect(this->mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
     connect(this->mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
     emit DatabaseUpdated();
@@ -86,6 +97,7 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
         Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==id,ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
         if (!this->mpPomodoro->IsRunning()) {
             this->mpCurrentActivity = new Activity(current);
+
             this->mpPomodoro->show();
             this->mpPomodoro->Start();
         } else {
@@ -278,6 +290,23 @@ void TodoTodaySheetGui::PlaySound(){
             myProcess.start(program, arguments);
             myProcess.waitForFinished();
         }
+}
+
+void TodoTodaySheetGui::RefreshPreferences()
+{
+    try{
+        Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
+        this->mMinutesPomodoroLength = atoi(length.mValue);
+        this->mpPomodoro->SetMinutes(this->mMinutesPomodoroLength);
+    }catch (Except e){
+        QMessageBox msgBox;
+        msgBox.setText("ERROR");
+        msgBox.exec();
+    }catch (PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        msgBox.exec();
+    }
 }
 
 TodoTodaySheetGui::~TodoTodaySheetGui()
