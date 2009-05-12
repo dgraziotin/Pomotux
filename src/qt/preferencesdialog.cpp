@@ -17,6 +17,11 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,PomotuxDatabase& database) 
     try{
         Settings length= select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
         this->m_ui->minutes->setValue(atoi(length.mValue));
+    }catch (NotFound e){
+        Settings length(*(this->mpDatabase));
+        length.mName= "length";
+        length.mValue = "25";
+        length.update();
     }catch(Except e){
         QMessageBox msgBox;
         msgBox.setText("ERROR");
