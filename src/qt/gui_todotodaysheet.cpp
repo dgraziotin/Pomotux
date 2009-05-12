@@ -40,11 +40,14 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         this->mpAis->update();
     }
 
+    Settings length(*(this->mpDatabase));
     try{
-        Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
+        length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
         this->mMinutesPomodoroLength = atoi(length.mValue);
     }catch (Except e){
         this->mMinutesPomodoroLength = 25;
+        length.mValue= "25";
+        length.update();
     }
 
 
@@ -247,6 +250,7 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
         /*Control if the user pressed ok or cancel*/
         float mainController = dialog->getController();
         if (mainController > 0) {
+
             QString description = dialog->getDescription();
             string sDescription = description.toStdString();
 
@@ -257,10 +261,15 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
             current.mDescription = sDescription;
             current.mInsertionDate = (int) mNow;
             current.mDeadline = (int)deadlineInt;
+            if (current.mDescription=="")throw PomotuxException("For Every Activity must be provided a Description");
             current.update();
-            
-
             mpAis->InsertActivity(*(mpDatabase),current,*(mpAis));
+            if (this->mpPomodoro->IsRunning())
+              {
+                  this->mNumInterruption = this->mNumInterruption + 1;
+                  this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
+             }
+           emit DatabaseUpdated();
         }
     } catch (NotFound e) {
         mpAis = new ActivityInventorySheet(*(mpDatabase));
@@ -269,13 +278,11 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
         QMessageBox msgBox;
         msgBox.setText("SQL Error");
         msgBox.exec();
+    }catch (PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        msgBox.exec();
     }
-    if (this->mpPomodoro->IsRunning())
-    {
-        this->mNumInterruption = this->mNumInterruption + 1;
-        this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
-    }
-    emit DatabaseUpdated();
 }
 
 void TodoTodaySheetGui::PlaySound(){

@@ -48,6 +48,11 @@ void PreferencesDialog::on_buttonBox_accepted()
         Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
         if(length.mValue!= this->m_ui->minutes->text().toStdString()) length.mValue=this->m_ui->minutes->text().toStdString();
         length.update();
+    }catch (NotFound e){
+        Settings length(*(this->mpDatabase));
+        length.mName= "length";
+        length.mValue = "25";
+        length.update();
     }catch (Except e){
         QMessageBox msgBox;
         msgBox.setText("ERROR");

@@ -179,6 +179,9 @@ signals:
       * Signal launched when the database is updated
       */
     void DatabaseUpdated();
+    /**
+      * Signal launched when it is necessary to play a sound
+      */
     void SoundAlert();
 };
 
