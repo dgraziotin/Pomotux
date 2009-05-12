@@ -104,9 +104,10 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->mpCurrentActivity->update();
         this->mpPomodoro->hide();
         this->mConsecutivePomodoro=(this->mConsecutivePomodoro+1);
-      //if (!QSound::isAvailable()) throw PomotuxException("Unable to Play the Sound");
-       QSound ring("mysound.wav");
-       ring.play();
+        if (QSound::isAvailable()){
+            QSound::play(QString("mysound.wav"));
+            throw PomotuxException("BLAH.");
+        }
         emit DatabaseUpdated();
         if (this->mConsecutivePomodoro>=4) {
             this->mConsecutivePomodoro=0;
