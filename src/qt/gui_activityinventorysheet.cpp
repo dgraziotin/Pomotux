@@ -30,6 +30,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
 
 GuiActivityInventorySheet::~GuiActivityInventorySheet()
 {
+    this->mpDatabase->commit();
     this->wPreferences->~PreferencesDialog();
     this->mpTts->~Persistent();
     this->mpAis->~Persistent();
@@ -113,7 +114,7 @@ void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
     float mainController = dialog->getController();
     if (mainController > 0) {
         QString description = dialog->getDescription();
-        float value = dialog->getDayToDeadline();
+        float value = this->mNow+(dialog->getDayToDeadline())*(86400);
         QString idString = this->ui->ais->item(mRow, 0)->text();
         bool ok;
         int id = idString.toInt(&ok, 16);

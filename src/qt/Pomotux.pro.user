@@ -13,6 +13,14 @@
   <value type="QString" >Pomotux</value>
  </data>
  <data>
+  <variable>RunConfiguration0-UseDyldImageSuffix</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseTerminal</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
   <variable>RunConfiguration0-UserSetName</variable>
   <value type="bool" >false</value>
  </data>
@@ -34,7 +42,7 @@
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <value key="QtVersionId" type="int" >0</value>
    <value key="addQDumper" type="" ></value>
-   <value key="buildDirectory" type="QString" >/home/ghost/Projects/SEP/Pomotux/team8/trunk/src/qt</value>
+   <value key="buildDirectory" type="QString" >/home/daniel/Projects/Pomotux/src/qt</value>
   </valuemap>
  </data>
  <data>
@@ -42,50 +50,38 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >COLORTERM=gnome-terminal</value>
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Fi3rdTzgAS,guid=27d26ca1ae42e949af46c5e94a095b12</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-gpqUsQ76Wc,guid=9ee3c7c66e06c621679d9b014a09743f</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
     <value type="QString" >GDMSESSION=default</value>
-    <value type="QString" >GDM_LANG=en_US.UTF-8</value>
+    <value type="QString" >GDM_LANG=it_IT.UTF-8</value>
     <value type="QString" >GDM_XSERVER_LOCATION=local</value>
     <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString" >GNOME_KEYRING_PID=4087</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-0g3OMa/socket</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-ZwvggO/S.gpg-agent:4176:1</value>
-    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/ghost/.gtkrc-1.2-gnome2</value>
-    <value type="QString" >HISTCONTROL=ignoreboth</value>
-    <value type="QString" >HOME=/home/ghost</value>
-    <value type="QString" >LANG=en_US.UTF-8</value>
-    <value type="QString" >LANGUAGE=</value>
-    <value type="QString" >LESSCLOSE=/usr/bin/lesspipe %s %s</value>
-    <value type="QString" >LESSOPEN=| /usr/bin/lesspipe %s</value>
-    <value type="QString" >LOGNAME=ghost</value>
-    <value type="QString" >LS_COLORS=no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.svgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:</value>
-    <value type="QString" >OLDPWD=/home/ghost/Projects/SEP/Pomotux/team8/trunk/src</value>
-    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-ghost</value>
+    <value type="QString" >GNOME_KEYRING_PID=5162</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-3P5Ac6/socket</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-xGWqeF/S.gpg-agent:5270:1</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/echidna21/.gtkrc-1.2-gnome2</value>
+    <value type="QString" >HOME=/home/echidna21</value>
+    <value type="QString" >LANG=it_IT.UTF-8</value>
+    <value type="QString" >LD_LIBRARY_PATH=/opt/qtcreator-1.0.90/lib/qtcreator:</value>
+    <value type="QString" >LOGNAME=echidna21</value>
+    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-echidna21</value>
     <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/ghost/Projects/SEP/Pomotux/team8/trunk/src/qt</value>
+    <value type="QString" >PWD=/opt/qtcreator-1.0.90/bin</value>
     <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/ghost-laptop:/tmp/.ICE-unix/4099</value>
+    <value type="QString" >SESSION_MANAGER=local/21max88:/tmp/.ICE-unix/5173</value>
     <value type="QString" >SHELL=/bin/bash</value>
-    <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=4153</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-0g3OMa/socket.ssh</value>
-    <value type="QString" >TERM=xterm</value>
-    <value type="QString" >USER=ghost</value>
-    <value type="QString" >USERNAME=ghost</value>
-    <value type="QString" >WINDOWID=23081717</value>
-    <value type="QString" >WINDOWPATH=7:7</value>
-    <value type="QString" >XAUTHORITY=/home/ghost/.Xauthority</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-3P5Ac6/ssh</value>
+    <value type="QString" >USER=echidna21</value>
+    <value type="QString" >USERNAME=echidna21</value>
+    <value type="QString" >WINDOWPATH=7</value>
+    <value type="QString" >XAUTHORITY=/home/echidna21/.Xauthority</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=cc0a4547e3a724a7dc5edfcb4a0976a9-1242127121.900061-64311977</value>
-    <value type="QString" >_=/usr/bin/qtcreator</value>
+    <value type="QString" >XDG_SESSION_COOKIE=d6a1940b3b66023d6a8afac549c8b5a1-1242133565.186247-1754977661</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
-    <value type="QString" >/home/ghost/Projects/SEP/Pomotux/team8/trunk/src/qt/Pomotux.pro</value>
+    <value type="QString" >/home/echidna21/Scrivania/sep/src/qt/Pomotux.pro</value>
     <value type="QString" >-spec</value>
     <value type="QString" >/usr/share/qt4/mkspecs/linux-g++</value>
     <value type="QString" >-r</value>
@@ -93,7 +89,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
    <value key="abstractProcess.enabled" type="bool" >false</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/ghost/Projects/SEP/Pomotux/team8/trunk/src/qt</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/echidna21/Scrivania/sep/src/qt</value>
    <value key="buildConfiguration" type="int" >2</value>
   </valuemap>
  </data>
@@ -102,54 +98,42 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >COLORTERM=gnome-terminal</value>
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Fi3rdTzgAS,guid=27d26ca1ae42e949af46c5e94a095b12</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-gpqUsQ76Wc,guid=9ee3c7c66e06c621679d9b014a09743f</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
     <value type="QString" >GDMSESSION=default</value>
-    <value type="QString" >GDM_LANG=en_US.UTF-8</value>
+    <value type="QString" >GDM_LANG=it_IT.UTF-8</value>
     <value type="QString" >GDM_XSERVER_LOCATION=local</value>
     <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString" >GNOME_KEYRING_PID=4087</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-0g3OMa/socket</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-ZwvggO/S.gpg-agent:4176:1</value>
-    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/ghost/.gtkrc-1.2-gnome2</value>
-    <value type="QString" >HISTCONTROL=ignoreboth</value>
-    <value type="QString" >HOME=/home/ghost</value>
-    <value type="QString" >LANG=en_US.UTF-8</value>
-    <value type="QString" >LANGUAGE=</value>
-    <value type="QString" >LESSCLOSE=/usr/bin/lesspipe %s %s</value>
-    <value type="QString" >LESSOPEN=| /usr/bin/lesspipe %s</value>
-    <value type="QString" >LOGNAME=ghost</value>
-    <value type="QString" >LS_COLORS=no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.svgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:</value>
-    <value type="QString" >OLDPWD=/home/ghost/Projects/SEP/Pomotux/team8/trunk/src</value>
-    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-ghost</value>
+    <value type="QString" >GNOME_KEYRING_PID=5162</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-3P5Ac6/socket</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-xGWqeF/S.gpg-agent:5270:1</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/echidna21/.gtkrc-1.2-gnome2</value>
+    <value type="QString" >HOME=/home/echidna21</value>
+    <value type="QString" >LANG=it_IT.UTF-8</value>
+    <value type="QString" >LD_LIBRARY_PATH=/opt/qtcreator-1.0.90/lib/qtcreator:</value>
+    <value type="QString" >LOGNAME=echidna21</value>
+    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-echidna21</value>
     <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/ghost/Projects/SEP/Pomotux/team8/trunk/src/qt</value>
+    <value type="QString" >PWD=/opt/qtcreator-1.0.90/bin</value>
     <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/ghost-laptop:/tmp/.ICE-unix/4099</value>
+    <value type="QString" >SESSION_MANAGER=local/21max88:/tmp/.ICE-unix/5173</value>
     <value type="QString" >SHELL=/bin/bash</value>
-    <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=4153</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-0g3OMa/socket.ssh</value>
-    <value type="QString" >TERM=xterm</value>
-    <value type="QString" >USER=ghost</value>
-    <value type="QString" >USERNAME=ghost</value>
-    <value type="QString" >WINDOWID=23081717</value>
-    <value type="QString" >WINDOWPATH=7:7</value>
-    <value type="QString" >XAUTHORITY=/home/ghost/.Xauthority</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-3P5Ac6/ssh</value>
+    <value type="QString" >USER=echidna21</value>
+    <value type="QString" >USERNAME=echidna21</value>
+    <value type="QString" >WINDOWPATH=7</value>
+    <value type="QString" >XAUTHORITY=/home/echidna21/.Xauthority</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=cc0a4547e3a724a7dc5edfcb4a0976a9-1242127121.900061-64311977</value>
-    <value type="QString" >_=/usr/bin/qtcreator</value>
+    <value type="QString" >XDG_SESSION_COOKIE=d6a1940b3b66023d6a8afac549c8b5a1-1242133565.186247-1754977661</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
     <value type="QString" >-w</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/ghost/Projects/SEP/Pomotux/team8/trunk/src/qt</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/echidna21/Scrivania/sep/src/qt</value>
   </valuemap>
  </data>
  <data>
