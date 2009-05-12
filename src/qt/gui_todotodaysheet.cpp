@@ -100,7 +100,7 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
         Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==id,ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
         if (!this->mpPomodoro->IsRunning()) {
             this->mpCurrentActivity = new Activity(current);
-
+            this->mpPomodoro->Reset();
             this->mpPomodoro->show();
             this->mpPomodoro->Start();
         } else {
@@ -134,10 +134,11 @@ void TodoTodaySheetGui::PomodoroFinished()
         msgBox.setText("ERROR");
         msgBox.exec();
     } catch (PomotuxException e){
+        emit SoundAlert();
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();
-        emit SoundAlert();
+
     }
 }
 
