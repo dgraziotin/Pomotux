@@ -3,6 +3,7 @@
 #include "ui_gui_todotodaysheet.h"
 #include <cstring>
 #include <QMessageBox>
+#include <QProcess>
 #include <QSound>
 #define mins 0
 #define secs 5
@@ -104,9 +105,7 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->mpCurrentActivity->update();
         this->mpPomodoro->hide();
         this->mConsecutivePomodoro=(this->mConsecutivePomodoro+1);
-        if (QSound::isAvailable()){
-            QSound::play(QString("mysound.wav"));
-        }
+        PlaySound();
         emit DatabaseUpdated();
         if (this->mConsecutivePomodoro>=4) {
             this->mConsecutivePomodoro=0;
@@ -265,6 +264,24 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
     emit DatabaseUpdated();
 }
 
+void TodoTodaySheetGui::PlaySound(){
+    // TODO: this is just a hack! fix this method to play a user selected file
+    if (QSound::isAvailable()){
+            QSound::play(QString("mysound.wav"));
+        }else{
+            QString program = "aplay";
+            QStringList arguments;
+            arguments << "mysound.wav";
+            try{
+                QProcess myProcess(this);
+                myProcess.start(program, arguments);
+                myProcess.waitForFinished();
+            }catch(Except e){
+
+            }
+
+        }
+}
 
 TodoTodaySheetGui::~TodoTodaySheetGui()
 {

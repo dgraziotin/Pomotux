@@ -8,6 +8,7 @@
 #include "pomotuxexception.hpp"
 #include "insertnewactivity.hpp"
 #include <time.h>
+#include <QProcess>
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -45,6 +46,7 @@ public:
       * Default Destructor
       */
     ~TodoTodaySheetGui();
+
 
 private:
     /**
@@ -102,6 +104,14 @@ private:
     * @see on_MoveActivityButton_clicked()
     */
     void ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove);
+
+    /**
+    * Tries to play a Bell file called mysound.wav in the src/qt directory.<br/>
+    * First tries to use QSound, which is badly supported by distro maintainers. <br/>
+    * If this fails, it forks and calls aplay to play the wav file. <br/>
+    * If this also fails, it continues silenty. <br/>
+    */
+    void PlaySound();
 
 private slots:
     /**
