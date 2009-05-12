@@ -34,6 +34,7 @@ GuiActivityInventorySheet::~GuiActivityInventorySheet()
     this->wPreferences->~PreferencesDialog();
     this->mpTts->~Persistent();
     this->mpAis->~Persistent();
+    this->mpDatabase->commit();
     delete ui;
 }
 
@@ -116,8 +117,7 @@ void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
         QString description = dialog->getDescription();
         float value = this->mNow+(dialog->getDayToDeadline())*(86400);
         QString idString = this->ui->ais->item(mRow, 0)->text();
-        bool ok;
-        int id = idString.toInt(&ok, 16);
+        int id = idString.toInt();
         Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
         string newDescription = description.toStdString();
         at.Modify(*(mpDatabase), at, value, newDescription);
