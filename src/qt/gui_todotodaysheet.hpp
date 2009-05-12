@@ -105,13 +105,7 @@ private:
     */
     void ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove);
 
-    /**
-    * Tries to play a Bell file called mysound.wav in the src/qt directory.<br/>
-    * First tries to use QSound, which is badly supported by distro maintainers. <br/>
-    * If this fails, it forks and calls aplay to play the wav file. <br/>
-    * If this also fails, it continues silenty. <br/>
-    */
-    void PlaySound();
+
 
 private slots:
     /**
@@ -167,11 +161,20 @@ private slots:
     */
    // void RefreshPreferences();
 
+   /**
+    * Tries to play a Bell file called mysound.wav in the src/qt directory.<br/>
+    * First tries to use QSound, which is badly supported by distro maintainers. <br/>
+    * If this fails, it forks and calls aplay to play the wav file. <br/>
+    * If this also fails, it continues silenty. <br/>
+    */
+    void PlaySound();
+
 signals:
     /**
       * Signal launched when the database is updated
       */
     void DatabaseUpdated();
+    void SoundAlert();
 };
 
 #endif // TODOTODAYSHEETGUI_H

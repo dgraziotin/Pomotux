@@ -38,6 +38,8 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         this->mpAis->update();
     }
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    connect(this, SIGNAL(SoundAlert()), this, SLOT(PlaySound()));
+
     this->mpPomodoro = new Pomodoro(0,mins,secs);
     connect(this->mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
     connect(this->mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
@@ -105,7 +107,6 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->mpCurrentActivity->update();
         this->mpPomodoro->hide();
         this->mConsecutivePomodoro=(this->mConsecutivePomodoro+1);
-        PlaySound();
         emit DatabaseUpdated();
         if (this->mConsecutivePomodoro>=4) {
             this->mConsecutivePomodoro=0;
@@ -117,10 +118,11 @@ void TodoTodaySheetGui::PomodoroFinished()
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
-    } catch (PomotuxException e) {
+    } catch (PomotuxException e){
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();
+        emit SoundAlert();
     }
 }
 
@@ -272,14 +274,9 @@ void TodoTodaySheetGui::PlaySound(){
             QString program = "aplay";
             QStringList arguments;
             arguments << "mysound.wav";
-            try{
-                QProcess myProcess(this);
-                myProcess.start(program, arguments);
-                myProcess.waitForFinished();
-            }catch(Except e){
-
-            }
-
+            QProcess myProcess(this);
+            myProcess.start(program, arguments);
+            myProcess.waitForFinished();
         }
 }
 
