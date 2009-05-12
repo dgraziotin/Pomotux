@@ -129,37 +129,37 @@ public:
     Activity(const litesql::Database& db, const litesql::Record& rec);
     Activity(const Activity& obj);
     const Activity& operator=(const Activity& obj);
-	/**
+    /**
      * Converts a Unix date stored in a string to a human readable date (ISO 8601) again as a string. <br/>
-	 * This method makes sense using litesql-0.3.3 with Scott McFarland patch against LiteSQL datetime.ccp. <br/>
-	 * This method should probably change when litesql-0.3.4 comes out.
+     * This method makes sense using litesql-0.3.3 with Scott McFarland patch against LiteSQL datetime.ccp. <br/>
+     * This method should probably change when litesql-0.3.4 comes out.
      * @see Activity
-	 * @see http://apps.sourceforge.net/trac/litesql
-	 * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
-	 * @see http://en.wikipedia.org/wiki/ISO_8601
-	 * @return a ISO 8601 string containing the date (example: 2009-05-11)
+     * @see http://apps.sourceforge.net/trac/litesql
+     * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
+     * @see http://en.wikipedia.org/wiki/ISO_8601
+     * @return a ISO 8601 string containing the date (example: 2009-05-11)
      */
     virtual std::string HumanizeDate(std::string unixDate);
-	/**
-	 * Acts as a getter for Activity::mInsertionDate, as LiteSQL-0.3.3 has some bugs when using the 
-	 * public attribute directly. <br/>
-	 * The method is just a wrapper for Activity::HumanizeDate(mInsertionDate)
+    /**
+     * Acts as a getter for Activity::mInsertionDate, as LiteSQL-0.3.3 has some bugs when using the
+     * public attribute directly. <br/>
+     * The method is just a wrapper for Activity::HumanizeDate(mInsertionDate)
      * @see Activity
-	 * @see HumanizeDate
-	 * @see http://apps.sourceforge.net/trac/litesql
-	 * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
-	 * @see http://en.wikipedia.org/wiki/ISO_8601
+     * @see HumanizeDate
+     * @see http://apps.sourceforge.net/trac/litesql
+     * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
+     * @see http://en.wikipedia.org/wiki/ISO_8601
      */
     virtual std::string GetInsertionDate();
-	/**
-	 * Acts as a getter for Activity::mDeadline, as LiteSQL-0.3.3 has some bugs when using the 
-	 * public attribute directly. <br/>
-	 * The method is just a wrapper for Activity::HumanizeDate(mDeadline)
+    /**
+     * Acts as a getter for Activity::mDeadline, as LiteSQL-0.3.3 has some bugs when using the
+     * public attribute directly. <br/>
+     * The method is just a wrapper for Activity::HumanizeDate(mDeadline)
      * @see Activity
-	 * @see HumanizeDate
-	 * @see http://apps.sourceforge.net/trac/litesql
-	 * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
-	 * @see http://en.wikipedia.org/wiki/ISO_8601
+     * @see HumanizeDate
+     * @see http://apps.sourceforge.net/trac/litesql
+     * @see http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
+     * @see http://en.wikipedia.org/wiki/ISO_8601
      */
     virtual std::string GetDeadline();
     /**
@@ -399,19 +399,19 @@ public:
     static const std::string table__;
     static const std::string sequence__;
     static const litesql::FieldType Id;
-	/**
+    /**
      * An automatically generated attribute that stores the id of the option
      */
     litesql::Field<int> id;
     static const litesql::FieldType Type;
     litesql::Field<std::string> type;
     static const litesql::FieldType MName;
-	/**
+    /**
      * Stores the name of the option field we want to memorize
      */
     litesql::Field<std::string> mName;
     static const litesql::FieldType MValue;
-	/**
+    /**
      * Stores the value of the option field
      */
     litesql::Field<std::string> mValue;

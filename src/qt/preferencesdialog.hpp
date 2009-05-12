@@ -13,7 +13,7 @@ using namespace pomotuxdatabase;
 using namespace std;
 
 namespace Ui {
-    class PreferencesDialog;
+class PreferencesDialog;
 }
 
 class PreferencesDialog : public QDialog {

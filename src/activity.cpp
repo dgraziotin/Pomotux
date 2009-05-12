@@ -5,7 +5,8 @@ using namespace std;
 using namespace litesql;
 using namespace pomotuxdatabase;
 
-string pomotuxdatabase::Activity::HumanizeDate(string unixDate){
+string pomotuxdatabase::Activity::HumanizeDate(string unixDate)
+{
     int startYear = 1900;   // C dates in tm structure are represented as the number of years from 1900
     int startMonth = 1;     // C months in tm structure are represented as the number of months since january [0-11]
 
@@ -22,10 +23,12 @@ string pomotuxdatabase::Activity::HumanizeDate(string unixDate){
     return humanizedDate.str();
 }
 
-string pomotuxdatabase::Activity::GetInsertionDate(){
+string pomotuxdatabase::Activity::GetInsertionDate()
+{
     return HumanizeDate(this->mInsertionDate);
 }
-string pomotuxdatabase::Activity::GetDeadline(){
+string pomotuxdatabase::Activity::GetDeadline()
+{
     return HumanizeDate(this->mDeadline);
 }
 void pomotuxdatabase::Activity::Delete(const litesql::Database& rDatabase,  Activity& delActivity,  ActivityInventorySheet& rAIS, TodoTodaySheet& rTTS)

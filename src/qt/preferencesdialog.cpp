@@ -7,22 +7,22 @@ using namespace pomotuxdatabase;
 using namespace std;
 
 PreferencesDialog::PreferencesDialog(QWidget *parent,PomotuxDatabase& database) :
-    QDialog(parent),
-    m_ui(new Ui::PreferencesDialog)
+        QDialog(parent),
+        m_ui(new Ui::PreferencesDialog)
 {
     this->mpDatabase= &database;
     this->mpDatabase->begin();
     m_ui->setupUi(this);
 
-    try{
+    try {
         Settings length= select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
         this->m_ui->minutes->setValue(atoi(length.mValue));
-    }catch (NotFound e){
+    } catch (NotFound e) {
         Settings length(*(this->mpDatabase));
         length.mName= "length";
         length.mValue = "25";
         length.update();
-    }catch(Except e){
+    } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
@@ -49,20 +49,20 @@ void PreferencesDialog::on_buttonBox_accepted()
 {
     //this->m_ui->LibraryPath->text();
     //this->m_ui->SoundFile->currentText();
-    try{
+    try {
         Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
-        if(length.mValue!= this->m_ui->minutes->text().toStdString()) length.mValue=this->m_ui->minutes->text().toStdString();
+        if (length.mValue!= this->m_ui->minutes->text().toStdString()) length.mValue=this->m_ui->minutes->text().toStdString();
         length.update();
-    }catch (NotFound e){
+    } catch (NotFound e) {
         Settings length(*(this->mpDatabase));
         length.mName= "length";
         length.mValue = "25";
         length.update();
-    }catch (Except e){
+    } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
-    }catch (PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();

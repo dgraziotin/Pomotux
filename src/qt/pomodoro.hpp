@@ -69,15 +69,15 @@ public:
        */
     bool IsRunning();
 
-     /**
-       * Getter for mMinutes variable
-       * @return mMinutes
-       */
+    /**
+      * Getter for mMinutes variable
+      * @return mMinutes
+      */
     int GetMinutes();
 
-     /**
-       * Setter for mMinutes variable
-       */
+    /**
+      * Setter for mMinutes variable
+      */
     void SetMinutes(int);
 
     /**

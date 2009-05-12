@@ -166,12 +166,12 @@ private slots:
     */
     void RefreshPreferences();
 
-   /**
-    * Tries to play a Bell file called mysound.wav in the src/qt directory.<br/>
-    * First tries to use QSound, which is badly supported by distro maintainers. <br/>
-    * If this fails, it forks and calls aplay to play the wav file. <br/>
-    * If this also fails, it continues silenty. <br/>
-    */
+    /**
+     * Tries to play a Bell file called mysound.wav in the src/qt directory.<br/>
+     * First tries to use QSound, which is badly supported by distro maintainers. <br/>
+     * If this fails, it forks and calls aplay to play the wav file. <br/>
+     * If this also fails, it continues silenty. <br/>
+     */
     void PlaySound();
 
 signals:

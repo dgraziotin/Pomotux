@@ -41,10 +41,10 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
     }
 
     Settings length(*(this->mpDatabase));
-    try{
+    try {
         length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
         this->mMinutesPomodoroLength = atoi(length.mValue);
-    }catch (Except e){
+    } catch (Except e) {
         this->mMinutesPomodoroLength = 25;
         length.mValue= "25";
         length.update();
@@ -127,13 +127,13 @@ void TodoTodaySheetGui::PomodoroFinished()
             this->mConsecutivePomodoro=0;
             throw PomotuxException("You Should now take a break longer than usual");
         }
-        this->ui->newActivityButton->setText("new activity");
+        this->      ui->newActivityButton->setText("new activity");
         throw PomotuxException("Now you Should take a short break");
     } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
-    } catch (PomotuxException e){
+    } catch (PomotuxException e) {
         emit SoundAlert();
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
@@ -265,52 +265,52 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
             if (current.mDescription=="")throw PomotuxException("For Every Activity must be provided a Description");
             current.update();
             mpAis->InsertActivity(*(mpDatabase),current,*(mpAis));
-            if (this->mpPomodoro->IsRunning())
-              {
-                  this->mNumInterruption = this->mNumInterruption + 1;
-                  this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
-             }
-           emit DatabaseUpdated();
+            if (this->mpPomodoro->IsRunning()) {
+                this->mNumInterruption = this->mNumInterruption + 1;
+                this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
+            }
+            emit DatabaseUpdated();
         }
     } catch (NotFound e) {
         mpAis = new ActivityInventorySheet(*(mpDatabase));
         mpAis->update();
-    }catch (Except e) {
+    } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("SQL Error");
         msgBox.exec();
-    }catch (PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();
     }
 }
 
-void TodoTodaySheetGui::PlaySound(){
+void TodoTodaySheetGui::PlaySound()
+{
     // TODO: this is just a hack! fix this method to play a user selected file
-    if (QSound::isAvailable()){
-            QSound::play(QString("mysound.wav"));
-        }else{
-            QString program = "aplay";
-            QStringList arguments;
-            arguments << "mysound.wav";
-            QProcess myProcess(this);
-            myProcess.start(program, arguments);
-            myProcess.waitForFinished();
-        }
+    if (QSound::isAvailable()) {
+        QSound::play(QString("mysound.wav"));
+    } else {
+        QString program = "aplay";
+        QStringList arguments;
+        arguments << "mysound.wav";
+        QProcess myProcess(this);
+        myProcess.start(program, arguments);
+        myProcess.waitForFinished();
+    }
 }
 
 void TodoTodaySheetGui::RefreshPreferences()
 {
-    try{
+    try {
         Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
         this->mMinutesPomodoroLength = atoi(length.mValue);
         this->mpPomodoro->SetMinutes(this->mMinutesPomodoroLength);
-    }catch (Except e){
+    } catch (Except e) {
         QMessageBox msgBox;
         msgBox.setText("ERROR");
         msgBox.exec();
-    }catch (PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();

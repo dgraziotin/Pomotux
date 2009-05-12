@@ -70,7 +70,8 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
     emit DatabaseUpdated();
     ui->DeleteActivityButton->setEnabled(false);
     ui->ModifyActivityButton->setEnabled(false);
-    ui->InsertInTTSButton->setEnabled(false);    ui->DeleteActivityButton->setEnabled(false);
+    ui->InsertInTTSButton->setEnabled(false);
+    ui->DeleteActivityButton->setEnabled(false);
 }
 
 void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
@@ -119,7 +120,7 @@ void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
         Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
         string newDescription = description.toStdString();
         at.Modify(*(mpDatabase), at, value, newDescription);
-            ui->DeleteActivityButton->setEnabled(false);
+        ui->DeleteActivityButton->setEnabled(false);
         emit DatabaseUpdated();
     }
     ui->DeleteActivityButton->setEnabled(false);
