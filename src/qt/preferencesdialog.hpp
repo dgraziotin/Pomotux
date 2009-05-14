@@ -22,7 +22,7 @@ class PreferencesDialog;
   * Preference dialog exanchanges signals with the Todo Today Sheet Window in order to maintain the consistency with user choices
   * and how tasks are actually carried out.
   * This class depends on several libraries: QtGui/QDialog and litesql libraries.
-  * This class uses the taylor-made class PomotuxException to handle internal Exceptions whenever it become necessary
+  * This class uses the taylor-made class PomotuxException to handle internal Exceptions whenever it becomes necessary
   *
   * @see PomotuxExcetion.hpp
   * @see PomotuxDatabase.hpp
