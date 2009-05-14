@@ -61,6 +61,7 @@ private slots:
     /**
       * Rejects all the changes made to Settings it simply hide the window and nothing will be sent to the database
       */
+    void on_SearchLibrary_clicked();
     void on_buttonBox_rejected();
 
     /**

@@ -12,7 +12,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,PomotuxDatabase& database) 
 {
     this->mpDatabase= &database;
     this->mpDatabase->begin();
-    m_ui->setupUi(this);
+    this->m_ui->setupUi(this);
 
     try {
         Settings length= select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
@@ -75,4 +75,9 @@ void PreferencesDialog::on_buttonBox_accepted()
 void PreferencesDialog::on_buttonBox_rejected()
 {
     this->hide();
+}
+
+void PreferencesDialog::on_SearchLibrary_clicked()
+{
+    //QDir
 }
