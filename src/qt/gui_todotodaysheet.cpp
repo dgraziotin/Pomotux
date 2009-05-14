@@ -70,23 +70,31 @@ void  TodoTodaySheetGui::Cleaner()
 
 void TodoTodaySheetGui::RefreshTable()
 {
-    vector<Activity> currentTTSActivities = ActivityInTTS::get<Activity>(*(this->mpDatabase),Expr(),
+    try {
+        vector<Activity> currentTTSActivities = ActivityInTTS::get<Activity>(*(this->mpDatabase),Expr(),
                                             ActivityInTTS::TodoTodaySheet==1).orderBy(Activity::MOrder).all();
-    Cleaner();
-    for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) {
-        int tablePosition= ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow(tablePosition);
-        QTableWidgetItem *currentActivity=new QTableWidgetItem[3];
-        currentActivity[0].setText(QString((toString((*i).id)).c_str()));
-        currentActivity[1].setText(QString((toString((*i).mDescription)).c_str()));
-        currentActivity[2].setText(QString((toString((*i).mNumPomodoro)).c_str()));
-        currentActivity[0].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-        currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-        currentActivity[2].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-        for (int k=0; k<3; k++)
-            ui->tableWidget->setItem(tablePosition,k,&currentActivity[k]);
+        Cleaner();
+        for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) {
+            int tablePosition= ui->tableWidget->rowCount();
+            ui->tableWidget->insertRow(tablePosition);
+            QTableWidgetItem *currentActivity=new QTableWidgetItem[3];
+            currentActivity[0].setText(QString((toString((*i).id)).c_str()));
+            currentActivity[1].setText(QString((toString((*i).mDescription)).c_str()));
+            currentActivity[2].setText(QString((toString((*i).mNumPomodoro)).c_str()));
+            currentActivity[0].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+            currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+            currentActivity[2].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+            for (int k=0; k<3; k++)
+                ui->tableWidget->setItem(tablePosition,k,&currentActivity[k]);
+        }
+        this->ui->MoveMagnitudeBox->setMaximum(ActivityInTTS::get<Activity>(*(this->mpDatabase),Expr()).count());
+    } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
+        QMessageBox msgBox;
+        msgBox.setText(errorMsg.str().c_str());
+        msgBox.exec();
     }
-    this->ui->MoveMagnitudeBox->setMaximum(ActivityInTTS::get<Activity>(*(this->mpDatabase),Expr()).count());
 }
 
 
@@ -108,6 +116,12 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
             throw PomotuxException("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
         }
         this->ui->newActivityButton->setText("Handle Interruption");
+    } catch (Except e){
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
+        QMessageBox msgBox;
+        msgBox.setText(errorMsg.str().c_str());
+        msgBox.exec();
     } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
@@ -130,8 +144,10 @@ void TodoTodaySheetGui::PomodoroFinished()
         this->      ui->newActivityButton->setText("new activity");
         throw PomotuxException("Now you Should take a short break");
     } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
-        msgBox.setText("ERROR");
+        msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
         emit SoundAlert();
@@ -163,9 +179,11 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
             if (this->mpCurrentActivity->id!=current.id || !(this->mpPomodoro->IsRunning()))this->mpTts->PostponeActivity(*(this->mpDatabase),current,*(this->mpTts));
         }
         emit DatabaseUpdated();
-    } catch (NotFound e) {
+    } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
-        msgBox.setText("ERROR");
+        msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
         QMessageBox msgBox;
@@ -187,9 +205,11 @@ void TodoTodaySheetGui::on_FinishActivityButton_clicked()
         if (!(this->mpCurrentActivity==NULL||this->mpCurrentActivity->id!=current.id)&&this->mpPomodoro->IsRunning())throw PomotuxException("current activity could be marked as finished only once current pomodoro is over");
         this->mpTts->FinishActivity(*(this->mpDatabase),current,*(this->mpTts));
         emit DatabaseUpdated();
-    } catch (NotFound e) {
+    } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
-        msgBox.setText("ERROR ");
+        msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
         QMessageBox msgBox;
@@ -230,8 +250,10 @@ void TodoTodaySheetGui::on_MoveActivityButton_clicked()
         if (this->mpPomodoro->IsRunning()&&this->mpCurrentActivity->id==current.id)throw PomotuxException("Could not change priority of the current Activity");
         this->ChangeActivityPriority(ui->MoveMagnitudeBox->value(),(ui->MoveDirectionBox->currentText()=="upward")?-1:1,current);
     } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
-        msgBox.setText("SQL Error");
+        msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
         QMessageBox msgBox;
@@ -275,8 +297,10 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
         mpAis = new ActivityInventorySheet(*(mpDatabase));
         mpAis->update();
     } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
-        msgBox.setText("SQL Error");
+        msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
         QMessageBox msgBox;
@@ -307,8 +331,10 @@ void TodoTodaySheetGui::RefreshPreferences()
         this->mMinutesPomodoroLength = atoi(length.mValue);
         this->mpPomodoro->SetMinutes(this->mMinutesPomodoroLength);
     } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
-        msgBox.setText("ERROR");
+        msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
         QMessageBox msgBox;

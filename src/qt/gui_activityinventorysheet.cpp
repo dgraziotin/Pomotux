@@ -66,7 +66,11 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
             mpDatabase->commit();
         }
     } catch (Except e) {
-        cerr << e << endl;
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
+        QMessageBox msgBox;
+        msgBox.setText(errorMsg.str().c_str());
+        msgBox.exec();
     }
 
     emit DatabaseUpdated();
