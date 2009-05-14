@@ -1,6 +1,7 @@
 #include "preferencesdialog.hpp"
 #include "ui_preferencesdialog.h"
 #include <iostream>
+#include <QFileDialog>
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -61,8 +62,10 @@ void PreferencesDialog::on_buttonBox_accepted()
         length.mValue = "25";
         length.update();
     } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
-        msgBox.setText("ERROR");
+        msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
         QMessageBox msgBox;
@@ -81,5 +84,7 @@ void PreferencesDialog::on_buttonBox_rejected()
 
 void PreferencesDialog::on_SearchLibrary_clicked()
 {
-    //QFileDialog
+    QFileDialog test(this,Qt::Dialog); // Here is Just some testing
+    test.show();
+    test.exec();
 }
