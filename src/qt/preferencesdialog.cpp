@@ -2,6 +2,7 @@
 #include "ui_preferencesdialog.h"
 #include <iostream>
 #include <QFileDialog>
+#include <QDir>
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -85,6 +86,15 @@ void PreferencesDialog::on_buttonBox_rejected()
 void PreferencesDialog::on_SearchLibrary_clicked()
 {
     QFileDialog test(this,Qt::Dialog); // Here is Just some testing
+    test.setWindowTitle("Open");
+    test.setDirectory(QDir::root());
+    test.setViewMode(QFileDialog::Detail);
+
+    QStringList filters;
+    filters << "Audio files (*.wav)";
+    test.setNameFilters(filters);
+
     test.show();
     test.exec();
+
 }

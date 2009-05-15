@@ -21,11 +21,19 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     wTTS = new TodoTodaySheetGui(this,*(this->mpDatabase));
     wPreferences = new PreferencesDialog (this,*(this->mpDatabase));
 
+    // connection of signal required to refresh preferences
     connect(this->wPreferences,SIGNAL(DatabaseUpdated()),this->wTTS,SLOT(RefreshPreferences()));
+
+    // connection of signals for refreshing tables
     connect(this->wTTS,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this,SIGNAL(DatabaseUpdated()),this->wTTS,SLOT(RefreshTable()));
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+
+    // connection of menu bar actions
+    connect(this->ui->actionExit,SIGNAL(triggered()),this,SLOT(close()));
     connect(this->ui->actionPreferences,SIGNAL(triggered()),this,SLOT(Preferences()));
+
+
     emit DatabaseUpdated();
     this->RefreshTable();
     this->ui->ais->setColumnWidth(0, 0);
@@ -38,7 +46,6 @@ GuiActivityInventorySheet::~GuiActivityInventorySheet()
     this->wPreferences->~PreferencesDialog();
     this->mpTts->~Persistent();
     this->mpAis->~Persistent();
-    this->mpDatabase->commit();
     delete ui;
 }
 
