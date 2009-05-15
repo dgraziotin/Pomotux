@@ -57,7 +57,11 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
     this->mpPomodoro = new Pomodoro(0,this->mMinutesPomodoroLength,secs);
     connect(this->mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
     connect(this->mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
+    this->RefreshTable();
+    this->ui->tableWidget->setColumnWidth(0, 0);
+    this->ui->tableWidget->setColumnWidth(1, 405);
     emit DatabaseUpdated();
+
 }
 
 void  TodoTodaySheetGui::Cleaner()
@@ -77,6 +81,8 @@ void TodoTodaySheetGui::RefreshTable()
         for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) {
             int tablePosition= ui->tableWidget->rowCount();
             ui->tableWidget->insertRow(tablePosition);
+            this->ui->tableWidget->setColumnWidth(0, 0);
+            this->ui->tableWidget->setColumnWidth(1, 390);
             QTableWidgetItem *currentActivity=new QTableWidgetItem[3];
             currentActivity[0].setText(QString((toString((*i).id)).c_str()));
             currentActivity[1].setText(QString((toString((*i).mDescription)).c_str()));

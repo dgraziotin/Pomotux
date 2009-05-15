@@ -20,12 +20,16 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
 
     wTTS = new TodoTodaySheetGui(this,*(this->mpDatabase));
     wPreferences = new PreferencesDialog (this,*(this->mpDatabase));
+
     connect(this->wPreferences,SIGNAL(DatabaseUpdated()),this->wTTS,SLOT(RefreshPreferences()));
     connect(this->wTTS,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this,SIGNAL(DatabaseUpdated()),this->wTTS,SLOT(RefreshTable()));
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this->ui->actionPreferences,SIGNAL(triggered()),this,SLOT(Preferences()));
     emit DatabaseUpdated();
+    this->RefreshTable();
+    this->ui->ais->setColumnWidth(0, 0);
+    this->ui->ais->setColumnWidth(1, 440);
 }
 
 GuiActivityInventorySheet::~GuiActivityInventorySheet()
@@ -59,6 +63,7 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
             at.mDescription = sDescription;
             at.mInsertionDate = (int) mNow;
             at.mDeadline = (int)deadlineInt;
+            if (at.mDescription=="")throw PomotuxException("For Every Activity must be provided a Description");
             at.update();
 
             ActivityInventorySheet &cAis = *(mpAis);
@@ -70,6 +75,10 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
         errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
         msgBox.setText(errorMsg.str().c_str());
+        msgBox.exec();
+    } catch (PomotuxException e) {
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
         msgBox.exec();
     }
 
@@ -186,6 +195,8 @@ void GuiActivityInventorySheet::RefreshTable()
     for (vector<Activity>::iterator i = currentAISActivities.begin(); i != currentAISActivities.end(); i++) {
         int tablePosition= ui->ais->rowCount();
         this->ui->ais->insertRow(tablePosition);
+        this->ui->ais->setColumnWidth(0, 0);
+        this->ui->ais->setColumnWidth(1, 440);
         QTableWidgetItem *currentActivity=new QTableWidgetItem[7];
         currentActivity[0].setText(QString((toString((*i).id)).c_str()));
         currentActivity[1].setText(QString((toString((*i).mDescription)).c_str()));

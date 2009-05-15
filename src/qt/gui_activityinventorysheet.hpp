@@ -10,6 +10,7 @@
 #include <time.h>
 #include "preferencesdialog.hpp"
 #include "gui_todotodaysheet.hpp"
+#include "pomotuxexception.hpp"
 
 using namespace litesql;
 using namespace pomotuxdatabase;
