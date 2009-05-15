@@ -31,4 +31,5 @@ FORMS += gui_activityinventorysheet.ui \
 OTHER_FILES += Pomotux.pro.user \
     pomodoro.pro \
     Pomotux.pro.user
-LIBS += -llitesql
+LIBS += -llitesql -lsqlite3 -lpthread
+#LIBS += -Wl,-Bstatic -llitesql -lsqlite3 -lpthread -Wl,-Bdynamic
