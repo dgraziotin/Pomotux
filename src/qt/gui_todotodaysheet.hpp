@@ -167,7 +167,7 @@ private slots:
     void RefreshTable();
 
     /**
-    *
+    * Handles the signal of DatabaseUpdated() received from the preferences dialog everytime preferences are changed
     */
     void RefreshPreferences();
 
