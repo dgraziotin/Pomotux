@@ -56,18 +56,34 @@ private:
       */
     PomotuxDatabase *mpDatabase;
 
+
 private slots:
+
+
+    void on_SearchLibrary_clicked();
 
     /**
       * Rejects all the changes made to Settings it simply hide the window and nothing will be sent to the database
       */
-    void on_SearchLibrary_clicked();
     void on_buttonBox_rejected();
 
     /**
       * Confirms the changes made to Settings and sends the new settings to the database
       */
     void on_buttonBox_accepted();
+
+    /**
+      *Handler of the signal fileselected sent by QFileDialog
+      *@param file a QString representing the absolutepath of a file including file name
+      */
+    void RefreshFile(const QString &);
+
+    /**
+      *Handler of the signal DatabaseUpdated sent internally
+      */
+    void RefreshSettings();
+
+
 signals:
 
     /**

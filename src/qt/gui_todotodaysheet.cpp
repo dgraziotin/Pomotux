@@ -3,6 +3,7 @@
 #include "ui_gui_todotodaysheet.h"
 #include <cstring>
 #include <QMessageBox>
+#include <QFileInfo>
 #include <QProcess>
 #include <QSound>
 #define secs 5
@@ -39,22 +40,13 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         this->mpAis = new ActivityInventorySheet(*(mpDatabase));
         this->mpAis->update();
     }
+    this->mpPomodoro = new Pomodoro(0,0,secs);
 
-    Settings length(*(this->mpDatabase));
-    try {
-        length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
-        this->mMinutesPomodoroLength = atoi(length.mValue);
-    } catch (Except e) {
-        this->mMinutesPomodoroLength = 25;
-        length.mValue= "25";
-        length.update();
-    }
-
-
+    this->RefreshPreferences();
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this, SIGNAL(SoundAlert()), this, SLOT(PlaySound()));
 
-    this->mpPomodoro = new Pomodoro(0,this->mMinutesPomodoroLength,secs);
+
     connect(this->mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
     connect(this->mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
     this->RefreshTable();
@@ -319,11 +311,11 @@ void TodoTodaySheetGui::PlaySound()
 {
     // TODO: this is just a hack! fix this method to play a user selected file
     if (QSound::isAvailable()) {
-        QSound::play(QString("mysound.wav"));
+        QSound::play(this->SoundFile);
     } else {
         QString program = "aplay";
         QStringList arguments;
-        arguments << "mysound.wav";
+        arguments << this->SoundFile;
         QProcess myProcess(this);
         myProcess.start(program, arguments);
         myProcess.waitForFinished();
@@ -343,6 +335,39 @@ void TodoTodaySheetGui::RefreshPreferences()
         msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        msgBox.exec();
+    }
+
+    try{
+        QString filePath="";
+        Settings SoundLib= select<Settings>(*(this->mpDatabase), Settings::MName=="SoundLib").one();
+        filePath += QString((toString(SoundLib.mValue)).c_str());
+        filePath +="/";
+        Settings SoundFile= select<Settings>(*(this->mpDatabase), Settings::MName=="SoundFile").one();
+        filePath += QString((toString(SoundFile.mValue)).c_str());
+        QFileInfo myFile(filePath);
+        if(!myFile.exists())throw PomotuxException("Sound file does not exist");
+        if(!myFile.isReadable())throw PomotuxException("Sound file cannot be read check your permissions");
+        this->SoundFile=filePath;
+    }catch(NotFound e){
+        Settings SoundLib(*(this->mpDatabase));
+        SoundLib.mName= "SoundLib";
+        SoundLib.mValue = "";
+        SoundLib.update();
+        Settings SoundFile(*(this->mpDatabase));
+        SoundFile.mName= "SoundFile";
+        SoundFile.mValue = "";
+        SoundFile.update();
+        this->mpDatabase->commit();
+    }catch(Except e){
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
+        QMessageBox msgBox;
+        msgBox.setText(errorMsg.str().c_str());
+        msgBox.exec();
+    }catch(PomotuxException e){
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();

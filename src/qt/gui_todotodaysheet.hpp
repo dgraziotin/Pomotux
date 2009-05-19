@@ -70,6 +70,11 @@ private:
     int mMinutesPomodoroLength;
 
     /**
+    * A variable for storing the path of the sound alert in QString data type
+    */
+    QString SoundFile;
+
+    /**
     * A pointer to the Activity that is at the momenent under a Pomodoro
     */
     Activity *mpCurrentActivity;

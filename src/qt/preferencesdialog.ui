@@ -7,29 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>538</width>
-    <height>220</height>
+    <height>201</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Preferences</string>
   </property>
-  <widget class="QComboBox" name="SoundFile">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>130</y>
-     <width>161</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>201</width>
-     <height>161</height>
+     <height>151</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -50,7 +40,7 @@
     <item>
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>Sound</string>
+       <string>Sound File</string>
       </property>
      </widget>
     </item>
@@ -79,7 +69,7 @@
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>170</y>
+     <y>160</y>
      <width>177</width>
      <height>34</height>
     </rect>
@@ -109,6 +99,16 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QComboBox" name="SoundFile">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>120</y>
+     <width>78</width>
+     <height>25</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>
