@@ -328,7 +328,13 @@ void TodoTodaySheetGui::RefreshPreferences()
         Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
         this->mMinutesPomodoroLength = atoi(length.mValue);
         this->mpPomodoro->SetMinutes(this->mMinutesPomodoroLength);
-    } catch (Except e) {
+    }catch (NotFound e){
+        Settings length(*(this->mpDatabase));
+        length.mName="length";
+        length.mValue="25";
+        length.update();
+        this->mpDatabase->commit();
+    }catch (Except e) {
         ostringstream errorMsg;
         errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;

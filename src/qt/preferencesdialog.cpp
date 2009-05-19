@@ -138,7 +138,7 @@ void PreferencesDialog::on_SearchLibrary_clicked()
 void  PreferencesDialog::RefreshFile(const QString &file)
 {
         try{
-             if(file=="")throw NotFound("First Start");
+             if(file=="/")throw NotFound("First Start");
              QFileInfo myFile(file);
              QDir myPath= myFile.absoluteDir();
              this->m_ui->LibraryPath->setText(myPath.path());
@@ -194,7 +194,7 @@ void PreferencesDialog::RefreshSettings()
         SoundLib.update();
     } catch (Except e) {
         ostringstream errorMsg;
-        errorMsg <<"liteSQL ERROR :"<< e;
+        errorMsg <<"liteSQL ERROR : "<< e <<"asd";
         QMessageBox msgBox;
         msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
@@ -219,5 +219,6 @@ void PreferencesDialog::RefreshSettings()
         msgBox.setText(e.getMessage());
         msgBox.exec();
     }
+
     RefreshFile(filePath);
 }
