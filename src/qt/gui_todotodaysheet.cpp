@@ -68,7 +68,7 @@ void TodoTodaySheetGui::RefreshTable()
 {
     try {
         vector<Activity> currentTTSActivities = ActivityInTTS::get<Activity>(*(this->mpDatabase),Expr(),
-                                            ActivityInTTS::TodoTodaySheet==1).orderBy(Activity::MOrder).all();
+                                                ActivityInTTS::TodoTodaySheet==1).orderBy(Activity::MOrder).all();
         Cleaner();
         for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) {
             int tablePosition= ui->tableWidget->rowCount();
@@ -114,7 +114,7 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
             throw PomotuxException("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
         }
         this->ui->newActivityButton->setText("Handle Interruption");
-    } catch (Except e){
+    } catch (Except e) {
         ostringstream errorMsg;
         errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
@@ -148,7 +148,27 @@ void TodoTodaySheetGui::PomodoroFinished()
         msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
     } catch (PomotuxException e) {
-        emit SoundAlert();
+        bool isSoundActivated = false;
+        try {
+            Settings soundActivated = select<Settings>(*(this->mpDatabase), Settings::MName=="soundActivated").one();
+            isSoundActivated = (bool) atoi(soundActivated.mValue);
+        } catch (NotFound e) {
+            Settings soundActivated(*(this->mpDatabase));
+            soundActivated.mName= "soundActivated";
+            soundActivated.mValue = "0";
+            soundActivated.update();
+            isSoundActivated = false;
+        } catch (Except e) {
+            ostringstream errorMsg;
+            errorMsg <<"liteSQL ERROR :"<< e;
+            QMessageBox msgBox;
+            msgBox.setText(errorMsg.str().c_str());
+            msgBox.exec();
+            isSoundActivated = false;
+        }
+
+        if (isSoundActivated)
+            emit SoundAlert();
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();
@@ -328,13 +348,13 @@ void TodoTodaySheetGui::RefreshPreferences()
         Settings length = select<Settings>(*(this->mpDatabase), Settings::MName=="length").one();
         this->mMinutesPomodoroLength = atoi(length.mValue);
         this->mpPomodoro->SetMinutes(this->mMinutesPomodoroLength);
-    }catch (NotFound e){
+    } catch (NotFound e) {
         Settings length(*(this->mpDatabase));
         length.mName="length";
         length.mValue="25";
         length.update();
         this->mpDatabase->commit();
-    }catch (Except e) {
+    } catch (Except e) {
         ostringstream errorMsg;
         errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
@@ -346,7 +366,7 @@ void TodoTodaySheetGui::RefreshPreferences()
         msgBox.exec();
     }
 
-    try{
+    try {
         QString filePath="";
         Settings SoundLib= select<Settings>(*(this->mpDatabase), Settings::MName=="SoundLib").one();
         filePath += QString((toString(SoundLib.mValue)).c_str());
@@ -354,10 +374,10 @@ void TodoTodaySheetGui::RefreshPreferences()
         Settings SoundFile= select<Settings>(*(this->mpDatabase), Settings::MName=="SoundFile").one();
         filePath += QString((toString(SoundFile.mValue)).c_str());
         QFileInfo myFile(filePath);
-        if(!myFile.exists())throw PomotuxException("Sound file does not exist");
-        if(!myFile.isReadable())throw PomotuxException("Sound file cannot be read check your permissions");
+        if (!myFile.exists())throw PomotuxException("Sound file does not exist");
+        if (!myFile.isReadable())throw PomotuxException("Sound file cannot be read check your permissions");
         this->SoundFile=filePath;
-    }catch(NotFound e){
+    } catch (NotFound e) {
         Settings SoundLib(*(this->mpDatabase));
         SoundLib.mName= "SoundLib";
         SoundLib.mValue = "";
@@ -367,13 +387,13 @@ void TodoTodaySheetGui::RefreshPreferences()
         SoundFile.mValue = "";
         SoundFile.update();
         this->mpDatabase->commit();
-    }catch(Except e){
+    } catch (Except e) {
         ostringstream errorMsg;
         errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
         msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
-    }catch(PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();
