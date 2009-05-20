@@ -329,7 +329,7 @@ void TodoTodaySheetGui::on_newActivityButton_clicked()
 
 void TodoTodaySheetGui::PlaySound()
 {
-    // TODO: this is just a hack! fix this method to play a user selected file
+
     if (QSound::isAvailable()) {
         QSound::play(this->SoundFile);
     } else {
