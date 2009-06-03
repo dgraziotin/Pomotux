@@ -114,6 +114,8 @@ void TodoTodaySheetGui::on_StartActivityButton_clicked()
             throw PomotuxException("You Should First Break or Wait Untill The End of The Current Pomodoro!!");
         }
         this->ui->newActivityButton->setText("Handle Interruption");
+        this->showMinimized();
+        this->parentWidget()->showMinimized();
     } catch (Except e) {
         ostringstream errorMsg;
         errorMsg <<"liteSQL ERROR :"<< e;

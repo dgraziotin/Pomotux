@@ -9,6 +9,7 @@
 #include "../pomotuxdatabase.hpp"
 #include <time.h>
 #include "preferencesdialog.hpp"
+#include "aboutwindow.h"
 #include "gui_todotodaysheet.hpp"
 #include "pomotuxexception.hpp"
 
@@ -76,6 +77,11 @@ private:
      */
     TodoTodaySheet* mpTts;
 
+   /**
+     * A pointer to the About Window
+     */
+    AboutWindow* wAbout;
+
     /**
      * A float for memorizing the row selected by the user
      */
@@ -125,6 +131,10 @@ private slots:
       */
     void Preferences();
 
+    /**
+      * Prompt the About Window
+      */
+    void About();
     /**
      * Handles the signal of DatabaseUpdated() received whenever the database is modified and refreshes the window
      * @see DatabaseUpdated()

@@ -82,12 +82,6 @@ p, li { white-space: pre-wrap; }
        <attribute name="verticalHeaderMinimumSectionSize">
         <number>18</number>
        </attribute>
-       <attribute name="horizontalHeaderCascadingSectionResizes">
-        <bool>true</bool>
-       </attribute>
-       <attribute name="horizontalHeaderVisible">
-        <bool>true</bool>
-       </attribute>
        <column>
         <property name="text">
          <string>Id</string>
@@ -219,7 +213,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -238,7 +232,6 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>help</string>
     </property>
-    <addaction name="actionHelp"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
@@ -265,7 +258,7 @@ p, li { white-space: pre-wrap; }
     <string>preferences</string>
    </property>
   </action>
-  <action name="actionHelp">
+  <action name="action">
    <property name="text">
     <string>help</string>
    </property>

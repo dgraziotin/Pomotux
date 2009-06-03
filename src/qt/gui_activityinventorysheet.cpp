@@ -1,5 +1,6 @@
 #include "gui_activityinventorysheet.hpp"
 #include "ui_gui_activityinventorysheet.h"
+
 #include <string>
 #include <time.h>
 #include <QMessageBox>
@@ -9,6 +10,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
 {
     mpDatabase = &database;
     mNow = time(NULL);
+    wAbout = new AboutWindow(this);
     ui->setupUi(this);
 
     try {
@@ -21,6 +23,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     wTTS = new TodoTodaySheetGui(this,*(this->mpDatabase));
     wPreferences = new PreferencesDialog (this,*(this->mpDatabase));
 
+
     // connection of signal required to refresh preferences
     connect(this->wPreferences,SIGNAL(DatabaseUpdated()),this->wTTS,SLOT(RefreshPreferences()));
 
@@ -32,7 +35,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     // connection of menu bar actions
     connect(this->ui->actionExit,SIGNAL(triggered()),this,SLOT(close()));
     connect(this->ui->actionPreferences,SIGNAL(triggered()),this,SLOT(Preferences()));
-
+    connect(this->ui->actionAbout,SIGNAL(triggered()),this,SLOT(About()));
 
     emit DatabaseUpdated();
     this->RefreshTable();
@@ -44,6 +47,8 @@ GuiActivityInventorySheet::~GuiActivityInventorySheet()
 {
     this->mpDatabase->commit();
     this->wPreferences->~PreferencesDialog();
+    this->wAbout->~AboutWindow();
+    this->wTTS->~TodoTodaySheetGui();
     this->mpTts->~Persistent();
     this->mpAis->~Persistent();
     delete ui;
@@ -230,6 +235,10 @@ void GuiActivityInventorySheet::Preferences()
     this->wPreferences->show();
 }
 
+void GuiActivityInventorySheet::About()
+{
+    this->wAbout->show();
+}
 void GuiActivityInventorySheet::on_wTtsButton_clicked()
 {
     this->wTTS->show();
