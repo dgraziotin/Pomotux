@@ -38,14 +38,14 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70000001"
-     inkscape:cx="-30.433327"
-     inkscape:cy="867.48123"
+     inkscape:zoom="1.4"
+     inkscape:cx="194.55292"
+     inkscape:cy="857.50303"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1270"
-     inkscape:window-height="769"
+     inkscape:window-height="763"
      inkscape:window-x="0"
      inkscape:window-y="0" />
   <metadata
@@ -68,22 +68,22 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#00ff00;stroke-width:1.01600003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#008000;stroke-width:2.016;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 45.480502,55.496333 L 407.37994,55.496333 L 389.46691,118.64532 L 27.325382,118.64532 L 45.480502,55.496333 z"
        id="rect2383"
        sodipodi:nodetypes="ccccc" />
     <path
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#000080;stroke-width:1.01600003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#000080;stroke-width:2.016;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 44.033752,158.22539 L 405.93318,158.22539 L 388.02014,221.37435 L 25.878622,221.37435 L 44.033752,158.22539 z"
        id="path3217"
        sodipodi:nodetypes="ccccc" />
     <path
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#ff6600;stroke-width:1.01600003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ff6600;stroke-width:2.016;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 43.601482,262.05579 L 405.50092,262.05579 L 387.58788,325.20477 L 25.446362,325.20477 L 43.601482,262.05579 z"
        id="path3219"
        sodipodi:nodetypes="ccccc" />
     <path
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.01600003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:#ff0000;stroke-width:2.016;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 42.650512,361.939 L 404.54994,361.939 L 386.63691,425.08798 L 24.495392,425.08798 L 42.650512,361.939 z"
        id="path3221"
        sodipodi:nodetypes="ccccc" />
@@ -226,7 +226,7 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3315"
-       style="font-size:37.66075897px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       style="font-size:37.66075897000000339px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
        transform="matrix(0.6051658,0,0,0.563888,-100.87361,44.274351)"><flowRegion
          id="flowRegion3317"><rect
            id="rect3319"
@@ -234,9 +234,9 @@
            height="66.428574"
            x="180"
            y="48.076466"
-           style="font-size:37.66075897px;text-align:center;text-anchor:middle" /></flowRegion><flowPara
+           style="font-size:37.66075897000000339px;text-align:center;text-anchor:middle;fill:#008000" /></flowRegion><flowPara
          id="flowPara3321"
-         style="font-size:37.66075897px;fill:#00ff00">QT Framework</flowPara></flowRoot>    <flowRoot
+         style="font-size:37.66075897000000339px;fill:#008000">QT Framework</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot3323"
        style="font-size:37.66075897px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
@@ -298,15 +298,29 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot2445"
-       style="font-size:40px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
-       transform="matrix(0.6051658,0,0,0.563888,76.810743,337.45496)"><flowRegion
+       style="font-size:27.09006882px;font-style:normal;font-weight:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       transform="matrix(0.6731285,0,0,0.6323191,24.336325,329.44095)"><flowRegion
          id="flowRegion2447"><rect
            id="rect2449"
-           width="396.54889"
-           height="129.12779"
+           width="465.00711"
+           height="205.13072"
            x="180"
            y="48.076466"
-           style="text-align:center;text-anchor:middle" /></flowRegion><flowPara
-         id="flowPara2453">Database</flowPara><flowPara
-         id="flowPara2457">Library</flowPara></flowRoot>  </g>
+           style="font-size:27.09006882px;text-align:center;text-anchor:middle" /></flowRegion><flowPara
+         id="flowPara2457"
+         style="font-size:27.09006882px">Full Database</flowPara><flowPara
+         id="flowPara2460"
+         style="font-size:27.09006882px">Implementation</flowPara><flowPara
+         id="flowPara2462"
+         style="font-size:27.09006882px">Library</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2464"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:36"><flowRegion
+         id="flowRegion2466"><rect
+           id="rect2468"
+           width="75"
+           height="51.42857"
+           x="300"
+           y="383.07648" /></flowRegion><flowPara
+         id="flowPara2470" /></flowRoot>  </g>
 </svg>
