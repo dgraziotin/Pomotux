@@ -60,6 +60,9 @@ private:
      */
     TodoTodaySheetGui *wTTS;
 
+    /**
+     * A pointer to the Preferences Window
+     */
     PreferencesDialog *wPreferences;
 
     /**
@@ -83,14 +86,18 @@ private:
     AboutWindow* wAbout;
 
     /**
+      * A pointer to the Insert Activity Window
+      */
+    InsertNewActivity* wInsertActivity;
+    /**
+      * A variable for storing the current time
+      */
+    time_t mNow;
+
+    /**
      * A float for memorizing the row selected by the user
      */
     float mRow;
-
-    /**
-     * A variable for saving the current date
-     */
-    time_t mNow;
 
     /**
      * Cleans the ui::ais whenever the database is updated
@@ -98,12 +105,17 @@ private:
     void Cleaner();
 
 
+
 private slots:
+
+    /**
+      * Show the Todo Today Sheet GUI
+      */
+    void on_wTtsButton_clicked();
 
     /**
      * Insert the selected Activity into the Todo Today Sheet
      */
-    void on_wTtsButton_clicked();
     void on_InsertInTTSButton_clicked();
 
     /**
@@ -135,6 +147,7 @@ private slots:
       * Prompt the About Window
       */
     void About();
+
     /**
      * Handles the signal of DatabaseUpdated() received whenever the database is modified and refreshes the window
      * @see DatabaseUpdated()

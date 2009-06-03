@@ -7,7 +7,6 @@
 #include "pomodoro.hpp"
 #include "pomotuxexception.hpp"
 #include "insertnewactivity.hpp"
-#include <time.h>
 #include <QProcess>
 
 using namespace litesql;
@@ -47,7 +46,12 @@ public:
       */
     ~TodoTodaySheetGui();
 
-
+    /**
+      * Getter for the InsertActivity Window in use. This method returns a pointer to a InsertNewActivity Object.
+      * It is used to synchronize the Activity Invetory Sheet table
+      * @return a pointer to the current InsertActivity Window
+      */
+    InsertNewActivity* getInsertActivity();
 private:
     /**
     * A pointer to the litesql database in use
@@ -94,10 +98,10 @@ private:
        */
     int mConsecutivePomodoro;
 
-    /**
-     * A variable for saving the current date
-     */
-    time_t mNow;
+     /**
+      * A pointer to the Insert Activity Window
+      */
+    InsertNewActivity* wInsertActivity;
 
     Ui::TodoTodaySheetGuiClass *ui;
     /**
@@ -124,8 +128,12 @@ private slots:
     *
     * @see ChangeActivityPriority(int magnitude,int direction,Activity& activityToMove)
     */
-    void on_newActivityButton_clicked();
     void on_MoveActivityButton_clicked();
+
+    /**
+      * Inserts a new Activity Directly in the Activity Inventory Sheet
+      */
+    void on_newActivityButton_clicked();
 
     /**
        * Breaks the Pomodoro of the current activity

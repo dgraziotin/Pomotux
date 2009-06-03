@@ -53,21 +53,6 @@ public:
      */
     virtual ~InsertNewActivity();
 
-    /**
-     * Getters for the deadline inserted by the user
-     */
-    float getDayToDeadline();
-
-    /**
-     * Getters for the controller value
-     */
-    float getController();
-
-    /**
-     * Getters for the description inserted by the user
-     */
-    QString getDescription();
-
 protected:
     virtual void changeEvent(QEvent *e);
 
@@ -83,19 +68,14 @@ private:
     PomotuxDatabase* mpDatabase;
 
     /**
-     * Stores the deadline value inserted by the user
-     */
-    float mDayToDeadline;
+      * A pointer to the ActivityInventorySheet in use
+      */
+    ActivityInventorySheet *mpAis;
 
     /**
-     * Stores the description inserted by the user
+     * A variable for saving the current date
      */
-    QString mDescription;
-
-    /**
-     * A control variable depending from which button pressed by the user
-     */
-    float mController;
+    time_t mNow;
 
 private slots:
     /**
@@ -107,6 +87,13 @@ private slots:
      * Close the window and save the values inserted by the user into the correct variables
      */
     void on_ButtonBox_accepted();
+
+signals:
+
+    /**
+     * Signal launched when the database is updated
+     */
+    void DatabaseUpdated();
 };
 
 #endif // INSERTNEWACTIVITY_H

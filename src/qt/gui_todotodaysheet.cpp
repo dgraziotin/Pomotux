@@ -23,7 +23,6 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
     this->mpDatabase->begin();
     this->mpCurrentActivity = new Activity(*(this->mpDatabase));
     this->mConsecutivePomodoro=0;
-    this->mNow = time(NULL);
     ui->setupUi(this);
     this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
 
@@ -41,6 +40,8 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         this->mpAis->update();
     }
     this->mpPomodoro = new Pomodoro(0,0,secs);
+
+    this->wInsertActivity =new InsertNewActivity(this,*(this->mpDatabase));
 
     this->RefreshPreferences();
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
@@ -284,49 +285,7 @@ void TodoTodaySheetGui::on_MoveActivityButton_clicked()
 
 void TodoTodaySheetGui::on_newActivityButton_clicked()
 {
-    try {
-        /*Calling the window for creating a new Activity*/
-        InsertNewActivity *dialog = new InsertNewActivity(0, *(mpDatabase));
-        dialog->show();
-        dialog->exec();
-
-        /*Control if the user pressed ok or cancel*/
-        float mainController = dialog->getController();
-        if (mainController > 0) {
-
-            QString description = dialog->getDescription();
-            string sDescription = description.toStdString();
-
-            float value = dialog->getDayToDeadline();
-            time_t deadlineInt = mNow + value*(86400);
-
-            Activity current(*(mpDatabase));
-            current.mDescription = sDescription;
-            current.mInsertionDate = (int) mNow;
-            current.mDeadline = (int)deadlineInt;
-            if (current.mDescription=="")throw PomotuxException("For Every Activity must be provided a Description");
-            current.update();
-            mpAis->InsertActivity(*(mpDatabase),current,*(mpAis));
-            if (this->mpPomodoro->IsRunning()) {
-                this->mNumInterruption = this->mNumInterruption + 1;
-                this->ui->NumInterruptions->setText(QString((toString(this->mNumInterruption)).c_str()));
-            }
-            emit DatabaseUpdated();
-        }
-    } catch (NotFound e) {
-        mpAis = new ActivityInventorySheet(*(mpDatabase));
-        mpAis->update();
-    } catch (Except e) {
-        ostringstream errorMsg;
-        errorMsg <<"liteSQL ERROR :"<< e;
-        QMessageBox msgBox;
-        msgBox.setText(errorMsg.str().c_str());
-        msgBox.exec();
-    } catch (PomotuxException e) {
-        QMessageBox msgBox;
-        msgBox.setText(e.getMessage());
-        msgBox.exec();
-    }
+    this->wInsertActivity->show();
 }
 
 void TodoTodaySheetGui::PlaySound()
@@ -402,8 +361,14 @@ void TodoTodaySheetGui::RefreshPreferences()
     }
 }
 
+InsertNewActivity* TodoTodaySheetGui::getInsertActivity()
+{
+    return this->wInsertActivity;
+}
+
 TodoTodaySheetGui::~TodoTodaySheetGui()
 {
+    this->wInsertActivity->~InsertNewActivity();
     this->mpTts->~Persistent();
     this->mpAis->~Persistent();
     this->mpCurrentActivity->~Persistent();

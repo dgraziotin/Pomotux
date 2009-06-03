@@ -3,6 +3,8 @@
 #include "ui_insertnewactivity.h"
 #include <string>
 #include <time.h>
+#include "pomotuxexception.hpp"
+#include <QMessageBox>
 
 InsertNewActivity::InsertNewActivity(QWidget *parent, PomotuxDatabase& database) :
         QDialog(parent),
@@ -10,6 +12,14 @@ InsertNewActivity::InsertNewActivity(QWidget *parent, PomotuxDatabase& database)
 {
     mpDatabase = &database;
     m_ui->setupUi(this);
+    this->mNow=time(NULL);
+    try {
+        this->mpAis = new ActivityInventorySheet(select<ActivityInventorySheet>(*(mpDatabase), ActivityInventorySheet::Id == 1).one());
+    } catch (NotFound e) {
+        this->mpAis = new ActivityInventorySheet(*(mpDatabase));
+        this->mpAis->update();
+    }
+    this->mpDatabase->commit();
 }
 
 InsertNewActivity::~InsertNewActivity()
@@ -17,20 +27,6 @@ InsertNewActivity::~InsertNewActivity()
     delete m_ui;
 }
 
-float InsertNewActivity::getDayToDeadline()
-{
-    return mDayToDeadline;
-}
-
-float InsertNewActivity::getController()
-{
-    return mController;
-}
-
-QString InsertNewActivity::getDescription()
-{
-    return mDescription;
-}
 
 void InsertNewActivity::changeEvent(QEvent *e)
 {
@@ -46,14 +42,44 @@ void InsertNewActivity::changeEvent(QEvent *e)
 
 void InsertNewActivity::on_ButtonBox_accepted()
 {
-    mDescription = this->m_ui->iaDescriptionLineEdit->text();
-    mDayToDeadline = this->m_ui->iaDeadlineSpinBox->value();
-    mController = 1;
-    this->close();
+    try {
+        this->mpAis = new ActivityInventorySheet(select<ActivityInventorySheet>(*(mpDatabase), ActivityInventorySheet::Id == 1).one());
+    } catch (NotFound e) {
+        this->mpAis = new ActivityInventorySheet(*(mpDatabase));
+        this->mpAis->update();
+    }
+
+    try{
+    QString description = this->m_ui->iaDescriptionLineEdit->text();
+    if (description=="")throw PomotuxException("For Every Activity must be provided a Description");
+    time_t deadline= mNow + (this->m_ui->iaDeadlineSpinBox->text().toInt())*(86400);
+
+    Activity current(*(this->mpDatabase));
+    current.mDescription= description.toStdString();
+    current.mInsertionDate= (int) mNow;
+    current.mDeadline= (int) deadline;
+    current.update();
+
+    this->mpAis->InsertActivity(*(this->mpDatabase),current,*(this->mpAis));
+    this->mpDatabase->commit();
+    emit DatabaseUpdated();
+    this->m_ui->iaDescriptionLineEdit->setText("");
+    this->m_ui->iaDeadlineSpinBox->setValue(0);
+    this->hide();
+    } catch (Except e) {
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
+        QMessageBox msgBox;
+        msgBox.setText(errorMsg.str().c_str());
+        msgBox.exec();
+    } catch(PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        msgBox.exec();
+    }
 }
 
 void InsertNewActivity::on_ButtonBox_rejected()
 {
-    mController = 0;
-    this->close();
+    this->hide();
 }

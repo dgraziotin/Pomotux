@@ -9,8 +9,8 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
         : QMainWindow(parent), ui(new Ui::GuiActivityInventorySheet)
 {
     mpDatabase = &database;
-    mNow = time(NULL);
     wAbout = new AboutWindow(this);
+    mNow= time(NULL);
     ui->setupUi(this);
 
     try {
@@ -22,7 +22,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
 
     wTTS = new TodoTodaySheetGui(this,*(this->mpDatabase));
     wPreferences = new PreferencesDialog (this,*(this->mpDatabase));
-
+    this->wInsertActivity = new InsertNewActivity(this,*(this->mpDatabase));
 
     // connection of signal required to refresh preferences
     connect(this->wPreferences,SIGNAL(DatabaseUpdated()),this->wTTS,SLOT(RefreshPreferences()));
@@ -31,7 +31,8 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     connect(this->wTTS,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this,SIGNAL(DatabaseUpdated()),this->wTTS,SLOT(RefreshTable()));
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
-
+    connect(this->wInsertActivity,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    connect(this->wTTS->getInsertActivity(),SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     // connection of menu bar actions
     connect(this->ui->actionExit,SIGNAL(triggered()),this,SLOT(close()));
     connect(this->ui->actionPreferences,SIGNAL(triggered()),this,SLOT(Preferences()));
@@ -49,6 +50,7 @@ GuiActivityInventorySheet::~GuiActivityInventorySheet()
     this->wPreferences->~PreferencesDialog();
     this->wAbout->~AboutWindow();
     this->wTTS->~TodoTodaySheetGui();
+    this->wInsertActivity->~InsertNewActivity();
     this->mpTts->~Persistent();
     this->mpAis->~Persistent();
     delete ui;
@@ -56,45 +58,7 @@ GuiActivityInventorySheet::~GuiActivityInventorySheet()
 
 void GuiActivityInventorySheet::on_NewActivityButton_clicked()
 {
-    try {
-        /*Calling the window for creating a new Activity*/
-        InsertNewActivity *dialog = new InsertNewActivity(0, *(mpDatabase));
-        dialog->show();
-        dialog->exec();
-
-        /*Control if the user pressed ok or cancel*/
-        float mainController = dialog->getController();
-        if (mainController > 0) {
-            QString description = dialog->getDescription();
-            string sDescription = description.toStdString();
-
-            float value = dialog->getDayToDeadline();
-            time_t deadlineInt = mNow + value*(86400);
-
-            Activity at(*(mpDatabase));
-            at.mDescription = sDescription;
-            at.mInsertionDate = (int) mNow;
-            at.mDeadline = (int)deadlineInt;
-            if (at.mDescription=="")throw PomotuxException("For Every Activity must be provided a Description");
-            at.update();
-
-            ActivityInventorySheet &cAis = *(mpAis);
-            cAis.InsertActivity(*(mpDatabase),at,cAis);
-            mpDatabase->commit();
-        }
-    } catch (Except e) {
-        ostringstream errorMsg;
-        errorMsg <<"liteSQL ERROR :"<< e;
-        QMessageBox msgBox;
-        msgBox.setText(errorMsg.str().c_str());
-        msgBox.exec();
-    } catch (PomotuxException e) {
-        QMessageBox msgBox;
-        msgBox.setText(e.getMessage());
-        msgBox.exec();
-    }
-
-    emit DatabaseUpdated();
+    this->wInsertActivity->show();
     ui->DeleteActivityButton->setEnabled(false);
     ui->ModifyActivityButton->setEnabled(false);
     ui->InsertInTTSButton->setEnabled(false);
