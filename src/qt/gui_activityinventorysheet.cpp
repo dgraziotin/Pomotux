@@ -2,7 +2,7 @@
 #include "ui_gui_activityinventorysheet.h"
 
 #include <string>
-#include <time.h>
+
 #include <QMessageBox>
 
 GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDatabase& database)
@@ -10,7 +10,7 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
 {
     mpDatabase = &database;
     wAbout = new AboutWindow(this);
-    mNow= time(NULL);
+
     ui->setupUi(this);
 
     try {
@@ -20,8 +20,9 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
         mpAis->update();
     }
 
-    wTTS = new TodoTodaySheetGui(this,*(this->mpDatabase));
-    wPreferences = new PreferencesDialog (this,*(this->mpDatabase));
+    this->wTTS = new TodoTodaySheetGui(this,*(this->mpDatabase));
+    this->wPreferences = new PreferencesDialog (this,*(this->mpDatabase));
+    this->wModifyActivity = new ModifyAnActivity(this,*(this->mpDatabase),mRow);
     this->wInsertActivity = new InsertNewActivity(this,*(this->mpDatabase));
 
     // connection of signal required to refresh preferences
@@ -33,6 +34,9 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this->wInsertActivity,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this->wTTS->getInsertActivity(),SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    connect(this->wModifyActivity,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
+    connect(this->wModifyActivity,SIGNAL(DatabaseUpdated()),this->wTTS,SLOT(RefreshTable()));
+
     // connection of menu bar actions
     connect(this->ui->actionExit,SIGNAL(triggered()),this,SLOT(close()));
     connect(this->ui->actionPreferences,SIGNAL(triggered()),this,SLOT(Preferences()));
@@ -59,6 +63,10 @@ GuiActivityInventorySheet::~GuiActivityInventorySheet()
     this->wTTS->~TodoTodaySheetGui();
     delete this->wTTS;
     this->wTTS = NULL;
+
+    this->wModifyActivity->~ModifyAnActivity();
+    delete this->wModifyActivity;
+    this->wModifyActivity = NULL;
 
     this->wInsertActivity->~InsertNewActivity();
     delete this->wInsertActivity;
@@ -107,7 +115,7 @@ void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
 
 void GuiActivityInventorySheet::on_ais_itemClicked(QTableWidgetItem* item)
 {
-    mRow = item->row();
+    this->mRow = this->ui->ais->item(item->row(), 0)->text().toInt();
     ui->DeleteActivityButton->setEnabled(true);
     ui->ModifyActivityButton->setEnabled(true);
     ui->InsertInTTSButton->setEnabled(true);
@@ -115,22 +123,7 @@ void GuiActivityInventorySheet::on_ais_itemClicked(QTableWidgetItem* item)
 
 void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
 {
-    ModifyAnActivity *dialog = new ModifyAnActivity(0, *(mpDatabase));
-    dialog->show();
-    dialog->exec();
-
-    float mainController = dialog->getController();
-    if (mainController > 0) {
-        QString description = dialog->getDescription();
-        float value = this->mNow+(dialog->getDayToDeadline())*(86400);
-        QString idString = this->ui->ais->item(mRow, 0)->text();
-        int id = idString.toInt();
-        Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
-        string newDescription = description.toStdString();
-        at.Modify(*(mpDatabase), at, value, newDescription);
-        ui->DeleteActivityButton->setEnabled(false);
-        emit DatabaseUpdated();
-    }
+    this->wModifyActivity->show();
     ui->DeleteActivityButton->setEnabled(false);
     ui->ModifyActivityButton->setEnabled(false);
     ui->InsertInTTSButton->setEnabled(false);

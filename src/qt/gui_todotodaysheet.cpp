@@ -369,9 +369,21 @@ InsertNewActivity* TodoTodaySheetGui::getInsertActivity()
 TodoTodaySheetGui::~TodoTodaySheetGui()
 {
     this->wInsertActivity->~InsertNewActivity();
+    delete this->wInsertActivity;
+    this->wInsertActivity = NULL;
+
     this->mpTts->~Persistent();
+    delete this->mpTts;
+    this->mpTts = NULL;
+
     this->mpAis->~Persistent();
+    delete this->mpAis;
+    this->mpAis = NULL;
+
     this->mpCurrentActivity->~Persistent();
+    delete this->mpCurrentActivity;
+    this->mpCurrentActivity = NULL;
+
     this->mpPomodoro->~Pomodoro();
     delete this->mpPomodoro;
     this->mpPomodoro = NULL;

@@ -66,6 +66,11 @@ private:
     PreferencesDialog *wPreferences;
 
     /**
+      * A pointer to the Modify Activity Window
+      */
+    ModifyAnActivity *wModifyActivity;
+
+    /**
      * A pointer to the litesql database in use
      */
     PomotuxDatabase* mpDatabase;
@@ -89,15 +94,12 @@ private:
       * A pointer to the Insert Activity Window
       */
     InsertNewActivity* wInsertActivity;
-    /**
-      * A variable for storing the current time
-      */
-    time_t mNow;
+
 
     /**
-     * A float for memorizing the row selected by the user
+     * An integer for memorizing the id of the activity selected by the user
      */
-    float mRow;
+    int mRow;
 
     /**
      * Cleans the ui::ais whenever the database is updated

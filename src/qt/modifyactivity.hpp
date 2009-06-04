@@ -18,6 +18,7 @@
 #include <QtGui/QDialog>
 #include <litesql.hpp>
 #include "../pomotuxdatabase.hpp"
+#include <time.h>
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -46,27 +47,12 @@ public:
      * @param parent a pointer to the parent widget (0 if we want a new window)
      * @param a reference to a litesql3 database
      */
-    explicit ModifyAnActivity(QWidget *parent, PomotuxDatabase& database);
+    explicit ModifyAnActivity(QWidget *parent, PomotuxDatabase& database,int& id);
 
     /**
      * Default destructor
      */
     virtual ~ModifyAnActivity();
-
-    /**
-     * Getters for the description inserted by the user
-     */
-    QString getDescription();
-
-    /**
-     * Getters for the deadline inserted by the user
-     */
-    float getDayToDeadline();
-
-    /**
-     * Getters for the controller value
-     */
-    float getController();
 
 protected:
     virtual void changeEvent(QEvent *e);
@@ -83,19 +69,15 @@ private:
     PomotuxDatabase* mpDatabase;
 
     /**
-     * Stores the description inserted by the user
+     * A reference to the selected activity
      */
-    QString mDescription;
+    int* mrSelectedActivity;
 
     /**
-     * Stores the deadline value inserted by the user
-     */
-    float mDayToDeadline;
+      * A variable for storing the current time
+      */
+    time_t mNow;
 
-    /**
-     * A control variable depending from which button pressed by the user
-     */
-    float mController;
 
 private slots:
 
@@ -108,6 +90,13 @@ private slots:
      * Close the window and save the values inserted by the user into the correct variables
      */
     void on_ButtonBox_accepted();
+
+signals:
+
+    /**
+     * Signal launched when the database is updated
+     */
+    void DatabaseUpdated();
 };
 
 #endif // MODIFYANACTIVITY_H
