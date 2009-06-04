@@ -115,7 +115,7 @@ void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
 
 void GuiActivityInventorySheet::on_ais_itemClicked(QTableWidgetItem* item)
 {
-    this->mRow = this->ui->ais->item(item->row(), 0)->text().toInt();
+    this->mRow = this->ui->ais->item(item->row(), 0)->text().toInt()-1;
     ui->DeleteActivityButton->setEnabled(true);
     ui->ModifyActivityButton->setEnabled(true);
     ui->InsertInTTSButton->setEnabled(true);
