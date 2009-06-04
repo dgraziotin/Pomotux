@@ -93,11 +93,8 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
 
 void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
 {
-    QString idString = this->ui->ais->item(mRow, 0)->text();
-    int id = idString.toInt();
-
     try {
-        Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
+        Activity at = select<Activity>(*(mpDatabase), Activity::Id == this->mRow+1).one();
         mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
         ActivityInventorySheet &cAis = *(mpAis);
         TodoTodaySheet &cTts = *(mpTts);
