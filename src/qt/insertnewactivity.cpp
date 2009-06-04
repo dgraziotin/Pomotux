@@ -24,6 +24,9 @@ InsertNewActivity::InsertNewActivity(QWidget *parent, PomotuxDatabase& database)
 
 InsertNewActivity::~InsertNewActivity()
 {
+    this->mpAis->~Persistent();
+    delete this->mpAis;
+    this->mpAis = NULL;
     delete m_ui;
 }
 

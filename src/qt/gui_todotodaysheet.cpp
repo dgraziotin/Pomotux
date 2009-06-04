@@ -194,7 +194,7 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
     QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
     try {
         if (items.empty())throw PomotuxException("There Are No Activities Selected");
-        for (QList<QTableWidgetItem *>::iterator k = items.begin(); k<items.end(); k++) {
+        for (QList<QTableWidgetItem *>::iterator k = items.begin(); k!=items.end(); k++) {
             QTableWidgetItem * activitiesToBePostponed = (*k);
             Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==activitiesToBePostponed->text().toInt(),ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
             if (this->mpCurrentActivity->id!=current.id || !(this->mpPomodoro->IsRunning()))this->mpTts->PostponeActivity(*(this->mpDatabase),current,*(this->mpTts));

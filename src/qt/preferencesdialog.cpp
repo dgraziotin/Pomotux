@@ -179,7 +179,7 @@ void  PreferencesDialog::RefreshFile(const QString &file)
         if (files.empty())throw PomotuxException("No Entries Found");
         this->m_ui->SoundFile->clear();
         this->m_ui->SoundFile->addItem(myFile.fileName());
-        for (QList<QString>::iterator it= files.begin(); it<files.end(); it++)
+        for (QList<QString>::iterator it= files.begin(); it!=files.end(); it++)
             if ((*it)!=myFile.fileName())this->m_ui->SoundFile->addItem((*it));
     } catch (NotFound e) {
         this->m_ui->LibraryPath->setText("");

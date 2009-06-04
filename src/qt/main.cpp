@@ -43,7 +43,6 @@ int main(int argc, char *argv[])
 
     try {
         string liteSQLDatabaseArg = "database=" + databasePathStr.toStdString();
-        /* MEMORY LEAK: db is not destroyed anywhere */
         PomotuxDatabase *db;
         db = new PomotuxDatabase("sqlite3", liteSQLDatabaseArg);
         db->verbose = false;
