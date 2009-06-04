@@ -47,12 +47,30 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
 GuiActivityInventorySheet::~GuiActivityInventorySheet()
 {
     this->mpDatabase->commit();
+
     this->wPreferences->~PreferencesDialog();
+    delete this->wPreferences;
+    this->wPreferences = NULL;
+
     this->wAbout->~AboutWindow();
+    delete this->wAbout;
+    this->wAbout = NULL;
+
     this->wTTS->~TodoTodaySheetGui();
+    delete this->wTTS;
+    this->wTTS = NULL;
+
     this->wInsertActivity->~InsertNewActivity();
+    delete this->wInsertActivity;
+    this->wInsertActivity = NULL;
+
     this->mpTts->~Persistent();
+    delete this->mpTts;
+    this->mpTts = NULL;
+
     this->mpAis->~Persistent();
+    delete this->mpAis;
+    this->mpAis = NULL;
     delete ui;
 }
 
