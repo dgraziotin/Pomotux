@@ -124,6 +124,11 @@ private slots:
        */
     void Run();
 
+    /**
+      * Override of the default signal closeEvent in order to disable the default close button
+      */
+    void closeEvent(QCloseEvent*);
+
 signals:
     /**
       * Signal launched when the Pomodoro finishes normally

@@ -84,3 +84,8 @@ Pomodoro::~Pomodoro()
     mpTimer = NULL;
     delete this;
 }
+
+void Pomodoro::closeEvent(QCloseEvent *event)
+{
+   event->ignore();
+}
