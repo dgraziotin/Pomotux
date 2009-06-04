@@ -79,6 +79,13 @@ p, li { white-space: pre-wrap; }
      <widget class="QSpinBox" name="mADeadlineSpinBox"/>
     </item>
     <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Days</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>

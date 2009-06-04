@@ -94,7 +94,7 @@ void GuiActivityInventorySheet::on_NewActivityButton_clicked()
 void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
 {
     try {
-        Activity at = select<Activity>(*(mpDatabase), Activity::Id == this->mRow+1).one();
+        Activity at = select<Activity>(*(mpDatabase), Activity::Id == this->mRow).one();
         mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
         ActivityInventorySheet &cAis = *(mpAis);
         TodoTodaySheet &cTts = *(mpTts);
@@ -112,7 +112,7 @@ void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
 
 void GuiActivityInventorySheet::on_ais_itemClicked(QTableWidgetItem* item)
 {
-    this->mRow = this->ui->ais->item(item->row(), 0)->text().toInt()-1;
+    this->mRow = this->ui->ais->item(item->row(), 0)->text().toInt();
     ui->DeleteActivityButton->setEnabled(true);
     ui->ModifyActivityButton->setEnabled(true);
     ui->InsertInTTSButton->setEnabled(true);
@@ -128,9 +128,8 @@ void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
 
 void GuiActivityInventorySheet::on_InsertInTTSButton_clicked()
 {
-    QString idString = this->ui->ais->item(mRow, 0)->text();
-    int id = idString.toInt();
-    Activity at = select<Activity>(*(mpDatabase), Activity::Id == id).one();
+
+    Activity at = select<Activity>(*(mpDatabase), Activity::Id == this->mRow).one();
     try {
         mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
     } catch (NotFound e) {
@@ -142,7 +141,7 @@ void GuiActivityInventorySheet::on_InsertInTTSButton_clicked()
             ActivityInTTS::TodoTodaySheet==mpTts->id).all();
     int check = 0;
     for (vector<Activity>::iterator i = currentTDTSActivities.begin(); i != currentTDTSActivities.end(); i++) {
-        if ((*i).id == id) check = 1;
+        if ((*i).id == this->mRow) check = 1;
     }
     if (check == 0 ) {
         ActivityInventorySheet &cAis = *(mpAis);

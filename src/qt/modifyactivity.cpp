@@ -44,6 +44,8 @@ void ModifyAnActivity::on_ButtonBox_accepted()
     time_t deadline= mNow + (this->m_ui->mADeadlineSpinBox->text().toInt())*(86400);
     current.Modify(*(mpDatabase), current, (int)deadline , newDescription.toStdString());
     emit DatabaseUpdated();
+    this->m_ui->mADescriptionLineEdit->setText("");
+    this->m_ui->mADeadlineSpinBox->setValue(0);
     this->hide();
     } catch(Except e){
         ostringstream errorMsg;
