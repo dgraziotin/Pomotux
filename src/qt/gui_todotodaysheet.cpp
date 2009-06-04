@@ -373,5 +373,7 @@ TodoTodaySheetGui::~TodoTodaySheetGui()
     this->mpAis->~Persistent();
     this->mpCurrentActivity->~Persistent();
     this->mpPomodoro->~Pomodoro();
+    delete this->mpPomodoro;
+    this->mpPomodoro = NULL;
     delete ui;
 }
