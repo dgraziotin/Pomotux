@@ -2,12 +2,13 @@
 #include "gui_activityinventorysheet.hpp"
 #include <litesql.hpp>
 #include "../pomotuxdatabase.hpp"
+#include "pomotuxexception.hpp"
 #include <QDir>
 #include <QFileInfo>
 #include <QString>
-#include <QtPlugin>
+//#include <QtPlugin>
 
-Q_IMPORT_PLUGIN(qjpeg)
+//Q_IMPORT_PLUGIN(qjpeg)
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -21,26 +22,24 @@ int main(int argc, char *argv[])
     QString databasePathStr = pomotuxDirStr + "pomotux.db";
 
     QDir pomotuxDir ( pomotuxDirStr );
-    if ( !pomotuxDir.exists() ) {
-        if (!pomotuxDir.mkdir( pomotuxDirStr )) {
-            cout << endl << "----------------------------" << endl;
-            cout << "Error. could not create directory " << pomotuxDirStr.toStdString() << endl;
-            cout << "Please create it by yourself and make sure it is writable.";
-            cout << endl << "----------------------------" << endl;
-            return 0;
-        }
-    } else {
-        QFileInfo databaseFileInfo((databasePathStr));
-        if (databaseFileInfo.exists()) {
-            if (!databaseFileInfo.isReadable() || !databaseFileInfo.isWritable()) {
-                cout << endl << "----------------------------" << endl;
-                cout << "Error. could not access file " << databasePathStr.toStdString() << endl;
-                cout << "Please make sure that both the file and the directory are writable";
-                cout << endl << "----------------------------" << endl;
-                return 0;
-            }
-        }
 
+    QApplication Pomotux(argc, argv);
+    try{
+        if ( !pomotuxDir.exists() ) {
+          if (!pomotuxDir.mkdir( pomotuxDirStr ))
+              throw PomotuxException("Error. could not create directory " + pomotuxDirStr.toStdString() + "\nPlease create it by yourself and make sure it is writable.");
+        }else {
+           QFileInfo databaseFileInfo((databasePathStr));
+          if (databaseFileInfo.exists()) {
+             if (!databaseFileInfo.isReadable() || !databaseFileInfo.isWritable()) {
+                  throw PomotuxException("Error. could not access file " + databasePathStr.toStdString()+"\nPlease make sure that both the file and the directory are writable");
+               }
+            }
+       }
+    }catch (PomotuxException e){
+        QMessageBox msgBox;
+        msgBox.setText(e.getMessage());
+        return msgBox.exec();
     }
 
 
@@ -52,14 +51,14 @@ int main(int argc, char *argv[])
         if (db->needsUpgrade())
             db->upgrade();
         db->begin();
-
-        QApplication Pomotux(argc, argv);
-
         GuiActivityInventorySheet* mainWindow = new GuiActivityInventorySheet(0,*(db));
         mainWindow->show();
         return Pomotux.exec();
     } catch (Except e) {
-        //cerr << e << endl;
-        return -1;
+        ostringstream errorMsg;
+        errorMsg <<"liteSQL ERROR :"<< e;
+        QMessageBox msgBox;
+        msgBox.setText(errorMsg.str().c_str());
+        return msgBox.exec();
     }
 }

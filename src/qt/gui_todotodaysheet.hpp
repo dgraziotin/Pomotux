@@ -187,6 +187,11 @@ private slots:
      */
     void PlaySound();
 
+     /**
+      * Increments the Interruption counter everytime the user is interrupted during a pomodoro
+      */
+    void HandleInterruption();
+
 signals:
     /**
       * Signal launched when the database is updated
@@ -196,6 +201,10 @@ signals:
       * Signal launched when it is necessary to play a sound
       */
     void SoundAlert();
+    /**
+      *
+      */
+    void Interruption();
 };
 
 #endif // TODOTODAYSHEETGUI_H

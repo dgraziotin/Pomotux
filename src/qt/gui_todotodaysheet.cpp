@@ -46,7 +46,7 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
     this->RefreshPreferences();
     connect(this,SIGNAL(DatabaseUpdated()),this,SLOT(RefreshTable()));
     connect(this, SIGNAL(SoundAlert()), this, SLOT(PlaySound()));
-
+    connect(this,SIGNAL(Interruption()),this,SLOT(HandleInterruption()));
 
     connect(this->mpPomodoro, SIGNAL(PomodoroFinished()), this, SLOT(PomodoroFinished()));
     connect(this->mpPomodoro, SIGNAL(PomodoroBroken()), this, SLOT(PomodoroBroken()));
@@ -286,6 +286,7 @@ void TodoTodaySheetGui::on_MoveActivityButton_clicked()
 void TodoTodaySheetGui::on_newActivityButton_clicked()
 {
     this->wInsertActivity->show();
+    emit Interruption();
 }
 
 void TodoTodaySheetGui::PlaySound()
@@ -366,6 +367,12 @@ InsertNewActivity* TodoTodaySheetGui::getInsertActivity()
     return this->wInsertActivity;
 }
 
+void TodoTodaySheetGui::HandleInterruption()
+{
+    this->mNumInterruption+=1;
+    this->ui->NumInterruptions->setText(toString(this->mNumInterruption).c_str());
+}
+
 TodoTodaySheetGui::~TodoTodaySheetGui()
 {
     this->wInsertActivity->~InsertNewActivity();
@@ -387,5 +394,6 @@ TodoTodaySheetGui::~TodoTodaySheetGui()
     this->mpPomodoro->~Pomodoro();
     delete this->mpPomodoro;
     this->mpPomodoro = NULL;
+
     delete ui;
 }

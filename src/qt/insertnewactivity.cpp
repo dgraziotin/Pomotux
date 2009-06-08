@@ -84,5 +84,7 @@ void InsertNewActivity::on_ButtonBox_accepted()
 
 void InsertNewActivity::on_ButtonBox_rejected()
 {
+    this->m_ui->iaDescriptionLineEdit->setText("");
+    this->m_ui->iaDeadlineSpinBox->setValue(0);
     this->hide();
 }

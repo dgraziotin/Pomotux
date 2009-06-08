@@ -35,10 +35,7 @@ OTHER_FILES += Pomotux.pro.user \
     pomodoro.pro \
     Pomotux.pro.user
 
-QMAKE_CXXFLAGS=-static -Bstatic
 
-QTPLUGIN += qjpeg
-
-LIBS += -L. -llitesql \
+LIBS +=-llitesql \
     -lsqlite3 \
     -lpthread
