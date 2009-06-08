@@ -5,6 +5,9 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QString>
+#include <QtPlugin>
+
+Q_IMPORT_PLUGIN(qjpeg)
 
 using namespace litesql;
 using namespace pomotuxdatabase;
