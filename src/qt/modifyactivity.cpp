@@ -1,8 +1,3 @@
-/*
-    see hpp file for change needed to attribute and method names.
-    Watch the Coding Standards everywhere also here!
-*/
-
 #include "modifyactivity.hpp"
 #include "ui_modifyactivity.h"
 #include <QMessageBox>
@@ -38,22 +33,22 @@ void ModifyAnActivity::changeEvent(QEvent *e)
 
 void ModifyAnActivity::on_ButtonBox_accepted()
 {
-    try{
-    Activity current = select<Activity>(*(mpDatabase), Activity::Id == *(this->mrSelectedActivity)).one();
-    QString newDescription = this->m_ui->mADescriptionLineEdit->text();
-    time_t deadline= mNow + (this->m_ui->mADeadlineSpinBox->text().toInt())*(86400);
-    current.Modify(*(mpDatabase), current, (int)deadline , newDescription.toStdString());
-    emit DatabaseUpdated();
-    this->m_ui->mADescriptionLineEdit->setText("");
-    this->m_ui->mADeadlineSpinBox->setValue(0);
-    this->hide();
-    } catch(Except e){
+    try {
+        Activity current = select<Activity>(*(mpDatabase), Activity::Id == *(this->mrSelectedActivity)).one();
+        QString newDescription = this->m_ui->mADescriptionLineEdit->text();
+        time_t deadline= mNow + (this->m_ui->mADeadlineSpinBox->text().toInt())*(86400);
+        current.Modify(*(mpDatabase), current, (int)deadline , newDescription.toStdString());
+        emit DatabaseUpdated();
+        this->m_ui->mADescriptionLineEdit->setText("");
+        this->m_ui->mADeadlineSpinBox->setValue(0);
+        this->hide();
+    } catch (Except e) {
         ostringstream errorMsg;
         errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
         msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
-    } catch(PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();

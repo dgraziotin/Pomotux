@@ -35,7 +35,7 @@ OTHER_FILES += Pomotux.pro.user \
     pomodoro.pro \
     Pomotux.pro.user
 
-QMAKE_CXXFLAGS=-static -Bstatic
+QMAKE_CXXFLAGS=-static -Bstatic -O3
 
 QTPLUGIN += qjpeg
 

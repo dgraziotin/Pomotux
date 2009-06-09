@@ -151,7 +151,7 @@ void GuiActivityInventorySheet::on_InsertInTTSButton_clicked()
         emit DatabaseUpdated();
     } else {
         QMessageBox msgBox;
-        msgBox.setText("Activity already present in the TTS");
+        msgBox.setText("Activity already scheduled in TTS");
         msgBox.exec();
     }
     ui->DeleteActivityButton->setEnabled(false);

@@ -52,30 +52,30 @@ void InsertNewActivity::on_ButtonBox_accepted()
         this->mpAis->update();
     }
 
-    try{
-    QString description = this->m_ui->iaDescriptionLineEdit->text();
-    if (description=="")throw PomotuxException("For Every Activity must be provided a Description");
-    time_t deadline= mNow + (this->m_ui->iaDeadlineSpinBox->text().toInt())*(86400);
+    try {
+        QString description = this->m_ui->iaDescriptionLineEdit->text();
+        if (description=="")throw PomotuxException("You must provide a description for the activity");
+        time_t deadline= mNow + (this->m_ui->iaDeadlineSpinBox->text().toInt())*(86400);
 
-    Activity current(*(this->mpDatabase));
-    current.mDescription= description.toStdString();
-    current.mInsertionDate= (int) mNow;
-    current.mDeadline= (int) deadline;
-    current.update();
+        Activity current(*(this->mpDatabase));
+        current.mDescription= description.toStdString();
+        current.mInsertionDate= (int) mNow;
+        current.mDeadline= (int) deadline;
+        current.update();
 
-    this->mpAis->InsertActivity(*(this->mpDatabase),current,*(this->mpAis));
-    this->mpDatabase->commit();
-    emit DatabaseUpdated();
-    this->m_ui->iaDescriptionLineEdit->setText("");
-    this->m_ui->iaDeadlineSpinBox->setValue(0);
-    this->hide();
+        this->mpAis->InsertActivity(*(this->mpDatabase),current,*(this->mpAis));
+        this->mpDatabase->commit();
+        emit DatabaseUpdated();
+        this->m_ui->iaDescriptionLineEdit->setText("");
+        this->m_ui->iaDeadlineSpinBox->setValue(0);
+        this->hide();
     } catch (Except e) {
         ostringstream errorMsg;
         errorMsg <<"liteSQL ERROR :"<< e;
         QMessageBox msgBox;
         msgBox.setText(errorMsg.str().c_str());
         msgBox.exec();
-    } catch(PomotuxException e){
+    } catch (PomotuxException e) {
         QMessageBox msgBox;
         msgBox.setText(e.getMessage());
         msgBox.exec();

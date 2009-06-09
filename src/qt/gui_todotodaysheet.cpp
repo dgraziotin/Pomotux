@@ -81,8 +81,8 @@ void TodoTodaySheetGui::RefreshTable()
             currentActivity[1].setText(QString((toString((*i).mDescription)).c_str()));
             currentActivity[2].setText(QString((toString((*i).mNumPomodoro)).c_str()));
             currentActivity[0].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-            currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
-            currentActivity[2].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled);
+            currentActivity[1].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled );
+            currentActivity[2].setFlags(Qt::NoItemFlags | Qt::ItemIsEnabled );
             for (int k=0; k<3; k++)
                 ui->tableWidget->setItem(tablePosition,k,&currentActivity[k]);
         }
@@ -140,10 +140,10 @@ void TodoTodaySheetGui::PomodoroFinished()
         emit DatabaseUpdated();
         if (this->mConsecutivePomodoro>=4) {
             this->mConsecutivePomodoro=0;
-            throw PomotuxException("You Should now take a break longer than usual");
+            throw PomotuxException("Pomodoro finished. Please take a LONG break.");
         }
         this->      ui->newActivityButton->setText("new activity");
-        throw PomotuxException("Now you Should take a short break");
+        throw PomotuxException("Pomodoro finished. Please take a SHORT break.");
     } catch (Except e) {
         ostringstream errorMsg;
         errorMsg <<"liteSQL ERROR :"<< e;
@@ -193,7 +193,7 @@ void TodoTodaySheetGui::on_PostponeActivityButton_clicked()
 {
     QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
     try {
-        if (items.empty())throw PomotuxException("There Are No Activities Selected");
+        if (items.empty())throw PomotuxException("No activity selected. Please select an activity.");
         for (QList<QTableWidgetItem *>::iterator k = items.begin(); k!=items.end(); k++) {
             QTableWidgetItem * activitiesToBePostponed = (*k);
             Activity current = ActivityInTTS::get<Activity>(*(this->mpDatabase),Activity::Id==activitiesToBePostponed->text().toInt(),ActivityInTTS::TodoTodaySheet==this->mpTts->id).one();
@@ -218,7 +218,7 @@ void TodoTodaySheetGui::on_FinishActivityButton_clicked()
 
     try {
         QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
-        if (items.empty())throw PomotuxException("There Are No Activities");
+        if (items.empty())throw PomotuxException("Please select the activity to be set as finished.");
         QList<QTableWidgetItem *>::iterator k = items.begin();
         QTableWidgetItem * head = (*k);
         int id=head->text().toInt(0,10);
@@ -263,7 +263,7 @@ void TodoTodaySheetGui::on_MoveActivityButton_clicked()
 {
     try {
         QList<QTableWidgetItem *> items = ui->tableWidget->selectedItems();
-        if (items.empty())throw PomotuxException("There Are No Activities");
+        if (items.empty())throw PomotuxException("Please select the activity to be moved.");
         QList<QTableWidgetItem *>::iterator k = items.begin();
         QTableWidgetItem * head = (*k);
         int id=head->text().toInt(0,10);
@@ -337,7 +337,7 @@ void TodoTodaySheetGui::RefreshPreferences()
         filePath += QString((toString(SoundFile.mValue)).c_str());
         QFileInfo myFile(filePath);
         if (!myFile.exists())throw PomotuxException("Sound file does not exist");
-        if (!myFile.isReadable())throw PomotuxException("Sound file cannot be read check your permissions");
+        if (!myFile.isReadable())throw PomotuxException("Sound file cannot be read. Please check your permissions");
         this->SoundFile=filePath;
     } catch (NotFound e) {
         Settings SoundLib(*(this->mpDatabase));

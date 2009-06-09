@@ -98,9 +98,9 @@ private:
        */
     int mConsecutivePomodoro;
 
-     /**
-      * A pointer to the Insert Activity Window
-      */
+    /**
+     * A pointer to the Insert Activity Window
+     */
     InsertNewActivity* wInsertActivity;
 
     Ui::TodoTodaySheetGuiClass *ui;
@@ -187,9 +187,9 @@ private slots:
      */
     void PlaySound();
 
-     /**
-      * Increments the Interruption counter everytime the user is interrupted during a pomodoro
-      */
+    /**
+     * Increments the Interruption counter everytime the user is interrupted during a pomodoro
+     */
     void HandleInterruption();
 
 signals:

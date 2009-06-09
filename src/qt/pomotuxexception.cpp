@@ -3,6 +3,7 @@
 PomotuxException::PomotuxException(string message)
 {
     this->Message= QString(message.c_str());
+
 }
 
 QString PomotuxException::getMessage()

@@ -87,5 +87,5 @@ Pomodoro::~Pomodoro()
 
 void Pomodoro::closeEvent(QCloseEvent *event)
 {
-   event->ignore();
+    event->ignore();
 }

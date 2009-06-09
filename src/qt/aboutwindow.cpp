@@ -2,8 +2,8 @@
 #include "ui_aboutwindow.h"
 
 AboutWindow::AboutWindow(QWidget *parent) :
-    QDialog(parent),
-    m_ui(new Ui::AboutWindow)
+        QDialog(parent),
+        m_ui(new Ui::AboutWindow)
 {
     m_ui->setupUi(this);
 }

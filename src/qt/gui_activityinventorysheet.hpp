@@ -85,9 +85,9 @@ private:
      */
     TodoTodaySheet* mpTts;
 
-   /**
-     * A pointer to the About Window
-     */
+    /**
+      * A pointer to the About Window
+      */
     AboutWindow* wAbout;
 
     /**

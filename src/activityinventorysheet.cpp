@@ -8,7 +8,6 @@ void pomotuxdatabase::ActivityInventorySheet::InsertActivity(const litesql::Data
 {
     try {
         ActivityInAIS::link(rDatabase,rNewActivity,rAIS);
-        //rDatabase.commit();
     } catch (Except e) {
         cerr << e << endl;
 
