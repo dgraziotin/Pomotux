@@ -286,7 +286,7 @@ void TodoTodaySheetGui::on_MoveActivityButton_clicked()
 void TodoTodaySheetGui::on_newActivityButton_clicked()
 {
     this->wInsertActivity->show();
-    emit Interruption();
+    if (this->mpPomodoro->IsRunning())emit Interruption();
 }
 
 void TodoTodaySheetGui::PlaySound()
