@@ -28,7 +28,7 @@
 <a name="l00007"></a>00007 <span class="preprocessor">#include "pomodoro.hpp"</span>
 <a name="l00008"></a>00008 <span class="preprocessor">#include "pomotuxexception.hpp"</span>
 <a name="l00009"></a>00009 <span class="preprocessor">#include "insertnewactivity.hpp"</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;time.h&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;QProcess&gt;</span>
 <a name="l00011"></a>00011 
 <a name="l00012"></a>00012 <span class="keyword">using namespace </span>litesql;
 <a name="l00013"></a>00013 <span class="keyword">using namespace </span>pomotuxdatabase;
@@ -46,55 +46,69 @@
 <a name="l00043"></a>00043 
 <a name="l00047"></a>00047     <a class="code" href="class_todo_today_sheet_gui.html#b1cc722873b146a4cc7d542b5e23181c">~TodoTodaySheetGui</a>();
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="keyword">private</span>:
-<a name="l00053"></a><a class="code" href="class_todo_today_sheet_gui.html#6003946ee3ca0a35fc1d0906f912971a">00053</a>     <a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a> *<a class="code" href="class_todo_today_sheet_gui.html#6003946ee3ca0a35fc1d0906f912971a">mpDatabase</a>;
-<a name="l00054"></a>00054 
-<a name="l00058"></a><a class="code" href="class_todo_today_sheet_gui.html#f8aeccd2ea1719c2f9ff26e0a743597c">00058</a>     <a class="code" href="class_pomodoro.html">Pomodoro</a> *<a class="code" href="class_todo_today_sheet_gui.html#f8aeccd2ea1719c2f9ff26e0a743597c">mpPomodoro</a>;
-<a name="l00059"></a>00059 
-<a name="l00063"></a><a class="code" href="class_todo_today_sheet_gui.html#5a7a38d7ad776f0147232e99bfc1ad7c">00063</a>     <span class="keywordtype">int</span> <a class="code" href="class_todo_today_sheet_gui.html#5a7a38d7ad776f0147232e99bfc1ad7c">mNumInterruption</a>;
-<a name="l00064"></a>00064 
-<a name="l00068"></a><a class="code" href="class_todo_today_sheet_gui.html#afd0e1a84defd6c5f4c0b0ac839aeba3">00068</a>     <a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a> *<a class="code" href="class_todo_today_sheet_gui.html#afd0e1a84defd6c5f4c0b0ac839aeba3">mpCurrentActivity</a>;
-<a name="l00069"></a>00069 
-<a name="l00073"></a><a class="code" href="class_todo_today_sheet_gui.html#822a32a8e113008f880a380e42be3d02">00073</a>     <a class="code" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> *<a class="code" href="class_todo_today_sheet_gui.html#822a32a8e113008f880a380e42be3d02">mpTts</a>;
-<a name="l00074"></a>00074 
-<a name="l00078"></a><a class="code" href="class_todo_today_sheet_gui.html#286e0646ded8fc47d19d6b9e1a3e8d48">00078</a>     <a class="code" href="classpomotuxdatabase_1_1_activity_inventory_sheet.html">ActivityInventorySheet</a>* <a class="code" href="class_todo_today_sheet_gui.html#286e0646ded8fc47d19d6b9e1a3e8d48">mpAis</a>;
-<a name="l00079"></a>00079 
-<a name="l00083"></a><a class="code" href="class_todo_today_sheet_gui.html#1a534196496e2ae35168acd7fd670917">00083</a>     <span class="keywordtype">int</span> <a class="code" href="class_todo_today_sheet_gui.html#1a534196496e2ae35168acd7fd670917">mConsecutivePomodoro</a>;
-<a name="l00084"></a>00084 
-<a name="l00088"></a><a class="code" href="class_todo_today_sheet_gui.html#7a4686af6f1962c1de68b4191ea8860d">00088</a>     time_t <a class="code" href="class_todo_today_sheet_gui.html#7a4686af6f1962c1de68b4191ea8860d">mNow</a>;
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090     Ui::TodoTodaySheetGuiClass *ui;
-<a name="l00094"></a>00094     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#c053d5e45aafe1578021318e54a51db4">Cleaner</a>();
+<a name="l00054"></a>00054     <a class="code" href="class_insert_new_activity.html">InsertNewActivity</a>* <a class="code" href="class_todo_today_sheet_gui.html#9ac17c5c007eafbd529e6505a4faabd6">getInsertActivity</a>();
+<a name="l00055"></a>00055 <span class="keyword">private</span>:
+<a name="l00059"></a><a class="code" href="class_todo_today_sheet_gui.html#6003946ee3ca0a35fc1d0906f912971a">00059</a>     <a class="code" href="classpomotuxdatabase_1_1_pomotux_database.html">PomotuxDatabase</a> *<a class="code" href="class_todo_today_sheet_gui.html#6003946ee3ca0a35fc1d0906f912971a">mpDatabase</a>;
+<a name="l00060"></a>00060 
+<a name="l00064"></a><a class="code" href="class_todo_today_sheet_gui.html#f8aeccd2ea1719c2f9ff26e0a743597c">00064</a>     <a class="code" href="class_pomodoro.html">Pomodoro</a> *<a class="code" href="class_todo_today_sheet_gui.html#f8aeccd2ea1719c2f9ff26e0a743597c">mpPomodoro</a>;
+<a name="l00065"></a>00065 
+<a name="l00069"></a><a class="code" href="class_todo_today_sheet_gui.html#5a7a38d7ad776f0147232e99bfc1ad7c">00069</a>     <span class="keywordtype">int</span> <a class="code" href="class_todo_today_sheet_gui.html#5a7a38d7ad776f0147232e99bfc1ad7c">mNumInterruption</a>;
+<a name="l00070"></a>00070 
+<a name="l00074"></a><a class="code" href="class_todo_today_sheet_gui.html#20c7cad392ee26058e293efb4b8a8142">00074</a>     <span class="keywordtype">int</span> <a class="code" href="class_todo_today_sheet_gui.html#20c7cad392ee26058e293efb4b8a8142">mMinutesPomodoroLength</a>;
+<a name="l00075"></a>00075 
+<a name="l00079"></a><a class="code" href="class_todo_today_sheet_gui.html#cc78b66da7ed75d32b482bc18d0a23c2">00079</a>     QString <a class="code" href="class_todo_today_sheet_gui.html#cc78b66da7ed75d32b482bc18d0a23c2">SoundFile</a>;
+<a name="l00080"></a>00080 
+<a name="l00084"></a><a class="code" href="class_todo_today_sheet_gui.html#afd0e1a84defd6c5f4c0b0ac839aeba3">00084</a>     <a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a> *<a class="code" href="class_todo_today_sheet_gui.html#afd0e1a84defd6c5f4c0b0ac839aeba3">mpCurrentActivity</a>;
+<a name="l00085"></a>00085 
+<a name="l00089"></a><a class="code" href="class_todo_today_sheet_gui.html#822a32a8e113008f880a380e42be3d02">00089</a>     <a class="code" href="classpomotuxdatabase_1_1_todo_today_sheet.html">TodoTodaySheet</a> *<a class="code" href="class_todo_today_sheet_gui.html#822a32a8e113008f880a380e42be3d02">mpTts</a>;
+<a name="l00090"></a>00090 
+<a name="l00094"></a><a class="code" href="class_todo_today_sheet_gui.html#286e0646ded8fc47d19d6b9e1a3e8d48">00094</a>     <a class="code" href="classpomotuxdatabase_1_1_activity_inventory_sheet.html">ActivityInventorySheet</a>* <a class="code" href="class_todo_today_sheet_gui.html#286e0646ded8fc47d19d6b9e1a3e8d48">mpAis</a>;
 <a name="l00095"></a>00095 
-<a name="l00104"></a>00104     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#bf65bbe690962bca32a968563e59009d">ChangeActivityPriority</a>(<span class="keywordtype">int</span> magnitude,<span class="keywordtype">int</span> direction,<a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a>&amp; activityToMove);
+<a name="l00099"></a><a class="code" href="class_todo_today_sheet_gui.html#1a534196496e2ae35168acd7fd670917">00099</a>     <span class="keywordtype">int</span> <a class="code" href="class_todo_today_sheet_gui.html#1a534196496e2ae35168acd7fd670917">mConsecutivePomodoro</a>;
+<a name="l00100"></a>00100 
+<a name="l00104"></a><a class="code" href="class_todo_today_sheet_gui.html#0d00a322ea5f120cd9d1ddd56c277c50">00104</a>     <a class="code" href="class_insert_new_activity.html">InsertNewActivity</a>* <a class="code" href="class_todo_today_sheet_gui.html#0d00a322ea5f120cd9d1ddd56c277c50">wInsertActivity</a>;
 <a name="l00105"></a>00105 
-<a name="l00106"></a>00106 <span class="keyword">private</span> slots:
-<a name="l00113"></a>00113     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#af52f99f9b640bd38469265e6c478c17">on_newActivityButton_clicked</a>();
-<a name="l00114"></a>00114     <span class="keywordtype">void</span> on_MoveActivityButton_clicked();
-<a name="l00115"></a>00115 
-<a name="l00119"></a>00119     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#40ec5f0141fdc739e98dae75d984526c">on_StopActivityButton_clicked</a>();
-<a name="l00120"></a>00120 
-<a name="l00124"></a>00124     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#dcda2cf60c2fa926d1106c6df5f71a82">on_PostponeActivityButton_clicked</a>();
-<a name="l00125"></a>00125 
-<a name="l00129"></a>00129     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#90f6f71402d17ac790c96e9281596c5f">on_StartActivityButton_clicked</a>();
-<a name="l00130"></a>00130 
-<a name="l00134"></a>00134     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#a7c495a5b8c1507324dd7aeceff708a7">on_FinishActivityButton_clicked</a>();
-<a name="l00135"></a>00135 
-<a name="l00141"></a>00141     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#05b30f013cf9df10810623c8e9fc9cf4">PomodoroFinished</a>();
+<a name="l00106"></a>00106     Ui::TodoTodaySheetGuiClass *ui;
+<a name="l00110"></a>00110     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#c053d5e45aafe1578021318e54a51db4">Cleaner</a>();
+<a name="l00111"></a>00111 
+<a name="l00120"></a>00120     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#bf65bbe690962bca32a968563e59009d">ChangeActivityPriority</a>(<span class="keywordtype">int</span> magnitude,<span class="keywordtype">int</span> direction,<a class="code" href="classpomotuxdatabase_1_1_activity.html">Activity</a>&amp; activityToMove);
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124 <span class="keyword">private</span> slots:
+<a name="l00131"></a>00131     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#5f38aaa1595755f1708539539573962a">on_MoveActivityButton_clicked</a>();
+<a name="l00132"></a>00132 
+<a name="l00136"></a>00136     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#af52f99f9b640bd38469265e6c478c17">on_newActivityButton_clicked</a>();
+<a name="l00137"></a>00137 
+<a name="l00141"></a>00141     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#40ec5f0141fdc739e98dae75d984526c">on_StopActivityButton_clicked</a>();
 <a name="l00142"></a>00142 
-<a name="l00147"></a>00147     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#1ab912b070d312cf6bfa95b1de8560e3">PomodoroBroken</a>();
-<a name="l00148"></a>00148 
-<a name="l00153"></a>00153     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#07f1731ddca5ff28e4fece0fa7103dc1">RefreshTable</a>();
-<a name="l00154"></a>00154 
-<a name="l00159"></a>00159     <a class="code" href="class_todo_today_sheet_gui.html#0337629e5a36817c110a256366889ad0">RefreshPreferences</a>();
-<a name="l00160"></a>00160 
-<a name="l00161"></a>00161 signals:
-<a name="l00165"></a>00165     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#20051a83651c164dea4d9bc0d0ab21c5">DatabaseUpdated</a>();
-<a name="l00166"></a>00166 };
-<a name="l00167"></a>00167 
-<a name="l00168"></a>00168 <span class="preprocessor">#endif // TODOTODAYSHEETGUI_H</span>
+<a name="l00146"></a>00146     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#dcda2cf60c2fa926d1106c6df5f71a82">on_PostponeActivityButton_clicked</a>();
+<a name="l00147"></a>00147 
+<a name="l00151"></a>00151     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#90f6f71402d17ac790c96e9281596c5f">on_StartActivityButton_clicked</a>();
+<a name="l00152"></a>00152 
+<a name="l00156"></a>00156     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#a7c495a5b8c1507324dd7aeceff708a7">on_FinishActivityButton_clicked</a>();
+<a name="l00157"></a>00157 
+<a name="l00163"></a>00163     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#05b30f013cf9df10810623c8e9fc9cf4">PomodoroFinished</a>();
+<a name="l00164"></a>00164 
+<a name="l00169"></a>00169     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#1ab912b070d312cf6bfa95b1de8560e3">PomodoroBroken</a>();
+<a name="l00170"></a>00170 
+<a name="l00175"></a>00175     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#07f1731ddca5ff28e4fece0fa7103dc1">RefreshTable</a>();
+<a name="l00176"></a>00176 
+<a name="l00180"></a>00180     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#8cf43533d395038c673ab6ec4cbfc237">RefreshPreferences</a>();
+<a name="l00181"></a>00181 
+<a name="l00188"></a>00188     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#781f71608ae4eabd396bde8f232b2e63">PlaySound</a>();
+<a name="l00189"></a>00189 
+<a name="l00193"></a>00193     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#f155de900d370f17bd22639d2aed5fd8">HandleInterruption</a>();
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195 signals:
+<a name="l00199"></a>00199     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#20051a83651c164dea4d9bc0d0ab21c5">DatabaseUpdated</a>();
+<a name="l00203"></a>00203     <span class="keywordtype">void</span> <a class="code" href="class_todo_today_sheet_gui.html#d6f445bc89d4766b6120d508e04df865">SoundAlert</a>();
+<a name="l00207"></a>00207     <span class="keywordtype">void</span> Interruption();
+<a name="l00208"></a>00208 };
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210 <span class="preprocessor">#endif // TODOTODAYSHEETGUI_H</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon May 11 15:12:10 2009 for Pomotux by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Jun 12 15:33:43 2009 for Pomotux by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.9 </small></address>
 </body>
