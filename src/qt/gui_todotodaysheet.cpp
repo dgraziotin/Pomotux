@@ -6,7 +6,6 @@
 #include <QFileInfo>
 #include <QProcess>
 #include <QSound>
-#define secs 5
 
 using namespace litesql;
 using namespace pomotuxdatabase;
@@ -39,7 +38,7 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
         this->mpAis = new ActivityInventorySheet(*(mpDatabase));
         this->mpAis->update();
     }
-    this->mpPomodoro = new Pomodoro(0,0,secs);
+    this->mpPomodoro = new Pomodoro(0,0,0);
 
     this->wInsertActivity =new InsertNewActivity(this,*(this->mpDatabase));
 
