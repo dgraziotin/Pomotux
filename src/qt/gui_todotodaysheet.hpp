@@ -52,6 +52,18 @@ public:
       * @return a pointer to the current InsertActivity Window
       */
     InsertNewActivity* getInsertActivity();
+
+    /**
+      * Returns true if there is a Pomodoro running, false elsewhere.
+      * @return true
+      */
+    bool IsPomodoroRunning();
+
+    /**
+      *  Returns the current Pomodoro
+      * @return a pointer to the current Pomodoro.
+      */
+    Pomodoro* GetPomodoro();
 private:
     /**
     * A pointer to the litesql database in use
@@ -108,6 +120,7 @@ private:
     * Cleans the ui::tableWidget whenever the database is updated
     */
     void Cleaner();
+
 
     /**
     * Processes the change of priority once all prelimary controls are made. It is called from the SLOT assigned to the click of MoveActivityButton

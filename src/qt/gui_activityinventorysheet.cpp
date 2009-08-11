@@ -48,10 +48,14 @@ GuiActivityInventorySheet::GuiActivityInventorySheet(QWidget *parent, PomotuxDat
     this->ui->ais->setColumnWidth(1, 440);
 }
 
+void GuiActivityInventorySheet::closeEvent(QCloseEvent* event){
+    this->wTTS->GetPomodoro()->Stop();
+    event->accept();
+}
+
 GuiActivityInventorySheet::~GuiActivityInventorySheet()
 {
     this->mpDatabase->commit();
-
     this->wPreferences->~PreferencesDialog();
     delete this->wPreferences;
     this->wPreferences = NULL;
@@ -84,29 +88,41 @@ GuiActivityInventorySheet::~GuiActivityInventorySheet()
 
 void GuiActivityInventorySheet::on_NewActivityButton_clicked()
 {
-    this->wInsertActivity->show();
-    ui->DeleteActivityButton->setEnabled(false);
-    ui->ModifyActivityButton->setEnabled(false);
-    ui->InsertInTTSButton->setEnabled(false);
-    ui->DeleteActivityButton->setEnabled(false);
+    if(!this->wTTS->IsPomodoroRunning()){
+        this->wInsertActivity->show();
+        ui->DeleteActivityButton->setEnabled(false);
+        ui->ModifyActivityButton->setEnabled(false);
+        ui->InsertInTTSButton->setEnabled(false);
+        ui->DeleteActivityButton->setEnabled(false);
+    }else{
+        QMessageBox msgBox;
+        msgBox.setText("You have to wait until Pomodoro is finished.");
+        msgBox.exec();
+    }
 }
 
 void GuiActivityInventorySheet::on_DeleteActivityButton_clicked()
 {
-    try {
-        Activity at = select<Activity>(*(mpDatabase), Activity::Id == this->mRow).one();
-        mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
-        ActivityInventorySheet &cAis = *(mpAis);
-        TodoTodaySheet &cTts = *(mpTts);
-        at.Delete(*(mpDatabase), at, cAis, cTts);
-        emit DatabaseUpdated();
-    } catch (NotFound e) {
-        mpTts = new TodoTodaySheet(*(mpDatabase));
-        mpTts->update();
+    if(!this->wTTS->IsPomodoroRunning()){
+        try {
+            Activity at = select<Activity>(*(mpDatabase), Activity::Id == this->mRow).one();
+            mpTts = new TodoTodaySheet(select<TodoTodaySheet>(*(mpDatabase), TodoTodaySheet::Id == 1).one());
+            ActivityInventorySheet &cAis = *(mpAis);
+            TodoTodaySheet &cTts = *(mpTts);
+            at.Delete(*(mpDatabase), at, cAis, cTts);
+            emit DatabaseUpdated();
+        } catch (NotFound e) {
+            mpTts = new TodoTodaySheet(*(mpDatabase));
+            mpTts->update();
+        }
+        ui->DeleteActivityButton->setEnabled(false);
+        ui->ModifyActivityButton->setEnabled(false);
+        ui->InsertInTTSButton->setEnabled(false);
+    }else{
+        QMessageBox msgBox;
+        msgBox.setText("You have to wait until Pomodoro is finished.");
+        msgBox.exec();
     }
-    ui->DeleteActivityButton->setEnabled(false);
-    ui->ModifyActivityButton->setEnabled(false);
-    ui->InsertInTTSButton->setEnabled(false);
 }
 
 
@@ -120,10 +136,16 @@ void GuiActivityInventorySheet::on_ais_itemClicked(QTableWidgetItem* item)
 
 void GuiActivityInventorySheet::on_ModifyActivityButton_clicked()
 {
-    this->wModifyActivity->show();
-    ui->DeleteActivityButton->setEnabled(false);
-    ui->ModifyActivityButton->setEnabled(false);
-    ui->InsertInTTSButton->setEnabled(false);
+    if(!this->wTTS->IsPomodoroRunning()){
+        this->wModifyActivity->show();
+        ui->DeleteActivityButton->setEnabled(false);
+        ui->ModifyActivityButton->setEnabled(false);
+        ui->InsertInTTSButton->setEnabled(false);
+    }else{
+        QMessageBox msgBox;
+        msgBox.setText("You have to wait until Pomodoro is finished.");
+        msgBox.exec();
+    }
 }
 
 void GuiActivityInventorySheet::on_InsertInTTSButton_clicked()
@@ -214,3 +236,4 @@ void GuiActivityInventorySheet::on_wTtsButton_clicked()
 {
     this->wTTS->show();
 }
+

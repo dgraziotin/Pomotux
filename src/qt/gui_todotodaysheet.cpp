@@ -56,6 +56,11 @@ TodoTodaySheetGui::TodoTodaySheetGui(QWidget *parent,PomotuxDatabase& database)
 
 }
 
+bool  TodoTodaySheetGui::IsPomodoroRunning()
+{
+    return this->mpPomodoro->IsRunning();
+}
+
 void  TodoTodaySheetGui::Cleaner()
 {
     for (int i=0 ; i<ui->tableWidget->rowCount(); i++)
@@ -73,7 +78,7 @@ void TodoTodaySheetGui::RefreshTable()
         for (vector<Activity>::iterator i = currentTTSActivities.begin(); i != currentTTSActivities.end(); i++) {
             int tablePosition= ui->tableWidget->rowCount();
             ui->tableWidget->insertRow(tablePosition);
-            this->ui->tableWidget->setColumnWidth(0, 0);
+            this->ui->tableWidget->setColumnWidth(0, 30);
             this->ui->tableWidget->setColumnWidth(1, 390);
             QTableWidgetItem *currentActivity=new QTableWidgetItem[3];
             currentActivity[0].setText(QString((toString((*i).id)).c_str()));
@@ -372,8 +377,15 @@ void TodoTodaySheetGui::HandleInterruption()
     this->ui->NumInterruptions->setText(toString(this->mNumInterruption).c_str());
 }
 
+Pomodoro* TodoTodaySheetGui::GetPomodoro(){
+        return this->mpPomodoro;
+}
 TodoTodaySheetGui::~TodoTodaySheetGui()
 {
+
+    delete this->mpPomodoro;
+    this->mpPomodoro = NULL;
+
     this->wInsertActivity->~InsertNewActivity();
     delete this->wInsertActivity;
     this->wInsertActivity = NULL;
@@ -390,9 +402,7 @@ TodoTodaySheetGui::~TodoTodaySheetGui()
     delete this->mpCurrentActivity;
     this->mpCurrentActivity = NULL;
 
-    this->mpPomodoro->~Pomodoro();
-    delete this->mpPomodoro;
-    this->mpPomodoro = NULL;
+
 
     delete ui;
 }

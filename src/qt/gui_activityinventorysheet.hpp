@@ -107,7 +107,6 @@ private:
     void Cleaner();
 
 
-
 private slots:
 
     /**
@@ -155,6 +154,8 @@ private slots:
      * @see DatabaseUpdated()
      */
     void RefreshTable();
+    virtual void closeEvent(QCloseEvent* );
+
 
 signals:
 

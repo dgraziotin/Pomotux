@@ -17,6 +17,7 @@
 
 #include <QtGui/QDialog>
 #include <litesql.hpp>
+#include <QCloseEvent>
 #include "../pomotuxdatabase.hpp"
 
 using namespace litesql;

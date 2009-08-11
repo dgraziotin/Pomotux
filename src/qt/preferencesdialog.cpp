@@ -166,6 +166,9 @@ void PreferencesDialog::on_SearchLibrary_clicked()
 
 void  PreferencesDialog::RefreshFile(const QString &file)
 {
+    /**
+     * loads the wav file for the pomodoro ring.
+     */
     try {
         if (file=="/")throw NotFound("First Start");
         QFileInfo myFile(file);
@@ -176,7 +179,7 @@ void  PreferencesDialog::RefreshFile(const QString &file)
         filters <<"*.wav";
         QList<QString> files = myPath.entryList(filters,QDir::AllEntries,QDir::Name);
 
-        if (files.empty())throw PomotuxException("No Entries Found");
+        if (files.empty())throw PomotuxException("Could not find the sound file. Please select an existent wav file.");
         this->m_ui->SoundFile->clear();
         this->m_ui->SoundFile->addItem(myFile.fileName());
         for (QList<QString>::iterator it= files.begin(); it!=files.end(); it++)
