@@ -87,8 +87,6 @@ public:
         TS_ASSERT( at1.mIsFinished == at2.mIsFinished );
         TS_ASSERT( at1.mNumPomodoro == at2.mNumPomodoro );
 
-        cout << "\n\n\nTest 1 will always fail because of a litesql-0.3.3 bug in dates.\n"
-             << "See http://apps.sourceforge.net/trac/litesql/ticket/13 for details\n\n\n";
     } catch (Except e) {
         cerr << e << endl;
     }

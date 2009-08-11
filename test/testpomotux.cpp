@@ -6,15 +6,19 @@
 
 #define _CXXTEST_HAVE_STD
 #define _CXXTEST_HAVE_EH
+#define _CXXTEST_LONGLONG long long
 #include <cxxtest/TestListener.h>
 #include <cxxtest/TestTracker.h>
 #include <cxxtest/TestRunner.h>
 #include <cxxtest/RealDescriptions.h>
+#include <cxxtest/TestMain.h>
 #include <cxxtest/ErrorPrinter.h>
 
-int main() {
- return CxxTest::ErrorPrinter().run();
+int main( int argc, char *argv[] ) {
+    CxxTest::ErrorPrinter tmp;
+    return CxxTest::Main<CxxTest::ErrorPrinter>( tmp, argc, argv );
 }
+bool ActivityTest_init = false;
 #include "TestActivity.h"
 
 static ActivityTest suite_ActivityTest;
@@ -30,13 +34,13 @@ public:
 
 static class TestDescription_ActivityTest_testModifyActivity : public CxxTest::RealTestDescription {
 public:
- TestDescription_ActivityTest_testModifyActivity() : CxxTest::RealTestDescription( Tests_ActivityTest, suiteDescription_ActivityTest, 97, "testModifyActivity" ) {}
+ TestDescription_ActivityTest_testModifyActivity() : CxxTest::RealTestDescription( Tests_ActivityTest, suiteDescription_ActivityTest, 95, "testModifyActivity" ) {}
  void runTest() { suite_ActivityTest.testModifyActivity(); }
 } testDescription_ActivityTest_testModifyActivity;
 
 static class TestDescription_ActivityTest_testDeleteActivity : public CxxTest::RealTestDescription {
 public:
- TestDescription_ActivityTest_testDeleteActivity() : CxxTest::RealTestDescription( Tests_ActivityTest, suiteDescription_ActivityTest, 117, "testDeleteActivity" ) {}
+ TestDescription_ActivityTest_testDeleteActivity() : CxxTest::RealTestDescription( Tests_ActivityTest, suiteDescription_ActivityTest, 115, "testDeleteActivity" ) {}
  void runTest() { suite_ActivityTest.testDeleteActivity(); }
 } testDescription_ActivityTest_testDeleteActivity;
 
@@ -72,3 +76,4 @@ public:
 } testDescription_TestTodoTodaySheet_testPostponeActivity;
 
 #include <cxxtest/Root.cpp>
+const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

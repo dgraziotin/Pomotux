@@ -1,12 +1,9 @@
-Sqlite3 (tested with 3.6.10)- http://www.sqlite.org - libsqlite3-dev on ubuntu
+Sqlite3 (tested with 3.6.10)- http://www.sqlite.org - libsqlite3-dev on debian
 LiteSQL (works JUST with 0.3.3) - http://apps.sourceforge.net/trac/litesql/
 				  Please correct litesql-0.3.3 sources with this patch, or Dates won't work:
 				  http://apps.sourceforge.net/trac/litesql/attachment/ticket/13/litesql-0.3.3-time.patch
+				  We do also provide patched LiteSQL 0.3.3 sources
 
-
-For the GUI:
 QT (developed with 4.5.0) - http://www.qtsoftware.com/downloads - libqt4-dev on ubuntu
 
-Just if you want audio support (Pomodoro Ring Bell):
-NAS (tested with 1.9.2) - http://sourceforge.net/projects/nas/ 
-You should also build QT libraries against NAS.
+Qmake is also required

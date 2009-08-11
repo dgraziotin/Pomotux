@@ -3,7 +3,24 @@ INSTALL
 
 Please verify that your system meets all the dependencies described in
 DEPENDENCIES file.
-First enter the src/ directory and perform a make, to compile the logic
-unit and the old textual Pomotux.
-Then enter the src/qt directory, do a qmake to generate the Makefile.
-Do another make, then run the src/qt/Pomotux binary compiled
+
+Make sure to install litesql-0.3.3-patched using /usr as prefix:
+	tar xfvj litesql-0.3.3-patched.tar.bz2
+	cd litesql-0.3.3-patched/
+	./configure --prefix=/usr --without-mysql --without-pgsql --with-sqlite3
+	make
+	make install (as root)
+
+First, generate the makefile using:
+qmake Pomotux.pro
+
+Then, compile Pomotux:
+make
+
+Pomotux is located in bin/pomotux. If you also want to install it, become root
+and do a:
+make install
+
+This will install pomotux in /usr/bin/pomotux
+
+You are ready, enjoy

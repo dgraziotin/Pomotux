@@ -16,7 +16,6 @@ void pomotuxdatabase::TodoTodaySheet::ScheduleActivity(const litesql::Database& 
 
     } catch (NotFound e) {
         cout << "Fatal. The tables are not consistent." << endl;
-        //exit (-1);
     }
     rNewActivity.mOrder = GetMaxActivityOrder(rDatabase, rTTS) + 1;
     rNewActivity.mIsFinished = false;
