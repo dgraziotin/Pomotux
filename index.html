@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>BodomLx/Pomotux @ GitHub</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #cd9f97;
+		  font-family: "Helvetica,Arial,FreeSans"; 
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #326068; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #326068; }
+    h3 { text-align: center; color: #326068; }
+    a { color: #326068; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+	
+</head>
+
+<body>
+  <a href="http://github.com/BodomLx/Pomotux"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  
+  <div id="container">
+
+    <div class="download">
+      <a href="http://github.com/BodomLx/Pomotux/zipball/master">
+        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+      <a href="http://github.com/BodomLx/Pomotux/tarball/master">
+        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+    </div>
+      
+    <h1><a href="http://github.com/BodomLx/Pomotux">Pomotux</a> 
+      <span class="small">by <a href="http://github.com/BodomLx">BodomLx</a></span></h1>
+
+    <div class="description">
+      A C++ activity manager implementing the Pomodoro Technique
+    </div>
+
+    <p>Application Domain
+
+Resource Management
+Vision statement
+
+The aim of our project is to develop an activity manager for the Pomodoro Technique created by Francesco Cirillo, a member of the XPlabs crew. Our program focuses on the basic features of the technique. It does not focus on advanced techniques, such as the prediction of the number of pomodoros needed for an activity.
+The Pomodoro Technique
+
+From the Website:
+
+    The Pomodoro Technique is a time management method that can be used for any kind of task. For many people, time is an enemy. The anxiety triggered by “the ticking clock”, especially when a deadline is involved, leads to ineffective work and study habits which in turn lead to procrastination. The aim of the Pomodoro Technique is to use time as a valuable ally in accomplishing what we want to do in the way we want to do it, and to enable us to continually improve the way we work or study. 
+
+The Technique is heavily explained on a 60+ pages book published on the website. Please visit the official website for more explanations.
+System Entities
+
+Pomotux heavily relies on the entities described in the Pomodoro Technique, that are introduced below:
+
+    * Activity – the task that the user wants to face using Pomotux
+    * Activity Inventory Sheet AIS – the general activity container. Contains all the activities registered in the system
+    * TODO Today Sheet TTS – the daily activity container. Contains just the activities that the user will face in the current day
+    * Pomodoro – an indivisible unit of time (normally 25 minutes) used to measure the resource dedicated to an Activity. </p><h2>Dependencies</h2>
+<p>Sqlite3 (3.6.x tested)
+LiteSQL (works just with 0.3.3 patched)
+QT (4.5.0 tested)
+Qmake
+GCC-4.3.0 (We are working to a port for GCC-4.4.x)</p>
+<h2>Install</h2>
+<p>Please verify that your system meets all the dependencies.
+
+Make sure to install litesql-0.3.3-patched using /usr as prefix:
+
+        tar xfvj litesql-0.3.3-patched.tar.bz2
+        cd litesql-0.3.3-patched/
+        ./configure --prefix=/usr --without-mysql --without-pgsql --with-sqlite3
+        make
+        make install (as root)
+ 
+
+First, generate the makefile using:
+
+ qmake Pomotux.pro
+ 
+
+Then, compile Pomotux:
+
+ make
+ 
+
+Pomotux is located in bin/pomotux. If you also want to install it, become root and do a:
+
+ make install
+ 
+
+This will install pomotux in /usr/bin/pomotux
+
+You are ready, enjoy </p>
+<h2>License</h2>
+<p>GNU General Public License v3</p>
+<h2>Authors</h2>
+<p>Riccardo Buttarelli <riccardo.buttarelli@stud-inf.unibz.it><br/>Daniel Graziotin <daniel.graziotin@stud-inf.unibz.it> - http://bd-things.net<br/>Massimiliano Pergher <massimiliano.pergher@stud-inf.unibz.it></p>
+<h2>Contact</h2>
+<p>Daniel Graziotin (daniel.graziotin@gmail.com)<br/>      </p>
+
+
+    <h2>Download</h2>
+    <p>
+      You can download this project in either
+      <a href="http://github.com/BodomLx/Pomotux/zipball/master">zip</a> or
+      <a href="http://github.com/BodomLx/Pomotux/tarball/master">tar</a> formats.
+    </p>
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+      by running:
+      <pre>$ git clone git://github.com/BodomLx/Pomotux</pre>
+    </p>
+      
+    <div class="footer">
+      get the source code on GitHub : <a href="http://github.com/BodomLx/Pomotux">BodomLx/Pomotux</a>
+    </div>
+    
+  </div>
+
+  <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-5685155-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>
